@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float speed = 5;
     [SerializeField] Transform cam;
+    [SerializeField] Transform attackPoint;
+    [SerializeField] float speed = 5;
+    [SerializeField] float attackRange;
+    [SerializeField] LayerMask enemyLayer;
 
     CharacterController controller;
 
@@ -25,6 +28,8 @@ public class PlayerController : MonoBehaviour
     {
         Move();
 
+        Attack();
+
         controller.SimpleMove(Vector3.zero);
     }
 
@@ -43,6 +48,37 @@ public class PlayerController : MonoBehaviour
 
             transform.rotation = Quaternion.LookRotation(moveDir);
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
+
+            AnimController.Instance.SetPlayerIsWalking(true);
         }
+        else
+        {
+            AnimController.Instance.SetPlayerIsWalking(false);
+        }
+    }
+
+    void Attack()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayer);
+
+            foreach(Collider enemy in hitEnemies)
+            {
+                Debug.Log("Hit");
+            }
+
+            AnimController.Instance.PlayAttackAnim();
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+        {
+            return;
+        }
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }

@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Hit");
             }
 
-            AnimController.Instance.PlayAttackAnim();
+            AnimController.Instance.PlayPlayerAttackAnim();
         }
     }
 

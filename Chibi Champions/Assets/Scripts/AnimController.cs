@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnimController : MonoBehaviour
 {
     [SerializeField] Animator playerAnimator;
+    [SerializeField] Animator enemyAnimator;
 
     bool playerIsWalking;
 
@@ -26,8 +27,13 @@ public class AnimController : MonoBehaviour
         playerIsWalking = walking;
     }
 
-    public void PlayAttackAnim()
+    public void PlayPlayerAttackAnim()
     {
         playerAnimator.SetTrigger("Attack");
+    }
+
+    public void PlayEnemyAttackAnim()
+    {
+        enemyAnimator.SetTrigger("Attack");
     }
 }

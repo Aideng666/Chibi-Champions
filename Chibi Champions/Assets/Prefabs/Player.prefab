@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7704304342646017323}
   - component: {fileID: 7704304342646017332}
   - component: {fileID: 7704304342646017333}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Leg (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 7704304342748214597}
   - component: {fileID: 7704304342748214598}
   - component: {fileID: 7704304342748214599}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7704304342959835042}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera LookAt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7704304343286629922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 7704304343410625402}
   - component: {fileID: 7704304343410625403}
   - component: {fileID: 7704304343410625348}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hilt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 7704304343446930336}
   - component: {fileID: 7704304343446930337}
   - component: {fileID: 7704304343446930338}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -471,7 +471,7 @@ GameObject:
   - component: {fileID: 7704304343790184009}
   - component: {fileID: 7704304343790184010}
   - component: {fileID: 7704304343790184011}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -569,7 +569,7 @@ GameObject:
   - component: {fileID: 7704304344230927983}
   - component: {fileID: 7704304344230927976}
   - component: {fileID: 7704304344230927977}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -667,7 +667,7 @@ GameObject:
   - component: {fileID: 7704304344304224622}
   - component: {fileID: 7704304344304224621}
   - component: {fileID: 7704304344304224620}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -758,7 +758,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7704304344394372377}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Attack Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -792,7 +792,7 @@ GameObject:
   - component: {fileID: 7704304344608153173}
   - component: {fileID: 7704304344608153174}
   - component: {fileID: 7704304344608153175}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -892,7 +892,7 @@ GameObject:
   - component: {fileID: 7704304344616687522}
   - component: {fileID: 7704304344616687523}
   - component: {fileID: 7704304344616687532}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1372,7 +1372,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7704304344677962447}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1411,7 +1411,7 @@ GameObject:
   - component: {fileID: 7704304344768594738}
   - component: {fileID: 7704304344768594739}
   - component: {fileID: 7704304344768594748}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,14 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] LayerMask enemyLayer;
     [SerializeField] Transform cam;
     [SerializeField] Transform attackPoint;
     [SerializeField] float speed = 5;
     [SerializeField] float attackRange;
-    [SerializeField] LayerMask enemyLayer;
+    [SerializeField] float maxHealth = 100;
 
     CharacterController controller;
 
@@ -17,10 +19,13 @@ public class PlayerController : MonoBehaviour
     Vector3 direction;
     Vector3 moveDir;
 
+    float health;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -65,11 +70,16 @@ public class PlayerController : MonoBehaviour
 
             foreach(Collider enemy in hitEnemies)
             {
-                Debug.Log("Hit");
+                enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-10);
             }
 
             AnimController.Instance.PlayPlayerAttackAnim();
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
     }
 
     private void OnDrawGizmosSelected()

@@ -5,17 +5,19 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField] LayerMask crystalLayer;
+    [SerializeField] LayerMask playerLayer;
+    [SerializeField] Transform attackPoint;
+    [SerializeField] float attackRange;
+    [SerializeField] float playerSpottedRange = 8;
+    [SerializeField] float maxHealth = 100;
 
     Transform crystalTransform;
     Transform playerTransform;
     NavMeshAgent navMeshAgent;
     EnemyAttackStates currentAttackState;
 
-    [SerializeField] Transform attackPoint;
-    [SerializeField] float attackRange;
-    [SerializeField] float playerSpottedRange = 8;
-    [SerializeField] LayerMask crystalLayer;
-    [SerializeField] LayerMask playerLayer;
+    float health;
 
     float attackDelay = 1.5f;
     float timeUntilNextAttack = 0;
@@ -28,6 +30,8 @@ public class EnemyController : MonoBehaviour
 
         crystalTransform = FindObjectOfType<Crystal>().transform;
         playerTransform = FindObjectOfType<PlayerController>().transform;
+
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -59,7 +63,7 @@ public class EnemyController : MonoBehaviour
     {
         if ((Vector3.Distance(transform.position, crystalTransform.position) < attackRange * 2) && CanAttack())
         {
-            AnimController.Instance.PlayEnemyAttackAnim();
+            AnimController.Instance.PlayEnemyAttackAnim(GetComponent<Animator>());
 
             Collider[] crystalHits = Physics.OverlapSphere(attackPoint.position, attackRange, crystalLayer);
 
@@ -74,13 +78,13 @@ public class EnemyController : MonoBehaviour
     {
         if ((Vector3.Distance(transform.position, playerTransform.position) < attackRange * 2) && CanAttack())
         {
-            AnimController.Instance.PlayEnemyAttackAnim();
+            AnimController.Instance.PlayEnemyAttackAnim(GetComponent<Animator>());
 
             Collider[] playerHits = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayer);
 
             foreach (Collider player in playerHits)
             {
-                Debug.Log("Player Damaged");
+                //Debug.Log("Player Damaged");
             }
         }
     }
@@ -104,6 +108,5 @@ public class EnemyController : MonoBehaviour
         }
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-        Gizmos.color = Color.red;
     }
 }

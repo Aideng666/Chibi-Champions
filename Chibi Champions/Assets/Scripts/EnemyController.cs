@@ -10,14 +10,12 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Transform attackPoint;
     [SerializeField] float attackRange;
     [SerializeField] float playerSpottedRange = 8;
-    [SerializeField] float maxHealth = 100;
 
     Transform crystalTransform;
     Transform playerTransform;
     NavMeshAgent navMeshAgent;
     EnemyAttackStates currentAttackState;
 
-    float health;
 
     float attackDelay = 1.5f;
     float timeUntilNextAttack = 0;
@@ -30,32 +28,38 @@ public class EnemyController : MonoBehaviour
 
         crystalTransform = FindObjectOfType<Crystal>().transform;
         playerTransform = FindObjectOfType<PlayerController>().transform;
-
-        health = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, playerTransform.position) < playerSpottedRange)
+        if (isActiveAndEnabled)
         {
-            currentAttackState = EnemyAttackStates.Player;
-        }
-        else
-        {
-            currentAttackState = EnemyAttackStates.Crystal;
-        }
+            if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0)
+            {
+                EnemyPool.Instance.AddToPool(gameObject);
+            }
+
+            if (Vector3.Distance(transform.position, playerTransform.position) < playerSpottedRange)
+            {
+                currentAttackState = EnemyAttackStates.Player;
+            }
+            else
+            {
+                currentAttackState = EnemyAttackStates.Crystal;
+            }
 
 
-        if (currentAttackState == EnemyAttackStates.Crystal)
-        {
-            navMeshAgent.destination = crystalTransform.position;
-            AttackCrystal();
-        }
-        else
-        {
-            navMeshAgent.destination = playerTransform.position;
-            AttackPlayer();
+            if (currentAttackState == EnemyAttackStates.Crystal)
+            {
+                navMeshAgent.destination = crystalTransform.position;
+                AttackCrystal();
+            }
+            else
+            {
+                navMeshAgent.destination = playerTransform.position;
+                AttackPlayer();
+            }
         }
     }
 
@@ -69,7 +73,7 @@ public class EnemyController : MonoBehaviour
 
             foreach (Collider crystal in crystalHits)
             {
-                Debug.Log("Crystal Damaged");
+                crystal.gameObject.GetComponent<Health>().ModifyHealth(-1);
             }
         }
     }
@@ -84,7 +88,7 @@ public class EnemyController : MonoBehaviour
 
             foreach (Collider player in playerHits)
             {
-                //Debug.Log("Player Damaged");
+                //Damage the player here
             }
         }
     }

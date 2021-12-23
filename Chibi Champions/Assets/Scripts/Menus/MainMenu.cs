@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void OnClick_Play()
     {
-        SceneManager.LoadScene("Main");
+        MenuManager.OpenMenu(Menu.MODE_SELECT, gameObject);
     }
 
     public void OnClick_Options()

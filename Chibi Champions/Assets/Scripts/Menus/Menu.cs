@@ -1,5 +1,6 @@
 public enum Menu
 {
     MAIN_MENU,
-    OPTIONS
+    OPTIONS,
+    MODE_SELECT
 }

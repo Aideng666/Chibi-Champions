@@ -667,6 +667,7 @@ GameObject:
   - component: {fileID: 7704304344304224622}
   - component: {fileID: 7704304344304224621}
   - component: {fileID: 7704304344304224620}
+  - component: {fileID: 8443398310105269126}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -722,13 +723,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 528e28407c6687e408c7ddec9e50144c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
   cam: {fileID: 0}
   attackPoint: {fileID: 7704304344394372377}
   speed: 10
   attackRange: 1.35
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  maxHealth: 100
 --- !u!95 &7704304344304224620
 Animator:
   serializedVersion: 4
@@ -749,6 +751,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8443398310105269126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7704304344304224616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4d399076dfe3cf45a7fd0737dceb11a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &7704304344394372378
 GameObject:
   m_ObjectHideFlags: 0

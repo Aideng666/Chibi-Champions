@@ -8,4 +8,11 @@ public class ModeSelectMenu : MonoBehaviour
     {
         MenuManager.OpenMenu(Menu.MAIN_MENU, gameObject);
     }
+
+    public void OnClick_SinglePlayer()
+    {
+        MenuManager.OpenMenu(Menu.CHARACTER_SELECT, gameObject);
+    }
+
+    public void OnClick_Multiplayer() { }
 }

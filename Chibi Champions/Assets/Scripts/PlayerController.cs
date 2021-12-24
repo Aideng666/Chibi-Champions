@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,7 +11,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform attackPoint;
     [SerializeField] float speed = 5;
     [SerializeField] float attackRange;
-    [SerializeField] float maxHealth = 100;
 
     CharacterController controller;
 
@@ -19,18 +19,20 @@ public class PlayerController : MonoBehaviour
     Vector3 direction;
     Vector3 moveDir;
 
-    float health;
-
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        health = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0)
+        {
+            GameOver();
+        }
+
         Move();
 
         Attack();
@@ -77,9 +79,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    void GameOver()
     {
-        health -= damage;
+        SceneManager.LoadScene("Lose");
     }
 
     private void OnDrawGizmosSelected()

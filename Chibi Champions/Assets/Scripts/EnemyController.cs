@@ -88,7 +88,7 @@ public class EnemyController : MonoBehaviour
 
             foreach (Collider player in playerHits)
             {
-                //Damage the player here
+                player.gameObject.GetComponentInParent<Health>().ModifyHealth(-5);
             }
         }
     }

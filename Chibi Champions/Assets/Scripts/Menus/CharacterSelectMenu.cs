@@ -2,13 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class CharacterSelectMenu : MonoBehaviour
 {
     [SerializeField]
     GameObject[] characters;
 
+    [SerializeField]
+    TMP_Text[] UIText;
+
     private int characterIndex;
+
+    bool hasSelectedCharacter = false;
+
+    public CharacterDatabase characterDB;
+    public TMP_Text characterName;
+    public TMP_Text characterType;
 
     public void ChangeCharacter(int index)
     {
@@ -17,9 +27,20 @@ public class CharacterSelectMenu : MonoBehaviour
             characters[i].SetActive(false);
         }
 
-        this.characterIndex = index;
+        for(int i = 0; i < UIText.Length; ++i)
+        {
+            UIText[i].text = "";
+        }
+
+        characterIndex = index;
 
         characters[index].SetActive(true);
+
+        Character character = characterDB.GetCharacter(index);
+        characterName.text = character.characterName;
+        characterType.text = character.characterType;
+
+        hasSelectedCharacter = true;
     }
 
 
@@ -30,12 +51,19 @@ public class CharacterSelectMenu : MonoBehaviour
         {
             characters[i].SetActive(false);
         }
+
+        for (int i = 0; i < UIText.Length; ++i)
+        {
+            UIText[i].text = "";
+        }
     }
 
     public void OnClickPlay()
     {
-        //SceneManager.LoadScene("Main");
-        SceneManager.LoadScene("Sandbox");
-        PlayerPrefs.SetInt("CharacterIndex", characterIndex);
+        if (hasSelectedCharacter)
+        {
+            SceneManager.LoadScene("Sandbox");
+            PlayerPrefs.SetInt("CharacterIndex", characterIndex);
+        } 
     }
 }

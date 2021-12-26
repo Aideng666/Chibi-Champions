@@ -32,8 +32,11 @@ public class AlertText : MonoBehaviour
 
         alert.fontSize = Mathf.Lerp(startingSize, endSize, t);
 
-        print(alert.fontSize);
-
         alertLifespan += Time.deltaTime;
+    }
+
+    public void SetAlert(string alertText)
+    {
+        alert.text = alertText;
     }
 }

@@ -7,14 +7,13 @@ using TMPro;
 public class Crystal : MonoBehaviour
 {
     TextMeshProUGUI healthText;
-    [SerializeField] TextMeshProUGUI alertText;
     bool alertFired;
+    bool alert2Fired;
+    bool alert3Fired;
 
     private void Start()
     {
         healthText = GetComponentInChildren<TextMeshProUGUI>();
-
-        alertText.gameObject.SetActive(false);
     }
     // Update is called once per frame
     void Update()
@@ -25,8 +24,19 @@ public class Crystal : MonoBehaviour
 
         if (GetComponent<Health>().GetCurrentHealth() <= 50 && !alertFired)
         {
-            alertText.gameObject.SetActive(true);
+            AlertManager.Instance.DisplayAlert("The Crystal Is At 50 HP!");
             alertFired = true;
         }
+        if (GetComponent<Health>().GetCurrentHealth() <= 25 && !alert2Fired)
+        {
+            AlertManager.Instance.DisplayAlert("The Crystal Is At 25 HP!");
+            alert2Fired = true;
+        }
+        if (GetComponent<Health>().GetCurrentHealth() <= 10 && !alert3Fired)
+        {
+            AlertManager.Instance.DisplayAlert("Only 10 HP Left!");
+            alert3Fired = true;
+        }
+
     }
 }

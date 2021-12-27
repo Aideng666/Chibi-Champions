@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2651231721310531717}
   - component: {fileID: 2651231721310531716}
   - component: {fileID: 2651231721310531719}
-  - component: {fileID: 2651231721310531718}
+  - component: {fileID: 8541780390392743737}
   m_Layer: 0
   m_Name: TowerPlatform
   m_TagString: Untagged
@@ -660,7 +660,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8cb4d6fee77fd4ee6895f08b240d625f, type: 2}
+  - {fileID: 2100000, guid: 89db8b11e2538314a89bde42040c3c94, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -690,8 +690,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2651231721310531721}
   m_Mesh: {fileID: 0}
---- !u!64 &2651231721310531718
-MeshCollider:
+--- !u!65 &8541780390392743737
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -700,7 +700,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 5, y: 7, z: 5}
+  m_Center: {x: 0, y: 2.9486196, z: 0}

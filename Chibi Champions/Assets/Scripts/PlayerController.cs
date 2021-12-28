@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     Vector3 direction;
     Vector3 moveDir;
 
+    bool isJumping;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,8 +40,6 @@ public class PlayerController : MonoBehaviour
         Move();
 
         Attack();
-
-        //controller.SimpleMove(Vector3.zero);
     }
 
     void Move()
@@ -54,13 +54,19 @@ public class PlayerController : MonoBehaviour
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
         moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-        moveDir.y -= gravity;
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded)
         {
             moveDir.y = jumpPower;
+
+            isJumping = true;
+
+            StartCoroutine(Jump());
         }
 
+        if (!isJumping)
+        {
+            moveDir.y -= gravity;
+        }
 
         if (direction.magnitude >= 0.1f)
         {
@@ -72,7 +78,28 @@ public class PlayerController : MonoBehaviour
             AnimController.Instance.SetPlayerIsWalking(false);
         }
 
-        controller.Move(moveDir * speed * Time.deltaTime);
+        if (!isJumping)
+        {
+            controller.Move(moveDir * speed * Time.deltaTime);
+        }
+    }
+
+    IEnumerator Jump()
+    {
+        float elasped = 0f;
+        float totalJumpTime = 0.5f;
+
+        while (elasped < totalJumpTime)
+        {
+            elasped += Time.deltaTime;
+            moveDir.y =  Mathf.Lerp(jumpPower, -gravity, elasped / totalJumpTime);
+
+            controller.Move(moveDir * speed * Time.deltaTime);
+
+            yield return null;
+        }
+
+        isJumping = false;
     }
 
     void Attack()

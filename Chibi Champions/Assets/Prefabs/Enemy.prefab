@@ -192,7 +192,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthImage: {fileID: 95333650690594862}
-  updateSpeedSeconds: 0.5
+  updateSpeedSeconds: 0.2
+  isPlayer: 0
 --- !u!1 &95333651235355323
 GameObject:
   m_ObjectHideFlags: 0
@@ -1821,7 +1822,6 @@ MonoBehaviour:
   attackPoint: {fileID: 6873490127833080893}
   attackRange: 1.35
   playerSpottedRange: 8
-  maxHealth: 100
 --- !u!95 &8991760203369301096
 Animator:
   serializedVersion: 4

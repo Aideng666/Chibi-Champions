@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform attackPoint;
     [SerializeField] float speed = 5;
     [SerializeField] float attackRange;
+    [SerializeField] float gravity = 9.81f;
+    [SerializeField] float jumpPower = 10;
 
     CharacterController controller;
 
@@ -37,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
         Attack();
 
-        controller.SimpleMove(Vector3.zero);
+        //controller.SimpleMove(Vector3.zero);
     }
 
     void Move()
@@ -48,20 +50,29 @@ public class PlayerController : MonoBehaviour
         direction = new Vector3(horizontalInput, 0f, verticalInput).normalized;
 
         transform.rotation = cam.rotation;
+
+        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+        moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+
+        moveDir.y -= gravity;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            moveDir.y = jumpPower;
+        }
+
+
         if (direction.magnitude >= 0.1f)
         {
-
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
-
             AnimController.Instance.SetPlayerIsWalking(true);
         }
         else
         {
+            moveDir = new Vector3(0, moveDir.y, 0);
             AnimController.Instance.SetPlayerIsWalking(false);
         }
+
+        controller.Move(moveDir * speed * Time.deltaTime);
     }
 
     void Attack()

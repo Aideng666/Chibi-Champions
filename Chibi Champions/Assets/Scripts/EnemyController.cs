@@ -20,6 +20,8 @@ public class EnemyController : MonoBehaviour
     float attackDelay = 1.5f;
     float timeUntilNextAttack = 0;
 
+    bool delayBeforeAttackReached = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,44 +55,62 @@ public class EnemyController : MonoBehaviour
             if (currentAttackState == EnemyAttackStates.Crystal)
             {
                 navMeshAgent.destination = crystalTransform.position;
-                AttackCrystal();
+
+                if ((Vector3.Distance(transform.position, crystalTransform.position) < attackRange * 2) && CanAttack())
+                {
+                    AnimController.Instance.PlayEnemyAttackAnim(GetComponent<Animator>());
+
+                    StartCoroutine(DelayBeforeAttack());
+                    //AttackCrystal();
+                }
+
+                if (delayBeforeAttackReached)
+                {
+                    AttackCrystal();
+                }
             }
             else
             {
                 navMeshAgent.destination = playerTransform.position;
-                AttackPlayer();
+
+                if ((Vector3.Distance(transform.position, playerTransform.position) < attackRange * 2) && CanAttack())
+                {
+                    AnimController.Instance.PlayEnemyAttackAnim(GetComponent<Animator>());
+
+                    StartCoroutine(DelayBeforeAttack());
+                    //AttackPlayer();
+                }
+
+                if (delayBeforeAttackReached)
+                {
+                    AttackPlayer();
+                }
             }
         }
     }
 
     void AttackCrystal()
     {
-        if ((Vector3.Distance(transform.position, crystalTransform.position) < attackRange * 2) && CanAttack())
+        Collider[] crystalHits = Physics.OverlapSphere(attackPoint.position, attackRange, crystalLayer);
+
+        foreach (Collider crystal in crystalHits)
         {
-            AnimController.Instance.PlayEnemyAttackAnim(GetComponent<Animator>());
-
-            Collider[] crystalHits = Physics.OverlapSphere(attackPoint.position, attackRange, crystalLayer);
-
-            foreach (Collider crystal in crystalHits)
-            {
-                crystal.gameObject.GetComponent<Health>().ModifyHealth(-1);
-            }
+            crystal.gameObject.GetComponent<Health>().ModifyHealth(-1);
         }
+
+        delayBeforeAttackReached = false;
     }
 
     void AttackPlayer()
     {
-        if ((Vector3.Distance(transform.position, playerTransform.position) < attackRange * 2) && CanAttack())
+        Collider[] playerHits = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayer);
+
+        foreach (Collider player in playerHits)
         {
-            AnimController.Instance.PlayEnemyAttackAnim(GetComponent<Animator>());
-
-            Collider[] playerHits = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayer);
-
-            foreach (Collider player in playerHits)
-            {
-                player.gameObject.GetComponentInParent<Health>().ModifyHealth(-5);
-            }
+            player.gameObject.GetComponentInParent<Health>().ModifyHealth(-5);
         }
+
+        delayBeforeAttackReached = false;
     }
 
     bool CanAttack()
@@ -102,6 +122,13 @@ public class EnemyController : MonoBehaviour
         }
 
         return false;
+    }
+
+    IEnumerator DelayBeforeAttack()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        delayBeforeAttackReached = true;
     }
 
     private void OnDrawGizmosSelected()

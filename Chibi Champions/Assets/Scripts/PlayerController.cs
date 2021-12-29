@@ -20,8 +20,10 @@ public class PlayerController : MonoBehaviour
     float verticalInput = 0f;
     Vector3 direction;
     Vector3 moveDir;
-
     bool isJumping;
+
+    float timeToNextAttack = 0;
+    float attackDelay = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -104,7 +106,7 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && CanAttack())
         {
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayer);
 
@@ -115,6 +117,17 @@ public class PlayerController : MonoBehaviour
 
             AnimController.Instance.PlayPlayerAttackAnim();
         }
+    }
+
+    bool CanAttack()
+    {
+        if (timeToNextAttack < Time.realtimeSinceStartup)
+        {
+            timeToNextAttack = Time.realtimeSinceStartup + attackDelay;
+            return true;
+        }
+
+        return false;
     }
 
     void GameOver()

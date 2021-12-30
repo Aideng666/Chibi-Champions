@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float attackRange;
     [SerializeField] float gravity = 9.81f;
     [SerializeField] float jumpPower = 10;
+    [SerializeField] float interactDistance = 3;
+    [SerializeField] float attackDelay = 0.75f;
+    [SerializeField] TextMeshProUGUI interactText;
 
     CharacterController controller;
 
@@ -23,12 +27,18 @@ public class PlayerController : MonoBehaviour
     bool isJumping;
 
     float timeToNextAttack = 0;
-    float attackDelay = 2f;
+
+    Transform currentSelection;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        interactText.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -42,6 +52,8 @@ public class PlayerController : MonoBehaviour
         Move();
 
         Attack();
+
+        CheckRaycastSelection();
     }
 
     void Move()
@@ -133,6 +145,27 @@ public class PlayerController : MonoBehaviour
     void GameOver()
     {
         SceneManager.LoadScene("Lose");
+    }
+
+    void CheckRaycastSelection()
+    {
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            var selection = hit.transform;
+
+            if (selection != null && selection.tag == "Interactable" && Vector3.Distance(transform.position, selection.position) < interactDistance)
+            {
+                interactText.gameObject.SetActive(true);
+            }
+            else
+            {
+                interactText.gameObject.SetActive(false);
+            }
+        }
     }
 
     private void OnDrawGizmosSelected()

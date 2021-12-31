@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float interactDistance = 3;
     [SerializeField] float attackDelay = 0.75f;
     [SerializeField] TextMeshProUGUI interactText;
+    [SerializeField] Canvas interactMenu;
 
     CharacterController controller;
 
@@ -28,17 +29,18 @@ public class PlayerController : MonoBehaviour
 
     float timeToNextAttack = 0;
 
-    Transform currentSelection;
+    bool canInteract;
+    bool menuOpen;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        ApplyCursorLock();
 
         interactText.gameObject.SetActive(false);
+        interactMenu.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -54,6 +56,21 @@ public class PlayerController : MonoBehaviour
         Attack();
 
         CheckRaycastSelection();
+
+
+        if (canInteract && Input.GetKeyDown(KeyCode.E) && !menuOpen)
+        {
+            interactMenu.gameObject.SetActive(true);
+            menuOpen = true;
+            RemoveCursorLock();
+        }
+        else if (menuOpen && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)))
+        {
+            ApplyCursorLock();
+            menuOpen = false;
+            interactMenu.gameObject.SetActive(false);
+        }
+
     }
 
     void Move()
@@ -159,13 +176,28 @@ public class PlayerController : MonoBehaviour
 
             if (selection != null && selection.tag == "Interactable" && Vector3.Distance(transform.position, selection.position) < interactDistance)
             {
+                canInteract = true;
                 interactText.gameObject.SetActive(true);
+                TowerMenu.Instance.SetPlatform(selection);
             }
             else
             {
+                canInteract = false;
                 interactText.gameObject.SetActive(false);
             }
         }
+    }
+
+    void ApplyCursorLock()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    void RemoveCursorLock()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 
     private void OnDrawGizmosSelected()

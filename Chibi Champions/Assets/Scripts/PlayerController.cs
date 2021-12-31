@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float interactDistance = 3;
     [SerializeField] float attackDelay = 0.75f;
     [SerializeField] TextMeshProUGUI interactText;
-    [SerializeField] Canvas interactMenu;
 
     CharacterController controller;
 
@@ -37,10 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
 
-        ApplyCursorLock();
-
         interactText.gameObject.SetActive(false);
-        interactMenu.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -58,17 +54,13 @@ public class PlayerController : MonoBehaviour
         CheckRaycastSelection();
 
 
-        if (canInteract && Input.GetKeyDown(KeyCode.E) && !menuOpen)
+        if (canInteract && Input.GetKeyDown(KeyCode.E) && !CanvasManager.Instance.IsTowerMenuOpen())
         {
-            interactMenu.gameObject.SetActive(true);
-            menuOpen = true;
-            RemoveCursorLock();
+            CanvasManager.Instance.OpenTowerMenu();
         }
-        else if (menuOpen && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)))
+        else if (CanvasManager.Instance.IsTowerMenuOpen() && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)))
         {
-            ApplyCursorLock();
-            menuOpen = false;
-            interactMenu.gameObject.SetActive(false);
+            CanvasManager.Instance.CloseTowerMenu();
         }
 
     }
@@ -186,18 +178,6 @@ public class PlayerController : MonoBehaviour
                 interactText.gameObject.SetActive(false);
             }
         }
-    }
-
-    void ApplyCursorLock()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    void RemoveCursorLock()
-    {
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
     }
 
     private void OnDrawGizmosSelected()

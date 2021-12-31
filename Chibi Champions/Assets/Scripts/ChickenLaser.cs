@@ -6,20 +6,34 @@ public class ChickenLaser : MonoBehaviour
 {
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] TowerAttackPriority defaultAttackPriority;
+    [SerializeField] Transform firePoint;
     [SerializeField] float attackRange;
+    [SerializeField] float laserDamage;
 
     TowerAttackPriority currentAttackPriority;
+    LineRenderer laserbeam;
 
     // Start is called before the first frame update
     void Start()
     {
         currentAttackPriority = defaultAttackPriority;
+        laserbeam = GetComponentInChildren<LineRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange, enemyLayer);
+
+        if (hitEnemies == null || hitEnemies.Length < 1)
+        {
+            if (laserbeam.enabled)
+            {
+                laserbeam.enabled = false;
+            }
+
+            return;
+        }
 
         Collider closestEnemy = hitEnemies[0];
 
@@ -39,10 +53,21 @@ public class ChickenLaser : MonoBehaviour
 
             Attack(closestEnemy.gameObject);
         }
+        
     }
 
     void Attack(GameObject enemy)
     {
+        if (!laserbeam.enabled)
+        {
+            laserbeam.enabled = true;
+        }
+
         transform.LookAt(enemy.transform.position);
+
+        laserbeam.SetPosition(0, firePoint.position);
+        laserbeam.SetPosition(1, enemy.transform.position);
+
+        enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-laserDamage);
     }
 }

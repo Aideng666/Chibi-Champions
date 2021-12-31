@@ -26,5 +26,6 @@ public class TowerMenu : MonoBehaviour
     {
         Instantiate(tower1, new Vector3(platform.position.x, 3, platform.position.z), Quaternion.identity);
         platform.gameObject.SetActive(false);
+        CanvasManager.Instance.CloseTowerMenu();
     }
 }

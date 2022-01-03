@@ -4,43 +4,70 @@ using UnityEngine;
 
 public class EnemyPool : MonoBehaviour
 {
-    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] GameObject gruntPrefab;
+    [SerializeField] GameObject sharpshooterPrefab;
 
-    Queue<GameObject> availableEnemies = new Queue<GameObject>();
+    Queue<GameObject> availableGrunts = new Queue<GameObject>();
+    Queue<GameObject> availableShooters = new Queue<GameObject>();
 
     public static EnemyPool Instance { get; private set; }
 
     private void Awake()
     {
         Instance = this;
-        CreatePool();
+        CreatePools();
     }
 
-    public GameObject GetEnemyFromPool()
+    public GameObject GetGruntFromPool()
     {
-        if (availableEnemies.Count == 0)
+        if (availableGrunts.Count == 0)
         {
-            CreatePool();
+            CreatePools();
         }
 
-        var instance = availableEnemies.Dequeue();
+        var instance = availableGrunts.Dequeue();
         instance.SetActive(true);
         return instance;
     }
 
-    private void CreatePool()
+    public GameObject GetShooterFromPool()
+    {
+        if (availableShooters.Count == 0)
+        {
+            CreatePools();
+        }
+
+        var instance = availableShooters.Dequeue();
+        instance.SetActive(true);
+        return instance;
+    }
+
+    private void CreatePools()
     {
         for (int i = 0; i < 20; ++i)
         {
-            var instanceToAdd = Instantiate(enemyPrefab);
+            var instanceToAdd = Instantiate(gruntPrefab);
             instanceToAdd.transform.SetParent(transform);
-            AddToPool(instanceToAdd);
+            AddToGruntPool(instanceToAdd);
+        }
+
+        for (int i = 0; i < 20; ++i)
+        {
+            var instanceToAdd = Instantiate(sharpshooterPrefab);
+            instanceToAdd.transform.SetParent(transform);
+            AddToShooterPool(instanceToAdd);
         }
     }
 
-    public void AddToPool(GameObject instance)
+    public void AddToGruntPool(GameObject instance)
     {
         instance.SetActive(false);
-        availableEnemies.Enqueue(instance);
+        availableGrunts.Enqueue(instance);
+    }
+
+    public void AddToShooterPool(GameObject instance)
+    {
+        instance.SetActive(false);
+        availableShooters.Enqueue(instance);
     }
 }

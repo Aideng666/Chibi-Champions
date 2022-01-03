@@ -66,7 +66,7 @@ public class WaveManager : MonoBehaviour
 
     bool CheckWaveComplete()
     {
-        var enemyList = FindObjectsOfType<EnemyController>();
+        var enemyList = FindObjectsOfType<GruntController>();
         int trueCheckCount = 0;
 
         foreach (EnemySpawner spawner in enemySpawners)

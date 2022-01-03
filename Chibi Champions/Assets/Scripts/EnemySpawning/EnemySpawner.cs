@@ -40,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
 
-        var enemy = EnemyPool.Instance.GetEnemyFromPool();
+        var enemy = EnemyPool.Instance.GetGruntFromPool();
 
         enemy.transform.position = transform.position;
 

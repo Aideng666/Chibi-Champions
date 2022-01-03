@@ -10,6 +10,8 @@ public class EnemySpawner : MonoBehaviour
     int currentSpawnAmount = 0;
     float timeToNextSpawn = 0;
 
+    bool firstEnemySpawned;
+
     private void Update()
     {
         if (CanSpawn())
@@ -22,6 +24,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (currentSpawnAmount >= maximumSpawns)
         {
+            print("Reached Max Spawns");
             return false;
         }
 
@@ -36,10 +39,25 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
+
         var enemy = EnemyPool.Instance.GetEnemyFromPool();
 
         enemy.transform.position = transform.position;
 
         currentSpawnAmount++;
+
+        firstEnemySpawned = true;
+    }
+
+    public void ResetMaximumSpawns(int max)
+    {
+        maximumSpawns = max;
+        currentSpawnAmount = 0;
+        firstEnemySpawned = false;
+    }
+
+    public bool GetFirstEnemySpawned()
+    {
+        return firstEnemySpawned;
     }
 }

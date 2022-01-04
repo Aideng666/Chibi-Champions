@@ -24,7 +24,7 @@ public class TowerMenu : MonoBehaviour
 
     public void BuyTower1()
     {
-        Instantiate(tower1, new Vector3(platform.position.x, 3, platform.position.z), Quaternion.identity);
+        Instantiate(tower1, new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
         platform.gameObject.SetActive(false);
         CanvasManager.Instance.CloseTowerMenu();
     }

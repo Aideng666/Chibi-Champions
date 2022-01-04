@@ -95,6 +95,7 @@ public class SharpshooterController : MonoBehaviour
 
         delayBeforeAttackReached = false;
         navMeshAgent.isStopped = false;
+        AnimController.Instance.SetEnemyIsWalking(GetComponent<Animator>(), true);
     }
 
     void AttackPlayer()
@@ -110,11 +111,14 @@ public class SharpshooterController : MonoBehaviour
 
         delayBeforeAttackReached = false;
         navMeshAgent.isStopped = false;
+        AnimController.Instance.SetEnemyIsWalking(GetComponent<Animator>(), true);
     }
 
     IEnumerator DelayBeforeAttack()
     {
         navMeshAgent.isStopped = true;
+
+        AnimController.Instance.SetEnemyIsWalking(GetComponent<Animator>(), false);
 
         yield return new WaitForSeconds(0.5f);
 

@@ -9,7 +9,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnClick_Play()
     {
-        MenuManager.OpenMenu(Menu.MODE_SELECT, gameObject);
+        MenuManager.OpenMenu(Menu.LOBBY, gameObject);
         playButton.transform.localScale = new Vector3(1, 1, 1);
     }
 

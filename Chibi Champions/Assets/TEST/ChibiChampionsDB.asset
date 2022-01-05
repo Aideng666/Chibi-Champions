@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: ChibiChampionsDB
   m_EditorClassIdentifier: 
   character:
-  - characterName: Drumstick
-  - characterName: Rolfe
-  - characterName: Potter
+  - characterName: Bulbasaur
+    classType: OFFENSE
+  - characterName: Charmander
+    classType: DEFENSE
+  - characterName: Squirtle
+    classType: SUPPORT

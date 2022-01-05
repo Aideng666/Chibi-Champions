@@ -5,7 +5,7 @@ using UnityEngine;
 public static class MenuManager
 {
     public static bool isInitialized { get; private set; }
-    public static GameObject mainMenu, optionsMenu, modeSelectMenu, characterSelectMenu;
+    public static GameObject mainMenu, optionsMenu, modeSelectMenu, lobbyMenu, characterSelectMenu;
 
    public static void Init()
     {
@@ -13,6 +13,7 @@ public static class MenuManager
         mainMenu = canvas.transform.Find("MainMenu").gameObject;
         optionsMenu = canvas.transform.Find("OptionsMenu").gameObject;
         modeSelectMenu = canvas.transform.Find("ModeSelectMenu").gameObject;
+        lobbyMenu = canvas.transform.Find("LobbyMenu").gameObject;
         characterSelectMenu = canvas.transform.Find("CharacterSelectMenu").gameObject;
 
         isInitialized = true;
@@ -37,6 +38,10 @@ public static class MenuManager
 
             case Menu.MODE_SELECT:
                 modeSelectMenu.SetActive(true);
+                break;
+
+            case Menu.LOBBY:
+                lobbyMenu.SetActive(true);
                 break;
 
             case Menu.CHARACTER_SELECT:

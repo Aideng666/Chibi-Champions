@@ -20,5 +20,9 @@ public class ModeSelectMenu : MonoBehaviour
         singlePlayerButton.transform.localScale = new Vector3(1, 1, 1);
     }
 
-    public void OnClick_MultiPlayer() { }
+    public void OnClick_MultiPlayer() 
+    {
+        MenuManager.OpenMenu(Menu.LOBBY, gameObject);
+        multiPlayerButton.transform.localScale = new Vector3(1, 1, 1);
+    }
 }

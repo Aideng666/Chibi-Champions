@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LobbyMenu : MonoBehaviour
+public class CharacterSelectMenu : MonoBehaviour
 {
     [SerializeField]
     GameObject[] characters;
@@ -60,7 +60,7 @@ public class LobbyMenu : MonoBehaviour
 
     public void OnClick_Back()
     {
-        MenuManager.OpenMenu(Menu.MAIN_MENU, gameObject);
+        MenuManager.OpenMenu(Menu.MODE_SELECT, gameObject);
         backButton.transform.localScale = new Vector3(1, 1, 1);
 
         for (int i = 0; i < characters.Length; ++i)

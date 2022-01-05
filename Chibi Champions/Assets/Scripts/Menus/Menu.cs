@@ -2,5 +2,6 @@ public enum Menu
 {
     MAIN_MENU,
     OPTIONS,
-    LOBBY,
+    MODE_SELECT,
+    CHARACTER_SELECT,
 }

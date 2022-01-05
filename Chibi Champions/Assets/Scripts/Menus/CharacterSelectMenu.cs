@@ -7,44 +7,42 @@ using UnityEngine.UI;
 
 public class CharacterSelectMenu : MonoBehaviour
 {
-    //[SerializeField]
-    //GameObject[] characters;
+    [SerializeField]
+    GameObject[] characters;
 
-    //[SerializeField]
-    //TMP_Text[] UIText;
+    [SerializeField]
+    Text[] UIText;
 
-    //private int characterIndex;
+    private int characterIndex;
 
     //bool hasSelectedCharacter = false;
 
-    //public CharacterDatabase characterDB;
-    //public TMP_Text characterName;
-    //public TMP_Text characterType;
+    public CharacterDatabase characterDB;
+    public Text characterName;
 
     public Button backButton, lockInButton;
 
-    //public void ChangeCharacter(int index)
-    //{
-    //    for(int i = 0; i < characters.Length; ++i)
-    //    {
-    //        characters[i].SetActive(false);
-    //    }
-    //
-    //    for(int i = 0; i < UIText.Length; ++i)
-    //    {
-    //        UIText[i].text = "";
-    //    }
-    //
-    //    characterIndex = index;
-    //
-    //    characters[index].SetActive(true);
-    //
-    //    Character character = characterDB.GetCharacter(index);
-    //    characterName.text = character.characterName;
-    //    characterType.text = character.characterType;
-    //
+    public void ChangeCharacter(int index)
+    {
+        for(int i = 0; i < characters.Length; ++i)
+        {
+            characters[i].SetActive(false);
+        }
+    
+        for(int i = 0; i < UIText.Length; ++i)
+        {
+            UIText[i].text = "";
+        }
+   
+        characterIndex = index;
+    
+        characters[index].SetActive(true);
+    
+        Character character = characterDB.GetCharacter(index);
+        characterName.text = character.characterName;
+    
     //    hasSelectedCharacter = true;
-    //}
+    }
 
 
     public void OnClick_Back()
@@ -52,15 +50,15 @@ public class CharacterSelectMenu : MonoBehaviour
         MenuManager.OpenMenu(Menu.MODE_SELECT, gameObject);
         backButton.transform.localScale = new Vector3(1, 1, 1);
 
-        //for (int i = 0; i < characters.Length; ++i)
-        //{
-        //    characters[i].SetActive(false);
-        //}
-        //
-        //for (int i = 0; i < UIText.Length; ++i)
-        //{
-        //    UIText[i].text = "";
-        //}
+        for (int i = 0; i < characters.Length; ++i)
+        {
+            characters[i].SetActive(false);
+        }
+        
+        for (int i = 0; i < UIText.Length; ++i)
+        {
+            UIText[i].text = "";
+        }
     }
 
     //public void OnClickPlay()

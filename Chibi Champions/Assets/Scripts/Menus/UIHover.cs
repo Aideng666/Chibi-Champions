@@ -7,6 +7,7 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     bool mouse_over = false;
 
+    public GameObject panel;
     private void Update()
     {
         if (mouse_over)
@@ -19,11 +20,13 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         mouse_over = true;
         Debug.Log("Mouse Enter");
+        panel.SetActive(true);
     }   
     
     public void OnPointerExit(PointerEventData eventData)
     {
         mouse_over = false;
         Debug.Log("Mouse Exit");
+        panel.SetActive(false);
     }
 }

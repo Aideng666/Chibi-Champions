@@ -58,8 +58,6 @@ public class CharacterSelectMenu : MonoBehaviour
             artworkSprites[i].sprite = character.towerSprites[i];
         }
 
-        //artworkSprite.sprite = character.towerSprite;
-
         towerTitle.SetActive(true);
         abilityTitle.SetActive(true);
 

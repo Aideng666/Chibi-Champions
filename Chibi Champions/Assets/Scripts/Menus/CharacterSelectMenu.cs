@@ -6,9 +6,11 @@ using UnityEngine.UI;
 
 public class CharacterSelectMenu : MonoBehaviour
 {
+    [Header("Character Images")]
     [SerializeField]
     GameObject[] characters;
 
+    [Header("UI Text")]
     [SerializeField]
     Text[] UIText;
 
@@ -16,11 +18,20 @@ public class CharacterSelectMenu : MonoBehaviour
 
     //bool hasSelectedCharacter = false;
 
+    [Header("Character DB and UI Components")]
     public CharacterDatabase characterDB;
     public Text characterName;
     public Text classType;
+    public Image[] artworkSprites;
 
-    public Button backButton, lockInButton;
+    [Header("Buttons")]
+    public Button backButton;
+    public Button lockInButton;
+
+    [Header("UI Objects")]
+    public GameObject towerTitle;
+    public GameObject abilityTitle;
+    public GameObject[] UIImages;
 
     public void ChangeCharacter(int index)
     {
@@ -41,6 +52,21 @@ public class CharacterSelectMenu : MonoBehaviour
         Character character = characterDB.GetCharacter(index);
         characterName.text = character.characterName;
         classType.text = character.classType;
+
+        for (int i = 0; i < artworkSprites.Length; ++i)
+        {
+            artworkSprites[i].sprite = character.towerSprites[i];
+        }
+
+        //artworkSprite.sprite = character.towerSprite;
+
+        towerTitle.SetActive(true);
+        abilityTitle.SetActive(true);
+
+        for (int i = 0; i < UIImages.Length; ++i)
+        {
+            UIImages[i].SetActive(true);
+        }
     
     //    hasSelectedCharacter = true;
     }
@@ -71,6 +97,14 @@ public class CharacterSelectMenu : MonoBehaviour
         for (int i = 0; i < UIText.Length; ++i)
         {
             UIText[i].text = "";
+        }
+
+        towerTitle.SetActive(false);
+        abilityTitle.SetActive(false);
+
+        for (int i = 0; i < UIImages.Length; ++i)
+        {
+            UIImages[i].SetActive(false);
         }
     }
 

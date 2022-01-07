@@ -7,12 +7,17 @@ public class SharpshooterController : MonoBehaviour
 {
     [SerializeField] float attackRange;
     [SerializeField] float playerSpottedRange = 15;
+    [SerializeField] Transform attackPoint;
+    [SerializeField] LayerMask enemyLayer;
 
     Transform crystalTransform;
     Transform playerTransform;
     NavMeshAgent navMeshAgent;
     EnemyAttackStates currentAttackState;
 
+    LineRenderer bulletTrail;
+
+    Vector3 shotDirection;
 
     float attackDelay = 1.5f;
     float timeUntilNextAttack = 0;
@@ -28,7 +33,11 @@ public class SharpshooterController : MonoBehaviour
         crystalTransform = FindObjectOfType<Crystal>().transform;
         playerTransform = FindObjectOfType<PlayerController>().transform;
 
-        navMeshAgent.stoppingDistance = 5;
+        navMeshAgent.stoppingDistance = 10;
+
+        bulletTrail = GetComponentInChildren<LineRenderer>();
+
+        bulletTrail.enabled = false;
     }
 
     // Update is called once per frame
@@ -69,7 +78,7 @@ public class SharpshooterController : MonoBehaviour
         {
             navMeshAgent.destination = playerTransform.position;
 
-            if ((Vector3.Distance(transform.position, playerTransform.position) < attackRange * 2) && CanAttack())
+            if ((Vector3.Distance(transform.position, playerTransform.position) <= attackRange) && CanAttack())
             {
                 //AnimController.Instance.PlayEnemyAttackAnim(GetComponent<Animator>());
 
@@ -100,14 +109,29 @@ public class SharpshooterController : MonoBehaviour
 
     void AttackPlayer()
     {
-        //Collider[] playerHits = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayer);
+        Ray ray = new Ray(attackPoint.position, shotDirection);
 
-        //foreach (Collider player in playerHits)
-        //{
-        //    player.gameObject.GetComponentInParent<Health>().ModifyHealth(-5);
-        //}
-        print("Shot Player");
+        RaycastHit hit;
 
+        if (Physics.Raycast(ray, out hit, 100f, ~enemyLayer))
+        {
+            var selection = hit.transform;
+
+            bulletTrail.enabled = true;
+
+            bulletTrail.SetPosition(0, attackPoint.position);
+            bulletTrail.SetPosition(1, selection.position);
+
+            if (selection.tag == "Player")
+            {
+                print("Player Shot");
+
+                playerTransform.gameObject.GetComponentInParent<Health>().ModifyHealth(-10);
+
+            }
+        }
+
+        StartCoroutine(TurnOffBulletTrail());
 
         delayBeforeAttackReached = false;
         navMeshAgent.isStopped = false;
@@ -116,13 +140,27 @@ public class SharpshooterController : MonoBehaviour
 
     IEnumerator DelayBeforeAttack()
     {
+        
         navMeshAgent.isStopped = true;
 
         AnimController.Instance.SetEnemyIsWalking(GetComponent<Animator>(), false);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
+
+        shotDirection = (playerTransform.position - attackPoint.position).normalized;
+
+        shotDirection.y = 0;
+
+        yield return new WaitForSeconds(0.2f);
 
         delayBeforeAttackReached = true;
+    }
+
+    IEnumerator TurnOffBulletTrail()
+    {
+        yield return new WaitForSeconds(1f);
+
+        bulletTrail.enabled = false;
     }
 
     bool CanAttack()

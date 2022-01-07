@@ -10,4 +10,6 @@ public class Character
     public string classType;
 
     public Sprite[] towerSprites;
+    public Sprite[] abilitySprites;
+    public string[] towerNames;
 }

@@ -23,6 +23,8 @@ public class CharacterSelectMenu : MonoBehaviour
     public Text characterName;
     public Text classType;
     public Image[] artworkSprites;
+    public Image[] abilityArtworkSprites;
+    //public Text[] towerNames;
 
     [Header("Buttons")]
     public Button backButton;
@@ -58,6 +60,11 @@ public class CharacterSelectMenu : MonoBehaviour
             artworkSprites[i].sprite = character.towerSprites[i];
         }
 
+        for (int i = 0; i < abilityArtworkSprites.Length; ++i)
+        {
+            abilityArtworkSprites[i].sprite = character.abilitySprites[i];
+        }
+
         towerTitle.SetActive(true);
         abilityTitle.SetActive(true);
 
@@ -65,6 +72,11 @@ public class CharacterSelectMenu : MonoBehaviour
         {
             UIImages[i].SetActive(true);
         }
+
+        //for (int i = 0; i < towerNames.Length; ++i)
+        //{
+        //    towerNames[i].text = character.towerNames[i];
+        //}
     
     //    hasSelectedCharacter = true;
     }
@@ -104,6 +116,11 @@ public class CharacterSelectMenu : MonoBehaviour
         {
             UIImages[i].SetActive(false);
         }
+
+        //for (int i = 0; i < towerNames.Length; ++i)
+        //{
+        //    towerNames[i].text = "";
+        //}
     }
 
     //public void OnClickPlay()

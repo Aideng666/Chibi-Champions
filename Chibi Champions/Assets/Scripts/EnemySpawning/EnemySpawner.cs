@@ -5,12 +5,13 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] float spawnDelay = 3;
-    [SerializeField] int maximumSpawns = 10;
 
     int currentSpawnAmount = 0;
     float timeToNextSpawn = 0;
 
     bool firstEnemySpawned;
+
+    List<GameObject> spawnList = new List<GameObject>();
 
     private void Update()
     {
@@ -22,7 +23,7 @@ public class EnemySpawner : MonoBehaviour
 
     bool CanSpawn()
     {
-        if (currentSpawnAmount >= maximumSpawns)
+        if (currentSpawnAmount >= spawnList.Count)
         {
             print("Reached Max Spawns");
             return false;
@@ -39,25 +40,33 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
+        if (spawnList[currentSpawnAmount].name.Contains("Grunt"))
+        {
+            var enemy = EnemyPool.Instance.GetGruntFromPool();
 
-        var enemy = EnemyPool.Instance.GetGruntFromPool();
+            enemy.transform.position = transform.position;
+        }
+        else if(spawnList[currentSpawnAmount].name.Contains("SharpShooter"))
+        {
+            var enemy = EnemyPool.Instance.GetShooterFromPool();
 
-        enemy.transform.position = transform.position;
+            enemy.transform.position = transform.position;
+        }
 
         currentSpawnAmount++;
 
         firstEnemySpawned = true;
     }
 
-    public void ResetMaximumSpawns(int max)
-    {
-        maximumSpawns = max;
-        currentSpawnAmount = 0;
-        firstEnemySpawned = false;
-    }
-
     public bool GetFirstEnemySpawned()
     {
         return firstEnemySpawned;
+    }
+
+    public void SetSpawnList(List<GameObject> list)
+    {
+        spawnList = list;
+        currentSpawnAmount = 0;
+        firstEnemySpawned = false;
     }
 }

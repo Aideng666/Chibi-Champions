@@ -670,7 +670,7 @@ GameObject:
   - component: {fileID: 8443398310105269126}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -730,7 +730,11 @@ MonoBehaviour:
   attackPoint: {fileID: 7704304344394372377}
   speed: 10
   attackRange: 1.35
-  maxHealth: 100
+  gravity: 9.81
+  jumpPower: 10
+  interactDistance: 3
+  attackDelay: 2
+  interactText: {fileID: 0}
 --- !u!95 &7704304344304224620
 Animator:
   serializedVersion: 4

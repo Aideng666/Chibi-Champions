@@ -6,13 +6,13 @@ public class WaveManager : MonoBehaviour
 {
     [SerializeField] int numberOfWaves;
     [SerializeField] List<EnemySpawner> enemySpawners;
+    [SerializeField] List<List<GameObject>> enemiesLists = new List<List<GameObject>>();
 
     int currentWave;
 
     bool waveCompleteAlertFired;
 
     List<int> enemiesPerWaveList = new List<int>();
-    //List<List<GameObject>> enemiesPerWaveList = new List<List<GameObject>>();
 
     // Start is called before the first frame update
     void Start()
@@ -88,5 +88,15 @@ public class WaveManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public int GetWaveCount()
+    {
+        return numberOfWaves;
+    }
+
+    public List<List<GameObject>> GetEnemiesLists()
+    {
+        return enemiesLists;
     }
 }

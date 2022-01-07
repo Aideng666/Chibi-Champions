@@ -133,7 +133,10 @@ public class PlayerController : MonoBehaviour
 
             foreach(Collider enemy in hitEnemies)
             {
-                enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-10);
+                if (enemy.tag == "Enemy")
+                {
+                    enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-10);
+                }
             }
 
             AnimController.Instance.PlayPlayerAttackAnim();

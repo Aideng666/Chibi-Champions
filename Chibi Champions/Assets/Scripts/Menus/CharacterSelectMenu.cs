@@ -57,7 +57,7 @@ public class CharacterSelectMenu : MonoBehaviour
 
         for (int i = 0; i < artworkSprites.Length; ++i)
         {
-            artworkSprites[i].sprite = character.towerSprites[i];
+            artworkSprites[i].sprite = character.towerBaseSprites[i];
         }
 
         for (int i = 0; i < abilityArtworkSprites.Length; ++i)

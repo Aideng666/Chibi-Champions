@@ -8,7 +8,7 @@ public class Character
     public string characterName;
     public string classType;
 
-    public Sprite[] towerSprites;
+    public Sprite[] towerBaseSprites;
     public Sprite[] abilitySprites;
-    public string[] towerNames;
+    public string[] towerBaseNames;
 }

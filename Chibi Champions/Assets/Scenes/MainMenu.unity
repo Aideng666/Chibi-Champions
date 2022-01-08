@@ -607,8 +607,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -207.4, y: -25.2}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -207.4, y: -21.3}
+  m_SizeDelta: {x: 260.2851, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &25994358
 MonoBehaviour:
@@ -632,10 +632,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: ce5e6b5ef23e3f74aa5c3c001b8e6ea0, type: 3}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
-    m_BestFit: 1
-    m_MinSize: 10
+    m_BestFit: 0
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -2504,6 +2504,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1139429479}
+  towerName: {fileID: 0}
+  towerIndex: 0
+  a: {fileID: 0}
 --- !u!114 &916349714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2794,6 +2797,7 @@ GameObject:
   - component: {fileID: 1049704711}
   - component: {fileID: 1049704713}
   - component: {fileID: 1049704712}
+  - component: {fileID: 1049704714}
   m_Layer: 5
   m_Name: Tower1
   m_TagString: Untagged
@@ -2859,6 +2863,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049704710}
   m_CullTransparentMesh: 1
+--- !u!114 &1049704714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049704710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 978c0a70581f61349be9c4aab3c4f8cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 1139429479}
+  towerName: {fileID: 25994358}
+  towerIndex: 0
+  a: {fileID: 250506657}
 --- !u!1 &1067751724
 GameObject:
   m_ObjectHideFlags: 0
@@ -3052,7 +3072,7 @@ GameObject:
   - component: {fileID: 1139429482}
   - component: {fileID: 1139429481}
   m_Layer: 5
-  m_Name: Towers/Abilities Panel
+  m_Name: Towers Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3596,12 +3616,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1381695823}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 978c0a70581f61349be9c4aab3c4f8cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1139429479}
+  towerName: {fileID: 0}
+  towerIndex: 0
+  a: {fileID: 0}
 --- !u!1 &1384140610
 GameObject:
   m_ObjectHideFlags: 0
@@ -3747,6 +3770,7 @@ GameObject:
   - component: {fileID: 1425349731}
   - component: {fileID: 1425349733}
   - component: {fileID: 1425349732}
+  - component: {fileID: 1425349734}
   m_Layer: 5
   m_Name: Tower2
   m_TagString: Untagged
@@ -3812,6 +3836,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425349730}
   m_CullTransparentMesh: 1
+--- !u!114 &1425349734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425349730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 978c0a70581f61349be9c4aab3c4f8cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 1139429479}
+  towerName: {fileID: 25994358}
+  towerIndex: 1
+  a: {fileID: 250506657}
 --- !u!1 &1426686756
 GameObject:
   m_ObjectHideFlags: 0
@@ -4467,6 +4507,7 @@ GameObject:
   - component: {fileID: 1557152166}
   - component: {fileID: 1557152168}
   - component: {fileID: 1557152167}
+  - component: {fileID: 1557152169}
   m_Layer: 5
   m_Name: Tower3
   m_TagString: Untagged
@@ -4532,6 +4573,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1557152165}
   m_CullTransparentMesh: 1
+--- !u!114 &1557152169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557152165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 978c0a70581f61349be9c4aab3c4f8cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 1139429479}
+  towerName: {fileID: 25994358}
+  towerIndex: 2
+  a: {fileID: 250506657}
 --- !u!1 &1593724626
 GameObject:
   m_ObjectHideFlags: 0

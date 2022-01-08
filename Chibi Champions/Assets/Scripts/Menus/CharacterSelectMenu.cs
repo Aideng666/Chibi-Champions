@@ -16,15 +16,12 @@ public class CharacterSelectMenu : MonoBehaviour
 
     private int characterIndex;
 
-    //bool hasSelectedCharacter = false;
-
     [Header("Character DB and UI Components")]
     public CharacterDatabase characterDB;
     public Text characterName;
     public Text classType;
     public Image[] artworkSprites;
     public Image[] abilityArtworkSprites;
-    //public Text[] towerNames;
 
     [Header("Buttons")]
     public Button backButton;
@@ -34,6 +31,8 @@ public class CharacterSelectMenu : MonoBehaviour
     public GameObject towerTitle;
     public GameObject abilityTitle;
     public GameObject[] UIImages;
+
+    Character character;
 
     public void ChangeCharacter(int index)
     {
@@ -50,8 +49,9 @@ public class CharacterSelectMenu : MonoBehaviour
         characterIndex = index;
     
         characters[index].SetActive(true);
-    
-        Character character = characterDB.GetCharacter(index);
+
+        character = characterDB.GetCharacter(index);
+        character = characterDB.GetCharacter(characterIndex);
         characterName.text = character.characterName;
         classType.text = character.classType;
 
@@ -72,27 +72,7 @@ public class CharacterSelectMenu : MonoBehaviour
         {
             UIImages[i].SetActive(true);
         }
-
-        //for (int i = 0; i < towerNames.Length; ++i)
-        //{
-        //    towerNames[i].text = character.towerNames[i];
-        //}
-    
-    //    hasSelectedCharacter = true;
     }
-
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.U))
-    //    {
-    //        hasSelectedCharacter = true;
-    //    }
-    //
-    //    if (hasSelectedCharacter)
-    //    {
-    //        lockInButton.interactable = true;
-    //    }
-    //}
 
     public void OnClick_Back()
     {
@@ -116,19 +96,23 @@ public class CharacterSelectMenu : MonoBehaviour
         {
             UIImages[i].SetActive(false);
         }
-
-        //for (int i = 0; i < towerNames.Length; ++i)
-        //{
-        //    towerNames[i].text = "";
-        //}
     }
 
-    //public void OnClickPlay()
-    //{
-    //    if (hasSelectedCharacter)
-    //    {
-    //        SceneManager.LoadScene("Sandbox");
-    //        PlayerPrefs.SetInt("CharacterIndex", characterIndex);
-    //    } 
-    //}
+    [SerializeField]
+    public int GetCharacterIndex()
+    {
+        return characterIndex;
+    }
+
+    [SerializeField]
+    public CharacterDatabase GetCharacterDB()
+    {
+        return characterDB;
+    }
+
+    [SerializeField]
+    public Character GetCharacter()
+    {
+        return character;
+    }
 }

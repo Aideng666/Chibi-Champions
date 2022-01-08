@@ -11,5 +11,9 @@ public class Character
     public Sprite[] towerBaseSprites;
     public Sprite[] abilitySprites;
     public string[] towerBaseNames;
+    public string[] towerBaseDescriptions;
     public string[] towerBaseCosts;
+    public string[] abilityNames;
+    public string[] abilityDescriptions;
+    public string[] abilityControls;
 }

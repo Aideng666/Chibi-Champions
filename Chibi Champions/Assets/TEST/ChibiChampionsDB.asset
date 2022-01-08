@@ -26,10 +26,23 @@ MonoBehaviour:
     - Feather Blaster
     - Chicken Laser
     - Gatling Drummet
+    towerBaseDescriptions:
+    - Shoots sharp feathers at nearby enemies
+    - Fires a beam of destruction over the span of a couple seconds
+    - A mounted automatic turret that fires a stream of bullets at a  high fire rate
     towerBaseCosts:
     - 'Cost: 200'
     - 'Cost: 600'
     - 'Cost: 1200'
+    abilityNames:
+    - Cybernetic Sword
+    - Ground Pound
+    abilityDescriptions:
+    - Swing my diamond sword
+    - Mario impersonation
+    abilityControls:
+    - 'Control: ?'
+    - 'Control: ?'
   - characterName: Charmander
     classType: DEFENSE
     towerBaseSprites:
@@ -43,10 +56,24 @@ MonoBehaviour:
     - Web Shooter
     - Tennis Bomb
     - Watchdog
+    towerBaseDescriptions:
+    - Shoots sticky webs that slow enemies
+    - Shoots tennis ball bombs that distracts enemies, bringing them close to the
+      bomb before it explodes
+    - A wall that sends a shockwave blast, knocking enemies away
     towerBaseCosts:
     - 'Cost: 200'
     - 'Cost: 200'
     - 'Cost: 400'
+    abilityNames:
+    - Claw Swipe
+    - Silk Dart
+    abilityDescriptions:
+    - Woof Woof Bark Bark
+    - Threading the needle
+    abilityControls:
+    - 'Control: ?'
+    - 'Control: ?'
   - characterName: Squirtle
     classType: SUPPORT
     towerBaseSprites:
@@ -60,7 +87,20 @@ MonoBehaviour:
     - Ink Bomber
     - Photosynthesizer
     - P.E.D
+    towerBaseDescriptions:
+    - Shoots a black blob of ink paralyzing enemies hit
+    - Heals players standing inside the radius overtime
+    - Deploys pollen spores that buff allies when activated
     towerBaseCosts:
     - 'Cost: 200'
     - 'Cost: 1100'
     - 'Cost: 1600'
+    abilityNames:
+    - Paintball Gun
+    - Healing Needle
+    abilityDescriptions:
+    - Colourful Fun
+    - Definitely not an Ana rip off
+    abilityControls:
+    - 'Control: ?'
+    - 'Control: ?'

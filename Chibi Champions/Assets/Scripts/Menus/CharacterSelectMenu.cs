@@ -32,6 +32,8 @@ public class CharacterSelectMenu : MonoBehaviour
     public GameObject abilityTitle;
     public GameObject[] UIImages;
 
+    public Image hoveredImage;
+
     Character character;
 
     // Changes the character based on its index
@@ -93,6 +95,8 @@ public class CharacterSelectMenu : MonoBehaviour
         {
             UIText[i].text = "";
         }
+
+        hoveredImage.sprite = null;
 
         towerTitle.SetActive(false);
         abilityTitle.SetActive(false);

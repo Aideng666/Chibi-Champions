@@ -4,16 +4,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class AbilityUIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public GameObject panel;
 
-    public Text towerName;
-    public Image towerImage;
-    public Text towerCost;
+    public Text abilityName;
+    public Image abilityImage;
+    public Text abilityDesc;
+    public Text abilityCost;
 
     [SerializeField]
-    public int towerIndex;
+    public int abilityIndex;
 
     Character character;
     CharacterDatabase DB;
@@ -23,9 +24,10 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         DB = FindObjectOfType<CharacterSelectMenu>().GetCharacterDB();
         character = DB.GetCharacter(FindObjectOfType<CharacterSelectMenu>().GetCharacterIndex());
 
-        towerName.text = character.towerBaseNames[towerIndex];
-        towerImage.sprite = character.towerBaseSprites[towerIndex];
-        towerCost.text = character.towerBaseCosts[towerIndex];
+        abilityName.text = character.abilityNames[abilityIndex];
+        abilityImage.sprite = character.abilitySprites[abilityIndex];
+        abilityDesc.text = character.abilityDescriptions[abilityIndex];
+        abilityCost.text = character.abilityControls[abilityIndex];
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -33,8 +35,8 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         panel.SetActive(true);
 
         ShowCharacterInfo();
-    }   
-    
+    }
+
     public void OnPointerExit(PointerEventData eventData)
     {
         panel.SetActive(false);

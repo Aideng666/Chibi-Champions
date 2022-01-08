@@ -109,10 +109,4 @@ public class CharacterSelectMenu : MonoBehaviour
     {
         return characterDB;
     }
-
-    [SerializeField]
-    public Character GetCharacter()
-    {
-        return character;
-    }
 }

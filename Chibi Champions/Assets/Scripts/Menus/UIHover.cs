@@ -23,8 +23,6 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void ShowCharacterInfo()
     {
         DB = a.GetCharacterDB();
-
-        character = a.GetCharacter();
         character = DB.GetCharacter(a.GetCharacterIndex());
 
         //Debug.Log("Character Name: " + character.characterName);

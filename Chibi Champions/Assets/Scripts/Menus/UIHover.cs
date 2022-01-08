@@ -25,11 +25,11 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         DB = a.GetCharacterDB();
         character = DB.GetCharacter(a.GetCharacterIndex());
 
-        //Debug.Log("Character Name: " + character.characterName);
+
+        //Debug.Log("Character Name: " + character.characterName); 
 
         towerName.text = character.towerNames[towerIndex];
     }
-
 
     public void OnPointerEnter(PointerEventData eventData)
     {

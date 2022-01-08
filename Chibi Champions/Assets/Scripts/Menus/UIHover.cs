@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    //bool mouse_over = false;
-
     public GameObject panel;
 
     public Text towerName;
+    public Image towerImage;
+    public Text towerCost;
 
     [SerializeField]
     public int towerIndex;
@@ -18,23 +18,18 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     Character character;
     CharacterDatabase DB;
 
-    public CharacterSelectMenu a;
-
     public void ShowCharacterInfo()
     {
-        DB = a.GetCharacterDB();
-        character = DB.GetCharacter(a.GetCharacterIndex());
-
-
-        //Debug.Log("Character Name: " + character.characterName); 
+        DB = FindObjectOfType<CharacterSelectMenu>().GetCharacterDB();
+        character = DB.GetCharacter(FindObjectOfType<CharacterSelectMenu>().GetCharacterIndex());
 
         towerName.text = character.towerBaseNames[towerIndex];
+        towerImage.sprite = character.towerBaseSprites[towerIndex];
+        towerCost.text = character.towerBaseCosts[towerIndex];
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //mouse_over = true;
-        //Debug.Log("Mouse Enter");
         panel.SetActive(true);
 
         ShowCharacterInfo();
@@ -42,8 +37,6 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     
     public void OnPointerExit(PointerEventData eventData)
     {
-        //mouse_over = false;
-        //Debug.Log("Mouse Exit");
         panel.SetActive(false);
     }
 }

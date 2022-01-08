@@ -2505,8 +2505,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1139429479}
   towerName: {fileID: 0}
+  towerImage: {fileID: 0}
+  towerCost: {fileID: 0}
   towerIndex: 0
-  a: {fileID: 0}
 --- !u!114 &916349714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2877,8 +2878,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1139429479}
   towerName: {fileID: 25994358}
+  towerImage: {fileID: 1426686758}
+  towerCost: {fileID: 2127096475}
   towerIndex: 0
-  a: {fileID: 250506657}
 --- !u!1 &1067751724
 GameObject:
   m_ObjectHideFlags: 0
@@ -3833,8 +3835,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1139429479}
   towerName: {fileID: 25994358}
+  towerImage: {fileID: 1426686758}
+  towerCost: {fileID: 2127096475}
   towerIndex: 1
-  a: {fileID: 250506657}
 --- !u!1 &1426686756
 GameObject:
   m_ObjectHideFlags: 0
@@ -4570,8 +4573,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1139429479}
   towerName: {fileID: 25994358}
+  towerImage: {fileID: 1426686758}
+  towerCost: {fileID: 2127096475}
   towerIndex: 2
-  a: {fileID: 250506657}
 --- !u!1 &1593724626
 GameObject:
   m_ObjectHideFlags: 0

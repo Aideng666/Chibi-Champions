@@ -26,6 +26,10 @@ MonoBehaviour:
     - Feather Blaster
     - Chicken Laser
     - Gatling Drummet
+    towerBaseCosts:
+    - 'Cost: 200'
+    - 'Cost: 600'
+    - 'Cost: 1200'
   - characterName: Charmander
     classType: DEFENSE
     towerBaseSprites:
@@ -39,6 +43,10 @@ MonoBehaviour:
     - Web Shooter
     - Tennis Bomb
     - Watchdog
+    towerBaseCosts:
+    - 'Cost: 200'
+    - 'Cost: 200'
+    - 'Cost: 400'
   - characterName: Squirtle
     classType: SUPPORT
     towerBaseSprites:
@@ -52,3 +60,7 @@ MonoBehaviour:
     - Ink Bomber
     - Photosynthesizer
     - P.E.D
+    towerBaseCosts:
+    - 'Cost: 200'
+    - 'Cost: 1100'
+    - 'Cost: 1600'

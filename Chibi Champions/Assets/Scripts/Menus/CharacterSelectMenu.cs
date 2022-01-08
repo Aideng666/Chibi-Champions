@@ -34,6 +34,10 @@ public class CharacterSelectMenu : MonoBehaviour
 
     Character character;
 
+    // Changes the character based on its index
+    // 0 for Character1
+    // 1 for Character2
+    // 2 for Character3
     public void ChangeCharacter(int index)
     {
         for(int i = 0; i < characters.Length; ++i)
@@ -50,6 +54,7 @@ public class CharacterSelectMenu : MonoBehaviour
     
         characters[index].SetActive(true);
 
+        // Fills out the UI for the selected character
         character = characterDB.GetCharacter(index);
         character = characterDB.GetCharacter(characterIndex);
         characterName.text = character.characterName;

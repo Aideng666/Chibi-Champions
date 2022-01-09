@@ -24,11 +24,6 @@ public class WaveManager : MonoBehaviour
 
         InitEnemiesLists();
 
-        for (int i = 0; i < numberOfWaves; i++)
-        {
-            Debug.Log("There are " + enemiesLists[i].Count + " Enemies in wave " + (i+1));
-        }
-
         BeginWave();
     }
 

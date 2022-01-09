@@ -173,7 +173,17 @@ public class PlayerController : MonoBehaviour
             {
                 canInteract = true;
                 interactText.gameObject.SetActive(true);
-                TowerMenu.Instance.SetPlatform(selection);
+
+                if (selection.parent.tag == "Tower")
+                {
+                    TowerMenu.Instance.SetMenuState(MenuState.Upgrade);
+                    TowerMenu.Instance.SetTower(selection);
+                }
+                else
+                {
+                    TowerMenu.Instance.SetMenuState(MenuState.Buy);
+                    TowerMenu.Instance.SetPlatform(selection);
+                }
             }
             else
             {

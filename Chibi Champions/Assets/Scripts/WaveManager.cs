@@ -82,7 +82,7 @@ public class WaveManager : MonoBehaviour
 
     void InitEnemiesLists()
     {
-        StreamReader reader = new StreamReader("WaveData.txt");
+        StreamReader reader = new StreamReader("Assets/WaveData.txt");
 
         numberOfWaves = Int32.Parse(reader.ReadLine());
 

@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField] int numberOfWaves;
     [SerializeField] List<EnemySpawner> enemySpawners;
     [SerializeField] GameObject gruntPrefab;
     [SerializeField] GameObject sharpshooterPrefab;
 
     int currentWave;
+    int numberOfWaves;
 
     bool waveCompleteAlertFired;
 

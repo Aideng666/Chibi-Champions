@@ -2,30 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChickenLaser : MonoBehaviour
+public class ChickenLaser : Tower
 {
-    [SerializeField] LayerMask enemyLayer;
-    [SerializeField] TowerAttackPriority defaultAttackPriority;
     [SerializeField] Transform firePoint;
-    [SerializeField] float attackRange;
     [SerializeField] float laserDamage;
 
-    TowerAttackPriority currentAttackPriority;
     LineRenderer laserbeam;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentAttackPriority = defaultAttackPriority;
         laserbeam = GetComponentInChildren<LineRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange, enemyLayer);
+        UpdateView();
 
-        if (hitEnemies == null || hitEnemies.Length < 1)
+        if (targetEnemy == null)
         {
             if (laserbeam.enabled)
             {
@@ -35,28 +30,10 @@ public class ChickenLaser : MonoBehaviour
             return;
         }
 
-        Collider closestEnemy = hitEnemies[0];
-
-        Collider currentEnemyCheck = hitEnemies[0];
-
-        if (currentAttackPriority == TowerAttackPriority.ClosestToTower)
-        {
-            for (int i = 0; i < hitEnemies.Length; i++)
-            {
-                currentEnemyCheck = hitEnemies[i];
-
-                if (Vector3.Distance(currentEnemyCheck.transform.position, transform.position) < Vector3.Distance(closestEnemy.transform.position, transform.position))
-                {
-                    closestEnemy = currentEnemyCheck;
-                }
-            }
-
-            Attack(closestEnemy.gameObject);
-        }
-        
+        Attack(targetEnemy);
     }
 
-    void Attack(GameObject enemy)
+    protected override void Attack(GameObject enemy = null)
     {
         if (!laserbeam.enabled)
         {

@@ -50,7 +50,7 @@ public class GruntController : MonoBehaviour
         }
 
 
-        if (currentAttackState == EnemyAttackStates.Crystal)
+        if (currentAttackState == EnemyAttackStates.Crystal && navMeshAgent.gameObject.activeSelf)
         {
             navMeshAgent.destination = crystalTransform.position;
 
@@ -59,7 +59,6 @@ public class GruntController : MonoBehaviour
                 AnimController.Instance.PlayEnemyAttackAnim(GetComponent<Animator>());
 
                 StartCoroutine(DelayBeforeAttack());
-                //AttackCrystal();
             }
 
             if (delayBeforeAttackReached)
@@ -67,7 +66,7 @@ public class GruntController : MonoBehaviour
                 AttackCrystal();
             }
         }
-        else
+        else if (currentAttackState == EnemyAttackStates.Player && navMeshAgent.gameObject.activeSelf)
         {
             navMeshAgent.destination = playerTransform.position;
 
@@ -76,7 +75,6 @@ public class GruntController : MonoBehaviour
                 AnimController.Instance.PlayEnemyAttackAnim(GetComponent<Animator>());
 
                 StartCoroutine(DelayBeforeAttack());
-                //AttackPlayer();
             }
 
             if (delayBeforeAttackReached)

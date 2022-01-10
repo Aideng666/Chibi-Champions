@@ -57,16 +57,14 @@ public class SharpshooterController : MonoBehaviour
             currentAttackState = EnemyAttackStates.Crystal;
         }
 
-        if (currentAttackState == EnemyAttackStates.Crystal)
+        if (currentAttackState == EnemyAttackStates.Crystal && navMeshAgent.gameObject.activeSelf)
         {
             navMeshAgent.destination = crystalTransform.position;
 
             if ((Vector3.Distance(transform.position, crystalTransform.position) < attackRange * 2) && CanAttack())
             {
-                //AnimController.Instance.PlayEnemyAttackAnim(GetComponent<Animator>());
 
                 StartCoroutine(DelayBeforeAttack());
-                //AttackCrystal();
             }
 
             if (delayBeforeAttackReached)
@@ -74,16 +72,14 @@ public class SharpshooterController : MonoBehaviour
                 AttackCrystal();
             }
         }
-        else
+        else if (currentAttackState == EnemyAttackStates.Player && navMeshAgent.gameObject.activeSelf)
         {
             navMeshAgent.destination = playerTransform.position;
 
             if ((Vector3.Distance(transform.position, playerTransform.position) <= attackRange) && CanAttack())
             {
-                //AnimController.Instance.PlayEnemyAttackAnim(GetComponent<Animator>());
 
                 StartCoroutine(DelayBeforeAttack());
-                //AttackPlayer();
             }
 
             if (delayBeforeAttackReached)

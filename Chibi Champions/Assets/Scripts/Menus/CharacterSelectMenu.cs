@@ -36,6 +36,8 @@ public class CharacterSelectMenu : MonoBehaviour
 
     Character character;
 
+    bool hasSelected = false;
+
     // Changes the character based on its index
     // 0 for Character1
     // 1 for Character2
@@ -79,6 +81,9 @@ public class CharacterSelectMenu : MonoBehaviour
         {
             UIImages[i].SetActive(true);
         }
+
+        hasSelected = true;
+        lockInButton.interactable = true;
     }
 
     public void OnClick_Back()
@@ -104,6 +109,17 @@ public class CharacterSelectMenu : MonoBehaviour
         for (int i = 0; i < UIImages.Length; ++i)
         {
             UIImages[i].SetActive(false);
+        }
+
+        lockInButton.interactable = false;
+    }
+
+    public void OnClick_LockIn()
+    {
+        if (hasSelected)
+        {
+            SceneManager.LoadScene("Sandbox");
+            PlayerPrefs.SetInt("CharacterIndex", characterIndex);
         }
     }
 

@@ -74,6 +74,6 @@ public class TowerMenu : MonoBehaviour
 
     public void UpgradeTower()
     {
-
+        tower.GetComponent<Tower>().Upgrade();
     }
 }

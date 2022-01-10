@@ -91,12 +91,29 @@ public class SharpshooterController : MonoBehaviour
 
     void AttackCrystal()
     {
-        //Collider[] crystalHits = Physics.OverlapSphere(attackPoint.position, attackRange, crystalLayer);
+        Ray ray = new Ray(attackPoint.position, shotDirection);
 
-        //foreach (Collider crystal in crystalHits)
-        //{
-        //    crystal.gameObject.GetComponent<Health>().ModifyHealth(-1);
-        //}
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100f, ~enemyLayer))
+        {
+            var selection = hit.transform;
+
+            bulletTrail.enabled = true;
+
+            bulletTrail.SetPosition(0, attackPoint.position);
+            bulletTrail.SetPosition(1, selection.position);
+
+            if (selection.tag == "Player")
+            {
+                print("Player Shot");
+
+                playerTransform.gameObject.GetComponentInParent<Health>().ModifyHealth(-10);
+
+            }
+        }
+
+        StartCoroutine(TurnOffBulletTrail());
 
         delayBeforeAttackReached = false;
         navMeshAgent.isStopped = false;
@@ -143,9 +160,15 @@ public class SharpshooterController : MonoBehaviour
 
         yield return new WaitForSeconds(0.8f);
 
-        shotDirection = (playerTransform.position - attackPoint.position).normalized;
 
-        shotDirection.y = 0;
+        if (currentAttackState == EnemyAttackStates.Player)
+        {
+            shotDirection = (playerTransform.position - attackPoint.position).normalized;
+        }
+        else if (currentAttackState == EnemyAttackStates.Crystal)
+        {
+            shotDirection = (crystalTransform.position - attackPoint.position).normalized;
+        }
 
         yield return new WaitForSeconds(0.2f);
 

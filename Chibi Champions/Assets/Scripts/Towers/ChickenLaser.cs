@@ -47,4 +47,22 @@ public class ChickenLaser : Tower
 
         enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-laserDamage);
     }
+
+    public override void Upgrade()
+    {
+        if (towerLevel == 1)
+        {
+            attackRange += 5f;
+        }
+        else if(towerLevel == 2)
+        {
+            laserDamage *= 1.5f;
+        }
+        else if (towerLevel == 3)
+        {
+
+        }
+
+        base.Upgrade();
+    }
 }

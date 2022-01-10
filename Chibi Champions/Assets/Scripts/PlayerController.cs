@@ -177,7 +177,7 @@ public class PlayerController : MonoBehaviour
                 if (selection.parent.tag == "Tower")
                 {
                     TowerMenu.Instance.SetMenuState(MenuState.Upgrade);
-                    TowerMenu.Instance.SetTower(selection);
+                    TowerMenu.Instance.SetTower(selection.parent);
                 }
                 else
                 {

@@ -10,58 +10,14 @@ public class Tower : MonoBehaviour
     [SerializeField] protected float attackRange;
 
     protected TowerAttackPriority currentAttackPriority;
-
-    Tower tower;
+    
     protected GameObject targetEnemy = null;
+
+    protected int towerLevel = 1;
 
     private void Start()
     {
         currentAttackPriority = defaultAttackPriority;
-
-        tower = this;
-
-        switch (type)
-        {
-            case TowerType.FeatherBlaster:
-
-                //tower = GetComponent<FeatherBlaster>();
-
-                break;
-
-            case TowerType.ChickenLaser:
-
-                tower = GetComponent<ChickenLaser>();
-
-                break;
-
-            case TowerType.GatlingDrummet:
-
-                break;
-
-            case TowerType.WebShooter:
-
-                break;
-
-            case TowerType.TennisBomb:
-
-                break;
-
-            case TowerType.Watchdog:
-
-                break;
-
-            case TowerType.InkBomber:
-
-                break;
-
-            case TowerType.Photosynthesiser:
-
-                break;
-
-            case TowerType.PED:
-
-                break;
-        }
     }
 
     protected void UpdateView()
@@ -111,5 +67,10 @@ public class Tower : MonoBehaviour
     protected virtual void Attack(GameObject enemy = null)
     {
 
+    }
+
+    public virtual void Upgrade()
+    {
+        towerLevel++;
     }
 }

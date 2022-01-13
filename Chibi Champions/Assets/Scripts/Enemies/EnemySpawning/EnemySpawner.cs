@@ -25,7 +25,6 @@ public class EnemySpawner : MonoBehaviour
     {
         if (currentSpawnAmount >= spawnList.Count)
         {
-            print("Reached Max Spawns");
             return false;
         }
 

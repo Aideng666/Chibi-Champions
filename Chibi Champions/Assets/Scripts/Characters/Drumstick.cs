@@ -35,6 +35,7 @@ public class Drumstick : PlayerController
                 if (enemy.tag == "Enemy")
                 {
                     enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
+                    enemy.GetComponentInParent<Enemy>().Knockback(20);
                 }
             }
 
@@ -50,6 +51,8 @@ public class Drumstick : PlayerController
 
     void GroundPoundAttack()
     {
+        groundPoundActivated = false;
+
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, heavyAttackRange, enemyLayer);
 
         foreach (Collider enemy in hitEnemies)
@@ -58,10 +61,9 @@ public class Drumstick : PlayerController
             {
                 print("Hit One Enemy");
                 enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-heavyAttackDamage);
-                //StartCoroutine(enemy.GetComponent<Enemy>().Knockback());
+                enemy.GetComponentInParent<Enemy>().Knockback(35);
             }
         }
 
-        groundPoundActivated = false;
     }
 }

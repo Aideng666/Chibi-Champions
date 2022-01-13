@@ -7,32 +7,34 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] LayerMask enemyLayer;
-    [SerializeField] Transform cam;
-    [SerializeField] Transform attackPoint;
-    [SerializeField] float speed = 5;
-    [SerializeField] float attackRange;
-    [SerializeField] float gravity = 9.81f;
-    [SerializeField] float jumpPower = 10;
-    [SerializeField] float interactDistance = 3;
-    [SerializeField] float attackDelay = 0.75f;
-    [SerializeField] TextMeshProUGUI interactText;
+    [SerializeField] protected LayerMask enemyLayer;
+    [SerializeField] protected Transform cam;
+    [SerializeField] protected Transform attackPoint;
+    [SerializeField] protected float speed = 5;
+    [SerializeField] protected float lightAttackRange;
+    [SerializeField] protected float heavyAttackRange;
+    [SerializeField] protected float lightAttackDamage = 10;
+    [SerializeField] protected float heavyAttackDamage = 15;
+    [SerializeField] protected float gravity = 1.5f;
+    [SerializeField] protected float jumpPower = 10;
+    [SerializeField] protected float interactDistance = 3;
+    [SerializeField] protected float attackDelay = 0.75f;
+    [SerializeField] protected TextMeshProUGUI interactText;
 
-    CharacterController controller;
+    protected CharacterController controller;
 
-    float horizontalInput = 0f;
-    float verticalInput = 0f;
-    Vector3 direction;
-    Vector3 moveDir;
-    bool isJumping;
+    protected float horizontalInput = 0f;
+    protected float verticalInput = 0f;
+    protected Vector3 direction;
+    protected Vector3 moveDir;
+    protected bool isJumping;
 
-    float timeToNextAttack = 0;
+    protected float timeToNextAttack = 0;
 
-    bool canInteract;
-    bool menuOpen;
+    protected bool canInteract;
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         controller = GetComponent<CharacterController>();
 
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0)
         {
@@ -79,10 +81,6 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded)
         {
-            moveDir.y = jumpPower;
-
-            isJumping = true;
-
             StartCoroutine(Jump());
         }
 
@@ -107,8 +105,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator Jump()
+    protected IEnumerator Jump()
     {
+        moveDir.y = jumpPower;
+
+        isJumping = true;
+
         float elasped = 0f;
         float totalJumpTime = 0.5f;
 
@@ -125,25 +127,12 @@ public class PlayerController : MonoBehaviour
         isJumping = false;
     }
 
-    void Attack()
+    protected virtual void Attack()
     {
-        if (Input.GetMouseButtonDown(0) && CanAttack())
-        {
-            Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayer);
 
-            foreach(Collider enemy in hitEnemies)
-            {
-                if (enemy.tag == "Enemy")
-                {
-                    enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-10);
-                }
-            }
-
-            AnimController.Instance.PlayPlayerAttackAnim();
-        }
     }
 
-    bool CanAttack()
+    protected bool CanAttack()
     {
         if (timeToNextAttack < Time.realtimeSinceStartup)
         {
@@ -200,6 +189,6 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        Gizmos.DrawWireSphere(attackPoint.position, lightAttackRange);
     }
 }

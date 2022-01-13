@@ -64,8 +64,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 15
-  playerSpottedRange: 15
   attackPoint: {fileID: 4146364756856947917}
+  playerSpottedRange: 15
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64

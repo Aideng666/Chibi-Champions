@@ -1813,15 +1813,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd25da3a4ef0a734cabab22d399afceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRange: 1.35
+  attackPoint: {fileID: 6873490127833080893}
+  playerSpottedRange: 8
   crystalLayer:
     serializedVersion: 2
     m_Bits: 128
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
-  attackPoint: {fileID: 6873490127833080893}
-  attackRange: 1.35
-  playerSpottedRange: 8
 --- !u!95 &8991760203369301096
 Animator:
   serializedVersion: 4

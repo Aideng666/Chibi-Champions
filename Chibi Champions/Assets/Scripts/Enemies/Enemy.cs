@@ -34,41 +34,44 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        if (Vector3.Distance(transform.position, playerTransform.position) < playerSpottedRange)
+        if (!knockbackApplied)
         {
-            currentAttackState = EnemyAttackStates.Player;
-        }
-        else
-        {
-            currentAttackState = EnemyAttackStates.Crystal;
-        }
-
-        if (currentAttackState == EnemyAttackStates.Crystal && navMeshAgent.gameObject.activeSelf && !knockbackApplied)
-        {
-            navMeshAgent.destination = crystalTransform.position;
-
-            if ((Vector3.Distance(transform.position, crystalTransform.position) < attackRange * 2) && CanAttack())
+            if (Vector3.Distance(transform.position, playerTransform.position) < playerSpottedRange)
             {
-                StartCoroutine(DelayBeforeAttack());
+                currentAttackState = EnemyAttackStates.Player;
+            }
+            else
+            {
+                currentAttackState = EnemyAttackStates.Crystal;
             }
 
-            if (delayBeforeAttackReached)
+            if (currentAttackState == EnemyAttackStates.Crystal && navMeshAgent.gameObject.activeSelf)
             {
-                AttackCrystal();
-            }
-        }
-        else if (currentAttackState == EnemyAttackStates.Player && navMeshAgent.gameObject.activeSelf && !knockbackApplied)
-        {
-            navMeshAgent.destination = playerTransform.position;
+                navMeshAgent.destination = crystalTransform.position;
 
-            if ((Vector3.Distance(transform.position, playerTransform.position) < attackRange * 2) && CanAttack())
-            {
-                StartCoroutine(DelayBeforeAttack());
-            }
+                if ((Vector3.Distance(transform.position, crystalTransform.position) < attackRange * 2) && CanAttack())
+                {
+                    StartCoroutine(DelayBeforeAttack());
+                }
 
-            if (delayBeforeAttackReached)
+                if (delayBeforeAttackReached)
+                {
+                    AttackCrystal();
+                }
+            }
+            else if (currentAttackState == EnemyAttackStates.Player && navMeshAgent.gameObject.activeSelf)
             {
-                AttackPlayer();
+                navMeshAgent.destination = playerTransform.position;
+
+                if ((Vector3.Distance(transform.position, playerTransform.position) < attackRange * 2) && CanAttack())
+                {
+                    StartCoroutine(DelayBeforeAttack());
+                }
+
+                if (delayBeforeAttackReached)
+                {
+                    AttackPlayer();
+                }
             }
         }
     }
@@ -82,20 +85,34 @@ public class Enemy : MonoBehaviour
 
         return false;
     }
-    public IEnumerator Knockback()
+    public void Knockback(float knockbackForce)
     {
         knockbackApplied = true;
 
-        Vector3 tempDestination = (transform.position - playerTransform.position) * 3;
-        Vector3 originalDestination = navMeshAgent.destination;
+        Rigidbody body = gameObject.AddComponent<Rigidbody>();
+        body.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
-        navMeshAgent.destination = tempDestination;
-        navMeshAgent.speed *= 2;
+        navMeshAgent.enabled = false;
 
-        yield return new WaitForSeconds(0.5f);
+        Vector3 direction = (transform.position - playerTransform.position).normalized;
+        direction.y = 1;
 
-        navMeshAgent.destination = originalDestination;
-        navMeshAgent.speed /= 2;
+        direction = direction.normalized;
+
+        body.mass = 10;
+
+        body.AddForce(direction * knockbackForce, ForceMode.Impulse);
+
+        StartCoroutine(ReactivateNavMesh());
+    }
+
+    IEnumerator ReactivateNavMesh()
+    {
+        yield return new WaitForSeconds(0.75f);
+
+        Destroy(GetComponent<Rigidbody>());
+
+        navMeshAgent.enabled = true;
 
         knockbackApplied = false;
     }

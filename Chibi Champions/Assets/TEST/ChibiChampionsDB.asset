@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 314258481f1d4824e940334c0c1a7f56, type: 3}
+  m_Name: ChibiChampionsDB
+  m_EditorClassIdentifier: 
+  character:
+  - characterName: Chris
+    classType: OFFENSE
+    towerBaseSprites:
+    - {fileID: 21300000, guid: 912adadc8c94ec7499174ed7cca439aa, type: 3}
+    - {fileID: 21300000, guid: 77ac75ff5db008f43b2d1f71c94fab36, type: 3}
+    - {fileID: 21300000, guid: 0c5e863059eb2dc49b6132763e508560, type: 3}
+    abilitySprites:
+    - {fileID: 21300000, guid: 27e3b0251688a804a92b2cb5cfbe6d7b, type: 3}
+    - {fileID: 21300000, guid: 27e3b0251688a804a92b2cb5cfbe6d7b, type: 3}
+    towerBaseNames:
+    - Feather Blaster
+    - Chicken Laser
+    - Gatling Drummet
+    towerBaseDescriptions:
+    - Shoots sharp feathers at nearby enemies
+    - Fires a beam of destruction over the span of a couple seconds
+    - A mounted automatic turret that fires a stream of bullets at a  high fire rate
+    towerBaseCosts:
+    - 'Cost: 200'
+    - 'Cost: 600'
+    - 'Cost: 1200'
+    abilityNames:
+    - Poop Sock
+    - Ground Pound
+    abilityDescriptions:
+    - Eeeww Stinky
+    - Mario impersonation
+    abilityControls:
+    - 'Control: ?'
+    - 'Control: ?'
+  - characterName: Rolfe
+    classType: DEFENSE
+    towerBaseSprites:
+    - {fileID: 21300000, guid: 00bf3dd0c7475c54fa52304ff1c886fc, type: 3}
+    - {fileID: 21300000, guid: 55d8b199bddfa5b4d884b2064990d4c3, type: 3}
+    - {fileID: 21300000, guid: 7d82711121e1f8242b6e73555b031d3d, type: 3}
+    abilitySprites:
+    - {fileID: 21300000, guid: 91efde8d591642044a13caaac13461a6, type: 3}
+    - {fileID: 21300000, guid: 91efde8d591642044a13caaac13461a6, type: 3}
+    towerBaseNames:
+    - Web Shooter
+    - Tennis Bomb
+    - Watchdog
+    towerBaseDescriptions:
+    - Shoots sticky webs that slow enemies
+    - Shoots tennis ball bombs that distracts enemies, bringing them close to the
+      bomb before it explodes
+    - A wall that sends a shockwave blast, knocking enemies away
+    towerBaseCosts:
+    - 'Cost: 200'
+    - 'Cost: 200'
+    - 'Cost: 400'
+    abilityNames:
+    - Claw Swipe
+    - Silk Dart
+    abilityDescriptions:
+    - Woof Woof Bark Bark
+    - Threading the needle
+    abilityControls:
+    - 'Control: ?'
+    - 'Control: ?'
+  - characterName: Squirtle
+    classType: SUPPORT
+    towerBaseSprites:
+    - {fileID: 21300000, guid: 30308aff79334064fb04c4cc7f353ba2, type: 3}
+    - {fileID: 21300000, guid: 7f656e6e6ace4f74fb3711e09ab7f6f5, type: 3}
+    - {fileID: 21300000, guid: 4b071edd99d70774aa0e9a871a4fb4d7, type: 3}
+    abilitySprites:
+    - {fileID: 21300000, guid: 2f2f98e52df63b04e9ee3245e8e12159, type: 3}
+    - {fileID: 21300000, guid: 2f2f98e52df63b04e9ee3245e8e12159, type: 3}
+    towerBaseNames:
+    - Ink Bomber
+    - Photosynthesizer
+    - P.E.D
+    towerBaseDescriptions:
+    - Shoots a black blob of ink paralyzing enemies hit
+    - Heals players standing inside the radius overtime
+    - Deploys pollen spores that buff allies when activated
+    towerBaseCosts:
+    - 'Cost: 200'
+    - 'Cost: 1100'
+    - 'Cost: 1600'
+    abilityNames:
+    - Paintball Gun
+    - Healing Needle
+    abilityDescriptions:
+    - Colourful Fun
+    - Definitely not an Ana rip off
+    abilityControls:
+    - 'Control: ?'
+    - 'Control: ?'

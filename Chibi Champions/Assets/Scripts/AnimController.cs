@@ -6,24 +6,21 @@ public class AnimController : MonoBehaviour
 {
     [SerializeField] Animator playerAnimator;
 
-    bool playerIsWalking;
-
     public static AnimController Instance { get; set; }
-
 
     private void Awake()
     {
         Instance = this;
     }
 
-    private void Update()
-    {
-        playerAnimator.SetBool("IsWalking", playerIsWalking);
-    }
-
     public void SetPlayerIsWalking(bool walking)
     {
-        playerIsWalking = walking;
+        playerAnimator.SetBool("IsWalking", walking);
+    }
+
+    public void SetEnemyIsWalking(Animator anim, bool walking)
+    {
+        anim.SetBool("IsWalking", walking);
     }
 
     public void PlayPlayerAttackAnim()
@@ -34,5 +31,15 @@ public class AnimController : MonoBehaviour
     public void PlayEnemyAttackAnim(Animator anim)
     {
         anim.SetTrigger("Attack");
+    }
+
+    public bool IsAnimatorPlaying(Animator animator)
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

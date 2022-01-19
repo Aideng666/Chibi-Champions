@@ -12,6 +12,7 @@ public class TowerMenu : MonoBehaviour
 
     Transform platform;
     Transform tower;
+    PlayerController player;
 
     MenuState currentMenuState;
 
@@ -46,6 +47,11 @@ public class TowerMenu : MonoBehaviour
         tower = t;
     }
 
+    public void SetPlayer(PlayerController p)
+    {
+        player = p;
+    }
+
     public void SetMenuState(MenuState state)
     {
         currentMenuState = state;
@@ -53,27 +59,59 @@ public class TowerMenu : MonoBehaviour
 
     public void BuyTower1()
     {
-        Instantiate(tower1, new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
-        platform.gameObject.SetActive(false);
-        CanvasManager.Instance.CloseTowerMenu();
+        if (tower1.GetComponent<Tower>().GetCost() < player.GetComponent<PointsManager>().GetCurrentPoints())
+        {
+            Instantiate(tower1, new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
+            platform.gameObject.SetActive(false);
+            CanvasManager.Instance.CloseTowerMenu();
+            player.GetComponent<PointsManager>().SpendPoints(tower1.GetComponent<Tower>().GetCost());
+        }
+        else
+        {
+            print("Not Enough Points");
+        }
     }
 
     public void BuyTower2()
     {
-        Instantiate(tower2, new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
-        platform.gameObject.SetActive(false);
-        CanvasManager.Instance.CloseTowerMenu();
+        if (tower2.GetComponent<Tower>().GetCost() < player.GetComponent<PointsManager>().GetCurrentPoints())
+        {
+            Instantiate(tower2, new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
+            platform.gameObject.SetActive(false);
+            CanvasManager.Instance.CloseTowerMenu();
+            player.GetComponent<PointsManager>().SpendPoints(tower2.GetComponent<Tower>().GetCost());
+        }
+        else
+        {
+            print("Not Enough Points");
+        }
     }
 
     public void BuyTower3()
     {
-        Instantiate(tower3, new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
-        platform.gameObject.SetActive(false);
-        CanvasManager.Instance.CloseTowerMenu();
+        if (tower3.GetComponent<Tower>().GetCost() < player.GetComponent<PointsManager>().GetCurrentPoints())
+        {
+            Instantiate(tower3, new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
+            platform.gameObject.SetActive(false);
+            CanvasManager.Instance.CloseTowerMenu();
+            player.GetComponent<PointsManager>().SpendPoints(tower3.GetComponent<Tower>().GetCost());
+        }
+        else
+        {
+            print("Not Enough Points");
+        }
     }
 
     public void UpgradeTower()
     {
-        tower.GetComponent<Tower>().Upgrade();
+        if (tower.GetComponent<Tower>().GetUpgradeCost(tower.GetComponent<Tower>().GetLevel()) < player.GetComponent<PointsManager>().GetCurrentPoints())
+        {
+            player.GetComponent<PointsManager>().SpendPoints(tower.GetComponent<Tower>().GetUpgradeCost(tower.GetComponent<Tower>().GetLevel()));
+            tower.GetComponent<Tower>().Upgrade();
+        }
+        else
+        {
+            print("Not Enough Points");
+        }
     }
 }

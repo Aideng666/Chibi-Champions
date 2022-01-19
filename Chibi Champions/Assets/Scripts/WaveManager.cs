@@ -15,7 +15,11 @@ public class WaveManager : MonoBehaviour
 
     bool waveCompleteAlertFired;
 
+    bool waveCompletePointsAdded = false;
+
     List<List<GameObject>> enemiesLists = new List<List<GameObject>>();
+
+   PlayerController[] playerList = new PlayerController[3];
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +29,8 @@ public class WaveManager : MonoBehaviour
         InitEnemiesLists();
 
         BeginWave();
+
+        playerList = FindObjectsOfType<PlayerController>();
     }
 
     // Update is called once per frame
@@ -32,6 +38,20 @@ public class WaveManager : MonoBehaviour
     {
         if (CheckWaveComplete())
         {
+            if (!waveCompletePointsAdded)
+            {
+                foreach (PlayerController player in playerList)
+                {
+                    if (player != null)
+                    {
+                        player.GetComponent<PointsManager>().AddPoints(200);
+                    }
+                }
+
+                waveCompletePointsAdded = true;
+            }
+            
+
             print("Press Q for next wave");
 
             if (Input.GetKeyDown(KeyCode.Q))
@@ -46,6 +66,7 @@ public class WaveManager : MonoBehaviour
         print("The current Wave is " + (currentWave + 1));
 
         waveCompleteAlertFired = false;
+        waveCompletePointsAdded = false;
 
         foreach (EnemySpawner spawner in enemySpawners)
         {

@@ -21,6 +21,7 @@ public class GruntController : Enemy
 
         if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0)
         {
+            lastHit.GetComponent<PointsManager>().AddPoints(50);
             EnemyPool.Instance.AddToGruntPool(gameObject);
         }
     }

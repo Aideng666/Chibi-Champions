@@ -35,7 +35,10 @@ public class Drumstick : PlayerController
                 if (enemy.tag == "Enemy")
                 {
                     enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
-                    enemy.GetComponentInParent<Enemy>().Knockback(20);
+                    enemy.GetComponentInParent<Enemy>().Knockback(10);
+                    enemy.GetComponentInParent<Enemy>().SetLastHit(this);
+                    GetComponent<PointsManager>().AddPoints(20);
+
                 }
             }
 
@@ -59,9 +62,10 @@ public class Drumstick : PlayerController
         {
             if (enemy.tag == "Enemy")
             {
-                print("Hit One Enemy");
                 enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-heavyAttackDamage);
                 enemy.GetComponentInParent<Enemy>().Knockback(35);
+                enemy.GetComponentInParent<Enemy>().SetLastHit(this);
+                GetComponent<PointsManager>().AddPoints(20);
             }
         }
 

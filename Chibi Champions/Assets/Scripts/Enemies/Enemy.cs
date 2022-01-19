@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
 
     protected bool knockbackApplied;
 
+    protected PlayerController lastHit;
+
     // Start is called before the first frame update
     protected void Start()
     {
@@ -130,6 +132,11 @@ public class Enemy : MonoBehaviour
     protected virtual void AttackPlayer()
     {
 
+    }
+
+    public void SetLastHit(PlayerController player)
+    {
+        lastHit = player;
     }
 
     private void OnDrawGizmosSelected()

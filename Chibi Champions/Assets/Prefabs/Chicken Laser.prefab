@@ -82,8 +82,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   defaultAttackPriority: 0
-  firePoint: {fileID: 5573766545861167648}
   attackRange: 10
+  towerCost: 600
+  upgradeCosts: 900100002003000008070000
+  firePoint: {fileID: 5573766545861167648}
   laserDamage: 0.05
 --- !u!1 &7540970448476818788
 GameObject:

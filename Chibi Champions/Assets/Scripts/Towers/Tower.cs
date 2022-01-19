@@ -8,6 +8,8 @@ public class Tower : MonoBehaviour
     [SerializeField] protected LayerMask enemyLayer;
     [SerializeField] protected TowerAttackPriority defaultAttackPriority;
     [SerializeField] protected float attackRange;
+    [SerializeField] protected int towerCost;
+    [SerializeField] protected int[] upgradeCosts = new int[3];
 
     protected TowerAttackPriority currentAttackPriority;
     
@@ -72,5 +74,20 @@ public class Tower : MonoBehaviour
     public virtual void Upgrade()
     {
         towerLevel++;
+    }
+
+    public int GetLevel()
+    {
+        return towerLevel;
+    }
+
+    public int GetCost()
+    {
+        return towerCost;
+    }
+
+    public int GetUpgradeCost(int level)
+    {
+        return upgradeCosts[level - 1];
     }
 }

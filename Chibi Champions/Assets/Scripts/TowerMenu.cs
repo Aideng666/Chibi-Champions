@@ -59,7 +59,7 @@ public class TowerMenu : MonoBehaviour
 
     public void BuyTower1()
     {
-        if (tower1.GetComponent<Tower>().GetCost() < player.GetComponent<PointsManager>().GetCurrentPoints())
+        if (tower1.GetComponent<Tower>().GetCost() <= player.GetComponent<PointsManager>().GetCurrentPoints())
         {
             Instantiate(tower1, new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
             platform.gameObject.SetActive(false);
@@ -74,7 +74,7 @@ public class TowerMenu : MonoBehaviour
 
     public void BuyTower2()
     {
-        if (tower2.GetComponent<Tower>().GetCost() < player.GetComponent<PointsManager>().GetCurrentPoints())
+        if (tower2.GetComponent<Tower>().GetCost() <= player.GetComponent<PointsManager>().GetCurrentPoints())
         {
             Instantiate(tower2, new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
             platform.gameObject.SetActive(false);
@@ -89,7 +89,7 @@ public class TowerMenu : MonoBehaviour
 
     public void BuyTower3()
     {
-        if (tower3.GetComponent<Tower>().GetCost() < player.GetComponent<PointsManager>().GetCurrentPoints())
+        if (tower3.GetComponent<Tower>().GetCost() <= player.GetComponent<PointsManager>().GetCurrentPoints())
         {
             Instantiate(tower3, new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
             platform.gameObject.SetActive(false);
@@ -104,7 +104,7 @@ public class TowerMenu : MonoBehaviour
 
     public void UpgradeTower()
     {
-        if (tower.GetComponent<Tower>().GetUpgradeCost(tower.GetComponent<Tower>().GetLevel()) < player.GetComponent<PointsManager>().GetCurrentPoints())
+        if (tower.GetComponent<Tower>().GetUpgradeCost(tower.GetComponent<Tower>().GetLevel()) <= player.GetComponent<PointsManager>().GetCurrentPoints())
         {
             player.GetComponent<PointsManager>().SpendPoints(tower.GetComponent<Tower>().GetUpgradeCost(tower.GetComponent<Tower>().GetLevel()));
             tower.GetComponent<Tower>().Upgrade();

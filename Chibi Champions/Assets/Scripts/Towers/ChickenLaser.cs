@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class ChickenLaser : Tower
 {
-    [SerializeField] Transform firePoint;
-    [SerializeField] float laserDamage;
-
     LineRenderer laserbeam;
 
     // Start is called before the first frame update
@@ -45,7 +42,7 @@ public class ChickenLaser : Tower
         laserbeam.SetPosition(0, firePoint.position);
         laserbeam.SetPosition(1, enemy.transform.position);
 
-        enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-laserDamage);
+        enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-towerDamage);
     }
 
     public override void Upgrade()
@@ -56,7 +53,7 @@ public class ChickenLaser : Tower
         }
         else if(towerLevel == 2)
         {
-            laserDamage *= 1.5f;
+            towerDamage *= 1.5f;
         }
         else if (towerLevel == 3)
         {

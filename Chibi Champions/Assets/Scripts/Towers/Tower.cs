@@ -9,13 +9,18 @@ public class Tower : MonoBehaviour
     [SerializeField] protected TowerAttackPriority defaultAttackPriority;
     [SerializeField] protected float attackRange;
     [SerializeField] protected int towerCost;
+    [SerializeField] protected float towerDamage;
+    [SerializeField] protected float attackDelay;
     [SerializeField] protected int[] upgradeCosts = new int[3];
+    [SerializeField] protected Transform firePoint;
 
     protected TowerAttackPriority currentAttackPriority;
     
     protected GameObject targetEnemy = null;
 
     protected int towerLevel = 1;
+
+    protected float timeToNextAttack = 0;
 
     private void Start()
     {
@@ -76,6 +81,17 @@ public class Tower : MonoBehaviour
         towerLevel++;
     }
 
+    protected bool CanAttack()
+    {
+        if (timeToNextAttack < Time.realtimeSinceStartup)
+        {
+            timeToNextAttack = Time.realtimeSinceStartup + attackDelay;
+            return true;
+        }
+
+        return false;
+    }
+
     public int GetLevel()
     {
         return towerLevel;
@@ -89,5 +105,10 @@ public class Tower : MonoBehaviour
     public int GetUpgradeCost(int level)
     {
         return upgradeCosts[level - 1];
+    }
+
+    public float GetDamage()
+    {
+        return towerDamage;
     }
 }

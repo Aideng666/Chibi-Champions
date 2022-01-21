@@ -30,7 +30,11 @@ public class SharpshooterController : Enemy
 
         if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0)
         {
-            lastHit.GetComponent<PointsManager>().AddPoints(50);
+            if (lastHit != null)
+            {
+                lastHit.GetComponent<PointsManager>().AddPoints(50);
+            }
+
             EnemyPool.Instance.AddToShooterPool(gameObject);
         }
     }

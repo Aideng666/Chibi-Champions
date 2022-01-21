@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class PointsManager : MonoBehaviour
 {
+    [SerializeField] int startingPoints;
+
     int currentPoints = 0;
+
+    private void Start()
+    {
+        currentPoints = startingPoints;
+    }
 
     public void AddPoints(int value)
     {

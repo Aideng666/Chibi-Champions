@@ -7,6 +7,7 @@ TagManager:
   - Interactable
   - Enemy
   - Tower
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - Crystal
   - Player
   - Gun
-  - 
-  - 
+  - Tower
+  - Bullet
   - 
   - 
   - 

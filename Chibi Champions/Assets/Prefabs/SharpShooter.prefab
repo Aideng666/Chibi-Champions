@@ -151,7 +151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4496647757012195327}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Scope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2648689685141527950}
   - component: {fileID: 6289806156684101321}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -440,7 +440,7 @@ GameObject:
   - component: {fileID: 1125575074539395550}
   - component: {fileID: 6678774312507164747}
   - component: {fileID: 458625497137467081}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -635,7 +635,7 @@ GameObject:
   - component: {fileID: 4553004798902470246}
   - component: {fileID: 8253447495603627316}
   - component: {fileID: 3327797489102028}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Lens
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -733,7 +733,7 @@ GameObject:
   - component: {fileID: 8340782147654555114}
   - component: {fileID: 4326452550271494341}
   - component: {fileID: 8429164482881438400}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,7 +831,7 @@ GameObject:
   - component: {fileID: 5200508632607717100}
   - component: {fileID: 2146795591886084988}
   - component: {fileID: 7231212603487830013}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Arm (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -929,7 +929,7 @@ GameObject:
   - component: {fileID: 7157108281276731791}
   - component: {fileID: 897344175682270228}
   - component: {fileID: 8838304728022654048}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Front Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1102,7 +1102,7 @@ GameObject:
   - component: {fileID: 5785257442402653129}
   - component: {fileID: 3116006660318645194}
   - component: {fileID: 4629492441852888844}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1237,7 +1237,7 @@ GameObject:
   - component: {fileID: 7319164711122988326}
   - component: {fileID: 4819812267643332696}
   - component: {fileID: 7079395921855854121}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Leg (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1335,7 +1335,7 @@ GameObject:
   - component: {fileID: 5202474804590560966}
   - component: {fileID: 2127090459314161001}
   - component: {fileID: 2259921846317749161}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Back Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1508,7 +1508,7 @@ GameObject:
   - component: {fileID: 249326803342035299}
   - component: {fileID: 8189729185619844497}
   - component: {fileID: 1051236474148903456}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}

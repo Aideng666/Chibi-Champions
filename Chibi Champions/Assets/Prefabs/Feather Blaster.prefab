@@ -248,7 +248,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   defaultAttackPriority: 0
-  attackRange: 10
+  attackRange: 25
   towerCost: 200
   towerDamage: 10
   attackDelay: 1

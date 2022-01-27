@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected float gravity = 1.5f;
     [SerializeField] protected float jumpPower = 10;
     [SerializeField] protected float interactDistance = 3;
-    [SerializeField] protected float attackDelay = 0.75f;
+    [SerializeField] protected float lightAttackDelay = 0.75f;
+    [SerializeField] protected float heavyAttackDelay = 0.75f;
     [SerializeField] protected TextMeshProUGUI interactText;
 
     protected CharacterController controller;
@@ -29,7 +30,8 @@ public class PlayerController : MonoBehaviour
     protected Vector3 moveDir;
     protected bool isJumping;
 
-    protected float timeToNextAttack = 0;
+    protected float timeToNextLightAttack = 0;
+    protected float timeToNextHeavyAttack = 0;
 
     protected bool canInteract;
 
@@ -133,11 +135,22 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    protected bool CanAttack()
+    protected bool CanLightAttack()
     {
-        if (timeToNextAttack < Time.realtimeSinceStartup)
+        if (timeToNextLightAttack < Time.realtimeSinceStartup)
         {
-            timeToNextAttack = Time.realtimeSinceStartup + attackDelay;
+            timeToNextLightAttack = Time.realtimeSinceStartup + lightAttackDelay;
+            return true;
+        }
+
+        return false;
+    }
+
+    protected bool CanHeavyAttack()
+    {
+        if (timeToNextHeavyAttack < Time.realtimeSinceStartup)
+        {
+            timeToNextHeavyAttack = Time.realtimeSinceStartup + heavyAttackDelay;
             return true;
         }
 
@@ -191,5 +204,6 @@ public class PlayerController : MonoBehaviour
         }
 
         Gizmos.DrawWireSphere(attackPoint.position, lightAttackRange);
+        Gizmos.DrawWireSphere(attackPoint.position, heavyAttackRange);
     }
 }

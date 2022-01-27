@@ -26,7 +26,7 @@ public class Drumstick : PlayerController
 
     protected override void Attack()
     {
-        if (Input.GetMouseButtonDown(0) && CanAttack())
+        if (Input.GetMouseButtonDown(0) && CanLightAttack())
         {
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, lightAttackRange, enemyLayer);
 
@@ -44,7 +44,7 @@ public class Drumstick : PlayerController
 
             AnimController.Instance.PlayPlayerAttackAnim();
         }
-        if (Input.GetMouseButtonDown(1) && CanAttack())
+        if (Input.GetMouseButtonDown(1) && CanHeavyAttack())
         {
             StartCoroutine(Jump());
 

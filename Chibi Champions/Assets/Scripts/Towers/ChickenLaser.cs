@@ -27,6 +27,8 @@ public class ChickenLaser : Tower
             return;
         }
 
+        transform.LookAt(new Vector3(targetEnemy.transform.position.x, targetEnemy.transform.position.y + 1f, targetEnemy.transform.position.z));
+
         Attack(targetEnemy);
     }
 
@@ -36,8 +38,6 @@ public class ChickenLaser : Tower
         {
             laserbeam.enabled = true;
         }
-
-        transform.LookAt(enemy.transform.position);
 
         laserbeam.SetPosition(0, firePoint.position);
         laserbeam.SetPosition(1, enemy.transform.position);

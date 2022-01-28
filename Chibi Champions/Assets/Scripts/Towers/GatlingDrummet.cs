@@ -6,6 +6,7 @@ public class GatlingDrummet : Tower
 {
     [SerializeField] float bulletSpeed;
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] GameObject partToRotate;
 
     // Update is called once per frame
     void Update()
@@ -17,7 +18,7 @@ public class GatlingDrummet : Tower
             return;
         }
 
-        transform.LookAt(targetEnemy.transform.position);
+        partToRotate.transform.LookAt(new Vector3(targetEnemy.transform.position.x, targetEnemy.transform.position.y - 1.5f, targetEnemy.transform.position.z));
 
         if (CanAttack())
         {

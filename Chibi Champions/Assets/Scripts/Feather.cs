@@ -8,8 +8,6 @@ public class Feather : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print("HI");
-
         if (collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.GetComponentInParent<Health>().ModifyHealth(-tower.GetDamage());

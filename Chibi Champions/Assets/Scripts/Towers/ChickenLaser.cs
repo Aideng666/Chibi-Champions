@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ChickenLaser : Tower
 {
     LineRenderer laserbeam;
+    bool slowEnemies;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +45,11 @@ public class ChickenLaser : Tower
         laserbeam.SetPosition(1, enemy.transform.position);
 
         enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-towerDamage);
+
+        if (slowEnemies)
+        {
+            enemy.gameObject.GetComponentInParent<NavMeshAgent>().speed = 2;
+        }
     }
 
     public override void Upgrade()
@@ -57,7 +64,7 @@ public class ChickenLaser : Tower
         }
         else if (towerLevel == 3)
         {
-
+            slowEnemies = true;
         }
 
         base.Upgrade();

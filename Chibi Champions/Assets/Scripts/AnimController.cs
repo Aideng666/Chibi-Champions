@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class AnimController : MonoBehaviour
 {
-    [SerializeField] Animator playerAnimator;
+    [SerializeField] Animator drumstickAnimator;
+    [SerializeField] Animator rolfeAnimator;
+    [SerializeField] Animator potterAnimator;
+
+    Animator playerAnimator;
 
     public static AnimController Instance { get; set; }
 
     private void Awake()
     {
         Instance = this;
+
+        if (playerAnimator == null)
+        {
+            playerAnimator = FindObjectOfType<PlayerController>().GetComponent<Animator>();
+        }
     }
 
     public void SetPlayerIsWalking(bool walking)

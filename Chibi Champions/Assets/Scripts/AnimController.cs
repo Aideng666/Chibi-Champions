@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AnimController : MonoBehaviour
 {
+    //Characters
     [SerializeField] Animator drumstickAnimator;
     [SerializeField] Animator rolfeAnimator;
     [SerializeField] Animator potterAnimator;
@@ -35,6 +36,11 @@ public class AnimController : MonoBehaviour
     public void PlayPlayerAttackAnim()
     {
         playerAnimator.SetTrigger("Attack");
+    }
+
+    public void PlayFeatherBlasterShootAnim(Animator anim)
+    {
+        anim.SetTrigger("Shoot");
     }
 
     public void PlayEnemyAttackAnim(Animator anim)

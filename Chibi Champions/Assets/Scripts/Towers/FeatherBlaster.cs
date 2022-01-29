@@ -6,6 +6,7 @@ public class FeatherBlaster : Tower
 {
     [SerializeField] float featherSpeed;
     [SerializeField] GameObject featherPrefab;
+    [SerializeField] GameObject partToRotate;
 
     // Update is called once per frame
     void Update()
@@ -17,7 +18,7 @@ public class FeatherBlaster : Tower
             return;
         }
 
-        transform.LookAt(targetEnemy.transform.position);
+        partToRotate.transform.LookAt(new Vector3(targetEnemy.transform.position.x, targetEnemy.transform.position.y - 1.5f, targetEnemy.transform.position.z));
 
         if (CanAttack())
         {
@@ -34,6 +35,8 @@ public class FeatherBlaster : Tower
         feather.transform.LookAt(enemy.transform);
         feather.GetComponentInChildren<Rigidbody>().velocity = direction * featherSpeed;
         feather.GetComponentInChildren<Feather>().SetTower(this);
+
+        AnimController.Instance.PlayFeatherBlasterShootAnim(GetComponentInChildren<Animator>());
     }
 
     public override void Upgrade()

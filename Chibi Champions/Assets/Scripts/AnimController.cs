@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class AnimController : MonoBehaviour
 {
-    [SerializeField] Animator playerAnimator;
+    //Characters
+    [SerializeField] Animator drumstickAnimator;
+    [SerializeField] Animator rolfeAnimator;
+    [SerializeField] Animator potterAnimator;
+
+    Animator playerAnimator;
 
     public static AnimController Instance { get; set; }
 
     private void Awake()
     {
         Instance = this;
+
+        if (playerAnimator == null)
+        {
+            playerAnimator = FindObjectOfType<PlayerController>().GetComponent<Animator>();
+        }
     }
 
     public void SetPlayerIsWalking(bool walking)
@@ -28,8 +38,23 @@ public class AnimController : MonoBehaviour
         playerAnimator.SetTrigger("Attack");
     }
 
+    public void PlayFeatherBlasterShootAnim(Animator anim)
+    {
+        anim.SetTrigger("Shoot");
+    }
+
     public void PlayEnemyAttackAnim(Animator anim)
     {
         anim.SetTrigger("Attack");
+    }
+
+    public bool IsAnimatorPlaying(Animator animator)
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Interactable
+  - Enemy
+  - Tower
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -15,9 +18,9 @@ TagManager:
   - Enemy
   - Crystal
   - Player
-  - 
-  - 
-  - 
+  - Gun
+  - Tower
+  - Bullet
   - 
   - 
   - 

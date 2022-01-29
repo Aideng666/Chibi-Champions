@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 95333650690594863}
   - component: {fileID: 95333650690594849}
   - component: {fileID: 95333650690594862}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 95333651194907708}
   - component: {fileID: 95333651194907709}
   - component: {fileID: 95333651194907697}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Healthbar Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 95333651235355322}
   - component: {fileID: 95333651235355324}
   - component: {fileID: 95333651235355325}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 3286187790628426618}
   m_Layer: 6
   m_Name: Torso
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1813,15 +1813,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd25da3a4ef0a734cabab22d399afceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRange: 1.35
+  attackPoint: {fileID: 6873490127833080893}
+  playerSpottedRange: 8
   crystalLayer:
     serializedVersion: 2
     m_Bits: 128
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
-  attackPoint: {fileID: 6873490127833080893}
-  attackRange: 1.35
-  playerSpottedRange: 8
 --- !u!95 &8991760203369301096
 Animator:
   serializedVersion: 4

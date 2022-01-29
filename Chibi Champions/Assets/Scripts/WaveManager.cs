@@ -1,27 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField] int numberOfWaves;
     [SerializeField] List<EnemySpawner> enemySpawners;
+    [SerializeField] GameObject gruntPrefab;
+    [SerializeField] GameObject sharpshooterPrefab;
 
     int currentWave;
+    int numberOfWaves;
 
     bool waveCompleteAlertFired;
 
-    List<int> enemiesPerWaveList = new List<int>();
-    //List<List<GameObject>> enemiesPerWaveList = new List<List<GameObject>>();
+    bool waveCompletePointsAdded = false;
+
+    List<List<GameObject>> enemiesLists = new List<List<GameObject>>();
+
+   PlayerController[] playerList = new PlayerController[3];
 
     // Start is called before the first frame update
     void Start()
     {
         currentWave = 0;
 
-        InitWaveList();
+        InitEnemiesLists();
 
         BeginWave();
+
+        playerList = FindObjectsOfType<PlayerController>();
     }
 
     // Update is called once per frame
@@ -29,6 +38,20 @@ public class WaveManager : MonoBehaviour
     {
         if (CheckWaveComplete())
         {
+            if (!waveCompletePointsAdded)
+            {
+                foreach (PlayerController player in playerList)
+                {
+                    if (player != null)
+                    {
+                        player.GetComponent<PointsManager>().AddPoints(200);
+                    }
+                }
+
+                waveCompletePointsAdded = true;
+            }
+            
+
             print("Press Q for next wave");
 
             if (Input.GetKeyDown(KeyCode.Q))
@@ -38,28 +61,16 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    void InitWaveList()
-    {
-        int numberOfEnemies = 1;
-
-        for (int i = 0; i < numberOfWaves; i++)
-        {
-            enemiesPerWaveList.Add(numberOfEnemies);
-
-            numberOfEnemies++;
-
-        }
-    }
-
     void BeginWave()
     {
         print("The current Wave is " + (currentWave + 1));
 
         waveCompleteAlertFired = false;
+        waveCompletePointsAdded = false;
 
         foreach (EnemySpawner spawner in enemySpawners)
         {
-            spawner.ResetMaximumSpawns(enemiesPerWaveList[currentWave]);
+            spawner.SetSpawnList(enemiesLists[currentWave]);
         }
         currentWave++;
     }
@@ -88,5 +99,34 @@ public class WaveManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    void InitEnemiesLists()
+    {
+        StreamReader reader = new StreamReader("Assets/WaveData.txt");
+
+        numberOfWaves = Int32.Parse(reader.ReadLine());
+
+        for (int i = 0; i < numberOfWaves; i++)
+        {
+            enemiesLists.Add(new List<GameObject>());
+            string line = reader.ReadLine();
+
+            string[] amountOfEachEnemy = line.Split(':');
+
+            int numberOfGrunts = Int32.Parse(amountOfEachEnemy[0]);
+            int numberOfShooters = Int32.Parse(amountOfEachEnemy[1]);
+
+            for (int j = 0; j < numberOfGrunts; j++)
+            {
+                enemiesLists[i].Add(gruntPrefab);
+            }
+            for (int j = 0; j < numberOfShooters; j++)
+            {
+                enemiesLists[i].Add(sharpshooterPrefab);
+            }
+        }
+
+        reader.Close();
     }
 }

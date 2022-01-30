@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float attackRange;
     [SerializeField] protected Transform attackPoint;
     [SerializeField] protected float playerSpottedRange;
+    [SerializeField] protected float defaultSpeed;
 
     protected Transform crystalTransform;
     protected Transform playerTransform;
@@ -31,6 +32,8 @@ public class Enemy : MonoBehaviour
 
         crystalTransform = FindObjectOfType<Crystal>().transform;
         playerTransform = FindObjectOfType<PlayerController>().transform;
+
+        navMeshAgent.speed = defaultSpeed;
     }
 
     // Update is called once per frame
@@ -137,6 +140,11 @@ public class Enemy : MonoBehaviour
     public void SetLastHit(PlayerController player)
     {
         lastHit = player;
+    }
+
+    public float GetDefaultSpeed()
+    {
+        return defaultSpeed;
     }
 
     private void OnDrawGizmosSelected()

@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected float lightAttackDelay = 0.75f;
     [SerializeField] protected float heavyAttackDelay = 0.75f;
     [SerializeField] protected TextMeshProUGUI interactText;
+    [SerializeField] protected GameObject[] towers = new GameObject[3];
 
     protected CharacterController controller;
 
@@ -194,6 +195,11 @@ public class PlayerController : MonoBehaviour
                 interactText.gameObject.SetActive(false);
             }
         }
+    }
+
+    public GameObject[] GetTowers()
+    {
+        return towers;
     }
 
     private void OnDrawGizmosSelected()

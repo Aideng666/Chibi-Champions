@@ -51,6 +51,11 @@ public class GatlingDrummet : Tower
         {
             towerDamage *= 1.5f;
         }
+        else
+        {
+            print("Tower is Max Level");
+            return;
+        }
 
         base.Upgrade();
     }

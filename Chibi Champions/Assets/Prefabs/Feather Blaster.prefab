@@ -255,7 +255,7 @@ MonoBehaviour:
   attackDelay: 1
   upgradeCosts: 580200008403000040060000
   firePoint: {fileID: 3258824005039446072}
-  featherSpeed: 50
+  featherSpeed: 150
   featherPrefab: {fileID: 210590721982759650, guid: 177d00b56498632418e37441be548698, type: 3}
   partToRotate: {fileID: 7664279542429962362}
 --- !u!1 &7364763816817339039

@@ -1518,8 +1518,13 @@ MonoBehaviour:
   gravity: 1.5
   jumpPower: 3
   interactDistance: 5
-  attackDelay: 0.75
+  lightAttackDelay: 0.75
+  heavyAttackDelay: 0.75
   interactText: {fileID: 0}
+  towers:
+  - {fileID: 5581690700421447387, guid: 6acd674e204676e4c8722f20863d0966, type: 3}
+  - {fileID: 7540970447587639792, guid: 40352688c1be85d44a41044913d3c6fe, type: 3}
+  - {fileID: 5489809721830213632, guid: 8a274f0ae49557a498bc0d7bb339efbb, type: 3}
 --- !u!114 &6529732846633032355
 MonoBehaviour:
   m_ObjectHideFlags: 0

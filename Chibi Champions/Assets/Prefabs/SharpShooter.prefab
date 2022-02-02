@@ -66,6 +66,7 @@ MonoBehaviour:
   attackRange: 15
   attackPoint: {fileID: 4146364756856947917}
   playerSpottedRange: 15
+  defaultSpeed: 3.5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64

@@ -27,7 +27,7 @@ public class Rolfe : PlayerController
                 if (enemy.tag == "Enemy")
                 {
                     enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
-                    enemy.GetComponentInParent<Enemy>().Knockback(10);
+                    enemy.GetComponentInParent<Enemy>().Knockback(20);
                     enemy.GetComponentInParent<Enemy>().SetLastHit(this);
                     GetComponent<PointsManager>().AddPoints(20);
 
@@ -53,7 +53,7 @@ public class Rolfe : PlayerController
             if (enemy.tag == "Enemy")
             {
                 enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
-                enemy.GetComponentInParent<Enemy>().Knockback(10);
+                enemy.GetComponentInParent<Enemy>().Knockback(20);
                 enemy.GetComponentInParent<Enemy>().SetLastHit(this);
                 GetComponent<PointsManager>().AddPoints(20);
 
@@ -63,7 +63,7 @@ public class Rolfe : PlayerController
 
     IEnumerator WaitForSecondSwipe()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
 
         SecondSwipeAttack();
     }

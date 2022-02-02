@@ -50,6 +50,10 @@ public class ChickenLaser : Tower
         {
             enemy.gameObject.GetComponentInParent<NavMeshAgent>().speed = 2;
         }
+        else
+        {
+            enemy.gameObject.GetComponentInParent<NavMeshAgent>().speed = enemy.GetComponentInParent<Enemy>().GetDefaultSpeed();
+        }
     }
 
     public override void Upgrade()
@@ -65,6 +69,11 @@ public class ChickenLaser : Tower
         else if (towerLevel == 3)
         {
             slowEnemies = true;
+        }
+        else
+        {
+            print("Tower is Max Level");
+            return;
         }
 
         base.Upgrade();

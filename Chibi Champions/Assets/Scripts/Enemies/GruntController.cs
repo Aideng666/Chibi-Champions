@@ -48,7 +48,7 @@ public class GruntController : Enemy
 
         foreach (Collider player in playerHits)
         {
-            player.gameObject.GetComponentInParent<Health>().ModifyHealth(-5);
+            player.gameObject.GetComponentInParent<Health>().ModifyHealth(-attackDamage);
         }
 
         delayBeforeAttackReached = false;

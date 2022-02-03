@@ -64,6 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 15
+  attackDamage: 5
   attackPoint: {fileID: 4146364756856947917}
   playerSpottedRange: 15
   defaultSpeed: 3.5

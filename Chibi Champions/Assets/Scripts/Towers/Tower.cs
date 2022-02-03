@@ -61,7 +61,7 @@ public class Tower : MonoBehaviour
             {
                 currentEnemyCheck = EnemiesInView[i];
 
-                if (Vector3.Distance(currentEnemyCheck.transform.position, FindObjectOfType<Crystal>().transform.position) < Vector3.Distance(selectedEnemy.transform.position, FindObjectOfType<Crystal>().transform.position))
+                if (Vector3.Distance(currentEnemyCheck.transform.position, FindObjectOfType<Cure>().transform.position) < Vector3.Distance(selectedEnemy.transform.position, FindObjectOfType<Cure>().transform.position))
                 {
                     selectedEnemy = currentEnemyCheck;
                 }
@@ -110,5 +110,10 @@ public class Tower : MonoBehaviour
     public float GetDamage()
     {
         return towerDamage;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

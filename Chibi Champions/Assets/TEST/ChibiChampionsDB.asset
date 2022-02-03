@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ChibiChampionsDB
   m_EditorClassIdentifier: 
   character:
-  - characterName: Chris
+  - characterName: Drumstick
     classType: OFFENSE
     towerBaseSprites:
     - {fileID: 21300000, guid: 912adadc8c94ec7499174ed7cca439aa, type: 3}
@@ -35,10 +35,10 @@ MonoBehaviour:
     - 'Cost: 600'
     - 'Cost: 1200'
     abilityNames:
-    - Poop Sock
+    - Sword Slash
     - Ground Pound
     abilityDescriptions:
-    - Eeeww Stinky
+    - Sword Slash Attack
     - Mario impersonation
     abilityControls:
     - 'Control: ?'
@@ -74,7 +74,7 @@ MonoBehaviour:
     abilityControls:
     - 'Control: ?'
     - 'Control: ?'
-  - characterName: Squirtle
+  - characterName: Potter
     classType: SUPPORT
     towerBaseSprites:
     - {fileID: 21300000, guid: 30308aff79334064fb04c4cc7f353ba2, type: 3}

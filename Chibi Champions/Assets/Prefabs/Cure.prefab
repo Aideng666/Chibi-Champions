@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 5498460353397738892}
   - component: {fileID: 8797515408434904196}
   m_Layer: 7
-  m_Name: Crystal
+  m_Name: Cure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -118,7 +118,7 @@ public class CharacterSelectMenu : MonoBehaviour
     {
         if (hasSelected)
         {
-            SceneManager.LoadScene("Sandbox");
+            SceneManager.LoadScene("Main");
             PlayerPrefs.SetInt("CharacterIndex", characterIndex);
         }
     }

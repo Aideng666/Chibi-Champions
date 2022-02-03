@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Rolfe : PlayerController
 {
+    [SerializeField] GameObject beaconPrefab;
+    [SerializeField] int maxBeacons = 2;
+
+    int currentBeacons = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +32,7 @@ public class Rolfe : PlayerController
                 if (enemy.tag == "Enemy")
                 {
                     enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
-                    enemy.GetComponentInParent<Enemy>().Knockback(20);
+                    enemy.GetComponentInParent<Enemy>().Knockback(20, transform);
                     enemy.GetComponentInParent<Enemy>().SetLastHit(this);
                     GetComponent<PointsManager>().AddPoints(20);
 
@@ -38,9 +43,10 @@ public class Rolfe : PlayerController
 
             //AnimController.Instance.PlayPlayerAttackAnim();
         }
-        if (Input.GetMouseButtonDown(1) && CanHeavyAttack())
+        if (Input.GetMouseButtonDown(1) && CanHeavyAttack() && currentBeacons < maxBeacons)
         {
-
+            var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
+            currentBeacons++;
         }
     }
 
@@ -53,11 +59,18 @@ public class Rolfe : PlayerController
             if (enemy.tag == "Enemy")
             {
                 enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
-                enemy.GetComponentInParent<Enemy>().Knockback(20);
+                enemy.GetComponentInParent<Enemy>().Knockback(20, transform);
                 enemy.GetComponentInParent<Enemy>().SetLastHit(this);
                 GetComponent<PointsManager>().AddPoints(20);
-
             }
+        }
+    }
+
+    public void RemoveBeacon()
+    {
+        if (currentBeacons > 0)
+        {
+            currentBeacons--;
         }
     }
 

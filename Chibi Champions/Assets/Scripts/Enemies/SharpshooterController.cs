@@ -58,7 +58,7 @@ public class SharpshooterController : Enemy
             {
                 print("Player Shot");
 
-                playerTransform.gameObject.GetComponentInParent<Health>().ModifyHealth(-10);
+                playerTransform.gameObject.GetComponentInParent<Health>().ModifyHealth(-2);
 
             }
         }
@@ -89,7 +89,7 @@ public class SharpshooterController : Enemy
             {
                 print("Player Shot");
 
-                playerTransform.gameObject.GetComponentInParent<Health>().ModifyHealth(-10);
+                playerTransform.gameObject.GetComponentInParent<Health>().ModifyHealth(-attackDamage);
 
             }
         }

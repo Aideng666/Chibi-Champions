@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Crystal : MonoBehaviour
+public class Cure : MonoBehaviour
 {
     TextMeshProUGUI healthText;
     bool alertFired;
@@ -24,12 +24,12 @@ public class Crystal : MonoBehaviour
 
         if (GetComponent<Health>().GetCurrentHealth() <= 50 && !alertFired)
         {
-            AlertManager.Instance.DisplayAlert("The Crystal Is At 50 HP!");
+            AlertManager.Instance.DisplayAlert("The Cure Is At 50 HP!");
             alertFired = true;
         }
         if (GetComponent<Health>().GetCurrentHealth() <= 25 && !alert2Fired)
         {
-            AlertManager.Instance.DisplayAlert("The Crystal Is At 25 HP!");
+            AlertManager.Instance.DisplayAlert("The Cure Is At 25 HP!");
             alert2Fired = true;
         }
         if (GetComponent<Health>().GetCurrentHealth() <= 10 && !alert3Fired)

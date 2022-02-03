@@ -859,7 +859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &250506656
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3146,7 +3146,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Chris
+  m_Text: Drumstick
 --- !u!222 &1171833400
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4201,7 +4201,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: S
+  m_Text: Potter
 --- !u!222 &1673657462
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5033,7 +5033,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1989804149
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5043,7 +5043,7 @@ RectTransform:
   m_GameObject: {fileID: 1989804148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.0127, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 158291084}

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,9 +22,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected float lightAttackDelay = 0.75f;
     [SerializeField] protected float heavyAttackDelay = 0.75f;
     [SerializeField] protected TextMeshProUGUI interactText;
+    [SerializeField] protected GameObject cameraLookAt;
     [SerializeField] protected GameObject[] towers = new GameObject[3];
 
     protected CharacterController controller;
+    protected CinemachineVirtualCamera thirdPersonCam;
 
     protected float horizontalInput = 0f;
     protected float verticalInput = 0f;
@@ -42,6 +45,11 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
 
         interactText.gameObject.SetActive(false);
+
+        thirdPersonCam = FindObjectOfType<CinemachineVirtualCamera>();
+
+        thirdPersonCam.LookAt = cameraLookAt.transform;
+        thirdPersonCam.Follow = cameraLookAt.transform;
     }
 
     // Update is called once per frame

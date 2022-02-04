@@ -984,10 +984,11 @@ MonoBehaviour:
   lightAttackDelay: 0.75
   heavyAttackDelay: 0.75
   interactText: {fileID: 0}
+  cameraLookAt: {fileID: 6888943266243870148}
   towers:
   - {fileID: 180069341355437286, guid: dcd554d6d7b010c43a492042894187b6, type: 3}
-  - {fileID: 5489809721830213632, guid: 8a274f0ae49557a498bc0d7bb339efbb, type: 3}
-  - {fileID: 5581690700421447387, guid: 6acd674e204676e4c8722f20863d0966, type: 3}
+  - {fileID: 180069341355437286, guid: dcd554d6d7b010c43a492042894187b6, type: 3}
+  - {fileID: 180069341355437286, guid: dcd554d6d7b010c43a492042894187b6, type: 3}
   beaconPrefab: {fileID: 1344693683629327406, guid: b66d712e63a60e84489acf9193c19c81, type: 3}
   maxBeacons: 2
 --- !u!114 &6888943266945402818

@@ -103,12 +103,12 @@ public class PlayerController : MonoBehaviour
 
         if (direction.magnitude >= 0.1f)
         {
-            AnimController.Instance.SetPlayerIsWalking(true);
+            //AnimController.Instance.SetPlayerIsWalking(true);
         }
         else
         {
             moveDir = new Vector3(0, moveDir.y, 0);
-            AnimController.Instance.SetPlayerIsWalking(false);
+            //AnimController.Instance.SetPlayerIsWalking(false);
         }
 
         if (!isJumping)

@@ -28,7 +28,7 @@ public class PointsManager : MonoBehaviour
     {
         Mathf.Clamp(currentPoints, 0, 100000);
 
-        print("Points: " + currentPoints);
+        //print("Points: " + currentPoints);
     }
 
     public int GetCurrentPoints()

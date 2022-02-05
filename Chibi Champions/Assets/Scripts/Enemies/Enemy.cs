@@ -10,13 +10,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected Transform attackPoint;
     [SerializeField] protected float playerSpottedRange;
     [SerializeField] protected float defaultSpeed;
+    [SerializeField] protected float attackDelay = 1.5f;
 
     protected Transform crystalTransform;
     protected Transform playerTransform;
     protected NavMeshAgent navMeshAgent;
     protected EnemyAttackStates currentAttackState;
 
-    protected float attackDelay = 1.5f;
     protected float timeUntilNextAttack = 0;
 
     protected bool delayBeforeAttackReached = false;

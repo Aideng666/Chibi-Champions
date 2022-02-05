@@ -39,6 +39,8 @@ public class WebShooter : Tower
         web.GetComponentInChildren<Rigidbody>().velocity = direction * webSpeed;
         web.GetComponentInChildren<Web>().SetTower(this);
         web.GetComponentInChildren<Web>().SetDealDamage(dealDamage);
+
+        Destroy(web, 3);
     }
 
     public void ApplySlowEffect(GameObject enemy)

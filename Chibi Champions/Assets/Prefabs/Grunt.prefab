@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 3685831042650893412}
   - component: {fileID: 6164070922812333141}
   - component: {fileID: 2344343827180880434}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hilt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -576,7 +576,7 @@ GameObject:
   - component: {fileID: 221523426699005790}
   - component: {fileID: 4485867279309149934}
   - component: {fileID: 4459614236948306585}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -840,7 +840,7 @@ GameObject:
   - component: {fileID: 4495384225097218575}
   - component: {fileID: 1777100801683677444}
   - component: {fileID: 872692998277619559}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1038,7 +1038,7 @@ GameObject:
   - component: {fileID: 4278273344803784109}
   - component: {fileID: 513998822088219283}
   - component: {fileID: 1115866499960530821}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1518,7 +1518,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6374132845835766490}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1557,7 +1557,7 @@ GameObject:
   - component: {fileID: 6706548942118268171}
   - component: {fileID: 2488784636571888808}
   - component: {fileID: 5595073936296815762}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1818,6 +1818,7 @@ MonoBehaviour:
   attackPoint: {fileID: 6873490127833080893}
   playerSpottedRange: 8
   defaultSpeed: 3.5
+  attackDelay: 1.5
   crystalLayer:
     serializedVersion: 2
     m_Bits: 128

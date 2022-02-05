@@ -48,18 +48,16 @@ public class SharpshooterController : Enemy
         if (Physics.Raycast(ray, out hit, 100f, ~enemyLayer))
         {
             var selection = hit.transform;
+            var hitPoint = hit.point;
 
             bulletTrail.enabled = true;
 
             bulletTrail.SetPosition(0, attackPoint.position);
-            bulletTrail.SetPosition(1, selection.position);
+            bulletTrail.SetPosition(1, hitPoint);
 
-            if (selection.tag == "Player")
+            if (selection.tag == "Cure")
             {
-                print("Player Shot");
-
-                playerTransform.gameObject.GetComponentInParent<Health>().ModifyHealth(-2);
-
+                crystalTransform.gameObject.GetComponentInParent<Health>().ModifyHealth(-2);
             }
         }
 
@@ -79,18 +77,27 @@ public class SharpshooterController : Enemy
         if (Physics.Raycast(ray, out hit, 100f, ~enemyLayer))
         {
             var selection = hit.transform;
+            var hitPoint = hit.point;
 
             bulletTrail.enabled = true;
 
-            bulletTrail.SetPosition(0, attackPoint.position);
-            bulletTrail.SetPosition(1, selection.position);
-
-            if (selection.tag == "Player")
+            if (hitPoint != null)
             {
-                print("Player Shot");
+                print("Hit " + selection.name);
 
-                playerTransform.gameObject.GetComponentInParent<Health>().ModifyHealth(-attackDamage);
+                bulletTrail.SetPosition(0, attackPoint.position);
+                bulletTrail.SetPosition(1, hitPoint);
 
+                if (selection.tag == "Player")
+                {
+                    playerTransform.gameObject.GetComponentInParent<Health>().ModifyHealth(-attackDamage);
+                }
+            }
+            else
+            {
+                print("Hit Nothing");
+                bulletTrail.SetPosition(0, attackPoint.position);
+                bulletTrail.SetPosition(1, (shotDirection * 2) + attackPoint.position);
             }
         }
 

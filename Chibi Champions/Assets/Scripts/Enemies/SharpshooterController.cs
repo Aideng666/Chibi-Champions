@@ -83,8 +83,6 @@ public class SharpshooterController : Enemy
 
             if (hitPoint != null)
             {
-                print("Hit " + selection.name);
-
                 bulletTrail.SetPosition(0, attackPoint.position);
                 bulletTrail.SetPosition(1, hitPoint);
 
@@ -95,7 +93,6 @@ public class SharpshooterController : Enemy
             }
             else
             {
-                print("Hit Nothing");
                 bulletTrail.SetPosition(0, attackPoint.position);
                 bulletTrail.SetPosition(1, (shotDirection * 2) + attackPoint.position);
             }

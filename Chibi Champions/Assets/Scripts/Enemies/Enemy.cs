@@ -6,16 +6,17 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] protected float attackRange;
+    [SerializeField] protected float attackDamage;
     [SerializeField] protected Transform attackPoint;
     [SerializeField] protected float playerSpottedRange;
     [SerializeField] protected float defaultSpeed;
+    [SerializeField] protected float attackDelay = 1.5f;
 
     protected Transform crystalTransform;
     protected Transform playerTransform;
     protected NavMeshAgent navMeshAgent;
     protected EnemyAttackStates currentAttackState;
 
-    protected float attackDelay = 1.5f;
     protected float timeUntilNextAttack = 0;
 
     protected bool delayBeforeAttackReached = false;
@@ -30,7 +31,7 @@ public class Enemy : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         currentAttackState = EnemyAttackStates.Crystal;
 
-        crystalTransform = FindObjectOfType<Crystal>().transform;
+        crystalTransform = FindObjectOfType<Cure>().transform;
         playerTransform = FindObjectOfType<PlayerController>().transform;
 
         navMeshAgent.speed = defaultSpeed;
@@ -90,7 +91,7 @@ public class Enemy : MonoBehaviour
 
         return false;
     }
-    public void Knockback(float knockbackForce)
+    public void Knockback(float knockbackForce, Transform origin)
     {
         knockbackApplied = true;
 
@@ -99,7 +100,7 @@ public class Enemy : MonoBehaviour
 
         navMeshAgent.enabled = false;
 
-        Vector3 direction = (transform.position - playerTransform.position).normalized;
+        Vector3 direction = (transform.position - origin.position).normalized;
         direction.y = 1;
 
         direction = direction.normalized;

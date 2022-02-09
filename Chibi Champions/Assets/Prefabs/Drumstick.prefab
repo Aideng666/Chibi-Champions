@@ -1521,6 +1521,7 @@ MonoBehaviour:
   lightAttackDelay: 0.75
   heavyAttackDelay: 0.75
   interactText: {fileID: 0}
+  cameraLookAt: {fileID: 3307315161210982373}
   towers:
   - {fileID: 5581690700421447387, guid: 6acd674e204676e4c8722f20863d0966, type: 3}
   - {fileID: 7540970447587639792, guid: 40352688c1be85d44a41044913d3c6fe, type: 3}

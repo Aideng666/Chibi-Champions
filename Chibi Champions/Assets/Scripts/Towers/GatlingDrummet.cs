@@ -35,6 +35,8 @@ public class GatlingDrummet : Tower
         feather.transform.LookAt(enemy.transform);
         feather.GetComponentInChildren<Rigidbody>().velocity = direction * bulletSpeed;
         feather.GetComponentInChildren<Feather>().SetTower(this);
+
+        Destroy(feather, 3);
     }
 
     public override void Upgrade()

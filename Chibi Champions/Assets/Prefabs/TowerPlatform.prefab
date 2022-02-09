@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2651231721310531716}
   - component: {fileID: 2651231721310531719}
   - component: {fileID: 8541780390392743737}
-  m_Layer: 2
+  m_Layer: 12
   m_Name: TowerPlatform
   m_TagString: Interactable
   m_Icon: {fileID: 0}

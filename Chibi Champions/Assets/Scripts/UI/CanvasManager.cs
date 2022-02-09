@@ -42,7 +42,7 @@ public class CanvasManager : MonoBehaviour
         Cursor.visible = false;
     }
 
-    void RemoveCursorLock()
+    public void RemoveCursorLock()
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;

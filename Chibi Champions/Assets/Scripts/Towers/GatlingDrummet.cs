@@ -15,6 +15,8 @@ public class GatlingDrummet : Tower
 
         if (targetEnemy == null)
         {
+            AnimController.Instance.SetGatlingDrummetFiring(GetComponentInChildren<Animator>(), false);
+
             return;
         }
 
@@ -28,6 +30,8 @@ public class GatlingDrummet : Tower
 
     protected override void Attack(GameObject enemy = null)
     {
+        AnimController.Instance.SetGatlingDrummetFiring(GetComponentInChildren<Animator>(), true);
+
         Vector3 direction = (enemy.transform.position - firePoint.position).normalized;
 
         var feather = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);

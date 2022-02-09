@@ -692,7 +692,7 @@ MonoBehaviour:
   gravity: 1.5
   jumpPower: 3
   interactDistance: 5
-  lightAttackDelay: 0.4
+  lightAttackDelay: 0.3
   heavyAttackDelay: 5
   interactText: {fileID: 0}
   cameraLookAt: {fileID: 6309032078632208579}
@@ -700,9 +700,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 4096
   paintballPrefab: {fileID: 4977529211249051071, guid: 76f52f49856098644a20796755efef6f, type: 3}
-  healingNeedlePrefab: {fileID: 210590721982759650, guid: 177d00b56498632418e37441be548698, type: 3}
+  healingNeedlePrefab: {fileID: 2555814566032613610, guid: 016f9ce8cd87e834096a63f0c168025d, type: 3}
   shotSpeed: 100
+  healAmount: 15
 --- !u!1 &6309032079285453264
 GameObject:
   m_ObjectHideFlags: 0

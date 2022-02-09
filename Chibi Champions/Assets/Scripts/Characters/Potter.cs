@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Potter : PlayerController
 {
+    [SerializeField] LayerMask interactableLayer;
     [SerializeField] GameObject paintballPrefab;
     [SerializeField] GameObject healingNeedlePrefab;
     [SerializeField] float shotSpeed;
+    [SerializeField] float healAmount;
 
     // Start is called before the first frame update
     void Start()
@@ -30,24 +32,13 @@ public class Potter : PlayerController
 
             Vector3 direction = new Vector3();
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, 1000f, ~interactableLayer))
             {
                 var endPoint = hit.point;
 
                 if (endPoint != null)
                 {
-                    print("Found EndPoint");
-
                     direction = (endPoint - attackPoint.position).normalized;
-                }
-                else
-                {
-                    print("No EndPoint");
-                    direction = cam.forward;
-
-                    direction.y += 0.1f;
-
-                    direction = direction.normalized;
                 }
             }
 
@@ -57,5 +48,36 @@ public class Potter : PlayerController
 
             Destroy(paintball, 3);
         }
+        if (Input.GetMouseButton(1) && CanHeavyAttack())
+        {
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            RaycastHit hit;
+
+            Vector3 direction = new Vector3();
+
+            if (Physics.Raycast(ray, out hit, 1000f, ~interactableLayer))
+            {
+                var endPoint = hit.point;
+
+                if (endPoint != null)
+                {
+                    direction = (endPoint - attackPoint.position).normalized;
+                }
+            }
+
+            var needle = Instantiate(healingNeedlePrefab, attackPoint.position, Quaternion.identity);
+
+            needle.transform.localScale *= 2;
+
+            needle.GetComponentInChildren<Rigidbody>().velocity = direction * shotSpeed;
+
+            Destroy(needle, 3);
+        }
+    }
+
+    public float GetHealAmount()
+    {
+        return healAmount;
     }
 }

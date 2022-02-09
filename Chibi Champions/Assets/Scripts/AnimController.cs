@@ -11,6 +11,8 @@ public class AnimController : MonoBehaviour
 
     Animator playerAnimator;
 
+    bool gatlingFiring;
+
     public static AnimController Instance { get; set; }
 
     private void Awake()
@@ -56,5 +58,28 @@ public class AnimController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void SetGatlingDrummetFiring(Animator animator, bool isFiring)
+    {
+        if (gatlingFiring && isFiring)
+        {
+            return;
+        }
+        if (!gatlingFiring && !isFiring)
+        {
+            return;
+        }
+
+        if (isFiring)
+        {
+            animator.SetTrigger("Fire");
+            gatlingFiring = true;
+        }
+        else
+        {
+            animator.SetTrigger("Stop");
+            gatlingFiring = false;
+        }
     }
 }

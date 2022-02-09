@@ -168,6 +168,8 @@ public class PlayerController : MonoBehaviour
 
     void GameOver()
     {
+        CanvasManager.Instance.RemoveCursorLock();
+
         SceneManager.LoadScene("Lose");
     }
 

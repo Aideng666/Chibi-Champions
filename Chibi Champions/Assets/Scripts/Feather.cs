@@ -12,9 +12,9 @@ public class Feather : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.GetComponentInParent<Health>().ModifyHealth(-bulletDamage);
-            Destroy(gameObject);
         }
 
+            Destroy(gameObject);
     }
 
     public void SetTower(Tower t)

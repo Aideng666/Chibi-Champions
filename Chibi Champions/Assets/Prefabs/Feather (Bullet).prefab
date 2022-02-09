@@ -228,6 +228,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Feather_Shot_-_Projectile
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 461de7e097ca30e44bf9d994ea8bf936, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 461de7e097ca30e44bf9d994ea8bf936, type: 3}
 --- !u!4 &4393501355778509736 stripped

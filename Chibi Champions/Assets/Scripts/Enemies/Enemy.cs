@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
     protected bool knockbackApplied;
 
     protected PlayerController lastHit;
+    TennisBall closestBall;
 
     // Start is called before the first frame update
     protected void Start()
@@ -40,9 +41,28 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
+        TennisBall[] tennisBalls = FindObjectsOfType<TennisBall>();
+
         if (!knockbackApplied)
         {
-            if (Vector3.Distance(transform.position, playerTransform.position) < playerSpottedRange)
+            if (tennisBalls.Length > 0)
+            {
+                closestBall = tennisBalls[0];
+
+                foreach (TennisBall ball in tennisBalls)
+                {
+                    if (Vector3.Distance(transform.position, ball.transform.position) < Vector3.Distance(transform.position, closestBall.transform.position))
+                    {
+                        closestBall = ball;
+                    }
+                }
+
+                if (Vector3.Distance(transform.position, closestBall.transform.position) < playerSpottedRange * 1.5f)
+                {
+                    currentAttackState = EnemyAttackStates.Tennis;
+                }
+            }
+            else if (Vector3.Distance(transform.position, playerTransform.position) < playerSpottedRange)
             {
                 currentAttackState = EnemyAttackStates.Player;
             }
@@ -78,6 +98,10 @@ public class Enemy : MonoBehaviour
                 {
                     AttackPlayer();
                 }
+            }
+            else if (currentAttackState == EnemyAttackStates.Tennis && navMeshAgent.gameObject.activeSelf)
+            {
+                navMeshAgent.destination = closestBall.transform.position;
             }
         }
     }

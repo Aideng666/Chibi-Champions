@@ -112,6 +112,16 @@ public class Tower : MonoBehaviour
         return towerDamage;
     }
 
+    public float GetRange()
+    {
+        return attackRange;
+    }
+
+    public LayerMask GetEnemyLayer()
+    {
+        return enemyLayer;
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, attackRange);

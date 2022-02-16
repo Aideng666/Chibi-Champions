@@ -5,15 +5,19 @@ using UnityEngine;
 public class Spider : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5;
+    [SerializeField] float applyEffectDistance = 1.8f;
     Tower tower;
     float tickDelay;
     SpiderStates currentState = SpiderStates.noEnemySighted;
     GameObject targetEnemy;
 
-    bool switchRandomDirection = true;
-
     Vector3 moveDirection;
     bool isMoving;
+
+    float timeToMovementChange = 0;
+    float movementChangeDelay = 0.5f;
+
+    int effectedEnemies = 0;
 
     private enum SpiderStates
     {
@@ -30,10 +34,30 @@ public class Spider : MonoBehaviour
         if (EnemiesInView == null || EnemiesInView.Length < 1)
         {
             currentState = SpiderStates.noEnemySighted;
+            moveSpeed = 2;
         }
         else
         {
-            currentState = SpiderStates.enemySighted;
+            foreach (Collider enemy in EnemiesInView)
+            {
+                if (enemy.GetComponentInParent<Enemy>().GetCurrentEffect() == Effects.Spider)
+                {
+                    effectedEnemies++;
+                }
+            }
+
+            if (effectedEnemies == EnemiesInView.Length)
+            {
+                currentState = SpiderStates.noEnemySighted;
+                moveSpeed = 2;
+            }
+            else
+            {
+                currentState = SpiderStates.enemySighted;
+                moveSpeed = 5;
+            }
+
+            effectedEnemies = 0;
         }
 
 
@@ -49,7 +73,10 @@ public class Spider : MonoBehaviour
 
                 if (Vector3.Distance(currentEnemyCheck.transform.position, transform.position) < Vector3.Distance(selectedEnemy.transform.position, transform.position))
                 {
-                    selectedEnemy = currentEnemyCheck;
+                    if (currentEnemyCheck.GetComponentInParent<Enemy>().GetCurrentEffect() == Effects.None)
+                    {
+                        selectedEnemy = currentEnemyCheck;
+                    }
                 }
             }
 
@@ -59,11 +86,8 @@ public class Spider : MonoBehaviour
         }
         else if (currentState == SpiderStates.noEnemySighted)
         {
-            SearchForEnemy(); 
+            SearchForEnemy();
         }
-
-        print("Move Direction: " + moveDirection);
-
     }
 
     void ChaseEnemy(GameObject enemy)
@@ -75,23 +99,28 @@ public class Spider : MonoBehaviour
         moveDirection = moveDirection.normalized;
 
         transform.position += moveDirection * moveSpeed * Time.deltaTime;
+
+        if (Vector3.Distance(transform.position, enemy.transform.position) < applyEffectDistance)
+        {
+            ApplyEffect();
+        }
     }
 
     void SearchForEnemy()
     {
-        if (switchRandomDirection)
+        if (ShouldChangeMovement())
+        {
+            isMoving = !isMoving;
+        }
+
+        if (!isMoving)
         {
             moveDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
         }
 
         if (isMoving)
         {
-            StartCoroutine(SearchMovement());
             transform.position += moveDirection * moveSpeed * Time.deltaTime;
-        }
-        else
-        {
-            StartCoroutine(SearchMovement());
         }
     }
 
@@ -102,6 +131,27 @@ public class Spider : MonoBehaviour
         isMoving = !isMoving;
     }
 
+    bool ShouldChangeMovement()
+    {
+        if (timeToMovementChange < Time.realtimeSinceStartup)
+        {
+            timeToMovementChange = Time.realtimeSinceStartup + movementChangeDelay;
+            return true;
+        }
+
+        return false;
+    }
+
+    void ApplyEffect()
+    {
+        targetEnemy.GetComponentInParent<Enemy>().SetEffect(Effects.Spider);
+        targetEnemy.GetComponentInParent<Enemy>().SetEffectTickDelay(tickDelay);
+
+        tower.GetComponent<SpiderHouse>().RemoveSpider();
+
+        Destroy(gameObject);
+    }
+
     public void SetTower(Tower t)
     {
         tower = t;
@@ -110,13 +160,5 @@ public class Spider : MonoBehaviour
     public void SetTickDelay(float delay)
     {
         tickDelay = delay;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            Destroy(gameObject);
-        }
     }
 }

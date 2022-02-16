@@ -7,6 +7,9 @@ public class SpiderHouse : Tower
     [SerializeField] GameObject spiderPrefab;
     [SerializeField] float spiderSpawnAmount;
     [SerializeField] float effectTickDelay;
+    [SerializeField] int maximumSpiders = 6;
+
+    int currentSpiders = 0;
 
     // Update is called once per frame
     void Update()
@@ -23,10 +26,14 @@ public class SpiderHouse : Tower
     {
         for (int i = 0; i < spiderSpawnAmount; i++)
         {
-            var spider = Instantiate(spiderPrefab, new Vector3(firePoint.position.x, 0, firePoint.position.z), Quaternion.identity);
+            if (currentSpiders < maximumSpiders)
+            {
+                var spider = Instantiate(spiderPrefab, new Vector3(firePoint.position.x, 0, firePoint.position.z), Quaternion.identity);
 
-            spider.GetComponent<Spider>().SetTower(this);
-            spider.GetComponent<Spider>().SetTickDelay(effectTickDelay);
+                currentSpiders++;
+                spider.GetComponent<Spider>().SetTower(this);
+                spider.GetComponent<Spider>().SetTickDelay(effectTickDelay);
+            }
         }
     }
 
@@ -56,5 +63,10 @@ public class SpiderHouse : Tower
     public float GetTickDelay()
     {
         return effectTickDelay;
+    }
+
+    public void RemoveSpider()
+    {
+        currentSpiders--;
     }
 }

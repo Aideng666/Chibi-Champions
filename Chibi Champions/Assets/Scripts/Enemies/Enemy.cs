@@ -26,6 +26,12 @@ public class Enemy : MonoBehaviour
     protected PlayerController lastHit;
     TennisBall closestBall;
 
+    Effects currentEffect = Effects.None;
+    float effectTickDelay;
+    float timeToNextEffectTick = 0;
+
+    bool isGrounded = true;
+
     // Start is called before the first frame update
     protected void Start()
     {
@@ -104,6 +110,29 @@ public class Enemy : MonoBehaviour
                 navMeshAgent.destination = closestBall.transform.position;
             }
         }
+
+        ApplyEffect();
+
+        ////Deactivates/Reactivates the Rigidbody and NavMeshAgent to account for Knockback////
+        if (GetComponent<Rigidbody>() != null && GetComponent<Rigidbody>().velocity.y != 0 && isGrounded)
+        {
+            isGrounded = false;
+            print("Left Ground");
+        }
+
+        if (!isGrounded && GetComponent<Rigidbody>().velocity.y < 0.01 && GetComponent<Rigidbody>().velocity.y > -0.01)
+        {
+            print("Touched Ground");
+
+            Destroy(GetComponent<Rigidbody>());
+
+            navMeshAgent.enabled = true;
+
+            knockbackApplied = false;
+
+            isGrounded = true;
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////
     }
     protected bool CanAttack()
     {
@@ -115,14 +144,42 @@ public class Enemy : MonoBehaviour
 
         return false;
     }
+    void ApplyEffect()
+    {
+        if (currentEffect == Effects.None)
+        {
+            return;
+        }
+        else if (currentEffect == Effects.Spider)
+        {
+            if (timeToNextEffectTick < Time.realtimeSinceStartup)
+            {
+                timeToNextEffectTick = Time.realtimeSinceStartup + effectTickDelay;
+
+                GetComponent<Health>().ModifyHealth(-2);
+
+                Knockback(5, FindObjectOfType<Cure>().transform);
+            }
+        }
+    }
     public void Knockback(float knockbackForce, Transform origin)
     {
-        knockbackApplied = true;
+        Rigidbody body = new Rigidbody();
 
-        Rigidbody body = gameObject.AddComponent<Rigidbody>();
+        if (!knockbackApplied)
+        {
+            knockbackApplied = true;
+
+            body = gameObject.AddComponent<Rigidbody>();
+
+            navMeshAgent.enabled = false;
+        }
+        else
+        {
+            body = GetComponent<Rigidbody>();
+        }
+
         body.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-
-        navMeshAgent.enabled = false;
 
         Vector3 direction = (transform.position - origin.position).normalized;
         direction.y = 1;
@@ -132,19 +189,6 @@ public class Enemy : MonoBehaviour
         body.mass = 10;
 
         body.AddForce(direction * knockbackForce, ForceMode.Impulse);
-
-        StartCoroutine(ReactivateNavMesh());
-    }
-
-    IEnumerator ReactivateNavMesh()
-    {
-        yield return new WaitForSeconds(0.75f);
-
-        Destroy(GetComponent<Rigidbody>());
-
-        navMeshAgent.enabled = true;
-
-        knockbackApplied = false;
     }
 
     protected virtual IEnumerator DelayBeforeAttack()
@@ -172,6 +216,21 @@ public class Enemy : MonoBehaviour
         return defaultSpeed;
     }
 
+    public Effects GetCurrentEffect()
+    {
+        return currentEffect;
+    }
+
+    public void SetEffect(Effects effect)
+    {
+        currentEffect = effect;
+    }
+
+    public void SetEffectTickDelay(float delay)
+    {
+        effectTickDelay = delay;
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null)
@@ -181,5 +240,4 @@ public class Enemy : MonoBehaviour
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-
 }

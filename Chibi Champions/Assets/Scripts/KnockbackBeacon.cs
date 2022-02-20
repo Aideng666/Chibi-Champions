@@ -47,6 +47,8 @@ public class KnockbackBeacon : MonoBehaviour
 
     void Pulse()
     {
+        ParticleManager.Instance.SpawnParticle(ParticleTypes.Knockback, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z));
+
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, pulseRange, enemyLayer);
 
         foreach (Collider enemy in hitEnemies)

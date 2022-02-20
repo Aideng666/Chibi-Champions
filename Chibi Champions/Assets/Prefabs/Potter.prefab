@@ -697,9 +697,9 @@ MonoBehaviour:
   interactText: {fileID: 0}
   cameraLookAt: {fileID: 6309032078632208579}
   towers:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3509385337888705508, guid: 7e0ab2448fe7c534592be9f09e1c95d9, type: 3}
+  - {fileID: 5388470936469326682, guid: 1d8fac24cc6fd594f82dca6585443f45, type: 3}
+  - {fileID: 5388470936469326682, guid: 1d8fac24cc6fd594f82dca6585443f45, type: 3}
   interactableLayer:
     serializedVersion: 2
     m_Bits: 4096

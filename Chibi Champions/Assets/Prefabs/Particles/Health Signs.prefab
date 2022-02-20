@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9054524945449203369}
   - component: {fileID: 7596992857558969794}
   - component: {fileID: 5753293997341196158}
-  - component: {fileID: 6272606521245528226}
+  - component: {fileID: -7134115581146058732}
   m_Layer: 0
   m_Name: Health Signs
   m_TagString: Untagged
@@ -4813,7 +4813,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &6272606521245528226
+--- !u!114 &-7134115581146058732
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4822,8 +4822,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3304910447578275265}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 765f7537b78fa8843a2fec9370973cf9, type: 3}
+  m_Script: {fileID: 11500000, guid: d6e8d4a7e6e14ca4f94b6076b1802d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionParticle: {fileID: 0}
-  healingParticle: {fileID: 0}

@@ -137,6 +137,18 @@ public class PlayerController : MonoBehaviour
         }
 
         isJumping = false;
+
+        StartCoroutine(PlayJumpEffect());
+    }
+
+    IEnumerator PlayJumpEffect()
+    {
+        while(!controller.isGrounded)
+        {
+            yield return null;
+        }
+
+        ParticleManager.Instance.SpawnParticle(ParticleTypes.JumpLanding, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z));
     }
 
     protected virtual void Attack()

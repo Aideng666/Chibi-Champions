@@ -117,13 +117,10 @@ public class Enemy : MonoBehaviour
         if (GetComponent<Rigidbody>() != null && GetComponent<Rigidbody>().velocity.y != 0 && isGrounded)
         {
             isGrounded = false;
-            print("Left Ground");
         }
 
         if (!isGrounded && GetComponent<Rigidbody>().velocity.y < 0.01 && GetComponent<Rigidbody>().velocity.y > -0.01)
         {
-            print("Touched Ground");
-
             Destroy(GetComponent<Rigidbody>());
 
             navMeshAgent.enabled = true;
@@ -131,6 +128,8 @@ public class Enemy : MonoBehaviour
             knockbackApplied = false;
 
             isGrounded = true;
+
+            ParticleManager.Instance.SpawnParticle(ParticleTypes.JumpLanding, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z));
         }
         ///////////////////////////////////////////////////////////////////////////////////////
     }

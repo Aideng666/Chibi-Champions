@@ -6,5 +6,7 @@ public enum ParticleTypes
 {
     Explosion,
     Healing,
-    Knockback
+    Knockback,
+    JumpLanding,
+    Hurt
 }

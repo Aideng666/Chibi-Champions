@@ -36,6 +36,7 @@ public class Rolfe : PlayerController
                     enemy.GetComponentInParent<Enemy>().SetLastHit(this);
                     GetComponent<PointsManager>().AddPoints(20);
 
+                    ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);
                 }
             }
 
@@ -62,6 +63,8 @@ public class Rolfe : PlayerController
                 enemy.GetComponentInParent<Enemy>().Knockback(20, transform);
                 enemy.GetComponentInParent<Enemy>().SetLastHit(this);
                 GetComponent<PointsManager>().AddPoints(20);
+
+                ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);
             }
         }
     }

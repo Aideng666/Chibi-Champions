@@ -7,6 +7,8 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] ParticleSystem explosionParticle;
     [SerializeField] ParticleSystem healingParticle;
     [SerializeField] ParticleSystem knockbackParticle;
+    [SerializeField] ParticleSystem jumpParticle;
+    [SerializeField] ParticleSystem hurtParticle;
     ParticleSystem.ShapeModule particleShape;
     float shapeRadius;
 
@@ -42,6 +44,18 @@ public class ParticleManager : MonoBehaviour
             case ParticleTypes.Knockback:
 
                 Instantiate(knockbackParticle, position, Quaternion.Euler(-90, 0, 0));
+
+                break;
+
+            case ParticleTypes.JumpLanding:
+
+                Instantiate(jumpParticle, position, Quaternion.Euler(-90, 0, 0));
+
+                break;
+
+            case ParticleTypes.Hurt:
+
+                Instantiate(hurtParticle, position, Quaternion.Euler(-90, 0, 0));
 
                 break;
         }

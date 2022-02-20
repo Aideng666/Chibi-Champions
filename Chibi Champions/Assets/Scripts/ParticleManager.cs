@@ -4,17 +4,51 @@ using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
 {
-    ParticleSystem.ShapeModule particleSystem;
+    [SerializeField] ParticleSystem explosionParticle;
+    [SerializeField] ParticleSystem healingParticle;
+    [SerializeField] ParticleSystem knockbackParticle;
+    ParticleSystem.ShapeModule particleShape;
+    float shapeRadius;
 
-    // Start is called before the first frame update
-    void Start()
+    public static ParticleManager Instance { get; set; }
+
+    private void Awake()
     {
-        particleSystem = GetComponent<ParticleSystem>().shape;
+        Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SpawnParticle(ParticleTypes type, Vector3 position, float radius = 0)
     {
-        particleSystem.radius = GetComponentInParent<Tower>().GetRange();
+        shapeRadius = radius;
+
+        switch (type)
+        {
+            case ParticleTypes.Explosion:
+                
+               Instantiate(explosionParticle, position, Quaternion.Euler(-90, 0, 0));
+
+                break;
+
+            case ParticleTypes.Healing:
+
+                Instantiate(healingParticle, position, Quaternion.Euler(-90, 0, 0));
+
+                particleShape = healingParticle.shape;
+
+                particleShape.radius = shapeRadius;
+
+                break;
+
+            case ParticleTypes.Knockback:
+
+                Instantiate(knockbackParticle, position, Quaternion.Euler(-90, 0, 0));
+
+                break;
+        }
+    }
+
+    public void SetShapeRadius(float radius)
+    {
+        shapeRadius = radius;
     }
 }

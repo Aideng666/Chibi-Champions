@@ -39,6 +39,11 @@ public class PlayerController : MonoBehaviour
 
     protected bool canInteract;
 
+    bool effectApplied;
+
+    int sporeLevel = 1;
+    Effects currentEffect = Effects.None;
+
     // Start is called before the first frame update
     protected void Start()
     {
@@ -60,11 +65,14 @@ public class PlayerController : MonoBehaviour
             GameOver();
         }
 
+        ApplyEffect();
+
         Move();
 
         Attack();
 
         CheckRaycastSelection();
+
 
 
         if (canInteract && Input.GetKeyDown(KeyCode.E) && !CanvasManager.Instance.IsTowerMenuOpen())
@@ -114,6 +122,41 @@ public class PlayerController : MonoBehaviour
         if (!isJumping)
         {
             controller.Move(moveDir * speed * Time.deltaTime);
+        }
+    }
+
+    void ApplyEffect()
+    {
+        if (currentEffect == Effects.None)
+        {
+            effectApplied = false;
+
+            return;
+        }
+        else if (currentEffect == Effects.PED)
+        {
+            if (!effectApplied)
+            {
+                if (sporeLevel == 1)
+                {
+                    lightAttackDamage *= 1.5f;
+                    heavyAttackDamage *= 1.5f;
+                }
+                if (sporeLevel == 2)
+                {
+                    lightAttackDamage *= 1.5f;
+                    heavyAttackDamage *= 1.5f;
+                    speed += 2;
+                }
+                if (sporeLevel >= 3)
+                {
+                    lightAttackDamage *= 2f;
+                    heavyAttackDamage *= 2f;
+                    speed += 2;
+                }
+
+                effectApplied = true;
+            }
         }
     }
 
@@ -222,6 +265,21 @@ public class PlayerController : MonoBehaviour
     public GameObject[] GetTowers()
     {
         return towers;
+    }
+
+    public Effects GetCurrentEffect()
+    {
+        return currentEffect;
+    }
+
+    public void SetEffect(Effects effect)
+    {
+        currentEffect = effect;
+    }
+
+    public void SetSporeLevel(int level)
+    {
+        sporeLevel = level;
     }
 
     private void OnDrawGizmosSelected()

@@ -9,6 +9,7 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] ParticleSystem knockbackParticle;
     [SerializeField] ParticleSystem jumpParticle;
     [SerializeField] ParticleSystem hurtParticle;
+    [SerializeField] ParticleSystem sporeParticle;
     ParticleSystem.ShapeModule particleShape;
     float shapeRadius;
 
@@ -56,6 +57,12 @@ public class ParticleManager : MonoBehaviour
             case ParticleTypes.Hurt:
 
                 Instantiate(hurtParticle, position, Quaternion.Euler(-90, 0, 0));
+
+                break;
+
+            case ParticleTypes.Spore:
+
+                Instantiate(sporeParticle, position, Quaternion.Euler(-90, 0, 0));
 
                 break;
         }

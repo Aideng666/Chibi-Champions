@@ -5,5 +5,6 @@ using UnityEngine;
 public enum Effects
 {
     None,
-    Spider
+    Spider,
+    PED
 }

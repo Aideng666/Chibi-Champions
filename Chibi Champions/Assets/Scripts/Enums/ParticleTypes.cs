@@ -8,5 +8,6 @@ public enum ParticleTypes
     Healing,
     Knockback,
     JumpLanding,
-    Hurt
+    Hurt,
+    Spore
 }

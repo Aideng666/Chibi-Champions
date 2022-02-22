@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CinemachineBlender
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: CM vcam1
-    m_To: CM vcam2
+  - m_From: BaseCam
+    m_To: MainCam
     m_Blend:
       m_Style: 1
       m_Time: 2
@@ -24,8 +24,74 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: CM vcam2
-    m_To: CM vcam1
+  - m_From: MainCam
+    m_To: BaseCam
+    m_Blend:
+      m_Style: 1
+      m_Time: 2
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: MainCam
+    m_To: PlayCam
+    m_Blend:
+      m_Style: 1
+      m_Time: 2
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: MainCam
+    m_To: OptionsCam
+    m_Blend:
+      m_Style: 1
+      m_Time: 2
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: PlayCam
+    m_To: MainCam
+    m_Blend:
+      m_Style: 1
+      m_Time: 2
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: PlayCam
+    m_To: BaseCam
+    m_Blend:
+      m_Style: 1
+      m_Time: 2
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: OptionsCam
+    m_To: MainCam
+    m_Blend:
+      m_Style: 1
+      m_Time: 2
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: OptionsCam
+    m_To: BaseCam
     m_Blend:
       m_Style: 1
       m_Time: 2

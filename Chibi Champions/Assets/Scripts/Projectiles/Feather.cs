@@ -12,6 +12,8 @@ public class Feather : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.GetComponentInParent<Health>().ModifyHealth(-bulletDamage);
+
+            ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, collision.contacts[0].point);
         }
 
             Destroy(gameObject);

@@ -29,6 +29,8 @@ public class TennisBall : MonoBehaviour
 
     void Explode()
     {
+        ParticleManager.Instance.SpawnParticle(ParticleTypes.Explosion, transform.position);
+
         Collider[] enemiesHit = Physics.OverlapSphere(transform.position, explosionRadius, enemyLayer);
 
         foreach (Collider enemy in enemiesHit)

@@ -21,14 +21,14 @@ public class MenuController : MonoBehaviour
             frames[1].SetActive(true);
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !frames[0].activeInHierarchy)
-        {
-            for (int i = 1; i < frames.Length; ++i)
-            {
-                frames[i].SetActive(false);
-            }
+        //if (Input.GetKeyDown(KeyCode.Escape) && !frames[0].activeInHierarchy)
+        //{
+        //    for (int i = 1; i < frames.Length; ++i)
+        //    {
+        //        frames[i].SetActive(false);
+        //    }
 
-            frames[0].SetActive(true);
-        }
+        //    frames[0].SetActive(true);
+        //}
     }
 }

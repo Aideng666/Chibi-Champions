@@ -7,6 +7,7 @@ public class Character
 {
     public string characterName;
     public string classType;
+    public Sprite characterSprite;
 
     public Sprite[] towerSprites;
     public Sprite[] abilitySprites;

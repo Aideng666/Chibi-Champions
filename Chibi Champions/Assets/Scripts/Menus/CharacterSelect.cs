@@ -6,9 +6,9 @@ using TMPro;
 
 public class CharacterSelect : MonoBehaviour
 {
-    [Header("UI Text")]
-    [SerializeField]
-    TMP_Text[] UIText;
+    //[Header("UI Text")]
+    //[SerializeField]
+    //TMP_Text[] UIText;
     // Character Name
     // Character Class 
     // Towers Head Title
@@ -21,13 +21,13 @@ public class CharacterSelect : MonoBehaviour
     public CharacterDatabase characterDB;
     public TMP_Text characterName;
     public TMP_Text characterClass;
+    public Image characterImage;
     public Image[] towerSprites;
     public Image[] abilitySprites;
 
     [Header("Buttons")]
     public Button lockInButton;
     public Button backButton;
-    public GameObject[] characterButtons;
 
     Character character;
 
@@ -45,5 +45,17 @@ public class CharacterSelect : MonoBehaviour
 
         character = characterDB.GetCharacter(characterIndex);
         characterName.text = character.characterName;
+        characterClass.text = character.classType;
+        characterImage.sprite = character.characterSprite;
+
+        for (int i = 0; i < towerSprites.Length; ++i)
+        {
+            towerSprites[i].sprite = character.towerSprites[i];
+        }
+
+        for (int i = 0; i < abilitySprites.Length; ++i)
+        {
+            abilitySprites[i].sprite = character.abilitySprites[i];
+        }
     }
 }

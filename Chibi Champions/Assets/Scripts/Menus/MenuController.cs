@@ -20,5 +20,15 @@ public class MenuController : MonoBehaviour
             frames[0].SetActive(false);
             frames[1].SetActive(true);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !frames[0].activeInHierarchy)
+        {
+            for (int i = 1; i < frames.Length; ++i)
+            {
+                frames[i].SetActive(false);
+            }
+
+            frames[0].SetActive(true);
+        }
     }
 }

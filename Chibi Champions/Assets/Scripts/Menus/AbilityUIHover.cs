@@ -27,7 +27,7 @@ public class AbilityUIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         abilityName.text = character.abilityNames[abilityIndex];
         abilityImage.sprite = character.abilitySprites[abilityIndex];
         abilityDesc.text = character.abilityDescriptions[abilityIndex];
-        abilityCost.text = character.abilityControls[abilityIndex];
+        //abilityCost.text = character.abilityControls[abilityIndex];
     }
 
     public void OnPointerEnter(PointerEventData eventData)

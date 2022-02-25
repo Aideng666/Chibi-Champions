@@ -24,10 +24,10 @@ public class TowerUIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         DB = FindObjectOfType<CharacterSelectMenu>().GetCharacterDB();
         character = DB.GetCharacter(FindObjectOfType<CharacterSelectMenu>().GetCharacterIndex());
 
-        towerName.text = character.towerBaseNames[towerIndex];
-        towerImage.sprite = character.towerBaseSprites[towerIndex];
-        towerDesc.text = character.towerBaseDescriptions[towerIndex];
-        towerCost.text = character.towerBaseCosts[towerIndex];
+        //towerName.text = character.towerBaseNames[towerIndex];
+        //towerImage.sprite = character.towerBaseSprites[towerIndex];
+        //towerDesc.text = character.towerBaseDescriptions[towerIndex];
+        //towerCost.text = character.towerBaseCosts[towerIndex];
     }
 
     public void OnPointerEnter(PointerEventData eventData)

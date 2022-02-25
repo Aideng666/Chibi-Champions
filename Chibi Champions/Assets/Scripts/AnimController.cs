@@ -18,7 +18,10 @@ public class AnimController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
 
+    private void Start()
+    {
         if (playerAnimator == null)
         {
             playerAnimator = FindObjectOfType<PlayerController>().GetComponent<Animator>();

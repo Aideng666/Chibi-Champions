@@ -27,6 +27,7 @@ public class CharacterSelect : MonoBehaviour
     [Header("Buttons")]
     public Button lockInButton;
     public Button backButton;
+    public GameObject[] characterButtons;
 
     Character character;
 
@@ -38,6 +39,11 @@ public class CharacterSelect : MonoBehaviour
     // 2 for Character3
     public void ChangeCharacter(int index)
     {
+        characterIndex = index;
 
+        Debug.Log("Character Index: " + characterIndex);
+
+        character = characterDB.GetCharacter(characterIndex);
+        characterName.text = character.characterName;
     }
 }

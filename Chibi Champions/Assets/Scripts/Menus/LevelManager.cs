@@ -13,7 +13,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Image progressBar;
     private float target;
 
-    private void Awake()
+    void Awake()
     {
         if (Instance == null)
         {
@@ -42,11 +42,12 @@ public class LevelManager : MonoBehaviour
             target = scene.progress;
         } while (scene.progress < 0.9f);
 
-        await Task.Delay(1000);
+        await Task.Delay(3000);
 
         scene.allowSceneActivation = true;
-        loadingCanvas.SetActive(false);
 
+        await Task.Delay(100);
+        loadingCanvas.SetActive(false);
     }
 
     private void Update()

@@ -14,6 +14,7 @@ public class WaveManager : MonoBehaviour
     int numberOfWaves;
 
     bool waveCompleteAlertFired;
+    bool beginWaveAlertFired;
 
     bool waveCompletePointsAdded = false;
 
@@ -27,8 +28,6 @@ public class WaveManager : MonoBehaviour
         currentWave = 0;
 
         InitEnemiesLists();
-
-        BeginWave();
 
         playerList = FindObjectsOfType<PlayerController>();
     }
@@ -51,12 +50,20 @@ public class WaveManager : MonoBehaviour
                 waveCompletePointsAdded = true;
             }
             
-
-            print("Press Q for next wave");
+            if (FindObjectsOfType<AlertText>().Length == 0 && !beginWaveAlertFired)
+            {
+                AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Press Q To Begin Wave {currentWave + 1}", 3));
+                beginWaveAlertFired = true;
+            }
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 BeginWave();
+
+                if (FindObjectsOfType<AlertText>().Length > 0)
+                {
+                    Destroy(FindObjectOfType<AlertText>().gameObject);
+                }
             }
         }
     }
@@ -77,6 +84,11 @@ public class WaveManager : MonoBehaviour
 
     bool CheckWaveComplete()
     {
+        if (currentWave == 0)
+        {
+            return true;
+        }
+
         var enemyList = FindObjectsOfType<Enemy>();
         int trueCheckCount = 0;
 
@@ -91,7 +103,7 @@ public class WaveManager : MonoBehaviour
         {
             if (!waveCompleteAlertFired)
             {
-                AlertManager.Instance.DisplayAlert("Wave Complete!");
+                AlertManager.Instance.DisplayAlert(new Alert(Color.red, "Wave Complete!"));
                 waveCompleteAlertFired = true;
             }
 

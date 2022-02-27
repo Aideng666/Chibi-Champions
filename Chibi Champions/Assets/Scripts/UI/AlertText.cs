@@ -5,38 +5,95 @@ using TMPro;
 
 public class AlertText : MonoBehaviour
 {
-    float alertLength = 2;
-    float alertLifespan = 0;
+    //float alertLifespan = 2;
 
-    float startingSize = 36;
-    float endSize = 0;
+    //float startingSize = 36;
+    //float endSize = 0;
+
+    //Color color;
+
+    //float delayBeforeFade;
+
+    float currentAlertLifetime = 0;
+    bool delayReached;
+
+    Alert alertInfo = new Alert(Color.red, "");
 
     TextMeshProUGUI alert;
 
     private void OnEnable()
     {
         alert = GetComponent<TextMeshProUGUI>();
-
-        alert.fontSize = startingSize;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (alertLifespan >= alertLength)
+        alert.text = alertInfo.text;
+
+        if (delayReached)
         {
-            gameObject.SetActive(false);
+            if (currentAlertLifetime >= alertInfo.lifespan)
+            {
+                gameObject.SetActive(false);
+            }
+
+            float t = currentAlertLifetime / alertInfo.lifespan;
+
+            alert.fontSize = Mathf.Lerp(alertInfo.startingSize, alertInfo.endSize, t);
+
+            alert.color = alertInfo.color;
+
+            currentAlertLifetime += Time.deltaTime;
         }
-
-        float t = alertLifespan / alertLength;
-
-        alert.fontSize = Mathf.Lerp(startingSize, endSize, t);
-
-        alertLifespan += Time.deltaTime;
     }
 
-    public void SetAlert(string alertText)
+    //public void SetAlert(string alertText)
+    //{
+    //    alert.text = alertText;
+    //}
+
+    //public void SetLifespan(float lifespan)
+    //{
+    //    alertLifespan = lifespan;
+    //}
+
+    //public void SetStartSize(float size)
+    //{
+    //    startingSize = size;
+    //}
+
+    //public void SetEndSize(float size)
+    //{
+    //    endSize = size;
+    //}
+
+    //public void SetColor(Color c)
+    //{
+    //    color = c;
+    //}
+
+    //public void SetDelay(float delay)
+    //{
+    //    delayBeforeFade = delay;
+    //}
+
+    public void SetInfo(Alert info)
     {
-        alert.text = alertText;
+        alertInfo = info;
+
+        alert.fontSize = alertInfo.startingSize;
+
+        if (alertInfo.delayBeforeFade > 0)
+        {
+            StartCoroutine(BeginDelay());
+        }
+    }
+
+    IEnumerator BeginDelay()
+    {
+        yield return new WaitForSeconds(alertInfo.delayBeforeFade);
+
+        delayReached = true;
     }
 }

@@ -23,6 +23,8 @@ public class Drumstick : PlayerController
         if (groundPoundActivated && controller.isGrounded)
         {
             GroundPoundAttack();
+
+            Destroy(speedParticle.gameObject);
         }
 
         if (groundPoundActivated && isJumping && controller.velocity.y < 0 && !speedParticleActivated)

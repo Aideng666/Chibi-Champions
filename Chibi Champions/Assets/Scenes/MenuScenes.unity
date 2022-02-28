@@ -1307,7 +1307,6 @@ GameObject:
   - component: {fileID: 249151866}
   - component: {fileID: 249151868}
   - component: {fileID: 249151867}
-  - component: {fileID: 249151869}
   m_Layer: 5
   m_Name: PortraitImage
   m_TagString: Untagged
@@ -1373,25 +1372,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249151865}
   m_CullTransparentMesh: 1
---- !u!114 &249151869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 249151865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8b2ed11d675446c5a49da1ea296d490, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectFactor: 1
-  m_ColorFactor: 1
-  m_BlurFactor: 1
-  m_EffectMode: 1
-  m_ColorMode: 0
-  m_BlurMode: 1
-  m_AdvancedBlur: 0
 --- !u!1 &259559914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1811,7 +1791,6 @@ GameObject:
   - component: {fileID: 411804222}
   - component: {fileID: 411804221}
   - component: {fileID: 411804220}
-  - component: {fileID: 411804219}
   - component: {fileID: 411804218}
   m_Layer: 5
   m_Name: PotterButton
@@ -1922,75 +1901,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
---- !u!114 &411804219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 411804216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 571072197}
-          m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
-          m_MethodName: set_effectFactor
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 571072197}
-          m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
-          m_MethodName: set_blurFactor
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 571072197}
-          m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
-          m_MethodName: set_effectFactor
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 1
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 571072197}
-          m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
-          m_MethodName: set_blurFactor
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 1
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &411804220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2766,7 +2676,6 @@ GameObject:
   - component: {fileID: 571072196}
   - component: {fileID: 571072199}
   - component: {fileID: 571072198}
-  - component: {fileID: 571072197}
   m_Layer: 5
   m_Name: PortraitImage
   m_TagString: Untagged
@@ -2794,25 +2703,6 @@ RectTransform:
   m_AnchoredPosition: {x: 36, y: -0.00001049}
   m_SizeDelta: {x: 1250.4512, y: 1180.6348}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &571072197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571072195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8b2ed11d675446c5a49da1ea296d490, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectFactor: 1
-  m_ColorFactor: 1
-  m_BlurFactor: 1
-  m_EffectMode: 1
-  m_ColorMode: 0
-  m_BlurMode: 1
-  m_AdvancedBlur: 0
 --- !u!114 &571072198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2863,7 +2753,6 @@ GameObject:
   - component: {fileID: 575285600}
   - component: {fileID: 575285599}
   - component: {fileID: 575285598}
-  - component: {fileID: 575285597}
   - component: {fileID: 575285596}
   m_Layer: 5
   m_Name: RolfeButton
@@ -2974,75 +2863,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
---- !u!114 &575285597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 575285594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1729486308}
-          m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
-          m_MethodName: set_effectFactor
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1729486308}
-          m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
-          m_MethodName: set_blurFactor
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1729486308}
-          m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
-          m_MethodName: set_effectFactor
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 1
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1729486308}
-          m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
-          m_MethodName: set_blurFactor
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 1
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &575285598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5896,9 +5716,6 @@ MonoBehaviour:
   - {fileID: 666793431}
   - {fileID: 1364714896}
   - {fileID: 1904245772}
-  myUIGroup: {fileID: 0}
-  fadeIn: 0
-  fadeOut: 0
 --- !u!4 &1214472442
 Transform:
   m_ObjectHideFlags: 0
@@ -6851,7 +6668,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 249151869}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
         m_MethodName: set_blurFactor
         m_Mode: 4
@@ -6863,7 +6680,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 249151869}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
         m_MethodName: set_effectFactor
         m_Mode: 4
@@ -6875,7 +6692,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1729486308}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
         m_MethodName: set_blurFactor
         m_Mode: 4
@@ -6887,7 +6704,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1729486308}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
         m_MethodName: set_effectFactor
         m_Mode: 4
@@ -6899,7 +6716,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 571072197}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
         m_MethodName: set_blurFactor
         m_Mode: 4
@@ -6911,7 +6728,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 571072197}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
         m_MethodName: set_effectFactor
         m_Mode: 4
@@ -6979,7 +6796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1364714897
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9048,7 +8865,6 @@ GameObject:
   - component: {fileID: 1729486307}
   - component: {fileID: 1729486310}
   - component: {fileID: 1729486309}
-  - component: {fileID: 1729486308}
   m_Layer: 5
   m_Name: PortraitImage
   m_TagString: Untagged
@@ -9076,25 +8892,6 @@ RectTransform:
   m_AnchoredPosition: {x: -15, y: -33}
   m_SizeDelta: {x: 1271.4438, y: 1227.7188}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1729486308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1729486306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8b2ed11d675446c5a49da1ea296d490, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectFactor: 1
-  m_ColorFactor: 1
-  m_BlurFactor: 1
-  m_EffectMode: 1
-  m_ColorMode: 0
-  m_BlurMode: 1
-  m_AdvancedBlur: 0
 --- !u!114 &1729486309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9631,7 +9428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1826626157
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10015,7 +9812,6 @@ GameObject:
   - component: {fileID: 1985260528}
   - component: {fileID: 1985260527}
   - component: {fileID: 1985260530}
-  - component: {fileID: 1985260529}
   - component: {fileID: 1985260531}
   m_Layer: 5
   m_Name: DrumstickButton
@@ -10084,75 +9880,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985260525}
   m_CullTransparentMesh: 1
---- !u!114 &1985260529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985260525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 249151869}
-          m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
-          m_MethodName: set_effectFactor
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 249151869}
-          m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
-          m_MethodName: set_blurFactor
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 249151869}
-          m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
-          m_MethodName: set_effectFactor
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 1
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 249151869}
-          m_TargetAssemblyTypeName: Coffee.UIEffects.UIEffect, UIEffect
-          m_MethodName: set_blurFactor
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 1
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1985260530
 MonoBehaviour:
   m_ObjectHideFlags: 0

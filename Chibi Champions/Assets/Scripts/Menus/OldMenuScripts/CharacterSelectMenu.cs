@@ -64,10 +64,10 @@ public class CharacterSelectMenu : MonoBehaviour
         characterName.text = character.characterName;
         classType.text = character.classType;
 
-        for (int i = 0; i < artworkSprites.Length; ++i)
-        {
-            artworkSprites[i].sprite = character.towerBaseSprites[i];
-        }
+        //for (int i = 0; i < artworkSprites.Length; ++i)
+        //{
+        //    artworkSprites[i].sprite = character.towerBaseSprites[i];
+        //}
 
         for (int i = 0; i < abilityArtworkSprites.Length; ++i)
         {

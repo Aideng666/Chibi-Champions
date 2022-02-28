@@ -24,17 +24,17 @@ public class Cure : MonoBehaviour
 
         if (GetComponent<Health>().GetCurrentHealth() <= 50 && !alertFired)
         {
-            AlertManager.Instance.DisplayAlert("The Cure Is At 50 HP!");
+            AlertManager.Instance.DisplayAlert(new Alert(Color.red, "The Cure Is At 50 HP!"));
             alertFired = true;
         }
         if (GetComponent<Health>().GetCurrentHealth() <= 25 && !alert2Fired)
         {
-            AlertManager.Instance.DisplayAlert("The Cure Is At 25 HP!");
+            AlertManager.Instance.DisplayAlert(new Alert(Color.red, "The Cure Is At 25 HP!"));
             alert2Fired = true;
         }
         if (GetComponent<Health>().GetCurrentHealth() <= 10 && !alert3Fired)
         {
-            AlertManager.Instance.DisplayAlert("Only 10 HP Left!");
+            AlertManager.Instance.DisplayAlert(new Alert(Color.red, "The Cure Only Has 10 HP Left!"));
             alert3Fired = true;
         }
 

@@ -11,7 +11,7 @@ public class HealthBar : MonoBehaviour
 
     [SerializeField] bool isPlayer = false;
 
-    private void Awake()
+    private void Start()
     {
         if (isPlayer)
         {

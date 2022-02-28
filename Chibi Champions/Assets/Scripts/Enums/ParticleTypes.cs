@@ -9,5 +9,8 @@ public enum ParticleTypes
     Knockback,
     JumpLanding,
     Hurt,
-    Spore
+    Spore,
+    GroundPound,
+    Speed,
+    HighJump
 }

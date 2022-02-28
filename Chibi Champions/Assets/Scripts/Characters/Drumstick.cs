@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class Drumstick : PlayerController
 {
     bool groundPoundActivated;
+    bool speedParticleActivated;
+    ParticleSystem speedParticle;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +23,22 @@ public class Drumstick : PlayerController
         if (groundPoundActivated && controller.isGrounded)
         {
             GroundPoundAttack();
+
+            Destroy(speedParticle.gameObject);
         }
+
+        if (groundPoundActivated && isJumping && controller.velocity.y < 0 && !speedParticleActivated)
+        {
+            speedParticle = ParticleManager.Instance.SpawnParticle(ParticleTypes.Speed, transform.position).GetComponent<ParticleSystem>();
+
+            speedParticleActivated = true;
+        }
+
+        if (speedParticle != null)
+        {
+            speedParticle.transform.position = transform.position;
+        }
+
     }
 
     protected override void Attack()
@@ -49,12 +66,16 @@ public class Drumstick : PlayerController
         {
             StartCoroutine(Jump());
 
+            ParticleManager.Instance.SpawnParticle(ParticleTypes.HighJump, transform.position);
+
             groundPoundActivated = true;
         }
     }
 
     void GroundPoundAttack()
     {
+        ParticleManager.Instance.SpawnParticle(ParticleTypes.GroundPound, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), heavyAttackRange);
+
         groundPoundActivated = false;
 
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, heavyAttackRange, enemyLayer);
@@ -70,5 +91,6 @@ public class Drumstick : PlayerController
             }
         }
 
+        speedParticleActivated = false;
     }
 }

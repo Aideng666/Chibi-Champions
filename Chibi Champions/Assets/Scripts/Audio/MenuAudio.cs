@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class MenuAudio : MonoBehaviour
 {
+    private bool menuEnd=false;
     // Start is called before the first frame update
     void Start()
     {
-            if (!FindObjectOfType<AudioManager>().IsPlaying("Menu") && !FindObjectOfType<AudioManager>().IsPlaying("Menu"))
-            {
-                FindObjectOfType<AudioManager>().Play("Menu");
-            }
+            
     }
 
     // Update is called once per frame
     void Update() {
 
+        if (!FindObjectOfType<AudioManager>().IsPlaying("Menu") && !FindObjectOfType<AudioManager>().IsPlaying("Menu") && menuEnd==false)
+        {
+            FindObjectOfType<AudioManager>().Play("Menu");
+        }
     }
 
     public void HoverSound()
@@ -36,6 +38,7 @@ public class MenuAudio : MonoBehaviour
     public void StartSound()
     {
         FindObjectOfType<AudioManager>().Play("Start");
+        menuEnd = true;
         FindObjectOfType<AudioManager>().Stop("Menu");
 
     }

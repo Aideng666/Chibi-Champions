@@ -282,6 +282,11 @@ public class PlayerController : MonoBehaviour
         sporeLevel = level;
     }
 
+    public float GetLightAttackDamage()
+    {
+        return lightAttackDamage;
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null)

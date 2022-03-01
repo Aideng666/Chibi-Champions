@@ -24,6 +24,11 @@ public class Spore : MonoBehaviour
         {
             ActivateSpore();
         }
+
+        if (tower.GetLevel() == 4)
+        {
+            navMeshAgent.speed = 6;
+        }
     }
 
     void ActivateSpore()

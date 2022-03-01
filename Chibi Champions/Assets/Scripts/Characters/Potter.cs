@@ -42,11 +42,11 @@ public class Potter : PlayerController
                 }
             }
 
-            var paintball = Instantiate(paintballPrefab, attackPoint.position, Quaternion.identity);
+            //var paintball = Instantiate(paintballPrefab, attackPoint.position, Quaternion.identity);
+            var paintball = ProjectilePool.Instance.GetPaintballFromPool(attackPoint.position);
 
             paintball.GetComponentInChildren<Rigidbody>().velocity = direction * shotSpeed;
-
-            Destroy(paintball, 3);
+            
         }
         if (Input.GetMouseButton(1) && CanHeavyAttack())
         {

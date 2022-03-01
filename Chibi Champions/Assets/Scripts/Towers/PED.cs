@@ -7,12 +7,6 @@ public class PED : Tower
 {
     [SerializeField] GameObject sporePrefab;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         if (CanAttack())
@@ -32,5 +26,16 @@ public class PED : Tower
             spore.GetComponent<Spore>().SetTower(this);
             spore.GetComponent<Spore>().SetPlayer(player);
         }
+    }
+
+    public override void Upgrade()
+    {
+        if (towerLevel > 3)
+        {
+            print("Tower is Max Level");
+            return;
+        }
+
+        base.Upgrade();
     }
 }

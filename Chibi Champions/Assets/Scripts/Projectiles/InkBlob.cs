@@ -12,6 +12,8 @@ public class InkBlob : MonoBehaviour
         {
             tower.GetComponent<InkBomber>().ApplyStunEffect(collision.gameObject);
 
+            ParticleManager.Instance.SpawnParticle(ParticleTypes.Ink, transform.position);
+
             Destroy(gameObject);
         }
 

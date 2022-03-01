@@ -5,17 +5,16 @@ using UnityEngine.UI;
 
 public class ImageSwap : MonoBehaviour
 {
-    public Image oldImage;
-    public Sprite newImage;
-    public Sprite oldSprite;
+    public Image portrait;
+    public Sprite oldImage, newImage;
 
     public void ImageChange()
     {
-        oldImage.sprite = newImage;
+        portrait.sprite = newImage;
     }
 
     public void RevertImage()
     {
-        oldImage.sprite = oldSprite;
+        portrait.sprite = oldImage;
     }
 }

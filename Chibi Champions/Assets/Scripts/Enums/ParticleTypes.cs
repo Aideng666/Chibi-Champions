@@ -12,5 +12,6 @@ public enum ParticleTypes
     Spore,
     GroundPound,
     Speed,
-    HighJump
+    HighJump,
+    Ink
 }

@@ -44,7 +44,10 @@ public class Photosynthesizer : Tower
         }
         else if (towerLevel == 3)
         {
-            attackDelay /= 1.5f;
+            foreach(PlayerController player in FindObjectsOfType<PlayerController>())
+            {
+                player.GetComponent<Health>().SetMaxHealth(player.GetComponent<Health>().GetMaxHealth() + 10);
+            }
         }
         else
         {

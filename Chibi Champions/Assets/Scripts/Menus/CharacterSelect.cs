@@ -28,11 +28,10 @@ public class CharacterSelect : MonoBehaviour
 
     [Header("Buttons")]
     public Button lockInButton;
-    public Button backButton;
 
     Character character;
 
-    bool hasSelected = false;
+    //bool hasSelected = false;
 
     //Changes the character based on its index
     // 0 for Character1

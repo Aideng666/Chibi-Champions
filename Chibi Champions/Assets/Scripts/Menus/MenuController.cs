@@ -13,6 +13,7 @@ public class MenuController : MonoBehaviour
         {
             frames[0].SetActive(false);
             frames[1].SetActive(true);
+            FindObjectOfType<AudioManager>().Play("Click");
         }
 
         //if (Input.GetKeyDown(KeyCode.Escape) && !frames[0].activeInHierarchy)

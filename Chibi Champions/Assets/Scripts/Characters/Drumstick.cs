@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Drumstick : PlayerController
 {
+    [SerializeField] AudioSource atk;
+    [SerializeField] AudioSource woosh;
     bool groundPoundActivated;
 
     // Start is called before the first frame update
@@ -28,6 +30,7 @@ public class Drumstick : PlayerController
     {
         if (Input.GetMouseButtonDown(0) && CanAttack())
         {
+            woosh.Play();
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, lightAttackRange, enemyLayer);
 
             foreach (Collider enemy in hitEnemies)
@@ -36,6 +39,7 @@ public class Drumstick : PlayerController
                 {
                     enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
                     enemy.GetComponentInParent<Enemy>().Knockback(20);
+                    atk.Play();
                 }
             }
 
@@ -44,7 +48,8 @@ public class Drumstick : PlayerController
         if (Input.GetMouseButtonDown(1) && CanAttack())
         {
             StartCoroutine(Jump());
-
+            
+            //Groundpunds sfx here
             groundPoundActivated = true;
         }
     }

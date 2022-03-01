@@ -6,6 +6,7 @@ public class ChickenLaser : Tower
 {
     [SerializeField] Transform firePoint;
     [SerializeField] float laserDamage;
+    [SerializeField] AudioSource shoot;
 
     LineRenderer laserbeam;
 
@@ -25,6 +26,8 @@ public class ChickenLaser : Tower
             if (laserbeam.enabled)
             {
                 laserbeam.enabled = false;
+                shoot.Stop();
+                Debug.Log("die");
             }
 
             return;
@@ -38,7 +41,10 @@ public class ChickenLaser : Tower
         if (!laserbeam.enabled)
         {
             laserbeam.enabled = true;
+            shoot.Play();
+            Debug.Log("pew");
         }
+
 
         transform.LookAt(enemy.transform.position);
 

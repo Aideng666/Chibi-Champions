@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected float interactDistance = 3;
     [SerializeField] protected float attackDelay = 0.75f;
     [SerializeField] protected TextMeshProUGUI interactText;
+    [SerializeField] AudioSource jump;
 
     protected CharacterController controller;
 
@@ -113,6 +114,7 @@ public class PlayerController : MonoBehaviour
 
         float elasped = 0f;
         float totalJumpTime = 0.5f;
+        jump.Play();
 
         while (elasped < totalJumpTime)
         {
@@ -120,7 +122,6 @@ public class PlayerController : MonoBehaviour
             moveDir.y =  Mathf.Lerp(jumpPower, -gravity, elasped / totalJumpTime);
 
             controller.Move(moveDir * speed * Time.deltaTime);
-
             yield return null;
         }
 

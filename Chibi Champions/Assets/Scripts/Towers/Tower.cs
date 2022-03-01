@@ -8,6 +8,7 @@ public class Tower : MonoBehaviour
     [SerializeField] protected LayerMask enemyLayer;
     [SerializeField] protected TowerAttackPriority defaultAttackPriority;
     [SerializeField] protected float attackRange;
+    
 
     protected TowerAttackPriority currentAttackPriority;
     

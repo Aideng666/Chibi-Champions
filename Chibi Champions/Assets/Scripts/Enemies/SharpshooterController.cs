@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class SharpshooterController : Enemy
 {
     [SerializeField] LayerMask enemyLayer;
-
+    [SerializeField] AudioSource pew;
     LineRenderer bulletTrail;
 
     Vector3 shotDirection;
@@ -71,6 +71,7 @@ public class SharpshooterController : Enemy
 
         RaycastHit hit;
 
+        pew.Play();
         if (Physics.Raycast(ray, out hit, 100f, ~enemyLayer))
         {
             var selection = hit.transform;

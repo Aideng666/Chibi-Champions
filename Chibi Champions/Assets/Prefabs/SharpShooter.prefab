@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c102240accc92c84992be46191ff9dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 15
+  attackRange: 10
   attackDamage: 5
   attackPoint: {fileID: 4146364756856947917}
   playerSpottedRange: 15

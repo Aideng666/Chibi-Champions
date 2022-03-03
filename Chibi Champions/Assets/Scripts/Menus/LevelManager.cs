@@ -48,7 +48,7 @@ public class LevelManager : MonoBehaviour
 
         // Can play with this -> Just to prevent the flicker
         await Task.Delay(100);
-        //loadingCanvas.SetActive(false); -> This turns off loading screen
+        loadingCanvas.SetActive(false); //-> This turns off loading screen
     }
 
     private void Update()

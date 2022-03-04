@@ -137,4 +137,28 @@ public class SharpshooterController : Enemy
 
         bulletTrail.enabled = false;
     }
+
+    public override void SetLevel(int lvl)
+    {
+        base.SetLevel(lvl);
+
+        if (level == 1)
+        {
+            GetComponent<Health>().SetMaxHealth(35);
+            GetComponent<Health>().ResetHealth();
+            attackDamage = 4;
+        }
+        else if (level == 2)
+        {
+            GetComponent<Health>().SetMaxHealth(70);
+            GetComponent<Health>().ResetHealth();
+            attackDamage = 9;
+        }
+        else if (level == 3)
+        {
+            GetComponent<Health>().SetMaxHealth(130);
+            GetComponent<Health>().ResetHealth();
+            attackDamage = 18;
+        }
+    }
 }

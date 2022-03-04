@@ -1511,15 +1511,15 @@ MonoBehaviour:
   cam: {fileID: 0}
   attackPoint: {fileID: 5120274358207205552}
   speed: 10
-  lightAttackRange: 1.45
+  lightAttackRange: 2
   heavyAttackRange: 10
   lightAttackDamage: 10
-  heavyAttackDamage: 15
+  heavyAttackDamage: 20
   gravity: 1.5
   jumpPower: 3
   interactDistance: 5
-  lightAttackDelay: 0.75
-  heavyAttackDelay: 0.75
+  lightAttackDelay: 1
+  heavyAttackDelay: 2
   interactText: {fileID: 0}
   cameraLookAt: {fileID: 3307315161210982373}
   towers:

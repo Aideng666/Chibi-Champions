@@ -50,7 +50,7 @@ public class GatlingDrummet : Tower
     {
         if (towerLevel == 1)
         {
-            bulletSpeed *= 1.25f;
+            attackRange += 5;
         }
         else if (towerLevel == 2)
         {

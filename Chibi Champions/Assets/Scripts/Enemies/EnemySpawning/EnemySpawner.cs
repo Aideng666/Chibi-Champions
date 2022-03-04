@@ -12,6 +12,7 @@ public class EnemySpawner : MonoBehaviour
     bool firstEnemySpawned;
 
     List<GameObject> spawnList = new List<GameObject>();
+    List<int> levelList = new List<int>();
 
     private void Update()
     {
@@ -43,13 +44,21 @@ public class EnemySpawner : MonoBehaviour
         {
             var enemy = EnemyPool.Instance.GetGruntFromPool();
 
+            enemy.GetComponent<GruntController>().SetLevel(levelList[currentSpawnAmount]);
+
             enemy.transform.position = transform.position;
+
+            print("Spawned Grunt At Level " + enemy.GetComponent<GruntController>().GetLevel());
         }
         else if(spawnList[currentSpawnAmount].name.Contains("SharpShooter"))
         {
             var enemy = EnemyPool.Instance.GetShooterFromPool();
 
+            enemy.GetComponent<SharpshooterController>().SetLevel(levelList[currentSpawnAmount]);
+
             enemy.transform.position = transform.position;
+
+            print("Spawned Shooter At Level " + enemy.GetComponent<SharpshooterController>().GetLevel());
         }
 
         currentSpawnAmount++;
@@ -67,5 +76,10 @@ public class EnemySpawner : MonoBehaviour
         spawnList = list;
         currentSpawnAmount = 0;
         firstEnemySpawned = false;
+    }
+
+    public void SetLevelList(List<int> list)
+    {
+        levelList = list;
     }
 }

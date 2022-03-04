@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour
 
     bool isGrounded = true;
 
+    protected int level = 1;
+
     // Start is called before the first frame update
     protected void Start()
     {
@@ -208,6 +210,16 @@ public class Enemy : MonoBehaviour
     public void SetLastHit(PlayerController player)
     {
         lastHit = player;
+    }
+
+    public virtual void SetLevel(int lvl)
+    {
+        level = lvl;
+    }
+
+    public int GetLevel()
+    {
+        return level;
     }
 
     public float GetDefaultSpeed()

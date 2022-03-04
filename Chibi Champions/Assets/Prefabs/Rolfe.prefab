@@ -976,7 +976,7 @@ MonoBehaviour:
   speed: 10
   lightAttackRange: 1.45
   heavyAttackRange: 10
-  lightAttackDamage: 10
+  lightAttackDamage: 5
   heavyAttackDamage: 15
   gravity: 1.5
   jumpPower: 3

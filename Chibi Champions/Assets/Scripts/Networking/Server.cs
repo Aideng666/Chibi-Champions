@@ -9,7 +9,7 @@ using System.Net.Sockets;
 public class Server : MonoBehaviour
 {
     //[SerializeField] GameObject cube;
-    public string message;
+    string message;
 
     private static byte[] buffer;
     private static IPHostEntry hostInfo;
@@ -24,6 +24,15 @@ public class Server : MonoBehaviour
     //private float[] pos;
 
     private static bool serverRunning;
+
+    void Start()
+    {
+        StartServer();
+
+        //Lecture 5
+        //Non-Blocking Mode
+        server.Blocking = false;
+    }
 
     // Update is called once per frame
     void Update()
@@ -41,7 +50,9 @@ public class Server : MonoBehaviour
 
             print($"Received from: {remoteClient.ToString()}");
 
-            string message = Encoding.ASCII.GetString(buffer, 0, rec);
+            message = Encoding.ASCII.GetString(buffer, 0, rec);
+
+            LobbyManager.Instance.SetMessage(message);
 
             print(message);
 
@@ -68,8 +79,6 @@ public class Server : MonoBehaviour
 
     public static void StartServer()
     {
-        server.Blocking = false;
-
         buffer = new byte[512];
         hostInfo = Dns.GetHostEntry(Dns.GetHostName());
         //ip = hostInfo.AddressList[4];

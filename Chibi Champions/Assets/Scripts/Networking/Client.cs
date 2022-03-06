@@ -25,6 +25,11 @@ public class Client : MonoBehaviour
     //Vector3 previousPos;
     //Vector3 currentPos;
 
+    void Start()
+    {
+        StartClient();
+        input = FindObjectOfType<TMP_InputField>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -54,6 +59,8 @@ public class Client : MonoBehaviour
 
     public static void SendMessage()
     {
+        print("Sending Message");
+
         client.SendTo(outBuffer, remoteEP);
     }
 

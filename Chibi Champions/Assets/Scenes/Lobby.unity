@@ -291,7 +291,7 @@ RectTransform:
   m_Children:
   - {fileID: 677765971}
   m_Father: {fileID: 2029855332}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -443,7 +443,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 523957565}
-  - component: {fileID: 523957567}
   - component: {fileID: 523957566}
   m_Layer: 0
   m_Name: LobbyManager
@@ -476,23 +475,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 523957564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4aba0fc3c2df934da01debcb002ac00, type: 3}
+  m_Script: {fileID: 11500000, guid: b2a25180ad17836458ecc0938b6fcac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 300766748}
---- !u!114 &523957567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523957564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91e256252b82e4d98baae8008fc306, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  message: 
 --- !u!1 &596750359
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,7 +632,7 @@ RectTransform:
   m_Children:
   - {fileID: 1637419127}
   m_Father: {fileID: 2029855332}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -697,7 +683,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 523957566}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Client, Assembly-CSharp
         m_MethodName: SendMessage
         m_Mode: 1
@@ -919,7 +905,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -30}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1190900756
@@ -967,8 +953,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 523957566}
-        m_TargetAssemblyTypeName: Client, Assembly-CSharp
-        m_MethodName: StartClient
+        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+        m_MethodName: MakeClient
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1614,9 +1600,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 523957567}
-        m_TargetAssemblyTypeName: Server, Assembly-CSharp
-        m_MethodName: StartServer
+      - m_Target: {fileID: 523957566}
+        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+        m_MethodName: MakeServer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1712,7 +1698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1758,8 +1744,8 @@ RectTransform:
   m_Children:
   - {fileID: 1901021206}
   - {fileID: 1190900755}
-  - {fileID: 300766747}
   - {fileID: 1016059758}
+  - {fileID: 300766747}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

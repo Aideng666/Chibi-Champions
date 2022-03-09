@@ -43,7 +43,7 @@ public class AnimController : MonoBehaviour
         playerAnimator.SetTrigger("Attack");
     }
 
-    public void PlayFeatherBlasterShootAnim(Animator anim)
+    public void PlayTowerShootAnim(Animator anim)
     {
         anim.SetTrigger("Shoot");
     }

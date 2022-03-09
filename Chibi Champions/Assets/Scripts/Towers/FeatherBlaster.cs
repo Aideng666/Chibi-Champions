@@ -41,7 +41,7 @@ public class FeatherBlaster : Tower
         feather.GetComponentInChildren<Rigidbody>().velocity = direction * featherSpeed;
         feather.GetComponentInChildren<Feather>().SetTower(this);
 
-        AnimController.Instance.PlayFeatherBlasterShootAnim(GetComponentInChildren<Animator>());
+        AnimController.Instance.PlayTowerShootAnim(GetComponentInChildren<Animator>());
 
         if (shootTwoShots)
         {

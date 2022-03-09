@@ -30,6 +30,11 @@ public class Health : MonoBehaviour
         return currentHealth;
     }
 
+    public void ResetHealth()
+    {
+        ModifyHealth(maxHealth - currentHealth);
+    }
+
     public float GetMaxHealth()
     {
         return maxHealth;

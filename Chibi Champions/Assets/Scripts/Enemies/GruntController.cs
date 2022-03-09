@@ -64,4 +64,28 @@ public class GruntController : Enemy
 
         delayBeforeAttackReached = true;
     }
+
+    public override void SetLevel(int lvl)
+    {
+        base.SetLevel(lvl);
+
+        if (level == 1)
+        {
+            GetComponent<Health>().SetMaxHealth(50);
+            GetComponent<Health>().ResetHealth();
+            attackDamage = 2;
+        }
+        else if (level == 2)
+        {
+            GetComponent<Health>().SetMaxHealth(100);
+            GetComponent<Health>().ResetHealth();
+            attackDamage = 6;
+        }
+        else if (level == 3)
+        {
+            GetComponent<Health>().SetMaxHealth(200);
+            GetComponent<Health>().ResetHealth();
+            attackDamage = 14;
+        }
+    }
 }

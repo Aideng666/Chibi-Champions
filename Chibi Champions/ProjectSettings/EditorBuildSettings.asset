@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Sandbox.unity
     guid: 49622b8f81718b14192d514c7c327871
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Lose.unity
     guid: 133b468888414ee40823ce3f34db8068
+  - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: 59955f2231c16074cb4d9d009ca88268
   m_configObjects: {}

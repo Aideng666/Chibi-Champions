@@ -20,6 +20,10 @@ public class CanvasManager : MonoBehaviour
     private void Start()
     {
         interactMenu.gameObject.SetActive(false);
+        if (!FindObjectOfType<AudioManager>().IsPlaying("Level") && !FindObjectOfType<AudioManager>().IsPlaying("Level"))
+        {
+            FindObjectOfType<AudioManager>().Play("Level");
+        }
     }
 
     public void OpenTowerMenu()

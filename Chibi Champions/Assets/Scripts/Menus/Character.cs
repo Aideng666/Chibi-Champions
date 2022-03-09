@@ -7,13 +7,12 @@ public class Character
 {
     public string characterName;
     public string classType;
+    public Sprite characterSprite;
 
-    public Sprite[] towerBaseSprites;
+    public Sprite[] towerSprites;
     public Sprite[] abilitySprites;
-    public string[] towerBaseNames;
-    public string[] towerBaseDescriptions;
-    public string[] towerBaseCosts;
+    public string[] towerNames;
+    public string[] towerDescriptions;
     public string[] abilityNames;
     public string[] abilityDescriptions;
-    public string[] abilityControls;
 }

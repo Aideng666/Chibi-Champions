@@ -78,4 +78,9 @@ public class CharacterSelect : MonoBehaviour
             abilityUIDesc[i].text = character.abilityDescriptions[i];
         }
     }
+
+    public void LockIn()
+    {
+        PlayerPrefs.SetInt("CharacterIndex", characterIndex);
+    }
 }

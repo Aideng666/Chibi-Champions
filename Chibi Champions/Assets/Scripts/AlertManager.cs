@@ -17,11 +17,6 @@ public class AlertManager : MonoBehaviour
     {
         Instantiate(alertPrefab, gameObject.transform).GetComponent<AlertText>().SetInfo(alertInfo);
 
-        //alert.GetComponent<TextMeshProUGUI>().text = alertInfo.text;
-        //alert.GetComponent<AlertText>().SetLifespan(alertInfo.lifespan);
-        //alert.GetComponent<AlertText>().SetStartSize(alertInfo.startingSize);
-        //alert.GetComponent<AlertText>().SetEndSize(alertInfo.endSize);
-        //alert.GetComponent<AlertText>().SetColor(alertInfo.color);
-        //alert.GetComponent<AlertText>().SetDelay(alertInfo.delayBeforeFade);
+        print("Info Sent: " + alertInfo.delayBeforeFade);
     }
 }

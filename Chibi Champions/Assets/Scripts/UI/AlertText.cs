@@ -5,15 +5,6 @@ using TMPro;
 
 public class AlertText : MonoBehaviour
 {
-    //float alertLifespan = 2;
-
-    //float startingSize = 36;
-    //float endSize = 0;
-
-    //Color color;
-
-    //float delayBeforeFade;
-
     float currentAlertLifetime = 0;
     bool delayReached;
 
@@ -48,36 +39,6 @@ public class AlertText : MonoBehaviour
         }
     }
 
-    //public void SetAlert(string alertText)
-    //{
-    //    alert.text = alertText;
-    //}
-
-    //public void SetLifespan(float lifespan)
-    //{
-    //    alertLifespan = lifespan;
-    //}
-
-    //public void SetStartSize(float size)
-    //{
-    //    startingSize = size;
-    //}
-
-    //public void SetEndSize(float size)
-    //{
-    //    endSize = size;
-    //}
-
-    //public void SetColor(Color c)
-    //{
-    //    color = c;
-    //}
-
-    //public void SetDelay(float delay)
-    //{
-    //    delayBeforeFade = delay;
-    //}
-
     public void SetInfo(Alert info)
     {
         alertInfo = info;
@@ -87,6 +48,10 @@ public class AlertText : MonoBehaviour
         if (alertInfo.delayBeforeFade > 0)
         {
             StartCoroutine(BeginDelay());
+        }
+        else
+        {
+            delayReached = true;
         }
     }
 

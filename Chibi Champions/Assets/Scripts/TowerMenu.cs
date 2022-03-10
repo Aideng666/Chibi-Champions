@@ -78,7 +78,7 @@ public class TowerMenu : MonoBehaviour
     {
         if (towers[0].GetComponent<Tower>().GetCost() <= player.GetComponent<PointsManager>().GetCurrentPoints())
         {
-            Instantiate(towers[0], new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
+            Instantiate(towers[0], new Vector3(platform.position.x, towers[0].transform.position.y, platform.position.z), Quaternion.identity);
             platform.gameObject.SetActive(false);
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[0].GetComponent<Tower>().GetCost());
@@ -93,7 +93,7 @@ public class TowerMenu : MonoBehaviour
     {
         if (towers[1].GetComponent<Tower>().GetCost() <= player.GetComponent<PointsManager>().GetCurrentPoints())
         {
-            Instantiate(towers[1], new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
+            Instantiate(towers[1], new Vector3(platform.position.x, towers[1].transform.position.y, platform.position.z), Quaternion.identity);
             platform.gameObject.SetActive(false);
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[1].GetComponent<Tower>().GetCost());
@@ -108,7 +108,7 @@ public class TowerMenu : MonoBehaviour
     {
         if (towers[2].GetComponent<Tower>().GetCost() <= player.GetComponent<PointsManager>().GetCurrentPoints())
         {
-            Instantiate(towers[2], new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
+            Instantiate(towers[2], new Vector3(platform.position.x, towers[2].transform.position.y, platform.position.z), Quaternion.identity);
             platform.gameObject.SetActive(false);
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[2].GetComponent<Tower>().GetCost());

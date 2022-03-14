@@ -23,6 +23,7 @@ public class CanvasManager : MonoBehaviour
         if (!FindObjectOfType<AudioManager>().IsPlaying("Level") && !FindObjectOfType<AudioManager>().IsPlaying("Level"))
         {
             FindObjectOfType<AudioManager>().Play("Level");
+            FindObjectOfType<AudioManager>().Loop("Level");
         }
     }
 

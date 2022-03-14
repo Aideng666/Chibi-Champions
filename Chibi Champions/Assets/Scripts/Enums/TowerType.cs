@@ -9,7 +9,7 @@ public enum TowerType
     GatlingDrummet,
     WebShooter,
     TennisBomb,
-    Watchdog,
+    SpiderHouse,
     InkBomber,
     Photosynthesiser,
     PED

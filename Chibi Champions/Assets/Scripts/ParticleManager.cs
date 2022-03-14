@@ -13,6 +13,7 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] ParticleSystem groundPoundParticle;
     [SerializeField] ParticleSystem speedParticle;
     [SerializeField] ParticleSystem highJumpParticle;
+    [SerializeField] ParticleSystem inkParticle;
     ParticleSystem.ShapeModule particleShape;
     float shapeRadius;
 
@@ -90,6 +91,12 @@ public class ParticleManager : MonoBehaviour
             case ParticleTypes.HighJump:
 
                 currentParticle = Instantiate(highJumpParticle, position, Quaternion.Euler(-90, 0, 0));
+
+                break;
+
+            case ParticleTypes.Ink:
+
+                currentParticle = Instantiate(inkParticle, position, Quaternion.Euler(-90, 0, 0));
 
                 break;
         }

@@ -6,6 +6,7 @@ public class Feather : MonoBehaviour
 {
     Tower tower;
     float bulletDamage = 5;
+    float deactivateDelay = 2;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -16,12 +17,24 @@ public class Feather : MonoBehaviour
             ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, collision.contacts[0].point);
         }
 
-            Destroy(gameObject);
+        ProjectilePool.Instance.AddToFeatherPool(gameObject.transform.parent.gameObject);
     }
 
     public void SetTower(Tower t)
     {
         tower = t;
         bulletDamage = tower.GetDamage();
+    }
+
+    public void StartDelay()
+    {
+        StartCoroutine(DelayToDeactivate());
+    }
+
+    IEnumerator DelayToDeactivate()
+    {
+        yield return new WaitForSeconds(deactivateDelay);
+
+        ProjectilePool.Instance.AddToFeatherPool(gameObject.transform.parent.gameObject);
     }
 }

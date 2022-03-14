@@ -32,13 +32,16 @@ public class FeatherBlaster : Tower
     {
         Vector3 direction = (enemy.transform.position - firePoint.position).normalized;
 
-        var feather = Instantiate(featherPrefab, firePoint.position, Quaternion.identity);
+        //var feather = Instantiate(featherPrefab, firePoint.position, Quaternion.identity);
+        var feather = ProjectilePool.Instance.GetFeatherFromPool(firePoint.position);
+
+        //feather.transform.position = firePoint.position;
 
         feather.transform.LookAt(enemy.transform);
         feather.GetComponentInChildren<Rigidbody>().velocity = direction * featherSpeed;
         feather.GetComponentInChildren<Feather>().SetTower(this);
 
-        AnimController.Instance.PlayFeatherBlasterShootAnim(GetComponentInChildren<Animator>());
+        AnimController.Instance.PlayTowerShootAnim(GetComponentInChildren<Animator>());
 
         if (shootTwoShots)
         {
@@ -50,13 +53,16 @@ public class FeatherBlaster : Tower
     {
         Vector3 direction = (enemy.transform.position - firePoint.position).normalized;
 
-        var feather = Instantiate(featherPrefab, new Vector3(firePoint.position.x, firePoint.position.y + 0.5f, firePoint.position.z), Quaternion.identity);
+        //var feather = Instantiate(featherPrefab, new Vector3(firePoint.position.x, firePoint.position.y + 0.5f, firePoint.position.z), Quaternion.identity);
+        var feather = ProjectilePool.Instance.GetFeatherFromPool(new Vector3(firePoint.position.x, firePoint.position.y + 0.5f, firePoint.position.z));
+
+        //feather.transform.position = new Vector3(firePoint.position.x, firePoint.position.y + 0.5f, firePoint.position.z);
 
         feather.transform.LookAt(enemy.transform);
         feather.GetComponentInChildren<Rigidbody>().velocity = direction * featherSpeed;
         feather.GetComponentInChildren<Feather>().SetTower(this);
 
-        Destroy(feather, 3);
+        //Destroy(feather, 3);
     }
 
     public override void Upgrade()

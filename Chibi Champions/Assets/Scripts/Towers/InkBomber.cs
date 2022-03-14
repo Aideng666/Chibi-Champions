@@ -37,6 +37,8 @@ public class InkBomber : Tower
         ink.GetComponentInChildren<Rigidbody>().velocity = direction * inkSpeed;
         ink.GetComponentInChildren<InkBlob>().SetTower(this);
 
+        AnimController.Instance.PlayTowerShootAnim(GetComponentInChildren<Animator>());
+
         Destroy(ink, 3);
     }
 

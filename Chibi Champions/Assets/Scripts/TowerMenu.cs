@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class TowerMenu : MonoBehaviour
 {
@@ -14,11 +16,18 @@ public class TowerMenu : MonoBehaviour
 
     MenuState currentMenuState;
 
+    Button[] buttons;
+
     public static TowerMenu Instance { get; private set; }
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        buttons = GetComponentsInChildren<Button>();
     }
 
     private void Update()
@@ -32,6 +41,11 @@ public class TowerMenu : MonoBehaviour
         {
             upgradePanel.SetActive(true);
             buyPanel.SetActive(false);
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            buttons[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = towers[i].name;
         }
     }
 
@@ -64,7 +78,7 @@ public class TowerMenu : MonoBehaviour
     {
         if (towers[0].GetComponent<Tower>().GetCost() <= player.GetComponent<PointsManager>().GetCurrentPoints())
         {
-            Instantiate(towers[0], new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
+            Instantiate(towers[0], new Vector3(platform.position.x, towers[0].transform.position.y, platform.position.z), Quaternion.identity);
             platform.gameObject.SetActive(false);
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[0].GetComponent<Tower>().GetCost());
@@ -79,7 +93,7 @@ public class TowerMenu : MonoBehaviour
     {
         if (towers[1].GetComponent<Tower>().GetCost() <= player.GetComponent<PointsManager>().GetCurrentPoints())
         {
-            Instantiate(towers[1], new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
+            Instantiate(towers[1], new Vector3(platform.position.x, towers[1].transform.position.y, platform.position.z), Quaternion.identity);
             platform.gameObject.SetActive(false);
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[1].GetComponent<Tower>().GetCost());
@@ -94,7 +108,7 @@ public class TowerMenu : MonoBehaviour
     {
         if (towers[2].GetComponent<Tower>().GetCost() <= player.GetComponent<PointsManager>().GetCurrentPoints())
         {
-            Instantiate(towers[2], new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
+            Instantiate(towers[2], new Vector3(platform.position.x, towers[2].transform.position.y, platform.position.z), Quaternion.identity);
             platform.gameObject.SetActive(false);
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[2].GetComponent<Tower>().GetCost());

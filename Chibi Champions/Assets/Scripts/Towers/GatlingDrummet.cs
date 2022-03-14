@@ -34,20 +34,23 @@ public class GatlingDrummet : Tower
 
         Vector3 direction = (enemy.transform.position - firePoint.position).normalized;
 
-        var feather = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        //var feather = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        var feather = ProjectilePool.Instance.GetFeatherFromPool(firePoint.position);
+
+        //feather.transform.position = firePoint.position;
 
         feather.transform.LookAt(enemy.transform);
         feather.GetComponentInChildren<Rigidbody>().velocity = direction * bulletSpeed;
         feather.GetComponentInChildren<Feather>().SetTower(this);
 
-        Destroy(feather, 3);
+        //Destroy(feather, 3);
     }
 
     public override void Upgrade()
     {
         if (towerLevel == 1)
         {
-            bulletSpeed *= 1.25f;
+            attackRange += 5;
         }
         else if (towerLevel == 2)
         {

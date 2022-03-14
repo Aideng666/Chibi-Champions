@@ -21,9 +21,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected float interactDistance = 3;
     [SerializeField] protected float lightAttackDelay = 0.75f;
     [SerializeField] protected float heavyAttackDelay = 0.75f;
+    [SerializeField] protected float deathTimer = 5;
     [SerializeField] protected TextMeshProUGUI interactText;
     [SerializeField] protected GameObject cameraLookAt;
     [SerializeField] protected GameObject[] towers = new GameObject[3];
+    [SerializeField] protected Transform respawnLocation;
 
     protected CharacterController controller;
     protected CinemachineVirtualCamera thirdPersonCam;
@@ -39,7 +41,8 @@ public class PlayerController : MonoBehaviour
 
     protected bool canInteract;
 
-    bool effectApplied;
+    protected bool effectApplied;
+    protected bool isAlive = true;
 
     int sporeLevel = 1;
     Effects currentEffect = Effects.None;
@@ -60,31 +63,34 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0)
+        if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0 && isAlive)
         {
-            GameOver();
+            Die();
         }
 
-        ApplyEffect();
-
-        Move();
-
-        Attack();
-
-        CheckRaycastSelection();
-
-
-
-        if (canInteract && Input.GetKeyDown(KeyCode.E) && !CanvasManager.Instance.IsTowerMenuOpen())
+        if (isAlive)
         {
-            TowerMenu.Instance.SetPlayer(this);
-            CanvasManager.Instance.OpenTowerMenu();
-        }
-        else if (CanvasManager.Instance.IsTowerMenuOpen() && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)))
-        {
-            CanvasManager.Instance.CloseTowerMenu();
-        }
 
+            ApplyEffect();
+
+            Move();
+
+            Attack();
+
+            CheckRaycastSelection();
+
+
+
+            if (canInteract && Input.GetKeyDown(KeyCode.E) && !CanvasManager.Instance.IsTowerMenuOpen())
+            {
+                TowerMenu.Instance.SetPlayer(this);
+                CanvasManager.Instance.OpenTowerMenu();
+            }
+            else if (CanvasManager.Instance.IsTowerMenuOpen() && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)))
+            {
+                CanvasManager.Instance.CloseTowerMenu();
+            }
+        }
     }
 
     void Move()
@@ -221,11 +227,36 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    void GameOver()
+    void Die()
     {
-        CanvasManager.Instance.RemoveCursorLock();
+        isAlive = false;
 
-        SceneManager.LoadScene("Lose");
+        StartCoroutine(DeathTimer());
+
+        MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
+
+        foreach(MeshRenderer mesh in meshes)
+        {
+            mesh.enabled = false;
+        }
+    }
+
+    IEnumerator DeathTimer()
+    {
+        yield return new WaitForSeconds(deathTimer);
+
+        MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
+
+        foreach (MeshRenderer mesh in meshes)
+        {
+            mesh.enabled = true;
+        }
+
+        GetComponent<Health>().ResetHealth();
+
+        transform.position = respawnLocation.position;
+
+        isAlive = true;
     }
 
     void CheckRaycastSelection()
@@ -280,6 +311,16 @@ public class PlayerController : MonoBehaviour
     public void SetSporeLevel(int level)
     {
         sporeLevel = level;
+    }
+
+    public bool GetIsAlive()
+    {
+        return isAlive;
+    }
+
+    public float GetLightAttackDamage()
+    {
+        return lightAttackDamage;
     }
 
     private void OnDrawGizmosSelected()

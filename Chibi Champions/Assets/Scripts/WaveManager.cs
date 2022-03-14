@@ -19,6 +19,7 @@ public class WaveManager : MonoBehaviour
     bool waveCompletePointsAdded = false;
 
     List<List<GameObject>> enemiesLists = new List<List<GameObject>>();
+    List<List<int>> enemyLevels = new List<List<int>>();
 
    PlayerController[] playerList = new PlayerController[3];
 
@@ -78,6 +79,7 @@ public class WaveManager : MonoBehaviour
         foreach (EnemySpawner spawner in enemySpawners)
         {
             spawner.SetSpawnList(enemiesLists[currentWave]);
+            spawner.SetLevelList(enemyLevels[currentWave]);
         }
         currentWave++;
     }
@@ -122,20 +124,49 @@ public class WaveManager : MonoBehaviour
         for (int i = 0; i < numberOfWaves; i++)
         {
             enemiesLists.Add(new List<GameObject>());
+            enemyLevels.Add(new List<int>());
+
             string line = reader.ReadLine();
 
             string[] amountOfEachEnemy = line.Split(':');
 
-            int numberOfGrunts = Int32.Parse(amountOfEachEnemy[0]);
-            int numberOfShooters = Int32.Parse(amountOfEachEnemy[1]);
+            int numberOfLvl1Grunts = Int32.Parse(amountOfEachEnemy[0]);
+            int numberOfLvl2Grunts = Int32.Parse(amountOfEachEnemy[1]);
+            int numberOfLvl3Grunts = Int32.Parse(amountOfEachEnemy[2]);
+            int numberOfLvl1Shooters = Int32.Parse(amountOfEachEnemy[3]);
+            int numberOfLvl2Shooters = Int32.Parse(amountOfEachEnemy[4]);
+            int numberOfLvl3Shooters = Int32.Parse(amountOfEachEnemy[5]);
 
-            for (int j = 0; j < numberOfGrunts; j++)
+
+            for (int j = 0; j < numberOfLvl1Grunts; j++)
             {
                 enemiesLists[i].Add(gruntPrefab);
+                enemyLevels[i].Add(1);
             }
-            for (int j = 0; j < numberOfShooters; j++)
+            for (int j = 0; j < numberOfLvl2Grunts; j++)
+            {
+                enemiesLists[i].Add(gruntPrefab);
+                enemyLevels[i].Add(2);
+            }
+            for (int j = 0; j < numberOfLvl3Grunts; j++)
+            {
+                enemiesLists[i].Add(gruntPrefab);
+                enemyLevels[i].Add(3);
+            }
+            for (int j = 0; j < numberOfLvl1Shooters; j++)
             {
                 enemiesLists[i].Add(sharpshooterPrefab);
+                enemyLevels[i].Add(1);
+            }
+            for (int j = 0; j < numberOfLvl2Shooters; j++)
+            {
+                enemiesLists[i].Add(sharpshooterPrefab);
+                enemyLevels[i].Add(2);
+            }
+            for (int j = 0; j < numberOfLvl3Shooters; j++)
+            {
+                enemiesLists[i].Add(sharpshooterPrefab);
+                enemyLevels[i].Add(3);
             }
         }
 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MenuAudio : MonoBehaviour
 {
-    private bool menuGo=true;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,15 +12,6 @@ public class MenuAudio : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("Menu");
             FindObjectOfType<AudioManager>().Loop("Menu");
         }
-    }
-
-    // Update is called once per frame
-    void Update() {
-        if (menuGo)
-        {
-
-        }
-        Debug.Log(menuGo);
     }
 
     public void HoverSound()
@@ -43,7 +33,5 @@ public class MenuAudio : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Play("Start");
         FindObjectOfType<AudioManager>().Stop("Menu");
-        menuGo = false;
-
     }
 }

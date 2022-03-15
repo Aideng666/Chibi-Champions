@@ -61,13 +61,18 @@ public class Client : MonoBehaviour
 
             if (receivedMessage != "NO:MESSAGE/SENT.KEY")
             {
-                LobbyManager.Instance.SetMessage(receivedMessage);
+                LobbyManager.Instance.SetMessage($"Received: {receivedMessage}");
             }
         }
     }
 
     public void ActivateSendMessage()
     {
+        if (messageToSend != "NO:MESSAGE/SENT.KEY")
+        {
+            LobbyManager.Instance.SetMessage($"Sent: {messageToSend}", true);
+        }
+
         SendMessage();
     }
 

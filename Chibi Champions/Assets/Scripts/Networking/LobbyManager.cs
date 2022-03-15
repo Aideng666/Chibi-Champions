@@ -44,11 +44,26 @@ public class LobbyManager : MonoBehaviour
         return isServer;
     }
 
-    public void SetMessage(string msg)
+    public void SetMessage(string msg, bool sentMessage = false)
     {
-        message.GetComponent<TextMeshProUGUI>().text = msg;
+        message.GetComponentInChildren<TextMeshProUGUI>().text = msg;
+
+        if (sentMessage)
+        {
+            message.GetComponent<Image>().color = Color.magenta;
+        }
+        else
+        {
+            message.GetComponent<Image>().color = Color.cyan;
+        }
 
         Instantiate(message, content.transform);
+
+        RectTransform contentRect = content.GetComponent<RectTransform>();
+
+        contentRect.sizeDelta = new Vector2(contentRect.sizeDelta.x, contentRect.sizeDelta.y + 50);
+
+        FindObjectOfType<Scrollbar>().value = 0;
     }
 
     public void SendMessage()

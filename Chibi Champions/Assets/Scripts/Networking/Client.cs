@@ -9,79 +9,121 @@ using TMPro;
 
 public class Client : MonoBehaviour
 {
-    //public GameObject cube;
-    [SerializeField] TMP_InputField input;
-    private static byte[] outBuffer = new byte[512];
+    TMP_InputField input;
+    private static byte[] buffer;
+    private static byte[] message;
     private static IPEndPoint remoteEP;
     private static Socket client;
+    private static int rec = 0;
 
-    string message;
-
-    //Lecture 5
-    //private float[] pos;
-    //private byte[] bpos;
-
-    //Lecture 5 Exercise
-    //Vector3 previousPos;
-    //Vector3 currentPos;
+    string messageToSend;
+    string receivedMessage;
 
     void Start()
     {
-        StartClient();
         input = FindObjectOfType<TMP_InputField>();
+
+        input.text = "Begin";
+
+        StartClient();
+
+        client.Blocking = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        message = input.text;
+        rec = 0;
 
-        //currentPos = cube.transform.position;
+        if (input.text.Length > 0)
+        {
+            messageToSend = input.text;
+        }
+        else
+        {
+            messageToSend = "NO:MESSAGE/SENT.KEY";
+        }
 
-        //print($"Sending Position: {cube.transform.position.x}, 0.5, {cube.transform.position.z}");
+        message = Encoding.ASCII.GetBytes(messageToSend);
 
-        outBuffer = Encoding.ASCII.GetBytes(message);
+        try
+        {
+            rec = client.Receive(buffer);
+        }
+        catch(Exception e)
+        {
+            print(e.ToString());
+        }
 
-        //pos = new float[] { cube.transform.position.x, cube.transform.position.y, cube.transform.position.z };
+        if (rec > 0)
+        {
+            receivedMessage = Encoding.ASCII.GetString(buffer, 0, rec);
 
-        //Buffer.BlockCopy(pos, 0, bpos, 0, bpos.Length);
+            if (receivedMessage != "NO:MESSAGE/SENT.KEY")
+            {
+                LobbyManager.Instance.SetMessage(receivedMessage);
+            }
+        }
+    }
 
-
-        //if (currentPos != previousPos)
-        //{
-        //    client.SendTo(bpos, remoteEP);
-        //}
-        
-        //client.SendTo(outBuffer, remoteEP);
-
-        //previousPos = currentPos;
+    public void ActivateSendMessage()
+    {
+        SendMessage();
     }
 
     public static void SendMessage()
     {
-        print("Sending Message");
-
-        client.SendTo(outBuffer, remoteEP);
+        client.Send(message);
     }
 
     public static void StartClient()
     {
-        // rcv buffer
-
-        byte[] buffer = new byte[512];
+        buffer = new byte[512];
 
         try
         {
-            //IPAddress ip = IPAddress.Parse("192.168.0.53");
             IPAddress ip = IPAddress.Parse("127.0.0.1");
 
             remoteEP = new IPEndPoint(ip, 11111);
 
-            client = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+            try 
+            {
+                Debug.Log("Connecting to Server...");
+                client.Connect(remoteEP);
+
+                Debug.Log("Connected to IP: " + client.RemoteEndPoint.ToString());
+            }
+            catch (ArgumentNullException anexc)
+            {
+                Console.WriteLine("ArgumentNullException: {0}", anexc.ToString());
+            }
+            catch (SocketException se)
+            {
+                Console.WriteLine("SocketException: {0}", se.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("UnexpectedException: {0}", e.ToString());
+            }
         }
         catch (Exception e)
         {
             Debug.Log(e.ToString());
+        }
+    }
+
+    void WaitForSendMessage(KeyCode key)
+    {
+        bool done = false;
+
+        while (!done)
+        {
+            if (Input.GetKeyDown(key))
+            {
+                done = true;
+            }
         }
     }
 }

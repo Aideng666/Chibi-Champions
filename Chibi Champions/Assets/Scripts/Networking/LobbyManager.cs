@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviour
 {
-    [SerializeField] TMP_InputField input;
+    [SerializeField] GameObject message;
+    [SerializeField] GameObject content;
     bool isServer;
     bool isClient;
 
@@ -44,7 +46,21 @@ public class LobbyManager : MonoBehaviour
 
     public void SetMessage(string msg)
     {
-        input.text = msg;
+        message.GetComponent<TextMeshProUGUI>().text = msg;
+
+        Instantiate(message, content.transform);
     }
 
+    public void SendMessage()
+    {
+        if (isClient)
+        {
+            GetComponent<Client>().ActivateSendMessage();
+        }
+
+        if (isServer)
+        {
+            GetComponent<Server>().ActivateSendMessage();
+        }
+    }
 }

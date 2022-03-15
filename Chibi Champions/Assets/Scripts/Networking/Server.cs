@@ -91,7 +91,7 @@ public class Server : MonoBehaviour
 
                 if (receivedMessage != "NO:MESSAGE/SENT.KEY")
                 {
-                    LobbyManager.Instance.SetMessage(receivedMessage);
+                    LobbyManager.Instance.SetMessage($"Received: {receivedMessage}");
                 }
             }
 
@@ -105,11 +105,6 @@ public class Server : MonoBehaviour
             }
 
             message = Encoding.ASCII.GetBytes(messageToSend);
-
-            //if (message.Length > 0)
-            //{
-            //    handler.Send(message);
-            //}
         }
     }
 
@@ -150,6 +145,11 @@ public class Server : MonoBehaviour
 
     public void ActivateSendMessage()
     {
+        if (messageToSend != "NO:MESSAGE/SENT.KEY")
+        {
+            LobbyManager.Instance.SetMessage($"Sent: {messageToSend}", true);
+        }
+
         SendMessage();
     }
 

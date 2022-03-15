@@ -79,8 +79,6 @@ public class PlayerController : MonoBehaviour
 
             CheckRaycastSelection();
 
-
-
             if (canInteract && Input.GetKeyDown(KeyCode.E) && !CanvasManager.Instance.IsTowerMenuOpen())
             {
                 TowerMenu.Instance.SetPlayer(this);

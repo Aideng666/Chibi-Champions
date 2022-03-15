@@ -7994,8 +7994,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 2022 Raw Chicken Productions
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 621e90b9eba96df419c3788a85088aeb, type: 2}
-  m_sharedMaterial: {fileID: 6865604261725284396, guid: 621e90b9eba96df419c3788a85088aeb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f03cf8da0d3f2c14aa015a0f994037a6, type: 2}
+  m_sharedMaterial: {fileID: 6865604261725284396, guid: f03cf8da0d3f2c14aa015a0f994037a6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

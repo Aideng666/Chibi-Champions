@@ -14,6 +14,8 @@ public class MenuController : MonoBehaviour
     //public Animator playFadeTransitionAnim;
 
     private bool isPlayButtonClicked = false;
+    private bool isTutorialButtonClicked = false;
+    private bool isOptionsButtonClicked = false;
 
     //public Animator panelTransitionAnim;
     //public float wipeTransitionTime = 2f;
@@ -35,11 +37,31 @@ public class MenuController : MonoBehaviour
             StartCoroutine(LoadFadeTransitions(frames[1], frames[2]));
             isPlayButtonClicked = false;
         }
+        else if (isTutorialButtonClicked)
+        {
+            StartCoroutine(LoadFadeTransitions(frames[1], frames[3]));
+            isTutorialButtonClicked = false;
+        }
+        else if (isOptionsButtonClicked)
+        {
+            StartCoroutine(LoadFadeTransitions(frames[1], frames[4]));
+            isOptionsButtonClicked = false;
+        }
     }
 
     public void PlayButtonFade()
     {
         isPlayButtonClicked = true;
+    }
+
+    public void TutorialButtonFade()
+    {
+        isTutorialButtonClicked = true;
+    }
+
+    public void OptionsButtonFade()
+    {
+        isOptionsButtonClicked = true;
     }
 
     IEnumerator LoadFadeTransitions(GameObject currentFrame, GameObject targetFrame)
@@ -53,25 +75,6 @@ public class MenuController : MonoBehaviour
         currentFrame.SetActive(false);
         targetFrame.SetActive(true);
     }
-
-    //IEnumerator LoadFadeTransition()
-    //{
-    //    fadeTransitionAnim.SetTrigger("End");
-    //    yield return new WaitForSeconds(fadeTransitionTime);
-    //    frames[0].SetActive(false);
-    //    frames[1].SetActive(true);
-    //}
-
-  
-
-    //IEnumerator LoadPlayFadeTransition()
-    //{
-    //    playFadeTransitionAnim.SetTrigger("End");
-    //    yield return new WaitForSeconds(fadeTransitionTime);
-    //    frames[1].SetActive(false);
-    //    frames[2].SetActive(true);
-    //}
-
 
     //IEnumerator LoadTransition()
     //{

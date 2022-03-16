@@ -5,10 +5,9 @@ using UnityEngine;
 public class MenuController : MonoBehaviour
 {
     public GameObject[] frames;
-    public Animator[] fadeAnims;
 
-    //public Animator fadeTransitionAnim;
-    public float fadeTransitionTime = 1.5f;
+    public Animator startfadeTransitionAnim;
+    public float startfadeTransitionTime = 1.5f;
 
     //public Animator panelTransitionAnim;
     //public float wipeTransitionTime = 2f;
@@ -21,24 +20,31 @@ public class MenuController : MonoBehaviour
             //frames[0].SetActive(false);
             //frames[1].SetActive(true);
             FindObjectOfType<AudioManager>().Play("Click");
-            StartCoroutine(LoadFadeTransition(frames[0], frames[1]));
+            StartCoroutine(LoadFadeTransition());
+            //StartCoroutine(LoadFadeTransition(frames[0], frames[1]));
+            //StartCoroutine(LoadFadeTransition());
             //StartCoroutine(LoadTransition());
         }
     }
 
-    IEnumerator LoadFadeTransition(GameObject currentFrame, GameObject targetFrame)
+    IEnumerator LoadFadeTransition()
     {
-        for (int i = 0; i < fadeAnims.Length; ++i)
-        {
-            fadeAnims[i].SetTrigger("End");
-        }
-        //fadeTransitionAnim.SetTrigger("End");
-        yield return new WaitForSeconds(fadeTransitionTime);
-        currentFrame.SetActive(false);
-        targetFrame.SetActive(true);
-        //frames[0].SetActive(false);
-        //frames[1].SetActive(true);
+        startfadeTransitionAnim.SetTrigger("End");
+        yield return new WaitForSeconds(startfadeTransitionTime);
+        frames[0].SetActive(false);
+        frames[1].SetActive(true);
     }
+
+    //IEnumerator LoadFadeTransition(/*GameObject currentFrame, GameObject targetFrame*/)
+    //{
+    //    fadeTransitionAnim.SetTrigger("End");
+    //    yield return new WaitForSeconds(fadeTransitionTime);
+    //    //currentFrame.SetActive(false);
+    //    //targetFrame.SetActive(true);
+    //    frames[0].SetActive(false);
+    //    frames[1].SetActive(true);
+    //}
+
 
     //IEnumerator LoadTransition()
     //{

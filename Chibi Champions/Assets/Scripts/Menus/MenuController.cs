@@ -8,10 +8,7 @@ public class MenuController : MonoBehaviour
 
     public Animator[] fadeAnims;
 
-    //public Animator fadeTransitionAnim;
     public float fadeTransitionTime = 1.5f;
-
-    //public Animator playFadeTransitionAnim;
 
     private bool isPlayButtonClicked = false;
     private bool isTutorialButtonClicked = false;

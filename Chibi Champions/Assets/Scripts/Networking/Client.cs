@@ -19,11 +19,16 @@ public class Client : MonoBehaviour
     string messageToSend;
     string receivedMessage;
 
+    static bool nameSelected;
+    static string username = "noName";
+
+    ClientStates currentState = ClientStates.Lobby;
+
+    List<string> otherClientsOnline = new List<string>();
+
     void Start()
     {
         input = FindObjectOfType<TMP_InputField>();
-
-        input.text = "Begin";
 
         StartClient();
 
@@ -33,44 +38,100 @@ public class Client : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rec = 0;
-
-        if (input.text.Length > 0)
+        if (LobbyManager.Instance.GetActivePanel() == LobbyPanels.UserList)
         {
-            messageToSend = input.text;
+            currentState = ClientStates.Lobby;
+        }
+        else if (LobbyManager.Instance.GetActivePanel() == LobbyPanels.Message)
+        {
+            currentState = ClientStates.Chatting;
+        }
+
+        if (!nameSelected)
+        {
+            SelectName();
+        }
+        else if(currentState == ClientStates.Lobby)
+        {
+            rec = 0;
+
+            try
+            {
+                rec = client.Receive(buffer);
+            }
+            catch (SocketException e)
+            {
+                print(e.SocketErrorCode);
+            }
+
+            if (rec > 0)
+            {
+                receivedMessage = Encoding.ASCII.GetString(buffer, 0, rec);
+
+                print($"Name Received From Server: {receivedMessage}");
+
+                foreach(string clientName in otherClientsOnline)
+                {
+                    if (receivedMessage == clientName || receivedMessage == username)
+                    {
+                        return;
+                    }
+                }
+
+                otherClientsOnline.Add(receivedMessage);
+
+                print($"Total Clients Online: {otherClientsOnline.Count + 1}");
+
+                LobbyManager.Instance.SetUserList(otherClientsOnline);
+            }
         }
         else
         {
-            messageToSend = "NO:MESSAGE/SENT.KEY";
-        }
+            rec = 0;
+            input = FindObjectOfType<TMP_InputField>();
 
-        message = Encoding.ASCII.GetBytes(messageToSend);
-
-        try
-        {
-            rec = client.Receive(buffer);
-        }
-        catch(Exception e)
-        {
-            print(e.ToString());
-        }
-
-        if (rec > 0)
-        {
-            receivedMessage = Encoding.ASCII.GetString(buffer, 0, rec);
-
-            if (receivedMessage != "NO:MESSAGE/SENT.KEY")
+            if (input.text.Length > 0)
             {
-                LobbyManager.Instance.SetMessage($"Received: {receivedMessage}");
+                messageToSend = input.text;
+            }
+            else
+            {
+                messageToSend = "NO:MESSAGE/SENT.KEY";
+            }
+
+            message = Encoding.ASCII.GetBytes(messageToSend);
+
+            try
+            {
+                rec = client.Receive(buffer);
+            }
+            catch (SocketException e)
+            {
+                print(e.SocketErrorCode);
+            }
+
+            if (rec > 0)
+            {
+                receivedMessage = Encoding.ASCII.GetString(buffer, 0, rec);
+
+                if (receivedMessage != "NO:MESSAGE/SENT.KEY")
+                {
+                    LobbyManager.Instance.SetMessage($"Received: {receivedMessage}");
+                }
             }
         }
     }
 
     public void ActivateSendMessage()
     {
-        if (messageToSend != "NO:MESSAGE/SENT.KEY")
+        if (messageToSend != "NO:MESSAGE/SENT.KEY" && nameSelected)
         {
-            LobbyManager.Instance.SetMessage($"Sent: {messageToSend}", true);
+            LobbyManager.Instance.SetMessage($"{username}: {messageToSend}", true);
+        }
+
+        if (!nameSelected)
+        {
+            username = messageToSend;
         }
 
         SendMessage();
@@ -79,6 +140,11 @@ public class Client : MonoBehaviour
     public static void SendMessage()
     {
         client.Send(message);
+
+        if (!nameSelected)
+        {
+            nameSelected = true;
+        }
     }
 
     public static void StartClient()
@@ -117,18 +183,26 @@ public class Client : MonoBehaviour
         {
             Debug.Log(e.ToString());
         }
+
+        nameSelected = false;
     }
 
-    void WaitForSendMessage(KeyCode key)
+    void SelectName()
     {
-        bool done = false;
-
-        while (!done)
-        {
-            if (Input.GetKeyDown(key))
+            if (input.text.Length > 0)
             {
-                done = true;
+                messageToSend = input.text;
             }
-        }
+            else
+            {
+                messageToSend = "user";
+            }
+
+            message = Encoding.ASCII.GetBytes(messageToSend);
+    }
+
+    public void SetClientState(ClientStates clientState)
+    {
+        currentState = clientState;
     }
 }

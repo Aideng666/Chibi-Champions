@@ -5,11 +5,13 @@ using UnityEngine;
 public enum ClientStates
 {
     Lobby,
-    Chatting
+    Chatting,
+    Request
 }
 
 public enum ServerStates
 {
     Lobby,
-    Chatting
+    Chatting,
+    Request
 }

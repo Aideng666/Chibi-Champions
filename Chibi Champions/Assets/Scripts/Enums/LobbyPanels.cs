@@ -7,5 +7,6 @@ public enum LobbyPanels
    Main,
    UserList,
    Message,
-   Name
+   Name,
+   Request
 }

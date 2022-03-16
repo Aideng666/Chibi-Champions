@@ -6,10 +6,12 @@ public class MenuController : MonoBehaviour
 {
     public GameObject[] frames;
 
-    public Animator fadeTransitionAnim;
+    public Animator[] fadeAnims;
+
+    //public Animator fadeTransitionAnim;
     public float fadeTransitionTime = 1.5f;
 
-    public Animator playFadeTransitionAnim;
+    //public Animator playFadeTransitionAnim;
 
     private bool isPlayButtonClicked = false;
 
@@ -24,38 +26,51 @@ public class MenuController : MonoBehaviour
             //frames[0].SetActive(false);
             //frames[1].SetActive(true);
             FindObjectOfType<AudioManager>().Play("Click");
-            StartCoroutine(LoadFadeTransition());
+            StartCoroutine(LoadFadeTransitions(frames[0], frames[1]));
             //StartCoroutine(LoadTransition());
         }
 
         if (isPlayButtonClicked)
         {
-            StartCoroutine(LoadPlayFadeTransition());
+            StartCoroutine(LoadFadeTransitions(frames[1], frames[2]));
             isPlayButtonClicked = false;
         }
-
-    }
-
-    IEnumerator LoadFadeTransition()
-    {
-        fadeTransitionAnim.SetTrigger("End");
-        yield return new WaitForSeconds(fadeTransitionTime);
-        frames[0].SetActive(false);
-        frames[1].SetActive(true);
     }
 
     public void PlayButtonFade()
     {
-        isPlayButtonClicked = true;        
+        isPlayButtonClicked = true;
     }
 
-    IEnumerator LoadPlayFadeTransition()
+    IEnumerator LoadFadeTransitions(GameObject currentFrame, GameObject targetFrame)
     {
-        playFadeTransitionAnim.SetTrigger("End");
+        for (int i = 0; i < fadeAnims.Length; ++i)
+        {
+            fadeAnims[i].SetTrigger("End");
+        }
+
         yield return new WaitForSeconds(fadeTransitionTime);
-        frames[1].SetActive(false);
-        frames[2].SetActive(true);
+        currentFrame.SetActive(false);
+        targetFrame.SetActive(true);
     }
+
+    //IEnumerator LoadFadeTransition()
+    //{
+    //    fadeTransitionAnim.SetTrigger("End");
+    //    yield return new WaitForSeconds(fadeTransitionTime);
+    //    frames[0].SetActive(false);
+    //    frames[1].SetActive(true);
+    //}
+
+  
+
+    //IEnumerator LoadPlayFadeTransition()
+    //{
+    //    playFadeTransitionAnim.SetTrigger("End");
+    //    yield return new WaitForSeconds(fadeTransitionTime);
+    //    frames[1].SetActive(false);
+    //    frames[2].SetActive(true);
+    //}
 
 
     //IEnumerator LoadTransition()

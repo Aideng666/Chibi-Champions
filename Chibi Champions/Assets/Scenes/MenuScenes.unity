@@ -2543,7 +2543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5652445391844231804, guid: 2f4d72b59ba413f43a1d9b0f14e97be2, type: 3}
       propertyPath: m_Name
-      value: FadePanelTransition
+      value: MainMenuFade
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f4d72b59ba413f43a1d9b0f14e97be2, type: 3}
@@ -3000,7 +3000,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5652445391844231804, guid: 2f4d72b59ba413f43a1d9b0f14e97be2, type: 3}
       propertyPath: m_Name
-      value: FadePanelTransition
+      value: PlayMenuFade
+      objectReference: {fileID: 0}
+    - target: {fileID: 5652445391844231804, guid: 2f4d72b59ba413f43a1d9b0f14e97be2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f4d72b59ba413f43a1d9b0f14e97be2, type: 3}
@@ -5401,9 +5405,15 @@ MonoBehaviour:
   - {fileID: 1826626156}
   - {fileID: 904581913}
   - {fileID: 27801667}
-  fadeTransitionAnim: {fileID: 1341064136}
+  - {fileID: 2114808498}
+  - {fileID: 235151703}
+  - {fileID: 666793431}
+  - {fileID: 1364714896}
+  - {fileID: 1904245772}
+  fadeAnims:
+  - {fileID: 1341064136}
+  - {fileID: 1405574959}
   fadeTransitionTime: 1.5
-  playFadeTransitionAnim: {fileID: 1405574959}
 --- !u!4 &1214472442
 Transform:
   m_ObjectHideFlags: 0
@@ -7283,7 +7293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5652445391844231804, guid: 2f4d72b59ba413f43a1d9b0f14e97be2, type: 3}
       propertyPath: m_Name
-      value: FadePanelTransition
+      value: StartFade
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f4d72b59ba413f43a1d9b0f14e97be2, type: 3}

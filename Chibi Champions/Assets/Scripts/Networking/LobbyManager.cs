@@ -10,6 +10,11 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] GameObject clientStatusPrefab;
     [SerializeField] GameObject textContent;
     [SerializeField] GameObject userListContent;
+    [SerializeField] GameObject requestPanel;
+    [SerializeField] GameObject mainPanel;
+    [SerializeField] GameObject userListPanel;
+    [SerializeField] GameObject namePanel;
+    [SerializeField] GameObject messagePanel;
     bool isServer;
     bool isClient;
 
@@ -20,6 +25,62 @@ public class LobbyManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Update()
+    {
+        switch (activePanel)
+        {
+            case LobbyPanels.Main:
+
+                requestPanel.SetActive(false);
+                mainPanel.SetActive(true);
+                userListPanel.SetActive(false);
+                namePanel.SetActive(false);
+                messagePanel.SetActive(false);
+
+                break;
+
+            case LobbyPanels.Name:
+
+                requestPanel.SetActive(false);
+                mainPanel.SetActive(false);
+                userListPanel.SetActive(false);
+                namePanel.SetActive(true);
+                messagePanel.SetActive(false);
+
+                break;
+
+            case LobbyPanels.Request:
+
+                requestPanel.SetActive(true);
+                mainPanel.SetActive(false);
+                userListPanel.SetActive(false);
+                namePanel.SetActive(false);
+                messagePanel.SetActive(false);
+
+                break;
+
+            case LobbyPanels.UserList:
+
+                requestPanel.SetActive(false);
+                mainPanel.SetActive(false);
+                userListPanel.SetActive(true);
+                namePanel.SetActive(false);
+                messagePanel.SetActive(false);
+
+                break;
+
+            case LobbyPanels.Message:
+
+                requestPanel.SetActive(false);
+                mainPanel.SetActive(false);
+                userListPanel.SetActive(false);
+                namePanel.SetActive(false);
+                messagePanel.SetActive(true);
+
+                break;
+        }
     }
 
     public void MakeClient()
@@ -84,7 +145,7 @@ public class LobbyManager : MonoBehaviour
 
         foreach(string name in listOfNames)
         {
-            clientStatusPrefab.GetComponentInChildren<TextMeshProUGUI>().text = $"{name} is online";
+            clientStatusPrefab.GetComponentInChildren<TextMeshProUGUI>().text = $"{name}";
 
             Instantiate(clientStatusPrefab, userListContent.transform);
         }
@@ -112,6 +173,16 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
+    public void SendRequestMessage()
+    {
+        GetComponent<Client>().ActivateSendMessageRequest();
+    }
+
+    public void SendRequestName(string nameOfRequested)
+    {
+        GetComponent<Client>().SetNameToRequest(nameOfRequested);
+    }
+
     public void SetMainPanelActive()
     {
         activePanel = LobbyPanels.Main;
@@ -132,8 +203,35 @@ public class LobbyManager : MonoBehaviour
         activePanel = LobbyPanels.UserList;
     }
 
+    public void SetRequestPanelActive()
+    {
+        activePanel = LobbyPanels.Request;
+    }
+
     public LobbyPanels GetActivePanel()
     {
         return activePanel;
+    }
+
+    public void ActivateRequestPanel()
+    {
+        if (!requestPanel.activeInHierarchy)
+        {
+            print("Received Request!");
+
+            requestPanel.SetActive(true);
+        }
+    }
+
+    public void AcceptMessageRequest()
+    {
+        FindObjectOfType<Client>().AcceptMessageRequest();
+    }
+
+    public void DeclineMessageRequest()
+    {
+        SetUserListPanelActive();
+
+        FindObjectOfType<Client>().DeclineMessageRequest();
     }
 }

@@ -32,6 +32,11 @@ public class Server : MonoBehaviour
 
     ServerStates currentState = ServerStates.Lobby;
 
+    int[] requestMessage;
+
+    int savedIndex;
+    int[] connectedIndices = new int[2];
+
     void Start()
     {
         input = FindObjectOfType<TMP_InputField>();
@@ -54,20 +59,58 @@ public class Server : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (LobbyManager.Instance.GetActivePanel() == LobbyPanels.UserList)
+        if (LobbyManager.Instance.GetActivePanel() == LobbyPanels.UserList && currentState != ServerStates.Request)
         {
             currentState = ServerStates.Lobby;
         }
-        else if (LobbyManager.Instance.GetActivePanel() == LobbyPanels.Message)
+        else if (LobbyManager.Instance.GetActivePanel() == LobbyPanels.Message && currentState != ServerStates.Request)
         {
             currentState = ServerStates.Chatting;
         }
 
+        if (currentState == ServerStates.Request)
+        {
+            requestMessage[1] = savedIndex;
 
-        if (currentState == ServerStates.Lobby)
+            int currentUser = 1;
+            int iteration = 0;
+            foreach (ClientInformation user in usersList)
+            {
+                if (user.GetRunConnection() && user.GetNameSelected())
+                {
+                    if (user.GetName() == usersList[requestMessage[0]].GetName())
+                    {
+                        requestMessage[1]++;
+                    }
+                    else if(user.GetName() == usersList[requestMessage[1]].GetName())
+                    {
+                        connectedIndices[0] = requestMessage[0];
+                        connectedIndices[1] = requestMessage[1];
+
+                        messageToSend = "MESSAGE:REQUEST/SENT.Key";
+
+                        message = Encoding.ASCII.GetBytes(messageToSend);
+
+                        SendMessageToSingleClient(iteration);
+
+                        currentState = ServerStates.Chatting;
+
+                        LobbyManager.Instance.SetMessagePanelActive();
+                    }
+                    else
+                    {
+                        currentUser++;
+                    }
+                }
+
+                iteration++;
+            }
+        }
+        else if (currentState == ServerStates.Lobby)
         {
             LobbyManager.Instance.SetUserList(activeUsers);
 
+            int currentUser = 1;
             foreach (ClientInformation user in usersList)
             {
                 rec = 0;
@@ -88,13 +131,41 @@ public class Server : MonoBehaviour
 
                             message = Encoding.ASCII.GetBytes(messageToSend);
 
-                            print("Sending Names To Clients");
-
                             SendNames(messageToSend);
                         }
-                        else
+
+                        try
                         {
-                            print("Not Sending Names");
+                            rec = handlers[currentUser - 1].Receive(buffer);
+                        }
+                        catch (SocketException e)
+                        {
+                            if (e.SocketErrorCode == SocketError.ConnectionReset)
+                            {
+                                handlers[currentUser - 1] = null;
+                                user.SetRunConnection(false);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            print(e.ToString());
+                        }
+
+                        if (rec > 0)
+                        {
+                            requestMessage = new int[rec / sizeof(int)];
+
+                            Buffer.BlockCopy(buffer, 0, requestMessage, 0, rec);
+
+                            requestMessage[0] = currentUser - 1;
+
+                            savedIndex = requestMessage[1];
+
+                            print(requestMessage[0] + " || " + requestMessage[1]);
+
+                            print("Received Request From A Client");
+
+                            currentState = ServerStates.Request;
                         }
                     }
                 }
@@ -162,18 +233,16 @@ public class Server : MonoBehaviour
                             {
                                 LobbyManager.Instance.SetMessage($"{user.GetName()}: {receivedMessage}");
                             }
-                        }
 
-                        if (input.text.Length > 0)
-                        {
-                            messageToSend = input.text;
-                        }
-                        else
-                        {
-                            messageToSend = "NO:MESSAGE/SENT.KEY";
-                        }
+                            messageToSend = receivedMessage;
 
-                        message = Encoding.ASCII.GetBytes(messageToSend);
+                            message = Encoding.ASCII.GetBytes(messageToSend);
+
+                            if (messageToSend != "MESSAGE:REQUEST_ACCEPTED.KEY")
+                            {
+                                SendMessageToListOfClients(connectedIndices);
+                            }
+                        }
                     }
                 }
 
@@ -258,6 +327,21 @@ public class Server : MonoBehaviour
             handlers[currentHandler].Send(message);
 
             currentHandler++;
+        }
+    }
+
+    public static void SendMessageToSingleClient(int clientIndex)
+    {
+        handlers[clientIndex].Send(message);
+    }
+
+    public static void SendMessageToListOfClients(int[] clientsToSend)
+    {
+        print("Sending Messages Back To Clients");
+
+        foreach(int index in clientsToSend)
+        {
+            handlers[index].Send(message);
         }
     }
 

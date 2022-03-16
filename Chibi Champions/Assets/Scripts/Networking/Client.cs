@@ -26,6 +26,12 @@ public class Client : MonoBehaviour
 
     List<string> otherClientsOnline = new List<string>();
 
+    int[] requestMessage;
+    byte[] bRequest;
+
+    //bool sendName;
+    static string nameToRequest = "";
+
     void Start()
     {
         input = FindObjectOfType<TMP_InputField>();
@@ -38,11 +44,11 @@ public class Client : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (LobbyManager.Instance.GetActivePanel() == LobbyPanels.UserList)
+        if (LobbyManager.Instance.GetActivePanel() == LobbyPanels.UserList && currentState != ClientStates.Request)
         {
             currentState = ClientStates.Lobby;
         }
-        else if (LobbyManager.Instance.GetActivePanel() == LobbyPanels.Message)
+        else if (LobbyManager.Instance.GetActivePanel() == LobbyPanels.Message && currentState != ClientStates.Request)
         {
             currentState = ClientStates.Chatting;
         }
@@ -51,9 +57,22 @@ public class Client : MonoBehaviour
         {
             SelectName();
         }
+        else if(currentState == ClientStates.Request)
+        {
+            LobbyManager.Instance.ActivateRequestPanel();
+
+            messageToSend = "MESSAGE:REQUEST_ACCEPTED.KEY";
+
+            message = Encoding.ASCII.GetBytes(messageToSend);
+        }
         else if(currentState == ClientStates.Lobby)
         {
             rec = 0;
+
+            if (nameToRequest != "")
+            {
+                SetRequestInfo();
+            }
 
             try
             {
@@ -61,28 +80,33 @@ public class Client : MonoBehaviour
             }
             catch (SocketException e)
             {
-                print(e.SocketErrorCode);
+                //print(e.SocketErrorCode);
             }
 
             if (rec > 0)
             {
                 receivedMessage = Encoding.ASCII.GetString(buffer, 0, rec);
 
-                print($"Name Received From Server: {receivedMessage}");
-
-                foreach(string clientName in otherClientsOnline)
+                if (receivedMessage == "MESSAGE:REQUEST/SENT.Key")
                 {
-                    if (receivedMessage == clientName || receivedMessage == username)
-                    {
-                        return;
-                    }
+                    currentState = ClientStates.Request;
                 }
+                else
+                {
+                    foreach (string clientName in otherClientsOnline)
+                    {
+                        if (receivedMessage == clientName || receivedMessage == username)
+                        {
+                            return;
+                        }
+                    }
 
-                otherClientsOnline.Add(receivedMessage);
+                    otherClientsOnline.Add(receivedMessage);
 
-                print($"Total Clients Online: {otherClientsOnline.Count + 1}");
+                    print($"Total Clients Online: {otherClientsOnline.Count + 1}");
 
-                LobbyManager.Instance.SetUserList(otherClientsOnline);
+                    LobbyManager.Instance.SetUserList(otherClientsOnline);
+                }
             }
         }
         else
@@ -137,14 +161,63 @@ public class Client : MonoBehaviour
         SendMessage();
     }
 
+    public void SetNameToRequest(string nameOfRequested)
+    {
+        nameToRequest = nameOfRequested;
+    }
+
+    public void ActivateSendMessageRequest()
+    {
+        SendMessageRequest();
+    }
+
     public static void SendMessage()
     {
         client.Send(message);
+
+        print("Message Sent From Client");
 
         if (!nameSelected)
         {
             nameSelected = true;
         }
+    }
+
+    public void SendMessageRequest()
+    {
+        client.Send(bRequest);
+
+        currentState = ClientStates.Chatting;
+    }
+
+    public void SetRequestInfo()
+    {
+        int currentIndex = 0;
+        foreach(string name in otherClientsOnline)
+        {
+            if (name == nameToRequest)
+            {
+                requestMessage = new int[] { 0, currentIndex };
+            }
+        }
+
+        bRequest = new byte[requestMessage.Length * sizeof(int)];
+
+        Buffer.BlockCopy(requestMessage, 0, bRequest, 0, bRequest.Length);
+    }
+
+    public void AcceptMessageRequest()
+    {
+        print("Sending The Confirmation");
+
+        client.Send(message);
+
+        currentState = ClientStates.Chatting;
+    }
+
+    public void DeclineMessageRequest()
+    {
+
     }
 
     public static void StartClient()
@@ -204,5 +277,10 @@ public class Client : MonoBehaviour
     public void SetClientState(ClientStates clientState)
     {
         currentState = clientState;
+    }
+
+    public string GetUsername()
+    {
+        return username;
     }
 }

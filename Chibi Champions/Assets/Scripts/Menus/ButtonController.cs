@@ -6,6 +6,7 @@ public class ButtonController : MonoBehaviour
 {
     public void Quit()
     {
+        Debug.Log("QUIT GAME");
         Application.Quit();
     }
 

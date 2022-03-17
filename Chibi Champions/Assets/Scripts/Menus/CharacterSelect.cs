@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
 public class CharacterSelect : MonoBehaviour
 {
     [Header("UI Text")]
@@ -26,12 +25,7 @@ public class CharacterSelect : MonoBehaviour
     public Image[] towerSprites;
     public Image[] abilitySprites;
 
-    [Header("Buttons")]
-    public Button lockInButton;
-
     Character character;
-
-    //bool hasSelected = false;
 
     //Changes the character based on its index
     // 0 for Character1

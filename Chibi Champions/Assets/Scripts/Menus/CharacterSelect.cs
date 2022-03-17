@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using TMPro;
 public class CharacterSelect : MonoBehaviour
 {
+    [Header("Character UI Models")]
+    public GameObject[] characterModels;
+
     [Header("UI Text")]
     [SerializeField]
     TMP_Text[] towerUIText;
@@ -33,6 +36,14 @@ public class CharacterSelect : MonoBehaviour
     // 2 for Character3
     public void ChangeCharacter(int index)
     {
+        for (int i = 0; i < characterModels.Length; ++i)
+        {
+            characterModels[i].SetActive(false);
+            characterModels[i].transform.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+
+        characterModels[index].SetActive(true);
+
         characterIndex = index;
 
         Debug.Log("Character Index: " + characterIndex);

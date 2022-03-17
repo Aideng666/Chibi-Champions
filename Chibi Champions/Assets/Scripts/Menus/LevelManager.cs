@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject loadingCanvas;
     [SerializeField] private Image progressBar;
     private float target;
+
+    public TMP_Text blurbText;
+    public string[] blurbs;
 
     void Awake()
     {
@@ -24,6 +28,8 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        PickRandomBlurb();
     }
 
     public async void LoadScene(string sceneName)
@@ -54,5 +60,11 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
         progressBar.fillAmount = Mathf.MoveTowards(progressBar.fillAmount, target, 3 * Time.deltaTime);
+    }
+
+    private void PickRandomBlurb()
+    {
+        string randomBlurb = blurbs[Random.Range(0, blurbs.Length)];
+        blurbText.text = randomBlurb;
     }
 }

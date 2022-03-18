@@ -27,13 +27,6 @@ public class CharacterSelect : MonoBehaviour
     public Image[] towerSprites;
     public Image[] abilitySprites;
 
-    [Header("Tooltip Components")]
-    public TMP_Text headerField;
-    public TMP_Text contentField;
-    public TMP_Text costField;
-    public LayoutElement layoutElement;
-    public int characterWrapLimit;
-
     Character character;
 
     //Changes the character based on its index
@@ -95,7 +88,7 @@ public class CharacterSelect : MonoBehaviour
         //for (int i = 0; i < abilityUIDesc.Length; ++i)
         //{
         //    abilityUIDesc[i].text = character.abilityDescriptions[i];
-        //}
+        //}    
     }
 
     public void LockIn()

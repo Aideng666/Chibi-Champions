@@ -18,7 +18,7 @@ public class CharacterSelect : MonoBehaviour
     //[SerializeField]
     //TMP_Text[] abilityUIDesc;
 
-    private int characterIndex;
+    private /*static*/ int characterIndex;
 
     [Header("Character DB and UI Components")]
     public CharacterDatabase characterDB;
@@ -26,6 +26,13 @@ public class CharacterSelect : MonoBehaviour
     public TMP_Text characterClass;
     public Image[] towerSprites;
     public Image[] abilitySprites;
+
+    [Header("Tooltip Components")]
+    public TMP_Text headerField;
+    public TMP_Text contentField;
+    public TMP_Text costField;
+    public LayoutElement layoutElement;
+    public int characterWrapLimit;
 
     Character character;
 
@@ -35,6 +42,7 @@ public class CharacterSelect : MonoBehaviour
     // 2 for Character3
     public void ChangeCharacter(int index)
     {
+        // Shows 3D models in the UI
         for (int i = 0; i < characterModels.Length; ++i)
         {
             characterModels[i].SetActive(false);
@@ -47,20 +55,27 @@ public class CharacterSelect : MonoBehaviour
 
         Debug.Log("Character Index: " + characterIndex);
 
+        // Sets the character specific information to the appropriate UI components
+        // Grabs the selected character by its index
         character = characterDB.GetCharacter(characterIndex);
+        // Sets the name of the character
         characterName.text = character.characterName;
+        // Sets the class of the character
         characterClass.text = character.classType;
 
+        // Displays the tower sprites for the selected character
         for (int i = 0; i < towerSprites.Length; ++i)
         {
             towerSprites[i].sprite = character.towerSprites[i];
         }
 
+        // Displays the ability sprites for the selected character
         for (int i = 0; i < abilitySprites.Length; ++i)
         {
             abilitySprites[i].sprite = character.abilitySprites[i];
         }
 
+        // Displays the tower name for each of the towers of the selected character
         for (int i = 0; i < towerUIText.Length; ++i)
         {
             towerUIText[i].text = character.towerNames[i];
@@ -71,6 +86,7 @@ public class CharacterSelect : MonoBehaviour
         //    towerUIDesc[i].text = character.towerDescriptions[i];
         //}
 
+        // Displays the ability name for each of the abilities of the selected character
         for (int i = 0; i < abilityUIText.Length; ++i)
         {
             abilityUIText[i].text = character.abilityNames[i];
@@ -86,4 +102,9 @@ public class CharacterSelect : MonoBehaviour
     {
         PlayerPrefs.SetInt("CharacterIndex", characterIndex);
     }
+
+    //public static int GetCharacterIndex()
+    //{
+    //    return characterIndex;
+    //}
 }

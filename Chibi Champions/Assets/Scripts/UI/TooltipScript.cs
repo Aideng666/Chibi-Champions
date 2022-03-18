@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class TooltipScript : MonoBehaviour
 {
-    public TMP_Text headerField;
-    public TMP_Text contentField;
-    public TMP_Text costField;
+    //public TMP_Text headerField;
+    //public TMP_Text contentField;
+    //public TMP_Text costField;
 
-    public LayoutElement layoutElement;
+    //public LayoutElement layoutElement;
 
-    public int characterWrapLimit;
+    //public int characterWrapLimit;
 
     public RectTransform rectTransform;
 
@@ -21,26 +21,28 @@ public class TooltipScript : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
     }
 
-    public void SetText(string content, string header = "", string cost = "")
-    {
-        if (string.IsNullOrEmpty(header))
-        {
-            headerField.gameObject.SetActive(false);
-        }
-        else
-        {
-            headerField.gameObject.SetActive(true);
-            headerField.text = header;
-        }
+    //public void SetText(string content, string header = "", string cost = "")
+    //{
+    //    if (string.IsNullOrEmpty(header))
+    //    {
+    //        headerField.gameObject.SetActive(false);
+    //    }
+    //    else
+    //    {
+    //        headerField.gameObject.SetActive(true);
+    //        headerField.text = header;
+    //    }
 
-        contentField.text = content;
-        costField.text = cost;
+    //    //characterIndex = CharacterSelect.GetCharacterIndex();
 
-        int headerLength = headerField.text.Length;
-        int contentLength = contentField.text.Length;
+    //    contentField.text = content;
+    //    costField.text = cost;
 
-        layoutElement.enabled = (headerLength > characterWrapLimit || contentLength > characterWrapLimit) ? true : false;
-    }
+    //    int headerLength = headerField.text.Length;
+    //    int contentLength = contentField.text.Length;
+
+    //    layoutElement.enabled = (headerLength > characterWrapLimit || contentLength > characterWrapLimit) ? true : false;
+    //}
 
     private void Update()
     {

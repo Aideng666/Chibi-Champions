@@ -15,46 +15,44 @@ MonoBehaviour:
   character:
   - characterName: Drumstick
     classType: Offense
-    characterSprite: {fileID: 21300000, guid: 4581446e5935d6544837346d3eb6d377, type: 3}
     towerSprites:
-    - {fileID: 21300000, guid: 77ac75ff5db008f43b2d1f71c94fab36, type: 3}
     - {fileID: 21300000, guid: 912adadc8c94ec7499174ed7cca439aa, type: 3}
+    - {fileID: 21300000, guid: 77ac75ff5db008f43b2d1f71c94fab36, type: 3}
     - {fileID: 21300000, guid: 0c5e863059eb2dc49b6132763e508560, type: 3}
     abilitySprites:
     - {fileID: 21300000, guid: 7b71c5c36e928f94fb6d4f32bcb98712, type: 3}
     - {fileID: 21300000, guid: aa4baad62af5fd84f982de00ef2f9769, type: 3}
     towerNames:
-    - Chicken Laser
     - Feather Blaster
+    - Chicken Laser
     - Gatling Drummet
     towerDescriptions:
-    - Zappy Zap Zap
-    - Tickle me Timbers
-    - Pew Pew Pew
+    - Shoots sharp feathers at nearby enemies
+    - Fires a continuos beam of destruction
+    - A mounted turret with a high fire rate
     abilityNames:
     - Auto Attack
     - Ground Pound
     abilityDescriptions:
-    - Basic
-    - Special
+    - Swings a sharp feather sword
+    - Jumps up in the air and slams down with full fury
   - characterName: Rolfe
     classType: Defense
-    characterSprite: {fileID: 21300000, guid: ae242e90a0e9d0d489b054fd893209d8, type: 3}
     towerSprites:
-    - {fileID: 21300000, guid: 6ae39776f1271fd43bb7f83736587866, type: 3}
     - {fileID: 21300000, guid: 00bf3dd0c7475c54fa52304ff1c886fc, type: 3}
-    - {fileID: 21300000, guid: 7d82711121e1f8242b6e73555b031d3d, type: 3}
+    - {fileID: 21300000, guid: 55d8b199bddfa5b4d884b2064990d4c3, type: 3}
+    - {fileID: 21300000, guid: 1a272fc14e5d2e8499754cd3e1d1a674, type: 3}
     abilitySprites:
     - {fileID: 21300000, guid: 87a97f65e7929c24a9257c227fd86a3e, type: 3}
     - {fileID: 21300000, guid: bd6ffa8d57b10c148b2c38a362c22698, type: 3}
     towerNames:
-    - Tennis Bomb
     - Web Shooter
-    - Watchdog
+    - Tennis Bomb
+    - Spider House
     towerDescriptions:
-    - Deuce
-    - Spooderman
-    - Not the Pokemon
+    - Shoots sticky webs that slow down enemies
+    - Launches a tennis bomb that distracts enemies before blowing up
+    - Spawns miniature spiders that latch onto enemies dealing damage overtime
     abilityNames:
     - Auto Attack
     - Knockback Beacon
@@ -63,7 +61,6 @@ MonoBehaviour:
     - Special
   - characterName: Potter
     classType: Support
-    characterSprite: {fileID: 21300000, guid: 4d022b733f9837a4a8cbd52b1d79d170, type: 3}
     towerSprites:
     - {fileID: 21300000, guid: 30308aff79334064fb04c4cc7f353ba2, type: 3}
     - {fileID: 21300000, guid: 7f656e6e6ace4f74fb3711e09ab7f6f5, type: 3}
@@ -74,11 +71,12 @@ MonoBehaviour:
     towerNames:
     - Ink Bomber
     - Photosynthesizer
-    - P.E.D
+    - S.A.P
     towerDescriptions:
-    - Ocotpus Squirted on Me
-    - GLUCOSE
-    - DOPE
+    - Shoots a black blob of paralyzing ink
+    - Heals players standing inside the radius overtime
+    - Deploys pollen spores that attach to allies buffing them for a brief period
+      of time
     abilityNames:
     - Auto Attack
     - Healing Needle

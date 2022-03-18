@@ -11,12 +11,12 @@ public class CharacterSelect : MonoBehaviour
     [Header("UI Text")]
     [SerializeField]
     TMP_Text[] towerUIText;
-    [SerializeField]
-    TMP_Text[] towerUIDesc;
+    //[SerializeField]
+    //TMP_Text[] towerUIDesc;
     [SerializeField]
     TMP_Text[] abilityUIText;
-    [SerializeField]
-    TMP_Text[] abilityUIDesc;
+    //[SerializeField]
+    //TMP_Text[] abilityUIDesc;
 
     private int characterIndex;
 
@@ -66,20 +66,20 @@ public class CharacterSelect : MonoBehaviour
             towerUIText[i].text = character.towerNames[i];
         }
 
-        for (int i = 0; i < towerUIDesc.Length; ++i)
-        {
-            towerUIDesc[i].text = character.towerDescriptions[i];
-        }
+        //for (int i = 0; i < towerUIDesc.Length; ++i)
+        //{
+        //    towerUIDesc[i].text = character.towerDescriptions[i];
+        //}
 
         for (int i = 0; i < abilityUIText.Length; ++i)
         {
             abilityUIText[i].text = character.abilityNames[i];
         }
 
-        for (int i = 0; i < abilityUIDesc.Length; ++i)
-        {
-            abilityUIDesc[i].text = character.abilityDescriptions[i];
-        }
+        //for (int i = 0; i < abilityUIDesc.Length; ++i)
+        //{
+        //    abilityUIDesc[i].text = character.abilityDescriptions[i];
+        //}
     }
 
     public void LockIn()

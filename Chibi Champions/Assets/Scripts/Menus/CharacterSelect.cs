@@ -24,7 +24,6 @@ public class CharacterSelect : MonoBehaviour
     public CharacterDatabase characterDB;
     public TMP_Text characterName;
     public TMP_Text characterClass;
-    public Image characterImage;
     public Image[] towerSprites;
     public Image[] abilitySprites;
 
@@ -51,7 +50,6 @@ public class CharacterSelect : MonoBehaviour
         character = characterDB.GetCharacter(characterIndex);
         characterName.text = character.characterName;
         characterClass.text = character.classType;
-        characterImage.sprite = character.characterSprite;
 
         for (int i = 0; i < towerSprites.Length; ++i)
         {

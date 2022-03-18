@@ -150,7 +150,7 @@ public class Client : MonoBehaviour
     {
         if (messageToSend != "NO:MESSAGE/SENT.KEY" && nameSelected)
         {
-            LobbyManager.Instance.SetMessage($"{username}: {messageToSend}", true);
+            //LobbyManager.Instance.SetMessage($"{username}: {messageToSend}", true);
         }
 
         if (!nameSelected)

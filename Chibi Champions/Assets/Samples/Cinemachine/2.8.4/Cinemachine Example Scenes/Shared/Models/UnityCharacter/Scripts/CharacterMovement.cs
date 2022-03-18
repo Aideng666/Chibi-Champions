@@ -84,7 +84,7 @@ public class CharacterMovement : MonoBehaviour
             //get the right-facing direction of the referenceTransform
             var right = mainCamera.transform.TransformDirection(Vector3.right);
 
-            // determine the direction the player will face based on input and the referenceTransform's right and forward directions
+            // determine the direction the player will face based on messageInput and the referenceTransform's right and forward directions
             targetDirection = input.x * right + input.y * forward;
         }
         else

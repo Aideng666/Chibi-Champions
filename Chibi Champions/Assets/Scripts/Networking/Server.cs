@@ -337,8 +337,6 @@ public class Server : MonoBehaviour
 
     public static void SendMessageToListOfClients(int[] clientsToSend)
     {
-        print("Sending Messages Back To Clients");
-
         foreach(int index in clientsToSend)
         {
             handlers[index].Send(message);
@@ -353,8 +351,6 @@ public class Server : MonoBehaviour
             if (name != usersList[currentHandler].GetName())
             {
                 handlers[currentHandler].Send(message);
-
-                print($"Sending: {name} To {usersList[currentHandler].GetName()}");
             }
 
             currentHandler++;
@@ -362,7 +358,6 @@ public class Server : MonoBehaviour
 
         if (name == usersList[usersList.Count - 1].GetName())
         {
-            print("Setting ShouldSentNames to false");
             shouldSendNames = false;
         }
     }
@@ -405,8 +400,6 @@ public class Server : MonoBehaviour
                 currentClient.SetName(receivedMessage);
 
                 activeUsers.Add(receivedMessage);
-
-                print("Setting ShouldSendNames to True");
 
                 shouldSendNames = true;
             }

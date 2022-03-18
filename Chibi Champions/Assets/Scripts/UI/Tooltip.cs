@@ -37,9 +37,9 @@ public class Tooltip : MonoBehaviour
         {
             anchoredPosition.x = canvasRectTransform.rect.width - backgroundRectTransform.rect.width;
         }
-        if (anchoredPosition.y + backgroundRectTransform.rect.height > canvasRectTransform.rect.height)
+        if (anchoredPosition.y - backgroundRectTransform.rect.height > canvasRectTransform.rect.height)
         {
-            anchoredPosition.y = canvasRectTransform.rect.height - backgroundRectTransform.rect.height;
+            anchoredPosition.y = canvasRectTransform.rect.height + backgroundRectTransform.rect.height;
         }
         transform.GetComponent<RectTransform>().anchoredPosition = anchoredPosition;
     }
@@ -50,9 +50,10 @@ public class Tooltip : MonoBehaviour
         transform.SetAsLastSibling();
 
         tooltipText.text = tooltipString;
-        float textPaddingSize = 4f;
-        Vector2 backgroundSize = new Vector2(tooltipText.preferredWidth + textPaddingSize * 2f, tooltipText.preferredHeight + textPaddingSize * 2f);
-        backgroundRectTransform.sizeDelta = backgroundSize;
+        Update();
+        //float textPaddingSize = 4f;
+        //Vector2 backgroundSize = new Vector2(tooltipText.preferredWidth + textPaddingSize * 2f, tooltipText.preferredHeight + textPaddingSize * 2f);
+        //backgroundRectTransform.sizeDelta = backgroundSize;
     }
 
     private void HideTooltip()

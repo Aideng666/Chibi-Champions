@@ -13,20 +13,14 @@ public class Tooltip_Info : MonoBehaviour
     [SerializeField]
     private RectTransform canvasRectTransform;
 
-    private Image image;
     private TMP_Text nameText;
-    private TMP_Text descriptionText;
-    private TMP_Text costText;
     private RectTransform backgroundRectTransform;
 
     private void Awake()
     {
         Instance = this;
         backgroundRectTransform = transform.Find("Background").GetComponent<RectTransform>();
-        image = transform.Find("UPGRADE").GetComponent<Image>();
-        nameText = transform.Find("NameText").GetComponent<TMP_Text>();
-        descriptionText = transform.Find("DescriptionText").GetComponent<TMP_Text>();
-        costText = transform.Find("Number").GetComponent<TMP_Text>();
+        nameText = transform.Find("nameText").GetComponent<TMP_Text>();
 
         HideTooltip();
     }
@@ -51,14 +45,12 @@ public class Tooltip_Info : MonoBehaviour
         transform.GetComponent<RectTransform>().anchoredPosition = anchoredPosition;
     }
 
-    private void ShowTooltip(Sprite itemSprite, string itemName, string itemDescription, int cost)
+    private void ShowTooltip(string itemName)
     {
         gameObject.SetActive(true);
         transform.SetAsLastSibling();
         nameText.text = itemName;
-        descriptionText.text = itemDescription;
-        costText.text = cost.ToString();
-        image.sprite = itemSprite;
+        Update();
     }
 
     private void HideTooltip()
@@ -66,9 +58,9 @@ public class Tooltip_Info : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public static void ShowTootip_Static(Sprite itemSprite, string itemName, string itemDescription, int cost)
+    public static void ShowTootip_Static(string itemName)
     {
-        Instance.ShowTooltip(itemSprite, itemName, itemDescription, cost);
+        Instance.ShowTooltip(itemName);
     }
 
     public static void HideTooltip_Static()

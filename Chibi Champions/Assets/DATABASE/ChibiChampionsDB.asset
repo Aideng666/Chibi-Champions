@@ -58,8 +58,9 @@ MonoBehaviour:
     - Auto Attack
     - Knockback Beacon
     abilityDescriptions:
-    - Basic
-    - Special
+    - Swipes forwards twice with both claws
+    - Places a mini beacon that sends out signals knocking back any enemies that
+      come into contact
     towerBaseCosts: f401000008070000b0040000
   - characterName: Potter
     classType: Support
@@ -83,6 +84,6 @@ MonoBehaviour:
     - Auto Attack
     - Healing Needle
     abilityDescriptions:
-    - Basic
-    - Special
+    - Shoots flying balls of black ink
+    - Injects a needle full of medicine that heals anyone who gets injected by it
     towerBaseCosts: f4010000d007000008070000

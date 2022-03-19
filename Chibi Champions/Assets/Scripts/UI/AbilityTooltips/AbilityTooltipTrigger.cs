@@ -15,6 +15,7 @@ public class AbilityTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPoint
 
     private string header;
     private string content;
+    public string control;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -26,7 +27,7 @@ public class AbilityTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPoint
         header = character.abilityNames[abilityIndex];
         content = character.abilityDescriptions[abilityIndex];
 
-        AbilityTooltipSystem.Show(content, header);
+        AbilityTooltipSystem.Show(content, header, control);
     }
 
     public void OnPointerExit(PointerEventData eventData)

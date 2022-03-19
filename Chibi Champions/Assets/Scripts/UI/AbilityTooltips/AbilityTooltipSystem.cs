@@ -13,9 +13,9 @@ public class AbilityTooltipSystem : MonoBehaviour
         current = this;
     }
 
-    public static void Show(string content, string header)
+    public static void Show(string content, string header, string control)
     {
-        current.tooltip.SetText(content, header);
+        current.tooltip.SetText(content, header, control);
         current.tooltip.gameObject.SetActive(true);
     }
 

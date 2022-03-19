@@ -8,6 +8,7 @@ public class AbilityTooltip : MonoBehaviour
 {
     public TMP_Text headerField;
     public TMP_Text contentField;
+    public TMP_Text controlField;
     public LayoutElement layoutElement;
     public int characterWrapLimit;
 
@@ -18,11 +19,12 @@ public class AbilityTooltip : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
     }
 
-    public void SetText(string content, string header)
+    public void SetText(string content, string header, string control)
     {
        
         headerField.text = header;
         contentField.text = content;
+        controlField.text = control;
 
         int headerLength = headerField.text.Length;
         int contentLength = contentField.text.Length;

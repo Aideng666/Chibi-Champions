@@ -28,7 +28,7 @@ public class AbilityTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPoint
         content = character.abilityDescriptions[abilityIndex];
 
         AbilityTooltipSystem.Show(content, header, control);
-        Debug.Log("HOVERING OVER ABILITY ICON");
+        //Debug.Log("HOVERING OVER ABILITY ICON");
     }
 
     public void OnPointerExit(PointerEventData eventData)

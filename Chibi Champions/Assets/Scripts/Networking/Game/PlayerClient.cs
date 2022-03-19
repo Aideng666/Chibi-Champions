@@ -31,10 +31,13 @@ public class PlayerClient : MonoBehaviour
     static string username;
 
     static bool clientStarted;
+    static bool isReady;
 
     string[] connectedUsers = new string[3];
 
     List<Tuple<string, string>> messageHistory = new List<Tuple<string, string>>();
+
+    ClientStates currentState = ClientStates.Lobby;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +50,7 @@ public class PlayerClient : MonoBehaviour
     {
         if (clientStarted)
         {
+            #region ReceivingSection
             int recv = 0;
 
             try
@@ -60,88 +64,169 @@ public class PlayerClient : MonoBehaviour
 
             if (recv > 0)
             {
-                string messageReceived = Encoding.ASCII.GetString(buffer, 0, recv);
-
-                print(messageReceived);
-
-                if (messageReceived.Contains("NEW/USER_CONNECTED.KEY"))
+                switch(currentState)
                 {
-                    connectedUsers = new string[3];
+                    case ClientStates.Lobby:
 
-                    string[] names = messageReceived.Split(':');
+                    string messageReceived = Encoding.ASCII.GetString(buffer, 0, recv);
 
-                    for (int i = 1; i < names.Length; i++)
+                    if (messageReceived.Contains("PLAYER_READY_STATUS.KEY"))
                     {
-                        connectedUsers[i - 1] = names[i];
+                        string[] messageSplit = messageReceived.Split(':');
+
+                        print($"{messageReceived} ||| {messageSplit[1]} ||| {messageSplit[2]}");
+
+                        string playerInd = messageSplit[1];
+                        string status = messageSplit[2];
+
+                        switch (playerInd)
+                        {
+                            case "0":
+
+                                if (status == "True")
+                                {
+
+                                    print("Changing The First Color");
+                                    userListContent.GetComponentsInChildren<Button>()[0].image.color = Color.green;
+                                }
+                                else
+                                {
+                                    userListContent.GetComponentsInChildren<Button>()[0].image.color = Color.gray;
+                                }
+
+                                break;
+
+                            case "1":
+
+                                if (status == "True")
+                                {
+                                    userListContent.GetComponentsInChildren<Button>()[1].image.color = Color.green;
+                                }
+                                else
+                                {
+                                    userListContent.GetComponentsInChildren<Button>()[1].image.color = Color.gray;
+                                }
+
+                                break;
+
+                            case "2":
+
+                                if (status == "True")
+                                {
+                                    userListContent.GetComponentsInChildren<Button>()[2].image.color = Color.green;
+                                }
+                                else
+                                {
+                                    userListContent.GetComponentsInChildren<Button>()[2].image.color = Color.gray;
+                                }
+
+                                break;
+                        }
+                    }
+                    else if (messageReceived.Contains("NEW/USER_CONNECTED.KEY"))
+                    {
+                        connectedUsers = new string[3];
+
+                        string[] names = messageReceived.Split(':');
+
+                        for (int i = 1; i < names.Length; i++)
+                        {
+                            connectedUsers[i - 1] = names[i];
+                        }
+
+                        SetUserList(connectedUsers);
+                    }
+                    else if (nameChosen)
+                    {
+                        string[] messageSplit = messageReceived.Split(':');
+
+                        messageHistory.Add(new Tuple<string, string>(messageSplit[0], messageSplit[1]));
+
+                        UpdateMessageHistory();
                     }
 
-                    SetUserList(connectedUsers);
-                }
-                else if (!messageReceived.Contains("NEW/USER_CONNECTED.KEY") && nameChosen)
-                {
-                    string[] messageSplit = messageReceived.Split(':');
+                    break;
 
-                    messageHistory.Add(new Tuple<string, string>(messageSplit[0], messageSplit[1]));
+                    case ClientStates.CharacterSelect:
 
-                    UpdateMessageHistory();
+
+
+                        break;
+
                 }
             }
+            #endregion
 
+            #region SendingSection
             string message;
 
-            if (!nameChosen)
+            switch (currentState)
             {
-                message = nameInput.text;
-            }
-            else
-            {
-                message = messageInput.text;
-            }
-
-            //Send data to client
-            byte[] msg = Encoding.ASCII.GetBytes(message);
-
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                if (message == "exit")
-                {
-                    client.Send(msg);
-
-                    client.Shutdown(SocketShutdown.Both);
-                    client.Close();
-
-                    userListPanel.SetActive(false);
-                    namePanel.SetActive(true);
-                    lobbyPanel.SetActive(false);
-                    mainMenuPanel.SetActive(true);
-
-                    nameChosen = false;
-                    username = null;
-                    clientStarted = false;
-                }
-
-                client.Send(msg);
+                case ClientStates.Lobby:
 
                 if (!nameChosen)
                 {
-                    nameChosen = true;
-
-                    namePanel.SetActive(false);
-                    userListPanel.SetActive(true);
-
-                    print($"Name: {message}");
-
-                    nameText.text = message;
-                    username = message;
+                    message = nameInput.text;
                 }
                 else
                 {
-                    messageHistory.Add(new Tuple<string, string>(username, message));
-
-                    UpdateMessageHistory();
+                    message = messageInput.text;
                 }
 
+                //Send data to client
+                byte[] msg = Encoding.ASCII.GetBytes(message);
+
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    if (message == "exit")
+                    {
+                        client.Send(msg);
+
+                        client.Shutdown(SocketShutdown.Both);
+                        client.Close();
+
+                        userListPanel.SetActive(false);
+                        namePanel.SetActive(true);
+                        lobbyPanel.SetActive(false);
+                        mainMenuPanel.SetActive(true);
+
+                        nameChosen = false;
+                        username = null;
+                        clientStarted = false;
+                    }
+
+                    client.Send(msg);
+
+                    if (!nameChosen)
+                    {
+                        nameChosen = true;
+
+                        namePanel.SetActive(false);
+                        userListPanel.SetActive(true);
+
+                        print($"Name: {message}");
+
+                        nameText.text = message;
+                        username = message;
+                    }
+                    else
+                    {
+                        messageHistory.Add(new Tuple<string, string>(username, message));
+
+                        UpdateMessageHistory();
+                    }
+
+                }
+
+                break;
+
+                case ClientStates.CharacterSelect:
+
+
+                    break;
             }
+
+            #endregion
         }
     }
 
@@ -209,7 +294,7 @@ public class PlayerClient : MonoBehaviour
                     {
                         case 0:
 
-                        oldUsers[i].GetComponentInParent<Image>().color = Color.cyan;
+                            oldUsers[i].GetComponentInParent<Image>().color = Color.cyan;
                             break;
 
                         case 1:
@@ -225,6 +310,23 @@ public class PlayerClient : MonoBehaviour
 
 
                     oldUsers[i].text = users[i];
+                }
+
+                for (int j = 0; j < oldUsers.Length; j++)
+                {
+                    print("Text From Old Users " + oldUsers[i].text);
+
+                    if (username == oldUsers[i].text)
+                    {
+                        if (isReady)
+                        {
+                            oldUsers[i].GetComponentInParent<Image>().gameObject.GetComponentInChildren<Button>().image.color = Color.green;
+                        }
+                        else
+                        {
+                            oldUsers[i].GetComponentInParent<Image>().gameObject.GetComponentInChildren<Button>().image.color = Color.gray;
+                        }
+                    }
                 }
             }
         }
@@ -312,5 +414,25 @@ public class PlayerClient : MonoBehaviour
 
 
         messageHistoryContent.GetComponent<RectTransform>().sizeDelta = new Vector2(messageHistoryContent.GetComponent<RectTransform>().sizeDelta.x, 100 * messageHistory.Count);
+    }
+
+    public void SetIsReady()
+    {
+        isReady = !isReady;
+
+        SetUserList(connectedUsers);
+
+        print(isReady.ToString());
+
+        string readyMessage = $"PLAYER_READY_STATUS.KEY:{isReady.ToString()}";
+
+        byte[] msg = Encoding.ASCII.GetBytes(readyMessage);
+
+        client.Send(msg);
+    }
+
+    public string GetUsername()
+    {
+        return username;
     }
 }

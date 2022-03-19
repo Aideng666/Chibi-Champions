@@ -44,28 +44,28 @@ public class Client : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (LobbyManager.Instance.GetActivePanel() == LobbyPanels.UserList && currentState != ClientStates.Request)
-        {
-            currentState = ClientStates.Lobby;
-        }
-        else if (LobbyManager.Instance.GetActivePanel() == LobbyPanels.Message && currentState != ClientStates.Request)
-        {
-            currentState = ClientStates.Chatting;
-        }
+        //if (LobbyManager.Instance.GetActivePanel() == LobbyPanels.UserList && currentState != ClientStates.Request)
+        //{
+        //    currentState = ClientStates.Lobby;
+        //}
+        //else if (LobbyManager.Instance.GetActivePanel() == LobbyPanels.Message && currentState != ClientStates.Request)
+        //{
+        //    currentState = ClientStates.Chatting;
+        //}
 
-        if (!nameSelected)
-        {
-            SelectName();
-        }
-        else if(currentState == ClientStates.Request)
-        {
-            LobbyManager.Instance.ActivateRequestPanel();
+        //if (!nameSelected)
+        //{
+        //    SelectName();
+        //}
+        //else if(currentState == ClientStates.Request)
+        //{
+        //    LobbyManager.Instance.ActivateRequestPanel();
 
-            messageToSend = "MESSAGE:REQUEST_ACCEPTED.KEY";
+        //    messageToSend = "MESSAGE:REQUEST_ACCEPTED.KEY";
 
-            message = Encoding.ASCII.GetBytes(messageToSend);
-        }
-        else if(currentState == ClientStates.Lobby)
+        //    message = Encoding.ASCII.GetBytes(messageToSend);
+        //}
+        if(currentState == ClientStates.Lobby)
         {
             rec = 0;
 
@@ -89,7 +89,7 @@ public class Client : MonoBehaviour
 
                 if (receivedMessage == "MESSAGE:REQUEST/SENT.Key")
                 {
-                    currentState = ClientStates.Request;
+                    //currentState = ClientStates.Request;
                 }
                 else
                 {
@@ -187,7 +187,7 @@ public class Client : MonoBehaviour
     {
         client.Send(bRequest);
 
-        currentState = ClientStates.Chatting;
+        //currentState = ClientStates.Chatting;
     }
 
     public void SetRequestInfo()
@@ -212,7 +212,7 @@ public class Client : MonoBehaviour
 
         client.Send(message);
 
-        currentState = ClientStates.Chatting;
+        //currentState = ClientStates.Chatting;
     }
 
     public void DeclineMessageRequest()

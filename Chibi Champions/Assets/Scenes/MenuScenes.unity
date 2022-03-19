@@ -369,6 +369,8 @@ MonoBehaviour:
   messageHistoryContent: {fileID: 1331512401}
   messagePrefab: {fileID: 5509508628433689365, guid: 79a3d01a4da56154db725cf58e71c7d3, type: 3}
   nameText: {fileID: 769261850}
+  mainMenuPanel: {fileID: 904581913}
+  lobbyPanel: {fileID: 666793431}
 --- !u!1 &27801667
 GameObject:
   m_ObjectHideFlags: 0

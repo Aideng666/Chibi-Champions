@@ -19,6 +19,8 @@ public class PlayerClient : MonoBehaviour
     [SerializeField] GameObject messageHistoryContent;
     [SerializeField] GameObject messagePrefab;
     [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] GameObject mainMenuPanel; 
+    [SerializeField] GameObject lobbyPanel; 
 
     static IPAddress ip;
     static IPEndPoint server;
@@ -64,6 +66,8 @@ public class PlayerClient : MonoBehaviour
 
                 if (messageReceived.Contains("NEW/USER_CONNECTED.KEY"))
                 {
+                    connectedUsers = new string[3];
+
                     string[] names = messageReceived.Split(':');
 
                     for (int i = 1; i < names.Length; i++)
@@ -101,8 +105,19 @@ public class PlayerClient : MonoBehaviour
             {
                 if (message == "exit")
                 {
+                    client.Send(msg);
+
                     client.Shutdown(SocketShutdown.Both);
                     client.Close();
+
+                    userListPanel.SetActive(false);
+                    namePanel.SetActive(true);
+                    lobbyPanel.SetActive(false);
+                    mainMenuPanel.SetActive(true);
+
+                    nameChosen = false;
+                    username = null;
+                    clientStarted = false;
                 }
 
                 client.Send(msg);
@@ -112,7 +127,6 @@ public class PlayerClient : MonoBehaviour
                     nameChosen = true;
 
                     namePanel.SetActive(false);
-                    //messagePanel.SetActive(true);
                     userListPanel.SetActive(true);
 
                     print($"Name: {message}");

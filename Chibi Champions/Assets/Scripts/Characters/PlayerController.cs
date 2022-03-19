@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
 
     protected CharacterController controller;
     protected CinemachineVirtualCamera thirdPersonCam;
+    protected Transform rayCastSelection;
 
     protected float horizontalInput = 0f;
     protected float verticalInput = 0f;
@@ -78,8 +79,6 @@ public class PlayerController : MonoBehaviour
             Attack();
 
             CheckRaycastSelection();
-
-
 
             if (canInteract && Input.GetKeyDown(KeyCode.E) && !CanvasManager.Instance.IsTowerMenuOpen())
             {
@@ -268,6 +267,8 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             var selection = hit.transform;
+
+            rayCastSelection = selection;
 
             if (selection != null && selection.tag == "Interactable" && Vector3.Distance(transform.position, selection.position) < interactDistance)
             {

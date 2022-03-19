@@ -22,9 +22,13 @@ public class Tower : MonoBehaviour
 
     protected float timeToNextAttack = 0;
 
+    protected int totalPointsSpent;
+
     private void Start()
     {
         currentAttackPriority = defaultAttackPriority;
+
+        totalPointsSpent = towerCost;
     }
 
     protected void UpdateView()
@@ -79,6 +83,8 @@ public class Tower : MonoBehaviour
     public virtual void Upgrade()
     {
         towerLevel++;
+
+        totalPointsSpent += upgradeCosts[towerLevel - 2];
     }
 
     protected bool CanAttack()
@@ -100,6 +106,11 @@ public class Tower : MonoBehaviour
     public int GetCost()
     {
         return towerCost;
+    }
+
+    public int GetTotalPointsSpent()
+    {
+        return totalPointsSpent;
     }
 
     public int GetUpgradeCost(int level)

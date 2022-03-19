@@ -11,14 +11,10 @@ public class CharacterSelect : MonoBehaviour
     [Header("UI Text")]
     [SerializeField]
     TMP_Text[] towerUIText;
-    //[SerializeField]
-    //TMP_Text[] towerUIDesc;
     [SerializeField]
     TMP_Text[] abilityUIText;
-    //[SerializeField]
-    //TMP_Text[] abilityUIDesc;
 
-    private /*static*/ int characterIndex;
+    private int characterIndex;
 
     [Header("Character DB and UI Components")]
     public CharacterDatabase characterDB;

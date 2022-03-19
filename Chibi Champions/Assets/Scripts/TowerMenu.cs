@@ -9,6 +9,8 @@ public class TowerMenu : MonoBehaviour
     [SerializeField] GameObject buyPanel;
     [SerializeField] GameObject upgradePanel;
 
+    [SerializeField] GameObject towerPlatformPrefab;
+
     GameObject[] towers = new GameObject[3];
     Transform platform;
     Transform currentTower;
@@ -47,6 +49,8 @@ public class TowerMenu : MonoBehaviour
         {
             buttons[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = towers[i].name;
         }
+
+        buttons[4].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Sell Tower For {currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7} Points";
     }
 
     public void SetPlatform(Transform plat)
@@ -131,5 +135,15 @@ public class TowerMenu : MonoBehaviour
         {
             print("Not Enough Points");
         }
+    }
+
+    public void SellTower()
+    {
+        Vector3 towerPosition = currentTower.transform.position;
+
+        Instantiate(towerPlatformPrefab, new Vector3(towerPosition.x, towerPlatformPrefab.transform.position.y, towerPosition.z), Quaternion.identity, GameObject.Find("Platforms").transform);
+        player.GetComponent<PointsManager>().AddPoints((int)(currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7));
+        Destroy(currentTower.gameObject);
+        CanvasManager.Instance.CloseTowerMenu();
     }
 }

@@ -46,7 +46,7 @@ public class CharacterSelect : MonoBehaviour
 
         characterIndex = index;
 
-        Debug.Log("Character Index: " + characterIndex);
+        //Debug.Log("Character Index: " + characterIndex);
 
         // Sets the character specific information to the appropriate UI components
         // Grabs the selected character by its index
@@ -74,21 +74,11 @@ public class CharacterSelect : MonoBehaviour
             towerUIText[i].text = character.towerNames[i];
         }
 
-        //for (int i = 0; i < towerUIDesc.Length; ++i)
-        //{
-        //    towerUIDesc[i].text = character.towerDescriptions[i];
-        //}
-
         // Displays the ability name for each of the abilities of the selected character
         for (int i = 0; i < abilityUIText.Length; ++i)
         {
             abilityUIText[i].text = character.abilityNames[i];
         }
-
-        //for (int i = 0; i < abilityUIDesc.Length; ++i)
-        //{
-        //    abilityUIDesc[i].text = character.abilityDescriptions[i];
-        //}    
     }
 
     public void LockIn()

@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-// Checks whether to call the show or hide functions if the mouse
-// is hovered over the object
-
-public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class AbilityTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
-    public int towerIndex;
+    public int abilityIndex;
 
     public CharacterSelect databaseSelect;
 
@@ -18,26 +15,24 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     private string header;
     private string content;
-    private string cost;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Cursor.visible = false;
+        //Cursor.visible = false;
 
         DB = databaseSelect.GetCharacterDB();
         character = DB.GetCharacter(databaseSelect.GetCharacterIndex());
 
-        header = character.towerNames[towerIndex];
-        content = character.towerDescriptions[towerIndex];
-        cost = character.towerBaseCosts[towerIndex].ToString();
+        header = character.abilityNames[abilityIndex];
+        content = character.abilityDescriptions[abilityIndex];
 
-        TooltipSystem.Show(content, header, cost);
+        AbilityTooltipSystem.Show(content, header);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Cursor.visible = true;
+        //Cursor.visible = true;
 
-        TooltipSystem.Hide();
+        AbilityTooltipSystem.Hide();
     }
 }

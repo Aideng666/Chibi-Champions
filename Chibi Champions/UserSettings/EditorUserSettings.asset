@@ -21,7 +21,11 @@ EditorUserSettings:
       value: 56080d5350535b095e5f0f734673084415154c2e752c7660742a1c6bbab26260
       flags: 0
     RecentlyUsedSceneGuid-5:
+<<<<<<< HEAD
       value: 5a0252575757080e080d0f20457a06444e4f1a7e7a7f7e647e7d4d32e1e3606c
+=======
+      value: 570802545757515d555f5b7348210e44474e4a2e797972337a2a4e61b5b86369
+>>>>>>> Tyler2
       flags: 0
     RecentlyUsedSceneGuid-6:
       value: 5a5757560101590a5d0c0e24427b5d44434e4c7a7b7a23677f2b4565b7b5353a

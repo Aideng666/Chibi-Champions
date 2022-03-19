@@ -7,15 +7,11 @@ public class MenuAudio : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-            if (!FindObjectOfType<AudioManager>().IsPlaying("Menu") && !FindObjectOfType<AudioManager>().IsPlaying("Menu"))
-            {
-                FindObjectOfType<AudioManager>().Play("Menu");
-            }
-    }
-
-    // Update is called once per frame
-    void Update() {
-
+        if (!FindObjectOfType<AudioManager>().IsPlaying("Menu") && !FindObjectOfType<AudioManager>().IsPlaying("Menu"))
+        {
+            FindObjectOfType<AudioManager>().Play("Menu");
+            FindObjectOfType<AudioManager>().Loop("Menu");
+        }
     }
 
     public void HoverSound()
@@ -37,6 +33,5 @@ public class MenuAudio : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Play("Start");
         FindObjectOfType<AudioManager>().Stop("Menu");
-
     }
 }

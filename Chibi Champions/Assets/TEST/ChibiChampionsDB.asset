@@ -14,93 +14,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character:
   - characterName: Drumstick
-    classType: OFFENSE
-    towerBaseSprites:
-    - {fileID: 21300000, guid: 912adadc8c94ec7499174ed7cca439aa, type: 3}
+    classType: Offense
+    characterSprite: {fileID: 21300000, guid: 4581446e5935d6544837346d3eb6d377, type: 3}
+    towerSprites:
     - {fileID: 21300000, guid: 77ac75ff5db008f43b2d1f71c94fab36, type: 3}
+    - {fileID: 21300000, guid: 912adadc8c94ec7499174ed7cca439aa, type: 3}
     - {fileID: 21300000, guid: 0c5e863059eb2dc49b6132763e508560, type: 3}
     abilitySprites:
-    - {fileID: 21300000, guid: 27e3b0251688a804a92b2cb5cfbe6d7b, type: 3}
-    - {fileID: 21300000, guid: 27e3b0251688a804a92b2cb5cfbe6d7b, type: 3}
-    towerBaseNames:
-    - Feather Blaster
+    - {fileID: 21300000, guid: 7b71c5c36e928f94fb6d4f32bcb98712, type: 3}
+    - {fileID: 21300000, guid: aa4baad62af5fd84f982de00ef2f9769, type: 3}
+    towerNames:
     - Chicken Laser
+    - Feather Blaster
     - Gatling Drummet
-    towerBaseDescriptions:
-    - Shoots sharp feathers at nearby enemies
-    - Fires a beam of destruction over the span of a couple seconds
-    - A mounted automatic turret that fires a stream of bullets at a  high fire rate
-    towerBaseCosts:
-    - 'Cost: 200'
-    - 'Cost: 600'
-    - 'Cost: 1200'
+    towerDescriptions:
+    - Zappy Zap Zap
+    - Tickle me Timbers
+    - Pew Pew Pew
     abilityNames:
-    - Sword Slash
+    - Auto Attack
     - Ground Pound
     abilityDescriptions:
-    - Sword Slash Attack
-    - Mario impersonation
-    abilityControls:
-    - 'Control: ?'
-    - 'Control: ?'
+    - Basic
+    - Special
   - characterName: Rolfe
-    classType: DEFENSE
-    towerBaseSprites:
+    classType: Defense
+    characterSprite: {fileID: 21300000, guid: ae242e90a0e9d0d489b054fd893209d8, type: 3}
+    towerSprites:
+    - {fileID: 21300000, guid: 6ae39776f1271fd43bb7f83736587866, type: 3}
     - {fileID: 21300000, guid: 00bf3dd0c7475c54fa52304ff1c886fc, type: 3}
-    - {fileID: 21300000, guid: 55d8b199bddfa5b4d884b2064990d4c3, type: 3}
     - {fileID: 21300000, guid: 7d82711121e1f8242b6e73555b031d3d, type: 3}
     abilitySprites:
-    - {fileID: 21300000, guid: 91efde8d591642044a13caaac13461a6, type: 3}
-    - {fileID: 21300000, guid: 91efde8d591642044a13caaac13461a6, type: 3}
-    towerBaseNames:
-    - Web Shooter
+    - {fileID: 21300000, guid: 87a97f65e7929c24a9257c227fd86a3e, type: 3}
+    - {fileID: 21300000, guid: bd6ffa8d57b10c148b2c38a362c22698, type: 3}
+    towerNames:
     - Tennis Bomb
+    - Web Shooter
     - Watchdog
-    towerBaseDescriptions:
-    - Shoots sticky webs that slow enemies
-    - Shoots tennis ball bombs that distracts enemies, bringing them close to the
-      bomb before it explodes
-    - A wall that sends a shockwave blast, knocking enemies away
-    towerBaseCosts:
-    - 'Cost: 200'
-    - 'Cost: 200'
-    - 'Cost: 400'
+    towerDescriptions:
+    - Deuce
+    - Spooderman
+    - Not the Pokemon
     abilityNames:
-    - Claw Swipe
-    - Silk Dart
+    - Auto Attack
+    - Knockback Beacon
     abilityDescriptions:
-    - Woof Woof Bark Bark
-    - Threading the needle
-    abilityControls:
-    - 'Control: ?'
-    - 'Control: ?'
+    - Basic
+    - Special
   - characterName: Potter
-    classType: SUPPORT
-    towerBaseSprites:
+    classType: Support
+    characterSprite: {fileID: 21300000, guid: 4d022b733f9837a4a8cbd52b1d79d170, type: 3}
+    towerSprites:
     - {fileID: 21300000, guid: 30308aff79334064fb04c4cc7f353ba2, type: 3}
     - {fileID: 21300000, guid: 7f656e6e6ace4f74fb3711e09ab7f6f5, type: 3}
     - {fileID: 21300000, guid: 4b071edd99d70774aa0e9a871a4fb4d7, type: 3}
     abilitySprites:
-    - {fileID: 21300000, guid: 2f2f98e52df63b04e9ee3245e8e12159, type: 3}
-    - {fileID: 21300000, guid: 2f2f98e52df63b04e9ee3245e8e12159, type: 3}
-    towerBaseNames:
+    - {fileID: 21300000, guid: 2bb56b4fe4fb9464d91392333b00da55, type: 3}
+    - {fileID: 21300000, guid: af5f00f04dc4dc840821a7745bd389be, type: 3}
+    towerNames:
     - Ink Bomber
     - Photosynthesizer
     - P.E.D
-    towerBaseDescriptions:
-    - Shoots a black blob of ink paralyzing enemies hit
-    - Heals players standing inside the radius overtime
-    - Deploys pollen spores that buff allies when activated
-    towerBaseCosts:
-    - 'Cost: 200'
-    - 'Cost: 1100'
-    - 'Cost: 1600'
+    towerDescriptions:
+    - Ocotpus Squirted on Me
+    - GLUCOSE
+    - DOPE
     abilityNames:
-    - Paintball Gun
+    - Auto Attack
     - Healing Needle
     abilityDescriptions:
-    - Colourful Fun
-    - Definitely not an Ana rip off
-    abilityControls:
-    - 'Control: ?'
-    - 'Control: ?'
+    - Basic
+    - Special

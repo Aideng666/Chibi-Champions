@@ -9,6 +9,8 @@ public class TowerMenu : MonoBehaviour
     [SerializeField] GameObject buyPanel;
     [SerializeField] GameObject upgradePanel;
 
+    [SerializeField] GameObject towerPlatformPrefab;
+
     GameObject[] towers = new GameObject[3];
     Transform platform;
     Transform currentTower;
@@ -47,6 +49,8 @@ public class TowerMenu : MonoBehaviour
         {
             buttons[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = towers[i].name;
         }
+
+        buttons[4].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Sell Tower For {currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7} Points";
     }
 
     public void SetPlatform(Transform plat)
@@ -78,7 +82,7 @@ public class TowerMenu : MonoBehaviour
     {
         if (towers[0].GetComponent<Tower>().GetCost() <= player.GetComponent<PointsManager>().GetCurrentPoints())
         {
-            Instantiate(towers[0], new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
+            Instantiate(towers[0], new Vector3(platform.position.x, towers[0].transform.position.y, platform.position.z), Quaternion.identity);
             platform.gameObject.SetActive(false);
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[0].GetComponent<Tower>().GetCost());
@@ -93,7 +97,7 @@ public class TowerMenu : MonoBehaviour
     {
         if (towers[1].GetComponent<Tower>().GetCost() <= player.GetComponent<PointsManager>().GetCurrentPoints())
         {
-            Instantiate(towers[1], new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
+            Instantiate(towers[1], new Vector3(platform.position.x, towers[1].transform.position.y, platform.position.z), Quaternion.identity);
             platform.gameObject.SetActive(false);
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[1].GetComponent<Tower>().GetCost());
@@ -108,7 +112,7 @@ public class TowerMenu : MonoBehaviour
     {
         if (towers[2].GetComponent<Tower>().GetCost() <= player.GetComponent<PointsManager>().GetCurrentPoints())
         {
-            Instantiate(towers[2], new Vector3(platform.position.x, platform.position.y + 2.5f, platform.position.z), Quaternion.identity);
+            Instantiate(towers[2], new Vector3(platform.position.x, towers[2].transform.position.y, platform.position.z), Quaternion.identity);
             platform.gameObject.SetActive(false);
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[2].GetComponent<Tower>().GetCost());
@@ -131,5 +135,15 @@ public class TowerMenu : MonoBehaviour
         {
             print("Not Enough Points");
         }
+    }
+
+    public void SellTower()
+    {
+        Vector3 towerPosition = currentTower.transform.position;
+
+        Instantiate(towerPlatformPrefab, new Vector3(towerPosition.x, towerPlatformPrefab.transform.position.y, towerPosition.z), Quaternion.identity, GameObject.Find("Platforms").transform);
+        player.GetComponent<PointsManager>().AddPoints((int)(currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7));
+        Destroy(currentTower.gameObject);
+        CanvasManager.Instance.CloseTowerMenu();
     }
 }

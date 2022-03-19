@@ -36,6 +36,7 @@ MonoBehaviour:
     abilityDescriptions:
     - Swings a sharp feather sword
     - Jumps up in the air and slams down with full fury
+    towerBaseCosts: f401000020030000b0040000
   - characterName: Rolfe
     classType: Defense
     towerSprites:
@@ -59,6 +60,7 @@ MonoBehaviour:
     abilityDescriptions:
     - Basic
     - Special
+    towerBaseCosts: f401000008070000b0040000
   - characterName: Potter
     classType: Support
     towerSprites:
@@ -83,3 +85,4 @@ MonoBehaviour:
     abilityDescriptions:
     - Basic
     - Special
+    towerBaseCosts: f4010000d007000008070000

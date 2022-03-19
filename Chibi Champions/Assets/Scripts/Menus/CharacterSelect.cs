@@ -96,8 +96,13 @@ public class CharacterSelect : MonoBehaviour
         PlayerPrefs.SetInt("CharacterIndex", characterIndex);
     }
 
-    //public static int GetCharacterIndex()
-    //{
-    //    return characterIndex;
-    //}
+    public int GetCharacterIndex()
+    {
+        return characterIndex;
+    }
+
+    public CharacterDatabase GetCharacterDB()
+    {
+        return characterDB;
+    }
 }

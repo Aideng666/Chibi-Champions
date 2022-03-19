@@ -19,8 +19,6 @@ public class PlayerClient : MonoBehaviour
     [SerializeField] GameObject messageHistoryContent;
     [SerializeField] GameObject messagePrefab;
     [SerializeField] TextMeshProUGUI nameText;
-    [SerializeField] GameObject mainMenuPanel; 
-    [SerializeField] GameObject lobbyPanel; 
 
     static IPAddress ip;
     static IPEndPoint server;
@@ -178,23 +176,6 @@ public class PlayerClient : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    if (message == "exit")
-                    {
-                        client.Send(msg);
-
-                        client.Shutdown(SocketShutdown.Both);
-                        client.Close();
-
-                        userListPanel.SetActive(false);
-                        namePanel.SetActive(true);
-                        lobbyPanel.SetActive(false);
-                        mainMenuPanel.SetActive(true);
-
-                        nameChosen = false;
-                        username = null;
-                        clientStarted = false;
-                    }
-
                     client.Send(msg);
 
                     if (!nameChosen)
@@ -239,7 +220,7 @@ public class PlayerClient : MonoBehaviour
             //REPLACE THE IP BELOW WITH YOUR AWS SERVER IP
             //IPAddress ip = IPAddress.Parse("54.208.168.94");
             ip = IPAddress.Parse("127.0.0.1");
-            server = new IPEndPoint(ip, 11111);
+            server = new IPEndPoint(ip, 11112);
 
             client = new Socket(AddressFamily.InterNetwork,
                 SocketType.Stream, ProtocolType.Tcp);
@@ -429,6 +410,26 @@ public class PlayerClient : MonoBehaviour
         byte[] msg = Encoding.ASCII.GetBytes(readyMessage);
 
         client.Send(msg);
+    }
+
+    public void ExitClient()
+    {
+        string message = "exit";
+
+        //Send data to client
+        byte[] msg = Encoding.ASCII.GetBytes(message);
+
+        client.Send(msg);
+
+        client.Shutdown(SocketShutdown.Both);
+        client.Close();
+
+        userListPanel.SetActive(false);
+        namePanel.SetActive(true);
+
+        nameChosen = false;
+        username = null;
+        clientStarted = false;
     }
 
     public string GetUsername()

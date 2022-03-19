@@ -32,6 +32,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         cost = character.towerBaseCosts[towerIndex].ToString();
 
         TooltipSystem.Show(content, header, cost);
+        Debug.Log("HOVERING OVER TOWER ICON");
     }
 
     public void OnPointerExit(PointerEventData eventData)

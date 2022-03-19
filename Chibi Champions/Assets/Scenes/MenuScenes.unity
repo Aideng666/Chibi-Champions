@@ -768,7 +768,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_AnchorMin.x
@@ -776,7 +776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -816,11 +816,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 321.55927
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -471.5
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1693,6 +1693,7 @@ GameObject:
   - component: {fileID: 182256216}
   - component: {fileID: 182256218}
   - component: {fileID: 182256217}
+  - component: {fileID: 182256219}
   m_Layer: 5
   m_Name: TowerPic
   m_TagString: Untagged
@@ -1758,6 +1759,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 182256215}
   m_CullTransparentMesh: 1
+--- !u!114 &182256219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182256215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80a75a4da1a964b4ea0361b68f218821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerIndex: 2
+  databaseSelect: {fileID: 1364714900}
 --- !u!1 &187494469
 GameObject:
   m_ObjectHideFlags: 0
@@ -2725,6 +2740,7 @@ GameObject:
   - component: {fileID: 389544182}
   - component: {fileID: 389544183}
   - component: {fileID: 389544184}
+  - component: {fileID: 389544185}
   m_Layer: 5
   m_Name: TowerPic
   m_TagString: Untagged
@@ -2790,6 +2806,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &389544185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389544181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80a75a4da1a964b4ea0361b68f218821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerIndex: 0
+  databaseSelect: {fileID: 1364714900}
 --- !u!224 &393895049 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6069602998817556037, guid: b325bf6bb81d5ba469d46157de633867, type: 3}
@@ -2876,7 +2906,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_AnchorMin.x
@@ -2884,7 +2914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2924,11 +2954,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1607.7964
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -471.5
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3307,7 +3337,6 @@ GameObject:
   - component: {fileID: 468118572}
   - component: {fileID: 468118574}
   - component: {fileID: 468118573}
-  - component: {fileID: 468118575}
   m_Layer: 5
   m_Name: Tower2
   m_TagString: Untagged
@@ -3374,20 +3403,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 468118571}
   m_CullTransparentMesh: 1
---- !u!114 &468118575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 468118571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80a75a4da1a964b4ea0361b68f218821, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerIndex: 1
-  databaseSelect: {fileID: 1364714900}
 --- !u!1 &468188051
 GameObject:
   m_ObjectHideFlags: 0
@@ -4923,7 +4938,7 @@ GameObject:
   - component: {fileID: 675737536}
   - component: {fileID: 675737535}
   m_Layer: 5
-  m_Name: Cost
+  m_Name: Control
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5424,7 +5439,6 @@ GameObject:
   - component: {fileID: 730785294}
   - component: {fileID: 730785296}
   - component: {fileID: 730785295}
-  - component: {fileID: 730785297}
   m_Layer: 5
   m_Name: Tower3
   m_TagString: Untagged
@@ -5491,20 +5505,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730785293}
   m_CullTransparentMesh: 1
---- !u!114 &730785297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 730785293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80a75a4da1a964b4ea0361b68f218821, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerIndex: 2
-  databaseSelect: {fileID: 1364714900}
 --- !u!1 &736926806
 GameObject:
   m_ObjectHideFlags: 0
@@ -6338,7 +6338,7 @@ GameObject:
   - component: {fileID: 842257911}
   - component: {fileID: 842257910}
   m_Layer: 5
-  m_Name: Control
+  m_Name: ControlText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7071,7 +7071,6 @@ GameObject:
   - component: {fileID: 932865408}
   - component: {fileID: 932865410}
   - component: {fileID: 932865409}
-  - component: {fileID: 932865411}
   m_Layer: 5
   m_Name: Tower1
   m_TagString: Untagged
@@ -7138,20 +7137,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932865407}
   m_CullTransparentMesh: 1
---- !u!114 &932865411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932865407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80a75a4da1a964b4ea0361b68f218821, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerIndex: 0
-  databaseSelect: {fileID: 1364714900}
 --- !u!1 &948349223
 GameObject:
   m_ObjectHideFlags: 0
@@ -7341,6 +7326,7 @@ GameObject:
   - component: {fileID: 967133489}
   - component: {fileID: 967133491}
   - component: {fileID: 967133490}
+  - component: {fileID: 967133492}
   m_Layer: 5
   m_Name: TowerPic
   m_TagString: Untagged
@@ -7406,6 +7392,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 967133488}
   m_CullTransparentMesh: 1
+--- !u!114 &967133492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967133488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80a75a4da1a964b4ea0361b68f218821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerIndex: 1
+  databaseSelect: {fileID: 1364714900}
 --- !u!1 &981024833
 GameObject:
   m_ObjectHideFlags: 0
@@ -9749,7 +9749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1364714897
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11186,7 +11186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_AnchorMin.x
@@ -11194,7 +11194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -11234,11 +11234,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 964.6778
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -471.5
       objectReference: {fileID: 0}
     - target: {fileID: 3773833097767178704, guid: 0715d474894d9b84f965a4ca92e1af7c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -12857,7 +12857,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6542297207078132470, guid: f6534f9934506c844a743900b0f3e830, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6534f9934506c844a743900b0f3e830, type: 3}
@@ -13271,7 +13271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1826626157
 RectTransform:
   m_ObjectHideFlags: 0

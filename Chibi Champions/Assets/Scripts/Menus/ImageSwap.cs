@@ -13,7 +13,7 @@ public class ImageSwap : MonoBehaviour
         portrait.sprite = newImage;
     }
 
-    public void RevertImage()
+    public void ImageRevert()
     {
         portrait.sprite = oldImage;
     }

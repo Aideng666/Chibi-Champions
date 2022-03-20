@@ -49,7 +49,7 @@ MonoBehaviour:
   progressBar: {fileID: 2224172296500336339}
   blurbText: {fileID: 8885227174728178037}
   blurbs:
-  - Remember to upgrade your towers to make them stronger!
+  - Remember to upgrade your towers!
   - Patamon loves Chris
   - Agumon Rules!
 --- !u!1 &2224172296500336336

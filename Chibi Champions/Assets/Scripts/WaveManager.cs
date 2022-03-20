@@ -3,12 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using TMPro;
 
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] List<EnemySpawner> enemySpawners;
     [SerializeField] GameObject gruntPrefab;
     [SerializeField] GameObject sharpshooterPrefab;
+
+    [SerializeField] TMP_Text currentWaveText;
+    [SerializeField] TMP_Text totalWavesText;
 
     int currentWave;
     int numberOfWaves;
@@ -31,6 +35,8 @@ public class WaveManager : MonoBehaviour
         InitEnemiesLists();
 
         playerList = FindObjectsOfType<PlayerController>();
+
+        totalWavesText.text = numberOfWaves.ToString();
     }
 
     // Update is called once per frame
@@ -72,7 +78,7 @@ public class WaveManager : MonoBehaviour
     void BeginWave()
     {
         print("The current Wave is " + (currentWave + 1));
-
+       
         waveCompleteAlertFired = false;
         waveCompletePointsAdded = false;
 
@@ -82,6 +88,8 @@ public class WaveManager : MonoBehaviour
             spawner.SetLevelList(enemyLevels[currentWave]);
         }
         currentWave++;
+
+        currentWaveText.text = currentWave.ToString();
     }
 
     bool CheckWaveComplete()

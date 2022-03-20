@@ -28,20 +28,20 @@ public class AnimController : MonoBehaviour
         }
     }
 
-    public void SetPlayerIsWalking(bool walking)
-    {
-        playerAnimator.SetBool("IsWalking", walking);
-    }
+    //public void SetPlayerIsWalking(bool walking)
+    //{
+    //    playerAnimator.SetBool("IsWalking", walking);
+    //}
 
     public void SetEnemyIsWalking(Animator anim, bool walking)
     {
         anim.SetBool("IsWalking", walking);
     }
 
-    public void PlayPlayerAttackAnim()
-    {
-        playerAnimator.SetTrigger("Attack");
-    }
+    //public void PlayPlayerAttackAnim()
+    //{
+    //    playerAnimator.SetTrigger("Attack");
+    //}
 
     public void PlayTowerShootAnim(Animator anim)
     {
@@ -83,6 +83,80 @@ public class AnimController : MonoBehaviour
         {
             animator.SetTrigger("Stop");
             gatlingFiring = false;
+        }
+    }
+
+    public void SetPlayerWalking(Animator anim, bool isWalking, bool forward)
+    {
+        if (anim == drumstickAnimator)
+        {
+            if (forward)
+            {
+                drumstickAnimator.SetBool("WalkForward", isWalking);
+            }
+            else
+            {
+                drumstickAnimator.SetBool("WalkBackward", isWalking);
+            }
+        }
+        if (anim == rolfeAnimator)
+        {
+            if (forward)
+            {
+                rolfeAnimator.SetBool("WalkForward", isWalking);
+            }
+            else
+            {
+                rolfeAnimator.SetBool("WalkBackward", isWalking);
+            }
+        }
+        if (anim == potterAnimator)
+        {
+            if (forward)
+            {
+                potterAnimator.SetBool("WalkForward", isWalking);
+            }
+            else
+            {
+                potterAnimator.SetBool("WalkBackward", isWalking);
+            }
+        }
+    }
+
+    public void SetPlayerStrafing(Animator anim, bool isStrafing, int direction = 0) //0 = left 1 = right
+    {
+        if (anim == drumstickAnimator)
+        {
+            if (direction == 0)
+            {
+                drumstickAnimator.SetBool("StrafeLeft", isStrafing);
+            }
+            else if (direction == 1)
+            {
+                drumstickAnimator.SetBool("StrafeRight", isStrafing);
+            }
+        }
+        if (anim == rolfeAnimator)
+        {
+            if (direction == 0)
+            {
+                rolfeAnimator.SetBool("StrafeLeft", isStrafing);
+            }
+            else if (direction == 1)
+            {
+                rolfeAnimator.SetBool("StrafeRight", isStrafing);
+            }
+        }
+        if (anim == potterAnimator)
+        {
+            if (direction == 0)
+            {
+                potterAnimator.SetBool("StrafeLeft", isStrafing);
+            }
+            else if (direction == 1)
+            {
+                potterAnimator.SetBool("StrafeRight", isStrafing);
+            }
         }
     }
 }

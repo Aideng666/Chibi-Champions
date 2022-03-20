@@ -39,6 +39,24 @@ public class Drumstick : PlayerController
             speedParticle.transform.position = transform.position;
         }
 
+        AbilityCooldown(groundPoundActivated);
+
+        //if (groundPoundActivated && isCooldown == false)
+        //{
+        //    isCooldown = true;
+        //    abilityImage.fillAmount = 1;
+        //}
+        
+        //if (isCooldown)
+        //{
+        //    abilityImage.fillAmount -= 1 / heavyAttackDelay * Time.deltaTime;
+
+        //    if (abilityImage.fillAmount <= 0)
+        //    {
+        //        isCooldown = false;
+        //    }
+        //}
+
     }
 
     protected override void Attack()

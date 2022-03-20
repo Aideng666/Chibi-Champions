@@ -72,13 +72,12 @@ public class Drumstick : PlayerController
                     enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
                     enemy.GetComponentInParent<Enemy>().Knockback(20, transform);
                     enemy.GetComponentInParent<Enemy>().SetLastHit(this);
-                    //GetComponent<PointsManager>().AddPoints(20);
 
                     ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);
                 }
             }
 
-            AnimController.Instance.PlayPlayerAttackAnim();
+            //AnimController.Instance.PlayPlayerAttackAnim();
         }
         if (Input.GetMouseButtonDown(1) && CanHeavyAttack())
         {

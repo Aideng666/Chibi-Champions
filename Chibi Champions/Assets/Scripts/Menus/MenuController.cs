@@ -36,7 +36,7 @@ public class MenuController : MonoBehaviour
             StartCoroutine(LoadFadeTransitions(frames[1], frames[2]));
             isPlayButtonClicked = false;
         }
-        else if (isTutorialButtonClicked)
+        if (isTutorialButtonClicked)
         {
             StartCoroutine(LoadFadeTransitions(frames[1], frames[3]));
             isTutorialButtonClicked = false;

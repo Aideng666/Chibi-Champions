@@ -11,14 +11,19 @@ public class Cure : MonoBehaviour
     bool alert2Fired;
     bool alert3Fired;
 
+    [SerializeField] TMP_Text cureUIHPText;
+
     private void Start()
     {
         healthText = GetComponentInChildren<TextMeshProUGUI>();
+        cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString();
     }
     // Update is called once per frame
     void Update()
     {
         healthText.text = GetComponent<Health>().GetCurrentHealth() + "/" + GetComponent<Health>().GetMaxHealth();
+
+        cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString();
 
         transform.RotateAround(transform.position, new Vector3(0, 1, 0), 0.1f);
 

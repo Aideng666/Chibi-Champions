@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
+using UnityEngine.UI;
 
 public class GruntController : Enemy
 {
     [SerializeField] LayerMask crystalLayer;
     [SerializeField] LayerMask playerLayer;
+
+    [SerializeField] Image enemyLevelBG;
+    [SerializeField] TMP_Text enemyLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -74,18 +79,27 @@ public class GruntController : Enemy
             GetComponent<Health>().SetMaxHealth(50);
             GetComponent<Health>().ResetHealth();
             attackDamage = 2;
+
+            enemyLevelBG.color = Color.yellow;
+            enemyLevel.text = level.ToString();
         }
         else if (level == 2)
         {
             GetComponent<Health>().SetMaxHealth(100);
             GetComponent<Health>().ResetHealth();
             attackDamage = 6;
+
+            enemyLevelBG.color = Color.magenta;
+            enemyLevel.text = level.ToString();
         }
         else if (level == 3)
         {
             GetComponent<Health>().SetMaxHealth(200);
             GetComponent<Health>().ResetHealth();
             attackDamage = 14;
+
+            enemyLevelBG.color = Color.red;
+            enemyLevel.text = level.ToString();
         }
     }
 }

@@ -12136,29 +12136,11 @@ MonoBehaviour:
   nameInput: {fileID: 2094986019}
   namePanel: {fileID: 881777508}
   userListPanel: {fileID: 499622634}
-  characterSelectPanel: {fileID: 1963906498}
-  lobbyPanel: {fileID: 1747212455}
   userListContent: {fileID: 723691774}
   userPrefab: {fileID: 659826387271462227, guid: 29ecf0c9130abfd4e997a5690b1fab90, type: 3}
   messageHistoryContent: {fileID: 1564669360}
   messagePrefab: {fileID: 5509508628433689365, guid: 79a3d01a4da56154db725cf58e71c7d3, type: 3}
   nameText: {fileID: 1905022805}
-  playerIcons:
-  - {fileID: 159397960}
-  - {fileID: 1638666154}
-  - {fileID: 72820862}
-  characterButtons:
-  - {fileID: 565221636}
-  - {fileID: 560685375}
-  - {fileID: 632317409}
-  unconfirmedCharacterImages:
-  - {fileID: 21300000, guid: cfcd0c11f12d8784b829b165b1ca4ea4, type: 3}
-  - {fileID: 21300000, guid: 0e39165ab0e1d9347ab675b086b0b3c4, type: 3}
-  - {fileID: 21300000, guid: 396e34127a3a243418d71b3aa8954450, type: 3}
-  confirmedCharacterImages:
-  - {fileID: 21300000, guid: 4581446e5935d6544837346d3eb6d377, type: 3}
-  - {fileID: 21300000, guid: ae242e90a0e9d0d489b054fd893209d8, type: 3}
-  - {fileID: 21300000, guid: 4d022b733f9837a4a8cbd52b1d79d170, type: 3}
 --- !u!4 &1212369763
 Transform:
   m_ObjectHideFlags: 0

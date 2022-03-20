@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
+using UnityEngine.UI;
 
 public class SharpshooterController : Enemy
 {
@@ -10,6 +12,9 @@ public class SharpshooterController : Enemy
     LineRenderer bulletTrail;
 
     Vector3 shotDirection;
+
+    [SerializeField] Image enemyLevelBG;
+    [SerializeField] TMP_Text enemyLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -147,18 +152,27 @@ public class SharpshooterController : Enemy
             GetComponent<Health>().SetMaxHealth(35);
             GetComponent<Health>().ResetHealth();
             attackDamage = 4;
+
+            enemyLevelBG.color = Color.yellow;
+            enemyLevel.text = level.ToString();
         }
         else if (level == 2)
         {
             GetComponent<Health>().SetMaxHealth(70);
             GetComponent<Health>().ResetHealth();
             attackDamage = 9;
+
+            enemyLevelBG.color = Color.magenta;
+            enemyLevel.text = level.ToString();
         }
         else if (level == 3)
         {
             GetComponent<Health>().SetMaxHealth(130);
             GetComponent<Health>().ResetHealth();
             attackDamage = 18;
+
+            enemyLevelBG.color = Color.red;
+            enemyLevel.text = level.ToString();
         }
     }
 }

@@ -13,6 +13,7 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] TMP_Text currentWaveText;
     [SerializeField] TMP_Text totalWavesText;
+    [SerializeField] TMP_Text numberOfEnemiesText;
 
     int currentWave;
     int numberOfWaves;
@@ -25,7 +26,7 @@ public class WaveManager : MonoBehaviour
     List<List<GameObject>> enemiesLists = new List<List<GameObject>>();
     List<List<int>> enemyLevels = new List<List<int>>();
 
-   PlayerController[] playerList = new PlayerController[3];
+    PlayerController[] playerList = new PlayerController[3];
 
     public static WaveManager Instance { get; set; }
 
@@ -97,6 +98,8 @@ public class WaveManager : MonoBehaviour
         currentWave++;
 
         currentWaveText.text = currentWave.ToString();
+
+        numberOfEnemiesText.text = Instance.GetEnemyCount(currentWave).ToString();
     }
 
     bool CheckWaveComplete()

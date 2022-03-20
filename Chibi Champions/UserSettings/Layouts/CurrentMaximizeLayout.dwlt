@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 18029
+  controlID: 35086
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -86,7 +86,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 18030
+  controlID: 35087
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 18031
+  controlID: 35088
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,10 +223,10 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 163}
-      m_SelectedIDs: 2e820000
-      m_LastClickedID: 33326
-      m_ExpandedIDs: 2450ffff5a83ffff98beffffdabfffff36c4fffff0c4ffffcafaffffca6200008863000098740000e8800000248100006a810000e28100002a8200003a820000
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 86270100
+      m_LastClickedID: 75654
+      m_ExpandedIDs: 48ccfcff28fbfcff8229fdffb62efdff2e31fdff8c3bfdff343ffdff6892fdff38abfdff20b4fdffb2c6feff2450ffff5a83ffff98beffffdabfffff36c4fffff0c4ffffcafaffffca6200008863000098740000e8800000248100006a810000e28100002a8200003a820000f0a700007ca80000c2a80000c8e8000062e90000a8e90000ccfd0000f0fd00008afe0000d8fe0000d2250100f625010098260100b6260100e6260100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -502,9 +502,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 882.6033, y: 580.78265, z: -0.8782069}
+    m_Target: {x: 1454.2029, y: 121.06472, z: 2.265855}
     speed: 2
-    m_Value: {x: 882.6033, y: 580.78265, z: -0.8782069}
+    m_Value: {x: 1454.2029, y: 121.06472, z: 2.265855}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -555,9 +555,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 116.10478
+    m_Target: 349.53268
     speed: 2
-    m_Value: 116.10478
+    m_Value: 349.53268
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -652,23 +652,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Enemies/EnemySpawning
+    - Assets/Scripts/Characters
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Enemies/EnemySpawning
+  - Assets/Scripts/Characters
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Tyler\Documents\Repositories\Chibi-Champions\Chibi
     Champions
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 333}
-    m_SelectedIDs: 908e0000
-    m_LastClickedID: 36496
-    m_ExpandedIDs: 00000000886f00008a6f00008c6f00008e6f0000906f0000926f0000946f0000966f0000986f00009a6f00009c6f00009e6f0000e26f000000ca9a3b
+    scrollPos: {x: 0, y: 401}
+    m_SelectedIDs: e06f0000
+    m_LastClickedID: 28640
+    m_ExpandedIDs: 00000000886f00008a6f00008c6f00008e6f0000906f0000926f0000946f0000966f0000986f00009a6f00009c6f00009e6f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -721,8 +721,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 2e820000
-    m_LastClickedInstanceID: 33326
+    m_SelectedInstanceIDs: 86270100
+    m_LastClickedInstanceID: 75654
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300005c6800004269000040660000
     m_RenameOverlay:
@@ -810,7 +810,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 33326
+  m_LastSelectedObjectID: 75654
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52

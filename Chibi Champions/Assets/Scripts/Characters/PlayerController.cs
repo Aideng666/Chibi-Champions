@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using Cinemachine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected GameObject cameraLookAt;
     [SerializeField] protected GameObject[] towers = new GameObject[3];
     [SerializeField] protected Transform respawnLocation;
+
+    [SerializeField] protected Image abilityImage;
+    protected bool isCooldown = false;
 
     protected CharacterController controller;
     protected CinemachineVirtualCamera thirdPersonCam;
@@ -59,6 +63,8 @@ public class PlayerController : MonoBehaviour
 
         thirdPersonCam.LookAt = cameraLookAt.transform;
         thirdPersonCam.Follow = cameraLookAt.transform;
+
+        abilityImage.fillAmount = 0;
     }
 
     // Update is called once per frame
@@ -322,6 +328,25 @@ public class PlayerController : MonoBehaviour
             {
                 canInteract = false;
                 interactText.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    protected void AbilityCooldown(bool isAbilityActivated)
+    {
+        if (isAbilityActivated && isCooldown == false)
+        {
+            isCooldown = true;
+            abilityImage.fillAmount = 1;
+        }
+
+        if (isCooldown)
+        {
+            abilityImage.fillAmount -= 1 / heavyAttackDelay * Time.deltaTime;
+
+            if (abilityImage.fillAmount <= 0)
+            {
+                isCooldown = false;
             }
         }
     }

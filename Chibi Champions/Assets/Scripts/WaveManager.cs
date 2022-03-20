@@ -35,6 +35,13 @@ public class WaveManager : MonoBehaviour
         Instance = this;
     }
 
+    public static WaveManager Instance { get; set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

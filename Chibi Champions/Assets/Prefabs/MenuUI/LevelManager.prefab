@@ -49,9 +49,9 @@ MonoBehaviour:
   progressBar: {fileID: 2224172296500336339}
   blurbText: {fileID: 8885227174728178037}
   blurbs:
-  - Chris stans Cheerios
-  - Where da poop sock at
-  - Chris + Agumon = Life
+  - Remember to upgrade your towers to make them stronger!
+  - Patamon loves Chris
+  - Agumon Rules!
 --- !u!1 &2224172296500336336
 GameObject:
   m_ObjectHideFlags: 0

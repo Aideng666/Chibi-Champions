@@ -15,6 +15,7 @@ MonoBehaviour:
   character:
   - characterName: Drumstick
     classType: Offense
+    characterPortrait: {fileID: 21300000, guid: 4581446e5935d6544837346d3eb6d377, type: 3}
     towerSprites:
     - {fileID: 21300000, guid: 912adadc8c94ec7499174ed7cca439aa, type: 3}
     - {fileID: 21300000, guid: 77ac75ff5db008f43b2d1f71c94fab36, type: 3}
@@ -39,6 +40,7 @@ MonoBehaviour:
     towerBaseCosts: f401000020030000b0040000
   - characterName: Rolfe
     classType: Defense
+    characterPortrait: {fileID: 21300000, guid: ae242e90a0e9d0d489b054fd893209d8, type: 3}
     towerSprites:
     - {fileID: 21300000, guid: 00bf3dd0c7475c54fa52304ff1c886fc, type: 3}
     - {fileID: 21300000, guid: 55d8b199bddfa5b4d884b2064990d4c3, type: 3}
@@ -64,6 +66,7 @@ MonoBehaviour:
     towerBaseCosts: f401000008070000b0040000
   - characterName: Potter
     classType: Support
+    characterPortrait: {fileID: 21300000, guid: 4d022b733f9837a4a8cbd52b1d79d170, type: 3}
     towerSprites:
     - {fileID: 21300000, guid: 30308aff79334064fb04c4cc7f353ba2, type: 3}
     - {fileID: 21300000, guid: 7f656e6e6ace4f74fb3711e09ab7f6f5, type: 3}

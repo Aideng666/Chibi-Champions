@@ -12147,10 +12147,6 @@ MonoBehaviour:
   - {fileID: 159397960}
   - {fileID: 1638666154}
   - {fileID: 72820862}
-  characterButtons:
-  - {fileID: 565221636}
-  - {fileID: 560685375}
-  - {fileID: 632317409}
   unconfirmedCharacterImages:
   - {fileID: 21300000, guid: cfcd0c11f12d8784b829b165b1ca4ea4, type: 3}
   - {fileID: 21300000, guid: 0e39165ab0e1d9347ab675b086b0b3c4, type: 3}

@@ -128,6 +128,38 @@ public class PlayerController : MonoBehaviour
         {
             controller.Move(moveDir * speed * Time.deltaTime);
         }
+
+        if (verticalInput > 0)
+        {
+            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, true);
+            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false);
+        }
+        else if (verticalInput < 0)
+        {
+            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, false);
+            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, true);
+        }
+        else
+        {
+            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, true);
+            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false);
+        }
+
+        if (horizontalInput > 0)
+        {
+            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), true, 1);
+            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 0);
+        }
+        else if (horizontalInput < 0)
+        {
+            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), true, 0);
+            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 1);
+        }
+        else
+        {
+            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 0);
+            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 1);
+        }
     }
 
     void ApplyEffect()

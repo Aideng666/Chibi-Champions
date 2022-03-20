@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PointsManager : MonoBehaviour
 {
@@ -8,9 +9,12 @@ public class PointsManager : MonoBehaviour
 
     int currentPoints = 0;
 
+    [SerializeField] TMP_Text pointsText;
+
     private void Start()
     {
         currentPoints = startingPoints;
+        pointsText.text = startingPoints.ToString();
     }
 
     public void AddPoints(int value)
@@ -29,6 +33,7 @@ public class PointsManager : MonoBehaviour
         Mathf.Clamp(currentPoints, 0, 100000);
 
         //print("Points: " + currentPoints);
+        pointsText.text = currentPoints.ToString();
     }
 
     public int GetCurrentPoints()

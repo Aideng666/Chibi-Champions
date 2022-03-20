@@ -13,6 +13,7 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] TMP_Text currentWaveText;
     [SerializeField] TMP_Text totalWavesText;
+    [SerializeField] TMP_Text numberOfEnemiesText;
 
     int currentWave;
     int numberOfWaves;
@@ -25,7 +26,14 @@ public class WaveManager : MonoBehaviour
     List<List<GameObject>> enemiesLists = new List<List<GameObject>>();
     List<List<int>> enemyLevels = new List<List<int>>();
 
-   PlayerController[] playerList = new PlayerController[3];
+    PlayerController[] playerList = new PlayerController[3];
+
+    public static WaveManager Instance { get; set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -90,6 +98,8 @@ public class WaveManager : MonoBehaviour
         currentWave++;
 
         currentWaveText.text = currentWave.ToString();
+
+        numberOfEnemiesText.text = Instance.GetEnemyCount(currentWave).ToString();
     }
 
     bool CheckWaveComplete()
@@ -179,5 +189,10 @@ public class WaveManager : MonoBehaviour
         }
 
         reader.Close();
+    }
+
+    public int GetEnemyCount(int waveNum)
+    {
+        return enemiesLists[waveNum].Count;
     }
 }

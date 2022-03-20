@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 18029
+  controlID: 22779
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 18030
+  controlID: 22780
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 18031
+  controlID: 22781
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,10 +223,10 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 163}
-      m_SelectedIDs: 2e820000
-      m_LastClickedID: 33326
-      m_ExpandedIDs: 2450ffff5a83ffff98beffffdabfffff36c4fffff0c4ffffcafaffffca6200008863000098740000e8800000248100006a810000e28100002a8200003a820000
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: e4b40000
+      m_LastClickedID: 0
+      m_ExpandedIDs: b2c6feff2450ffff5a83ffff98beffffdabfffff36c4fffff0c4ffffcafaffffca6200008863000098740000e8800000248100006a810000e28100002a8200003a820000b4a70000f0a70000c2a80000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -502,9 +502,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 882.6033, y: 580.78265, z: -0.8782069}
+    m_Target: {x: 1100.8696, y: 551.09314, z: -5.9388714}
     speed: 2
-    m_Value: {x: 882.6033, y: 580.78265, z: -0.8782069}
+    m_Value: {x: 1100.8696, y: 551.09314, z: -5.9388714}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -555,9 +555,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 116.10478
+    m_Target: 586.00275
     speed: 2
-    m_Value: 116.10478
+    m_Value: 586.00275
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -652,22 +652,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Enemies/EnemySpawning
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Enemies/EnemySpawning
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Tyler\Documents\Repositories\Chibi-Champions\Chibi
     Champions
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 333}
-    m_SelectedIDs: 908e0000
-    m_LastClickedID: 36496
+    scrollPos: {x: 0, y: 77}
+    m_SelectedIDs: 886f0000
+    m_LastClickedID: 28552
     m_ExpandedIDs: 00000000886f00008a6f00008c6f00008e6f0000906f0000926f0000946f0000966f0000986f00009a6f00009c6f00009e6f0000e26f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -721,9 +721,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 2e820000
-    m_LastClickedInstanceID: 33326
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: e4b40000
+    m_LastClickedInstanceID: 46308
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300005c6800004269000040660000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -810,7 +810,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 33326
+  m_LastSelectedObjectID: 42940
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52

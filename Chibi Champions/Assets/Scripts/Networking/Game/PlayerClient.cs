@@ -10,26 +10,43 @@ using UnityEngine.UI;
 
 public class PlayerClient : MonoBehaviour
 {
+
+    ////////////////LOBBY STATE//////////////////
     [SerializeField] TMP_InputField messageInput;
     [SerializeField] TMP_InputField nameInput;
     [SerializeField] GameObject namePanel;
     [SerializeField] GameObject userListPanel;
+    [SerializeField] GameObject characterSelectPanel;
+    [SerializeField] GameObject lobbyPanel;
     [SerializeField] GameObject userListContent;
     [SerializeField] GameObject userPrefab;
     [SerializeField] GameObject messageHistoryContent;
     [SerializeField] GameObject messagePrefab;
     [SerializeField] TextMeshProUGUI nameText;
 
+
+    static bool nameChosen;
+    static bool isReady;
+    //////////////////////////////////////////////
+
+    /////////////CHARACTER SELECT STATE///////////
+    [SerializeField] Image[] playerIcons = new Image[3];
+    [SerializeField] Button[] characterButtons = new Button[3];
+    [SerializeField] Sprite[] unconfirmedCharacterImages = new Sprite[3];
+    [SerializeField] Sprite[] confirmedCharacterImages = new Sprite[3];
+
+    bool characterConfirmed;
+    string selectedCharacter = "Agumon";
+    //////////////////////////////////////////////
+
     static IPAddress ip;
     static IPEndPoint server;
     static Socket client;
     static byte[] buffer;
 
-    static bool nameChosen;
     static string username;
 
     static bool clientStarted;
-    static bool isReady;
 
     string[] connectedUsers = new string[3];
 
@@ -62,92 +79,108 @@ public class PlayerClient : MonoBehaviour
 
             if (recv > 0)
             {
+                string messageReceived = Encoding.ASCII.GetString(buffer, 0, recv);
+
                 switch(currentState)
                 {
                     case ClientStates.Lobby:
 
-                    string messageReceived = Encoding.ASCII.GetString(buffer, 0, recv);
-
-                    if (messageReceived.Contains("PLAYER_READY_STATUS.KEY"))
-                    {
-                        string[] messageSplit = messageReceived.Split(':');
-
-                        print($"{messageReceived} ||| {messageSplit[1]} ||| {messageSplit[2]}");
-
-                        string playerInd = messageSplit[1];
-                        string status = messageSplit[2];
-
-                        switch (playerInd)
+                        if (messageReceived.Contains("SEND_TO/CHARACTERSELECT.KEY"))
                         {
-                            case "0":
+                            currentState = ClientStates.CharacterSelect;
 
-                                if (status == "True")
-                                {
-
-                                    print("Changing The First Color");
-                                    userListContent.GetComponentsInChildren<Button>()[0].image.color = Color.green;
-                                }
-                                else
-                                {
-                                    userListContent.GetComponentsInChildren<Button>()[0].image.color = Color.gray;
-                                }
-
-                                break;
-
-                            case "1":
-
-                                if (status == "True")
-                                {
-                                    userListContent.GetComponentsInChildren<Button>()[1].image.color = Color.green;
-                                }
-                                else
-                                {
-                                    userListContent.GetComponentsInChildren<Button>()[1].image.color = Color.gray;
-                                }
-
-                                break;
-
-                            case "2":
-
-                                if (status == "True")
-                                {
-                                    userListContent.GetComponentsInChildren<Button>()[2].image.color = Color.green;
-                                }
-                                else
-                                {
-                                    userListContent.GetComponentsInChildren<Button>()[2].image.color = Color.gray;
-                                }
-
-                                break;
+                            characterSelectPanel.SetActive(true);
+                            lobbyPanel.SetActive(false);
                         }
-                    }
-                    else if (messageReceived.Contains("NEW/USER_CONNECTED.KEY"))
-                    {
-                        connectedUsers = new string[3];
-
-                        string[] names = messageReceived.Split(':');
-
-                        for (int i = 1; i < names.Length; i++)
+                        else if (messageReceived.Contains("PLAYER_READY_STATUS.KEY"))
                         {
-                            connectedUsers[i - 1] = names[i];
+                            string[] messageSplit = messageReceived.Split(':');
+
+                            string playerInd = messageSplit[1];
+                            string status = messageSplit[2];
+
+                            switch (playerInd)
+                            {
+                                case "0":
+
+                                    if (status == "True")
+                                    {
+
+                                        print("Changing The First Color");
+                                        userListContent.GetComponentsInChildren<Button>()[0].image.color = Color.green;
+                                    }
+                                    else
+                                    {
+                                        userListContent.GetComponentsInChildren<Button>()[0].image.color = Color.gray;
+                                    }
+
+                                    break;
+
+                                case "1":
+
+                                    if (status == "True")
+                                    {
+                                        userListContent.GetComponentsInChildren<Button>()[1].image.color = Color.green;
+                                    }
+                                    else
+                                    {
+                                        userListContent.GetComponentsInChildren<Button>()[1].image.color = Color.gray;
+                                    }
+
+                                    break;
+
+                                case "2":
+
+                                    if (status == "True")
+                                    {
+                                        userListContent.GetComponentsInChildren<Button>()[2].image.color = Color.green;
+                                    }
+                                    else
+                                    {
+                                        userListContent.GetComponentsInChildren<Button>()[2].image.color = Color.gray;
+                                    }
+
+                                    break;
+                            }
+                        }
+                        else if (messageReceived.Contains("NEW/USER_CONNECTED.KEY"))
+                        {
+                            connectedUsers = new string[3];
+
+                            string[] names = messageReceived.Split(':');
+
+                            for (int i = 1; i < names.Length; i++)
+                            {
+                                connectedUsers[i - 1] = names[i];
+                            }
+
+                            SetUserList(connectedUsers);
+                        }
+                        else if (nameChosen)
+                        {
+                            string[] messageSplit = messageReceived.Split(':');
+
+                            messageHistory.Add(new Tuple<string, string>(messageSplit[0], messageSplit[1]));
+
+                            UpdateMessageHistory();
                         }
 
-                        SetUserList(connectedUsers);
-                    }
-                    else if (nameChosen)
-                    {
-                        string[] messageSplit = messageReceived.Split(':');
-
-                        messageHistory.Add(new Tuple<string, string>(messageSplit[0], messageSplit[1]));
-
-                        UpdateMessageHistory();
-                    }
-
-                    break;
+                        break;
 
                     case ClientStates.CharacterSelect:
 
+                        if (messageReceived.Contains("NEW_CHARACTER/SELECTED.KEY"))
+                        {
+                            string[] messageSplit = messageReceived.Split(':');
 
+                            UpdateSelectedCharacters(messageSplit[1], messageSplit[2]);
+                        }
+                        else if (messageReceived.Contains("CONFIRMED_CHARACTER/SELECTED.KEY"))
+                        {
+                            string[] messageSplit = messageReceived.Split(':');
+
+                            UpdateSelectedCharacters(messageSplit[1], messageSplit[2], true);
+                        }
 
                         break;
 
@@ -202,6 +235,7 @@ public class PlayerClient : MonoBehaviour
                 break;
 
                 case ClientStates.CharacterSelect:
+
 
 
                     break;
@@ -397,6 +431,53 @@ public class PlayerClient : MonoBehaviour
         messageHistoryContent.GetComponent<RectTransform>().sizeDelta = new Vector2(messageHistoryContent.GetComponent<RectTransform>().sizeDelta.x, 100 * messageHistory.Count);
     }
 
+    public void UpdateSelectedCharacters(string playerIndex, string character, bool confirmed = false)
+    {
+        int index = int.Parse(playerIndex);
+
+        switch (character)
+        {
+            case "Drumstick":
+
+                if (confirmed)
+                {
+                    playerIcons[index].sprite = confirmedCharacterImages[0];
+                }
+                else
+                {
+                    playerIcons[index].sprite = unconfirmedCharacterImages[0];
+                }
+
+                break;
+
+            case "Rolfe":
+
+                if (confirmed)
+                {
+                    playerIcons[index].sprite = confirmedCharacterImages[1];
+                }
+                else
+                {
+                    playerIcons[index].sprite = unconfirmedCharacterImages[1];
+                }
+
+                break;
+
+            case "Potter":
+
+                if (confirmed)
+                {
+                    playerIcons[index].sprite = confirmedCharacterImages[2];
+                }
+                else
+                {
+                    playerIcons[index].sprite = unconfirmedCharacterImages[2];
+                }
+
+                break;
+        }
+    }
+
     public void SetIsReady()
     {
         isReady = !isReady;
@@ -408,6 +489,30 @@ public class PlayerClient : MonoBehaviour
         string readyMessage = $"PLAYER_READY_STATUS.KEY:{isReady.ToString()}";
 
         byte[] msg = Encoding.ASCII.GetBytes(readyMessage);
+
+        client.Send(msg);
+    }
+
+    public void SetSelectedCharacter(string character)
+    {
+        selectedCharacter = character;
+
+        print("Selected: " + selectedCharacter);
+
+        string characterMessage = $"NEW_CHARACTER/SELECTED.KEY:{selectedCharacter}";
+
+        byte[] msg = Encoding.ASCII.GetBytes(characterMessage);
+
+        client.Send(msg);
+    }
+
+    public void ConfirmSelectedCharacter()
+    {
+        characterConfirmed = true;
+
+        string confirmedMessage = $"CONFIRMED_CHARACTER/SELECTED.KEY";
+
+        byte[] msg = Encoding.ASCII.GetBytes(confirmedMessage);
 
         client.Send(msg);
     }

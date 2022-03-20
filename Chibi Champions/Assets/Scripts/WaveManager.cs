@@ -27,6 +27,13 @@ public class WaveManager : MonoBehaviour
 
    PlayerController[] playerList = new PlayerController[3];
 
+    public static WaveManager Instance { get; set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -179,5 +186,10 @@ public class WaveManager : MonoBehaviour
         }
 
         reader.Close();
+    }
+
+    public int GetEnemyCount(int waveNum)
+    {
+        return enemiesLists[waveNum].Count;
     }
 }

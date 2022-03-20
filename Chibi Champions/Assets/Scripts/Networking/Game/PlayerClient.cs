@@ -24,6 +24,7 @@ public class PlayerClient : MonoBehaviour
     [SerializeField] GameObject messagePrefab;
     [SerializeField] TextMeshProUGUI nameText;
 
+    List<Tuple<string, string>> messageHistory = new List<Tuple<string, string>>();
 
     static bool nameChosen;
     static bool isReady;
@@ -31,12 +32,13 @@ public class PlayerClient : MonoBehaviour
 
     /////////////CHARACTER SELECT STATE///////////
     [SerializeField] Image[] playerIcons = new Image[3];
-    [SerializeField] Button[] characterButtons = new Button[3];
     [SerializeField] Sprite[] unconfirmedCharacterImages = new Sprite[3];
     [SerializeField] Sprite[] confirmedCharacterImages = new Sprite[3];
 
-    bool characterConfirmed;
+    List<string> takenCharacters = new List<string>();
+
     string selectedCharacter = "Agumon";
+    bool isConfirmed;
     //////////////////////////////////////////////
 
     static IPAddress ip;
@@ -49,8 +51,6 @@ public class PlayerClient : MonoBehaviour
     static bool clientStarted;
 
     string[] connectedUsers = new string[3];
-
-    List<Tuple<string, string>> messageHistory = new List<Tuple<string, string>>();
 
     ClientStates currentState = ClientStates.Lobby;
 
@@ -181,9 +181,12 @@ public class PlayerClient : MonoBehaviour
 
                             UpdateSelectedCharacters(messageSplit[1], messageSplit[2], true);
                         }
+                        else
+                        {
+                            print("Server: " + messageReceived);
+                        }
 
                         break;
-
                 }
             }
             #endregion
@@ -435,6 +438,11 @@ public class PlayerClient : MonoBehaviour
     {
         int index = int.Parse(playerIndex);
 
+        if (confirmed)
+        {
+            takenCharacters.Add(character);
+        }
+
         switch (character)
         {
             case "Drumstick":
@@ -495,26 +503,50 @@ public class PlayerClient : MonoBehaviour
 
     public void SetSelectedCharacter(string character)
     {
-        selectedCharacter = character;
+        if (!isConfirmed)
+        {
+            for (int i = 0; i < takenCharacters.Count; i++)
+            {
+                if (takenCharacters[i] == character)
+                {
+                    return;
+                }
+            }
 
-        print("Selected: " + selectedCharacter);
+            selectedCharacter = character;
 
-        string characterMessage = $"NEW_CHARACTER/SELECTED.KEY:{selectedCharacter}";
+            print("Selected: " + selectedCharacter);
 
-        byte[] msg = Encoding.ASCII.GetBytes(characterMessage);
+            string characterMessage = $"NEW_CHARACTER/SELECTED.KEY:{selectedCharacter}";
 
-        client.Send(msg);
+            byte[] msg = Encoding.ASCII.GetBytes(characterMessage);
+
+            client.Send(msg);
+        }
     }
 
     public void ConfirmSelectedCharacter()
     {
-        characterConfirmed = true;
+        if (!isConfirmed)
+        {
+            for (int i = 0; i < takenCharacters.Count; i++)
+            {
+                if (takenCharacters[i] == selectedCharacter)
+                {
+                    return;
+                }
+            }
 
-        string confirmedMessage = $"CONFIRMED_CHARACTER/SELECTED.KEY";
+            takenCharacters.Add(selectedCharacter);
 
-        byte[] msg = Encoding.ASCII.GetBytes(confirmedMessage);
+            string confirmedMessage = $"CONFIRMED_CHARACTER/SELECTED.KEY";
 
-        client.Send(msg);
+            byte[] msg = Encoding.ASCII.GetBytes(confirmedMessage);
+
+            client.Send(msg);
+
+            isConfirmed = true;
+        }
     }
 
     public void ExitClient()

@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CanvasManager : MonoBehaviour
 {
     [SerializeField] Canvas interactMenu;
+    [SerializeField] TMP_Text interactText;
 
     bool towerMenuOpen;
 
@@ -29,6 +31,7 @@ public class CanvasManager : MonoBehaviour
 
     public void OpenTowerMenu()
     {
+        interactText.alpha = 0;
         interactMenu.gameObject.SetActive(true);
         RemoveCursorLock();
         towerMenuOpen = true;
@@ -36,6 +39,7 @@ public class CanvasManager : MonoBehaviour
 
     public void CloseTowerMenu()
     {
+        interactText.alpha = 1;
         interactMenu.gameObject.SetActive(false);
         ApplyCursorLock();
         towerMenuOpen = false;

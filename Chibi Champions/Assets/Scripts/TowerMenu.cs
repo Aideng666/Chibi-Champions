@@ -67,7 +67,7 @@ public class TowerMenu : MonoBehaviour
             buttons[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = towers[i].name;
         }
 
-        //buttons[4].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Sell Tower For {currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7} Points";
+        buttons[4].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Sell Tower For {currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7} Points";
     }
 
     public void SetPlatform(Transform plat)

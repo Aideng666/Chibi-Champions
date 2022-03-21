@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Rolfe : PlayerController
 {
@@ -9,16 +10,30 @@ public class Rolfe : PlayerController
 
     int currentBeacons = 0;
 
+    public TMP_Text beaconNumberText;
+    public GameObject beaconAmount;
+    int beaconsPlaced = 0;
+    bool beaconActivated = false;
+
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
+
+        beaconsPlaced = maxBeacons;
+
+        beaconAmount.SetActive(true);
+        beaconNumberText.text = beaconsPlaced.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
         base.Update();
+
+        beaconNumberText.text = beaconsPlaced.ToString();
+
+        AbilityCooldown(beaconActivated);
     }
 
     protected override void Attack()
@@ -48,6 +63,13 @@ public class Rolfe : PlayerController
         {
             var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
             currentBeacons++;
+
+            beaconsPlaced--;
+            beaconActivated = true;
+        }
+        else
+        {
+            beaconActivated = false;
         }
     }
 
@@ -74,6 +96,8 @@ public class Rolfe : PlayerController
         if (currentBeacons > 0)
         {
             currentBeacons--;
+
+            beaconsPlaced++;
         }
     }
 

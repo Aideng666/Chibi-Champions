@@ -89,6 +89,14 @@ MonoBehaviour:
   attackDelay: 0
   upgradeCosts: 900100002003000008070000
   firePoint: {fileID: 5573766545861167648}
+  upgradeNames:
+  - Global Ordinance
+  - Death Ray
+  - Melting Beam
+  upgradeImages:
+  - {fileID: 21300000, guid: 337e3aada58c10c45bde8dab9edd5d08, type: 3}
+  - {fileID: 21300000, guid: 7b71c5c36e928f94fb6d4f32bcb98712, type: 3}
+  - {fileID: 21300000, guid: 60f0fda13995bc4448df59ea92d2d2ad, type: 3}
   towerName: Chicken Laser
 --- !u!1 &7540970448476818788
 GameObject:

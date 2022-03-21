@@ -159,4 +159,24 @@ public class AnimController : MonoBehaviour
             }
         }
     }
+
+    public void PlayPlayerJumpAnim(Animator anim)
+    {
+        anim.SetTrigger("Jump");
+    }
+
+    public void PlayPlayerAttackAnim(Animator anim)
+    {
+        anim.SetTrigger("Attack");
+    }
+
+    public void PlayPlayerDeathAnim(Animator anim)
+    {
+        anim.SetTrigger("Died");
+    }
+
+    public void PlayPlayerAbilityAnim(Animator anim)
+    {
+        anim.SetTrigger("Ability");
+    }
 }

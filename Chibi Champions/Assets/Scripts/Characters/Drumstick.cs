@@ -46,21 +46,9 @@ public class Drumstick : PlayerController
     {
         if (Input.GetMouseButtonDown(0) && CanLightAttack())
         {
-            Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, lightAttackRange, enemyLayer);
+            AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>());
 
-            foreach (Collider enemy in hitEnemies)
-            {
-                if (enemy.tag == "Enemy")
-                {
-                    enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
-                    enemy.GetComponentInParent<Enemy>().Knockback(20, transform);
-                    enemy.GetComponentInParent<Enemy>().SetLastHit(this);
-
-                    ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);
-                }
-            }
-
-            //AnimController.Instance.PlayPlayerAttackAnim();
+            StartCoroutine(DelayBeforeAttack());
         }
         if (Input.GetMouseButtonDown(1) && CanHeavyAttack())
         {
@@ -69,6 +57,8 @@ public class Drumstick : PlayerController
             ParticleManager.Instance.SpawnParticle(ParticleTypes.HighJump, transform.position);
 
             groundPoundActivated = true;
+
+            AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>());
         }
     }
 
@@ -92,5 +82,24 @@ public class Drumstick : PlayerController
         }
 
         speedParticleActivated = false;
+    }
+
+    IEnumerator DelayBeforeAttack()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, lightAttackRange, enemyLayer);
+
+        foreach (Collider enemy in hitEnemies)
+        {
+            if (enemy.tag == "Enemy")
+            {
+                enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
+                enemy.GetComponentInParent<Enemy>().Knockback(20, transform);
+                enemy.GetComponentInParent<Enemy>().SetLastHit(this);
+
+                ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);
+            }
+        }
     }
 }

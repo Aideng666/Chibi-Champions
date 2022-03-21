@@ -120,6 +120,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded)
         {
+            AnimController.Instance.PlayPlayerJumpAnim(GetComponentInChildren<Animator>());
+
             StartCoroutine(Jump());
         }
 
@@ -278,12 +280,14 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(DeathTimer());
 
-        MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
+        AnimController.Instance.PlayPlayerDeathAnim(GetComponentInChildren<Animator>());
 
-        foreach(MeshRenderer mesh in meshes)
-        {
-            mesh.enabled = false;
-        }
+        //MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
+
+        //foreach(MeshRenderer mesh in meshes)
+        //{
+        //    mesh.enabled = false;
+        //}
     }
 
     IEnumerator DeathTimer()

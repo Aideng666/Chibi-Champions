@@ -14,7 +14,7 @@ public class TowerMenu : MonoBehaviour
     [SerializeField] Image[] towerImages;
     [SerializeField] TMP_Text[] towerBaseCosts;
     [SerializeField] TMP_Text upgradeCostText;
-    [SerializeField] Image level1Upgrades;
+    [SerializeField] TMP_Text upgradeNameText;
     public CharacterDatabase characterDB;
     Character character;
 
@@ -67,13 +67,27 @@ public class TowerMenu : MonoBehaviour
             buttons[4].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Sell For {currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7} Points";
                     
             towerLevelText.text = (currentTower.GetComponent<Tower>().GetLevel() - 1).ToString();
-            upgradeCostText.text = (currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()).ToString());           
-        }
+                      
+            if (currentTower.GetComponent<Tower>().GetLevel() == 4)
+            {
+                upgradeCostText.text = string.Empty;
+            }
+            else
+            {
+                upgradeCostText.text = currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()).ToString();
+            }
 
-        //if (currentTower.GetComponent<Tower>().GetLevel() == 4)
-        //{
-        //    buttons[3].gameObject.GetComponentInChildren<Button>().interactable = false;
-        //}
+            if (currentTower.GetComponent<Tower>().GetLevel() == 4)
+            {
+                buttons[3].gameObject.GetComponentInChildren<Button>().interactable = false;
+            }
+            else
+            {
+                buttons[3].gameObject.GetComponentInChildren<Button>().interactable = true;
+            }
+
+            //upgradeNameText.text = currentTower.GetComponent<Tower>().GetUpgradeName(currentTower.GetComponent<Tower>().GetLevel()).ToString();        
+        }
 
         for (int i = 0; i < 3; i++)
         {

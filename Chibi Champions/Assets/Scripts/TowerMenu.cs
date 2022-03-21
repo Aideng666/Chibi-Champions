@@ -60,14 +60,13 @@ public class TowerMenu : MonoBehaviour
         {
             upgradePanel.SetActive(true);
             buyPanel.SetActive(false);
+            buttons[4].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Sell For {currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7} Points";
         }
 
         for (int i = 0; i < 3; i++)
         {
             buttons[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = towers[i].name;
-        }
-
-        buttons[4].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Sell Tower For {currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7} Points";
+        }     
     }
 
     public void SetPlatform(Transform plat)

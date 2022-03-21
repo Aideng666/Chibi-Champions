@@ -10,6 +10,8 @@ public class Potter : PlayerController
     [SerializeField] float shotSpeed;
     [SerializeField] float healAmount;
 
+    bool healingNeedleActivated = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,8 @@ public class Potter : PlayerController
     void Update()
     {
         base.Update();
+
+        AbilityCooldown(healingNeedleActivated);
     }
 
     protected override void Attack()
@@ -56,6 +60,8 @@ public class Potter : PlayerController
 
             Vector3 direction = new Vector3();
 
+            healingNeedleActivated = true;
+
             if (Physics.Raycast(ray, out hit, 1000f, ~interactableLayer))
             {
                 var endPoint = hit.point;
@@ -73,6 +79,10 @@ public class Potter : PlayerController
             needle.GetComponentInChildren<Rigidbody>().velocity = direction * shotSpeed;
 
             Destroy(needle, 3);
+        }
+        else
+        {
+            healingNeedleActivated = false;
         }
     }
 

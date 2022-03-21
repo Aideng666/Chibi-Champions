@@ -15,6 +15,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] TMP_Text totalWavesText;
     [SerializeField] TMP_Text numberOfEnemiesText;
 
+    [SerializeField] TMP_Text currentPhaseText;
+
     int currentWave;
     int numberOfWaves;
 
@@ -45,6 +47,8 @@ public class WaveManager : MonoBehaviour
         playerList = FindObjectsOfType<PlayerController>();
 
         totalWavesText.text = numberOfWaves.ToString();
+
+        currentPhaseText.text = "Build Phase";
     }
 
     // Update is called once per frame
@@ -52,13 +56,15 @@ public class WaveManager : MonoBehaviour
     {
         if (CheckWaveComplete())
         {
+            currentPhaseText.text = "Build Phase";
+
             if (!waveCompletePointsAdded)
             {
                 foreach (PlayerController player in playerList)
                 {
                     if (player != null)
-                    {
-                        player.GetComponent<PointsManager>().AddPoints(200);
+                    {           
+                        //player.GetComponent<PointsManager>().AddPoints(200);
                     }
                 }
 
@@ -85,6 +91,8 @@ public class WaveManager : MonoBehaviour
 
     void BeginWave()
     {
+        currentPhaseText.text = "Combat Phase";
+
         print("The current Wave is " + (currentWave + 1));
        
         waveCompleteAlertFired = false;

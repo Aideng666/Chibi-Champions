@@ -71,22 +71,15 @@ public class TowerMenu : MonoBehaviour
             if (currentTower.GetComponent<Tower>().GetLevel() == 4)
             {
                 upgradeCostText.text = string.Empty;
+                buttons[3].gameObject.GetComponentInChildren<Button>().interactable = false;
+                upgradeNameText.text = currentTower.GetComponent<Tower>().GetUpgradeName(3);
             }
             else
             {
                 upgradeCostText.text = currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()).ToString();
-            }
-
-            if (currentTower.GetComponent<Tower>().GetLevel() == 4)
-            {
-                buttons[3].gameObject.GetComponentInChildren<Button>().interactable = false;
-            }
-            else
-            {
                 buttons[3].gameObject.GetComponentInChildren<Button>().interactable = true;
+                upgradeNameText.text = currentTower.GetComponent<Tower>().GetUpgradeName(currentTower.GetComponent<Tower>().GetLevel()).ToString();
             }
-
-            //upgradeNameText.text = currentTower.GetComponent<Tower>().GetUpgradeName(currentTower.GetComponent<Tower>().GetLevel()).ToString();        
         }
 
         for (int i = 0; i < 3; i++)

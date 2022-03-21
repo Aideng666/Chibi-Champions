@@ -58,7 +58,7 @@ public class WaveManager : MonoBehaviour
                 {
                     if (player != null)
                     {
-                        player.GetComponent<PointsManager>().AddPoints(200);
+                        //player.GetComponent<PointsManager>().AddPoints(200);
                     }
                 }
 

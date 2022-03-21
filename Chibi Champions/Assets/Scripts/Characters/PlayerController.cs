@@ -29,7 +29,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected Transform respawnLocation;
 
     [SerializeField] protected Image abilityImage;
+    [SerializeField] protected Image abilityImageMain;
     protected bool isCooldown = false;
+    [SerializeField] protected CharacterDatabase characterDB;
+    Character character;
 
     protected CharacterController controller;
     protected CinemachineVirtualCamera thirdPersonCam;
@@ -65,6 +68,10 @@ public class PlayerController : MonoBehaviour
         thirdPersonCam.Follow = cameraLookAt.transform;
 
         abilityImage.fillAmount = 0;
+
+        character = characterDB.GetCharacter(PlayerPrefs.GetInt("CharacterIndex"));
+        abilityImage.sprite = character.abilitySprites[1];
+        abilityImageMain.sprite = character.abilitySprites[1];
     }
 
     // Update is called once per frame

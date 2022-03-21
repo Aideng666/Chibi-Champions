@@ -11,6 +11,11 @@ public class TowerMenu : MonoBehaviour
 
     [SerializeField] GameObject towerPlatformPrefab;
 
+    [SerializeField] Image[] towerImages;
+    [SerializeField] TMP_Text[] towerBaseCosts;
+    public CharacterDatabase characterDB;
+    Character character;
+
     GameObject[] towers = new GameObject[3];
     Transform platform;
     Transform currentTower;
@@ -30,12 +35,24 @@ public class TowerMenu : MonoBehaviour
     private void Start()
     {
         buttons = GetComponentsInChildren<Button>();
+
+        character = characterDB.GetCharacter(PlayerPrefs.GetInt("CharacterIndex"));
     }
 
     private void Update()
     {
         if (currentMenuState == MenuState.Buy)
         {
+            for (int i = 0; i < towerImages.Length; ++i)
+            {
+                towerImages[i].sprite = character.towerSprites[i];
+            }
+
+            for (int i = 0; i < towerBaseCosts.Length; ++i)
+            {
+                towerBaseCosts[i].text = character.towerBaseCosts[i].ToString();
+            }
+
             upgradePanel.SetActive(false);
             buyPanel.SetActive(true);
         }

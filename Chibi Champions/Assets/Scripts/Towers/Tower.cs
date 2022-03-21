@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tower : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Tower : MonoBehaviour
     [SerializeField] protected Transform firePoint;
 
     [SerializeField] protected string[] upgradeNames = new string[3];
+    [SerializeField] protected Sprite[] upgradeImages = new Sprite[3];
+    [SerializeField] protected string towerName;
 
     protected TowerAttackPriority currentAttackPriority;
     
@@ -138,6 +141,16 @@ public class Tower : MonoBehaviour
     public string GetUpgradeName(int level)
     {
         return upgradeNames[level - 1];
+    }
+
+    public Sprite GetUpgradeImage(int level)
+    {
+        return upgradeImages[level - 1];
+    }
+
+    public string GetTowerName()
+    {
+        return towerName;
     }
 
     private void OnDrawGizmosSelected()

@@ -16,6 +16,8 @@ public class TowerMenu : MonoBehaviour
     public CharacterDatabase characterDB;
     Character character;
 
+    [SerializeField] TMP_Text towerLevelText;
+
     GameObject[] towers = new GameObject[3];
     Transform platform;
     Transform currentTower;
@@ -61,7 +63,14 @@ public class TowerMenu : MonoBehaviour
             upgradePanel.SetActive(true);
             buyPanel.SetActive(false);
             buttons[4].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Sell For {currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7} Points";
+                    
+            towerLevelText.text = (currentTower.GetComponent<Tower>().GetLevel() - 1).ToString();
         }
+
+        //if (currentTower.GetComponent<Tower>().GetLevel() == 4)
+        //{
+        //    buttons[3].gameObject.GetComponentInChildren<Button>().interactable = false;
+        //}
 
         for (int i = 0; i < 3; i++)
         {

@@ -332,8 +332,6 @@ public class PlayerClient : MonoBehaviour
 
                 for (int j = 0; j < oldUsers.Length; j++)
                 {
-                    print("Text From Old Users " + oldUsers[i].text);
-
                     if (username == oldUsers[i].text)
                     {
                         if (isReady)
@@ -393,8 +391,6 @@ public class PlayerClient : MonoBehaviour
     public void UpdateMessageHistory()
     {
         TextMeshProUGUI[] oldMessages = messageHistoryContent.GetComponentsInChildren<TextMeshProUGUI>();
-
-        print($"Number Of Old Messages: {oldMessages.Length} Number Of Messages In History: {messageHistory.Count}");
 
         int count = 0;
         foreach(TextMeshProUGUI message in oldMessages)

@@ -98,6 +98,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7b71c5c36e928f94fb6d4f32bcb98712, type: 3}
   - {fileID: 21300000, guid: 60f0fda13995bc4448df59ea92d2d2ad, type: 3}
   towerName: Chicken Laser
+  upgradeDescriptions:
+  - Increased Range
+  - Increased Damage
+  - Laser now slows enemies
 --- !u!1 &7540970448476818788
 GameObject:
   m_ObjectHideFlags: 0

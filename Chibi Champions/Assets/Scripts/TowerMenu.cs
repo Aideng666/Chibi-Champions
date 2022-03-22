@@ -13,6 +13,7 @@ public class TowerMenu : MonoBehaviour
 
     [SerializeField] Image[] towerImages;
     [SerializeField] TMP_Text[] towerBaseCosts;
+    [SerializeField] TMP_Text[] towerBaseDescriptions;
     [SerializeField] TMP_Text upgradeCostText;
     [SerializeField] TMP_Text upgradeNameText;
     [SerializeField] Image upgradeImageIcon;
@@ -21,6 +22,7 @@ public class TowerMenu : MonoBehaviour
     Character character;
 
     [SerializeField] TMP_Text towerLevelText;
+    [SerializeField] TMP_Text descriptionText;
 
     GameObject[] towers = new GameObject[3];
     Transform platform;
@@ -61,6 +63,11 @@ public class TowerMenu : MonoBehaviour
                 towerBaseCosts[i].text = character.towerBaseCosts[i].ToString();
             }
 
+            for (int i = 0; i < towerBaseDescriptions.Length; ++i)
+            {
+                towerBaseDescriptions[i].text = character.towerDescriptions[i];
+            }
+
             CannotPurchaseTower();
             CanPurchaseTower();
 
@@ -82,7 +89,7 @@ public class TowerMenu : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             buttons[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = towers[i].name;
-        }     
+        }    
     }
 
     public void SetPlatform(Transform plat)
@@ -219,13 +226,17 @@ public class TowerMenu : MonoBehaviour
 
             upgradeCostText.text = string.Empty;
             upgradeNameText.text = "Fully Upgraded";
-            upgradeImageIcon.sprite = currentTower.GetComponent<Tower>().GetUpgradeImage(3);        
+            upgradeImageIcon.sprite = currentTower.GetComponent<Tower>().GetUpgradeImage(3);
+            
+            descriptionText.text = currentTower.GetComponent<Tower>().GetUpgradeDescriptions(3);
         }
         else
         {
             upgradeCostText.text = currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()).ToString();       
             upgradeNameText.text = currentTower.GetComponent<Tower>().GetUpgradeName(currentTower.GetComponent<Tower>().GetLevel()).ToString();
             upgradeImageIcon.sprite = currentTower.GetComponent<Tower>().GetUpgradeImage(currentTower.GetComponent<Tower>().GetLevel());
+
+            descriptionText.text = currentTower.GetComponent<Tower>().GetUpgradeDescriptions(currentTower.GetComponent<Tower>().GetLevel());
         }
 
         if (!isMaxLevel)

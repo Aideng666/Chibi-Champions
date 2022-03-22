@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 522534452703667531}
   - component: {fileID: 1873191929397462063}
   m_Layer: 10
-  m_Name: PED
+  m_Name: S.A.P
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,4 +195,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: af5f00f04dc4dc840821a7745bd389be, type: 3}
   - {fileID: 21300000, guid: 5d47aab024075dd4092d4e7dbd4f0adc, type: 3}
   towerName: S.A.P
+  upgradeDescriptions:
+  - Grants Movement Speed
+  - Increased Damage Given
+  - Faster Travel Time
   sporePrefab: {fileID: 6634593626932089271, guid: 57beb904983b2aa4c9692e89ca3a0116, type: 3}

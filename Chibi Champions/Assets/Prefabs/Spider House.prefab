@@ -51,14 +51,28 @@ MonoBehaviour:
     m_Bits: 64
   defaultAttackPriority: 0
   attackRange: 8
-  towerCost: 400
+  towerCost: 1200
   towerDamage: 0
   attackDelay: 5
-  upgradeCosts: 58020000e8030000a4060000
+  upgradeCosts: e803000098080000b80b0000
   firePoint: {fileID: 135562295876674589}
+  upgradeNames:
+  - Aggressive Spiders
+  - 8 Eyes
+  - Spider Swarm
+  upgradeImages:
+  - {fileID: 21300000, guid: bd6ffa8d57b10c148b2c38a362c22698, type: 3}
+  - {fileID: 21300000, guid: e5f5ab9b2de16194b9dca1ecc3daab40, type: 3}
+  - {fileID: 21300000, guid: 1a272fc14e5d2e8499754cd3e1d1a674, type: 3}
+  towerName: Spider House
+  upgradeDescriptions:
+  - Tick Speed Increased
+  - Spider Vision Range Increased
+  - Increased Number of Spiders Spawned
   spiderPrefab: {fileID: 3151059426589653435, guid: 191609a3e4bdb81409e7d9177cb1d971, type: 3}
   spiderSpawnAmount: 3
   effectTickDelay: 2
+  maximumSpiders: 6
 --- !u!1 &6726876784771049457
 GameObject:
   m_ObjectHideFlags: 0

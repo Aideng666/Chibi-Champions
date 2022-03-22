@@ -20,8 +20,7 @@ public class AbilityTooltip : MonoBehaviour
     }
 
     public void SetText(string content, string header, string control)
-    {
-       
+    {      
         headerField.text = header;
         contentField.text = content;
         controlField.text = control;

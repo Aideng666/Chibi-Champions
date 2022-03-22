@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tower : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class Tower : MonoBehaviour
     [SerializeField] protected float attackDelay;
     [SerializeField] protected int[] upgradeCosts = new int[3];
     [SerializeField] protected Transform firePoint;
+
+    [SerializeField] protected string[] upgradeNames = new string[3];
+    [SerializeField] protected Sprite[] upgradeImages = new Sprite[3];
+    [SerializeField] protected string towerName;
+    [SerializeField] protected string[] upgradeDescriptions = new string[3];
 
     protected TowerAttackPriority currentAttackPriority;
     
@@ -131,6 +137,26 @@ public class Tower : MonoBehaviour
     public LayerMask GetEnemyLayer()
     {
         return enemyLayer;
+    }
+
+    public string GetUpgradeName(int level)
+    {
+        return upgradeNames[level - 1];
+    }
+
+    public Sprite GetUpgradeImage(int level)
+    {
+        return upgradeImages[level - 1];
+    }
+
+    public string GetTowerName()
+    {
+        return towerName;
+    }
+
+    public string GetUpgradeDescriptions(int level)
+    {
+        return upgradeDescriptions[level - 1];
     }
 
     private void OnDrawGizmosSelected()

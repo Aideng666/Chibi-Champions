@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
                 CanvasManager.Instance.OpenTowerMenu();
             }
             else if (CanvasManager.Instance.IsTowerMenuOpen() && (Input.GetKeyDown(KeyCode.Escape) || 
-                Input.GetKeyDown(KeyCode.E)) || !canInteract)
+                Input.GetKeyDown(KeyCode.E)) /*|| !canInteract*/)
             {
                 CanvasManager.Instance.CloseTowerMenu();
             }

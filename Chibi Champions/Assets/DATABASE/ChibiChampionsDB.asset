@@ -32,7 +32,7 @@ MonoBehaviour:
     - Fires a continuos beam of destruction
     - A mounted turret with a high fire rate
     abilityNames:
-    - Auto Attack
+    - Sword Slash
     - Ground Pound
     abilityDescriptions:
     - Swings a sharp feather sword
@@ -54,10 +54,10 @@ MonoBehaviour:
     - Spider House
     towerDescriptions:
     - Shoots sticky webs that slow down enemies
-    - Launches a tennis bomb that distracts enemies before blowing up
-    - Spawns miniature spiders that latch onto enemies dealing damage overtime
+    - Lobs a tennis ball that distracts enemies before exploding
+    - Spawns miniature spiders that latch onto enemies
     abilityNames:
-    - Auto Attack
+    - Claw Swipe
     - Knockback Beacon
     abilityDescriptions:
     - Swipes forwards twice with both claws
@@ -81,10 +81,9 @@ MonoBehaviour:
     towerDescriptions:
     - Shoots a black blob of paralyzing ink
     - Heals players standing inside the radius overtime
-    - Deploys pollen spores that attach to allies buffing them for a brief period
-      of time
+    - Deploys a pollen spore that buffs allies
     abilityNames:
-    - Auto Attack
+    - Octo Blaster
     - Healing Needle
     abilityDescriptions:
     - Shoots flying balls of black ink

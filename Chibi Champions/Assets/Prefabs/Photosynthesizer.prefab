@@ -150,11 +150,24 @@ MonoBehaviour:
     m_Bits: 64
   defaultAttackPriority: 0
   attackRange: 7
-  towerCost: 1100
+  towerCost: 2000
   towerDamage: 0
   attackDelay: 0
-  upgradeCosts: 200300009808000094110000
+  upgradeCosts: 40060000b80b0000d0070000
   firePoint: {fileID: 0}
+  upgradeNames:
+  - Spread the Love
+  - Mitochondria
+  - Energized
+  upgradeImages:
+  - {fileID: 21300000, guid: 2bb56b4fe4fb9464d91392333b00da55, type: 3}
+  - {fileID: 21300000, guid: 85a1c7d77fcf5f14ea9e24aba2aa44a1, type: 3}
+  - {fileID: 21300000, guid: d2d45fcf4d939e846b4e54e0e7a863dd, type: 3}
+  towerName: Photosynthesizer
+  upgradeDescriptions:
+  - Increased Radius
+  - Increased Healing
+  - Allies gain increased max health
   playerLayer:
     serializedVersion: 2
     m_Bits: 256

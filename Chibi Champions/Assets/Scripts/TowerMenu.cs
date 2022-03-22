@@ -13,6 +13,7 @@ public class TowerMenu : MonoBehaviour
 
     [SerializeField] Image[] towerImages;
     [SerializeField] TMP_Text[] towerBaseCosts;
+    [SerializeField] TMP_Text[] towerBaseDescriptions;
     [SerializeField] TMP_Text upgradeCostText;
     [SerializeField] TMP_Text upgradeNameText;
     [SerializeField] Image upgradeImageIcon;
@@ -60,6 +61,11 @@ public class TowerMenu : MonoBehaviour
             for (int i = 0; i < towerBaseCosts.Length; ++i)
             {
                 towerBaseCosts[i].text = character.towerBaseCosts[i].ToString();
+            }
+
+            for (int i = 0; i < towerBaseDescriptions.Length; ++i)
+            {
+                towerBaseDescriptions[i].text = character.towerDescriptions[i];
             }
 
             CannotPurchaseTower();

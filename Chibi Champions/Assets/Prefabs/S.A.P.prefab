@@ -181,10 +181,10 @@ MonoBehaviour:
     m_Bits: 64
   defaultAttackPriority: 0
   attackRange: 0
-  towerCost: 1600
+  towerCost: 1800
   towerDamage: 0
   attackDelay: 30
-  upgradeCosts: 200300009808000094110000
+  upgradeCosts: d0070000280a000008070000
   firePoint: {fileID: 522534452502065542}
   upgradeNames:
   - Zoomies

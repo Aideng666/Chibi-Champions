@@ -51,10 +51,10 @@ MonoBehaviour:
     m_Bits: 64
   defaultAttackPriority: 0
   attackRange: 8
-  towerCost: 400
+  towerCost: 1200
   towerDamage: 0
   attackDelay: 5
-  upgradeCosts: 58020000e8030000a4060000
+  upgradeCosts: e803000098080000b80b0000
   firePoint: {fileID: 135562295876674589}
   upgradeNames:
   - Aggressive Spiders

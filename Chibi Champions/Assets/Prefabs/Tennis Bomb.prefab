@@ -181,10 +181,10 @@ MonoBehaviour:
     m_Bits: 64
   defaultAttackPriority: 0
   attackRange: 20
-  towerCost: 200
+  towerCost: 1800
   towerDamage: 20
   attackDelay: 8
-  upgradeCosts: f4010000e8030000f00a0000
+  upgradeCosts: e8030000d007000088130000
   firePoint: {fileID: 3452136170508804976}
   upgradeNames:
   - Lob

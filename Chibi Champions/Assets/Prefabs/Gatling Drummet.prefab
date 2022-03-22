@@ -385,7 +385,7 @@ MonoBehaviour:
   towerCost: 1200
   towerDamage: 0.75
   attackDelay: 0.05
-  upgradeCosts: f4010000e803000098080000
+  upgradeCosts: e8030000d0070000800c0000
   firePoint: {fileID: 5153336333898162678}
   upgradeNames:
   - Protein Boost

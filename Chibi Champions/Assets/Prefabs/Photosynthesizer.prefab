@@ -150,10 +150,10 @@ MonoBehaviour:
     m_Bits: 64
   defaultAttackPriority: 0
   attackRange: 7
-  towerCost: 1100
+  towerCost: 2000
   towerDamage: 0
   attackDelay: 0
-  upgradeCosts: 200300009808000094110000
+  upgradeCosts: 40060000b80b0000d0070000
   firePoint: {fileID: 0}
   upgradeNames:
   - Spread the Love

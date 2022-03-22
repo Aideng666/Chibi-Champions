@@ -32,7 +32,7 @@ MonoBehaviour:
     - Fires a continuos beam of destruction
     - A mounted turret with a high fire rate
     abilityNames:
-    - Auto Attack
+    - Sword Slash
     - Ground Pound
     abilityDescriptions:
     - Swings a sharp feather sword
@@ -57,7 +57,7 @@ MonoBehaviour:
     - Launches a tennis bomb that distracts enemies before blowing up
     - Spawns miniature spiders that latch onto enemies dealing damage overtime
     abilityNames:
-    - Auto Attack
+    - Claw Swipe
     - Knockback Beacon
     abilityDescriptions:
     - Swipes forwards twice with both claws
@@ -84,7 +84,7 @@ MonoBehaviour:
     - Deploys pollen spores that attach to allies buffing them for a brief period
       of time
     abilityNames:
-    - Auto Attack
+    - Octo Blaster
     - Healing Needle
     abilityDescriptions:
     - Shoots flying balls of black ink

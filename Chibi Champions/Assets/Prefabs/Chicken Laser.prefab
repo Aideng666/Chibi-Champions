@@ -84,10 +84,10 @@ MonoBehaviour:
     m_Bits: 64
   defaultAttackPriority: 0
   attackRange: 10
-  towerCost: 600
+  towerCost: 800
   towerDamage: 0.05
   attackDelay: 0
-  upgradeCosts: 900100002003000008070000
+  upgradeCosts: e803000040060000b80b0000
   firePoint: {fileID: 5573766545861167648}
   upgradeNames:
   - Global Ordinance

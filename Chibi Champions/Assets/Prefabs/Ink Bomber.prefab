@@ -53,10 +53,10 @@ MonoBehaviour:
     m_Bits: 64
   defaultAttackPriority: 0
   attackRange: 8
-  towerCost: 200
+  towerCost: 500
   towerDamage: 0
   attackDelay: 3
-  upgradeCosts: f40100008403000078050000
+  upgradeCosts: b00400000807000034080000
   firePoint: {fileID: 3509385339138943341}
   upgradeNames:
   - Octopus Reach

@@ -50,8 +50,16 @@ MonoBehaviour:
   blurbText: {fileID: 8885227174728178037}
   blurbs:
   - Remember to upgrade your towers!
-  - Patamon loves Chris
-  - Agumon Rules!
+  - Protect the cure at all costs
+  - Did Drumstick cross the road?
+  - "Target slowed enemies hit by Rolfe\u2019s webs"
+  - Potter's favourite food is watermelon
+  - Use your ability to gain an upper hand!
+  - Potter's S.A.P will follow you
+  - Drumstick likes to bathe in oil
+  - Save your points to buy stronger towers!
+  - Who let Rolfe out?
+  - Don't fear, Potter's here!
 --- !u!1 &2224172296500336336
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.031372547, g: 1, b: 0.18455331, a: 1}
+  m_Color: {r: 1, g: 0.2028302, b: 0.91713685, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -123,7 +131,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.67
+  m_FillAmount: 0.4
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -139,6 +147,7 @@ GameObject:
   - component: {fileID: 2224172296547220754}
   - component: {fileID: 2224172296547220748}
   - component: {fileID: 2224172296547220749}
+  - component: {fileID: 6336704406979725710}
   m_Layer: 5
   m_Name: Loading Text
   m_TagString: Untagged
@@ -163,7 +172,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 56.56, y: -409}
+  m_AnchoredPosition: {x: 56.56, y: -442}
   m_SizeDelta: {x: 113.1199, y: 28.442}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2224172296547220748
@@ -263,6 +272,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!95 &6336704406979725710
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2224172296547220755}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9e4dc67c9230a01428f3c69bc7f38b01, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2224172296909464597
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,7 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1764706, g: 0.105882354, b: 0.6156863, a: 1}
+  m_Color: {r: 0.25490198, g: 0.8470589, b: 0.94117653, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -645,7 +674,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a021718957c9eee46bfd23a45b9e187a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c71affd0c37362545a2cd7b08ae33f82, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -253,7 +253,7 @@ MonoBehaviour:
   towerCost: 500
   towerDamage: 10
   attackDelay: 1
-  upgradeCosts: 580200008403000040060000
+  upgradeCosts: 2003000040060000a00f0000
   firePoint: {fileID: 3258824005039446072}
   upgradeNames:
   - Hawkeye

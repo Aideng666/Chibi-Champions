@@ -67,6 +67,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a4e2559548c0f3749a75dde2d6e1d48e, type: 3}
   - {fileID: 21300000, guid: 9865cdde228efc64d8b9a94ec5e91047, type: 3}
   towerName: Ink Bomber
+  upgradeDescriptions:
+  - Increased Range
+  - Increased Srun Duration
+  - Increased Fire Rate
   inkPrefab: {fileID: 2139432763464514921, guid: fd310e0a2008f9846966ea0295f990c6, type: 3}
   partToRotate: {fileID: 3509385339373074476}
   stunDuration: 1.5

@@ -396,6 +396,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6aa3deba761ecbf4585c08e807c36b3c, type: 3}
   - {fileID: 21300000, guid: aa4baad62af5fd84f982de00ef2f9769, type: 3}
   towerName: Gatling Drummet
+  upgradeDescriptions:
+  - Increased Range
+  - Increased Fire Rate
+  - Increased Damage
   bulletSpeed: 45
   bulletPrefab: {fileID: 210590721982759650, guid: 177d00b56498632418e37441be548698, type: 3}
   partToRotate: {fileID: 8196288730349358280}

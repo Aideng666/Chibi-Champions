@@ -18,6 +18,7 @@ public class Tower : MonoBehaviour
     [SerializeField] protected string[] upgradeNames = new string[3];
     [SerializeField] protected Sprite[] upgradeImages = new Sprite[3];
     [SerializeField] protected string towerName;
+    [SerializeField] protected string[] upgradeDescriptions = new string[3];
 
     protected TowerAttackPriority currentAttackPriority;
     
@@ -151,6 +152,11 @@ public class Tower : MonoBehaviour
     public string GetTowerName()
     {
         return towerName;
+    }
+
+    public string GetUpgradeDescriptions(int level)
+    {
+        return upgradeDescriptions[level - 1];
     }
 
     private void OnDrawGizmosSelected()

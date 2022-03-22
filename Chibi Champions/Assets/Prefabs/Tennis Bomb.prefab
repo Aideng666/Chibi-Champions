@@ -195,6 +195,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2b303974dbf1b4347bbb5de44f0f177c, type: 3}
   - {fileID: 21300000, guid: 6ae39776f1271fd43bb7f83736587866, type: 3}
   towerName: Tennis Bomb
+  upgradeDescriptions:
+  - Longer Fuse Duration
+  - Increased Explosion Damage
+  - Cooldown Decreased
   tennisBallPrefab: {fileID: 7085326149237912130, guid: d3c636d0d193c8b4d94c9f4c06528e3e, type: 3}
   launchForce: 8
   fuseDuration: 5

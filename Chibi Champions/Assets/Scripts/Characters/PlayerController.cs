@@ -307,12 +307,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(deathTimer);
 
-        MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
-
-        foreach (MeshRenderer mesh in meshes)
-        {
-            mesh.enabled = true;
-        }
+        AnimController.Instance.SetPlayerRespawn(GetComponentInChildren<Animator>());
 
         GetComponent<Health>().ResetHealth();
 

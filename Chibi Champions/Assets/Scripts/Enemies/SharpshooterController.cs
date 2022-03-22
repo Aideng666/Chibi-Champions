@@ -35,22 +35,23 @@ public class SharpshooterController : Enemy
 
         if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0)
         {
-            if (lastHit != null)
+            foreach (PlayerController player in FindObjectsOfType<PlayerController>())
             {
                 if (level == 1)
                 {
-                    lastHit.GetComponent<PointsManager>().AddPoints(500);
+                    player.GetComponent<PointsManager>().AddPoints(50);
                 }
                 else if (level == 2)
                 {
-                    lastHit.GetComponent<PointsManager>().AddPoints(100);
+                    player.GetComponent<PointsManager>().AddPoints(100);
                 }
                 else if (level == 3)
                 {
-                    lastHit.GetComponent<PointsManager>().AddPoints(300);
-                }               
+                    player.GetComponent<PointsManager>().AddPoints(300);
+                }
             }
 
+            WaveManager.Instance.AddEnemyKilled();
             EnemyPool.Instance.AddToShooterPool(gameObject);
         }
     }

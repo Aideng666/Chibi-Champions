@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8888331764633667439}
   - component: {fileID: 805396111513884845}
   - component: {fileID: 4340994888627803085}
+  - component: {fileID: 5977501417020465303}
   m_Layer: 0
   m_Name: Ground Pound Effect
   m_TagString: Untagged
@@ -4870,3 +4871,15 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &5977501417020465303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6882069692888432129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e8d4a7e6e14ca4f94b6076b1802d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

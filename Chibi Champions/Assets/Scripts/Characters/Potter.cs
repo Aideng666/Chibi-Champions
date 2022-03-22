@@ -24,6 +24,8 @@ public class Potter : PlayerController
         base.Update();
 
         AbilityCooldown(healingNeedleActivated);
+
+        print(GetComponent<Health>().GetCurrentHealth());
     }
 
     protected override void Attack()
@@ -73,8 +75,6 @@ public class Potter : PlayerController
             }
 
             var needle = Instantiate(healingNeedlePrefab, attackPoint.position, Quaternion.identity);
-
-            needle.transform.localScale *= 2;
 
             needle.GetComponentInChildren<Rigidbody>().velocity = direction * shotSpeed;
 

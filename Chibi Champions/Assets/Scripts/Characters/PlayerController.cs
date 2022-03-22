@@ -52,8 +52,12 @@ public class PlayerController : MonoBehaviour
     protected bool effectApplied;
     protected bool isAlive = true;
 
+    protected bool isPlayerCharacter = true;
+
     int sporeLevel = 1;
     Effects currentEffect = Effects.None;
+
+    bool lost;
 
     // Start is called before the first frame update
     protected void Start()
@@ -99,9 +103,18 @@ public class PlayerController : MonoBehaviour
                 CanvasManager.Instance.OpenTowerMenu();
             }
             else if (CanvasManager.Instance.IsTowerMenuOpen() && (Input.GetKeyDown(KeyCode.Escape) || 
-                Input.GetKeyDown(KeyCode.E)) /*|| !canInteract*/)
+                Input.GetKeyDown(KeyCode.E)))
             {
                 CanvasManager.Instance.CloseTowerMenu();
+            }
+
+            if (CanvasManager.Instance.IsTowerMenuOpen())
+            {
+                CameraLock(true);
+            }
+            else
+            {
+                CameraLock(false);
             }
         }
     }
@@ -281,13 +294,6 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(DeathTimer());
 
         AnimController.Instance.PlayPlayerDeathAnim(GetComponentInChildren<Animator>());
-
-        //MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
-
-        //foreach(MeshRenderer mesh in meshes)
-        //{
-        //    mesh.enabled = false;
-        //}
     }
 
     IEnumerator DeathTimer()
@@ -363,6 +369,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void CameraLock(bool isLocked)
+    {
+        if (isLocked)
+        {
+            thirdPersonCam.enabled = false;
+        }
+        else
+        {
+            thirdPersonCam.enabled = true;
+        }
+    }
+
     public GameObject[] GetTowers()
     {
         return towers;
@@ -383,6 +401,11 @@ public class PlayerController : MonoBehaviour
         sporeLevel = level;
     }
 
+    public void SetLost(bool l)
+    {
+        lost = l;
+    }
+
     public bool GetIsAlive()
     {
         return isAlive;
@@ -391,6 +414,11 @@ public class PlayerController : MonoBehaviour
     public float GetLightAttackDamage()
     {
         return lightAttackDamage;
+    }
+
+    public bool GetIsPlayerCharacter()
+    {
+        return isPlayerCharacter;
     }
 
     private void OnDrawGizmosSelected()

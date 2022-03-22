@@ -8,15 +8,11 @@ public class ChickenLaser : Tower
     LineRenderer laserbeam;
     bool slowEnemies;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        laserbeam = GetComponentInChildren<LineRenderer>();
-    }
-
     // Update is called once per frame
     void Update()
     {
+        laserbeam = GetComponentInChildren<LineRenderer>();
+
         UpdateView();
 
         if (targetEnemy == null)

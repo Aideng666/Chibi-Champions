@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class HealingNeedle : MonoBehaviour
 {
+    [SerializeField] float healingRadius = 3;
     float healAmount = 15;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        Collider[] hitPlayers = Physics.OverlapSphere(transform.position, healingRadius);
+
+        foreach (Collider player in hitPlayers)
         {
-            collision.gameObject.GetComponentInParent<Health>().ModifyHealth(FindObjectOfType<Potter>().GetHealAmount());
+            if (player.tag == "Player")
+            {
+                player.GetComponentInParent<Health>().ModifyHealth(FindObjectOfType<Potter>().GetHealAmount());
+            }
         }
 
         Destroy(gameObject);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, healingRadius);
     }
 }

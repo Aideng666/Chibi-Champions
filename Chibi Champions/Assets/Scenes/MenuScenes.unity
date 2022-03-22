@@ -12136,8 +12136,8 @@ MonoBehaviour:
   nameInput: {fileID: 2094986019}
   namePanel: {fileID: 881777508}
   userListPanel: {fileID: 499622634}
-  characterSelectPanel: {fileID: 0}
-  lobbyPanel: {fileID: 0}
+  characterSelectPanel: {fileID: 1963906498}
+  lobbyPanel: {fileID: 1747212455}
   userListContent: {fileID: 723691774}
   userPrefab: {fileID: 659826387271462227, guid: 29ecf0c9130abfd4e997a5690b1fab90, type: 3}
   messageHistoryContent: {fileID: 1564669360}

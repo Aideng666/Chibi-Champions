@@ -16,6 +16,8 @@ public class SharpshooterController : Enemy
     [SerializeField] Image enemyLevelBG;
     [SerializeField] TMP_Text enemyLevel;
 
+    [SerializeField] AudioSource shot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,22 +37,23 @@ public class SharpshooterController : Enemy
 
         if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0)
         {
-            if (lastHit != null)
+            foreach (PlayerController player in FindObjectsOfType<PlayerController>())
             {
                 if (level == 1)
                 {
-                    lastHit.GetComponent<PointsManager>().AddPoints(500);
+                    player.GetComponent<PointsManager>().AddPoints(50);
                 }
                 else if (level == 2)
                 {
-                    lastHit.GetComponent<PointsManager>().AddPoints(100);
+                    player.GetComponent<PointsManager>().AddPoints(100);
                 }
                 else if (level == 3)
                 {
-                    lastHit.GetComponent<PointsManager>().AddPoints(300);
-                }               
+                    player.GetComponent<PointsManager>().AddPoints(300);
+                }
             }
 
+            WaveManager.Instance.AddEnemyKilled();
             EnemyPool.Instance.AddToShooterPool(gameObject);
         }
     }
@@ -60,6 +63,8 @@ public class SharpshooterController : Enemy
         Ray ray = new Ray(attackPoint.position, shotDirection);
 
         RaycastHit hit;
+
+        shot.Play();
 
         if (Physics.Raycast(ray, out hit, 100f, ~enemyLayer))
         {
@@ -89,6 +94,8 @@ public class SharpshooterController : Enemy
         Ray ray = new Ray(attackPoint.position, shotDirection);
 
         RaycastHit hit;
+
+        shot.Play();
 
         if (Physics.Raycast(ray, out hit, 100f, ~enemyLayer))
         {

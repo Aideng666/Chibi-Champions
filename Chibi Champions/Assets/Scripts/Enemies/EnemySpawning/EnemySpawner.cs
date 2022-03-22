@@ -47,8 +47,6 @@ public class EnemySpawner : MonoBehaviour
             enemy.GetComponent<GruntController>().SetLevel(levelList[currentSpawnAmount]);
 
             enemy.transform.position = transform.position;
-
-            print("Spawned Grunt At Level " + enemy.GetComponent<GruntController>().GetLevel());
         }
         else if(spawnList[currentSpawnAmount].name.Contains("SharpShooter"))
         {
@@ -57,8 +55,6 @@ public class EnemySpawner : MonoBehaviour
             enemy.GetComponent<SharpshooterController>().SetLevel(levelList[currentSpawnAmount]);
 
             enemy.transform.position = transform.position;
-
-            print("Spawned Shooter At Level " + enemy.GetComponent<SharpshooterController>().GetLevel());
         }
 
         currentSpawnAmount++;

@@ -172,6 +172,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   healingAmount: 0.001
+  healingParticles: {fileID: 5508785683348446380}
 --- !u!1001 &2674807933191500142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -229,6 +230,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7280e0e3b7c93534eabdbc0b8485bc96, type: 3}
+--- !u!198 &5508785683348446380 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7596992857558969794, guid: 7280e0e3b7c93534eabdbc0b8485bc96, type: 3}
+  m_PrefabInstance: {fileID: 2674807933191500142}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6392562612779812807 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9054524945449203369, guid: 7280e0e3b7c93534eabdbc0b8485bc96, type: 3}

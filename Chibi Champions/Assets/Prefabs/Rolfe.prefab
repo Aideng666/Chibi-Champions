@@ -900,6 +900,7 @@ GameObject:
   - component: {fileID: 6888943266945402817}
   - component: {fileID: 6888943266945402818}
   - component: {fileID: 6888943266945402877}
+  - component: {fileID: 6218796117631846592}
   m_Layer: 0
   m_Name: Rolfe
   m_TagString: Untagged
@@ -983,14 +984,23 @@ MonoBehaviour:
   interactDistance: 5
   lightAttackDelay: 0.75
   heavyAttackDelay: 0.75
+  deathTimer: 5
   interactText: {fileID: 0}
   cameraLookAt: {fileID: 6888943266243870148}
   towers:
   - {fileID: 180069341355437286, guid: dcd554d6d7b010c43a492042894187b6, type: 3}
   - {fileID: 3452136171878836063, guid: 59cb3fa370cd19147a0be179c98119db, type: 3}
   - {fileID: 4593806915371494033, guid: b6249eeca85bd2047a82823e57e3993a, type: 3}
+  respawnLocation: {fileID: 0}
+  jump: {fileID: 0}
+  dead: {fileID: 0}
+  abilityImage: {fileID: 0}
+  abilityImageMain: {fileID: 0}
+  characterDB: {fileID: 0}
   beaconPrefab: {fileID: 1344693683629327406, guid: b66d712e63a60e84489acf9193c19c81, type: 3}
   maxBeacons: 2
+  beaconNumberText: {fileID: 0}
+  beaconAmount: {fileID: 0}
 --- !u!114 &6888943266945402818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1004,6 +1014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingPoints: 0
+  pointsText: {fileID: 0}
 --- !u!95 &6888943266945402877
 Animator:
   serializedVersion: 4
@@ -1024,6 +1035,14 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!81 &6218796117631846592
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6888943266945402819}
+  m_Enabled: 1
 --- !u!1 &6888943267202439460
 GameObject:
   m_ObjectHideFlags: 0

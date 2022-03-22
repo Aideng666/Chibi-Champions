@@ -12,9 +12,13 @@ public class AlertText : MonoBehaviour
 
     TextMeshProUGUI alert;
 
+    bool isActive;
+
     private void OnEnable()
     {
         alert = GetComponent<TextMeshProUGUI>();
+
+        isActive = true;
     }
 
     // Update is called once per frame
@@ -26,7 +30,9 @@ public class AlertText : MonoBehaviour
         {
             if (currentAlertLifetime >= alertInfo.lifespan)
             {
-                gameObject.SetActive(false);
+                AlertManager.Instance.SetAlertPlaying(false);
+
+                Destroy(gameObject);
             }
 
             float t = currentAlertLifetime / alertInfo.lifespan;
@@ -60,5 +66,10 @@ public class AlertText : MonoBehaviour
         yield return new WaitForSeconds(alertInfo.delayBeforeFade);
 
         delayReached = true;
+    }
+
+    public bool GetActive()
+    {
+        return isActive;
     }
 }

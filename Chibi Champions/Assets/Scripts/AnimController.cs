@@ -175,6 +175,11 @@ public class AnimController : MonoBehaviour
         anim.SetTrigger("Died");
     }
 
+    public void SetPlayerRespawn(Animator anim)
+    {
+        anim.SetTrigger("Respawn");
+    }
+
     public void PlayPlayerAbilityAnim(Animator anim)
     {
         anim.SetTrigger("Ability");

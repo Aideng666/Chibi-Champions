@@ -31,6 +31,8 @@ public class TowerMenu : MonoBehaviour
 
     Button[] buttons;
 
+    bool isMaxLevel = false;
+
     public static TowerMenu Instance { get; private set; }
 
     private void Awake()
@@ -59,6 +61,9 @@ public class TowerMenu : MonoBehaviour
                 towerBaseCosts[i].text = character.towerBaseCosts[i].ToString();
             }
 
+            CannotPurchaseTower();
+            CanPurchaseTower();
+
             upgradePanel.SetActive(false);
             buyPanel.SetActive(true);
         }
@@ -69,23 +74,9 @@ public class TowerMenu : MonoBehaviour
             buttons[4].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Sell For {currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7} Points";
                     
             towerLevelText.text = (currentTower.GetComponent<Tower>().GetLevel() - 1).ToString();
-            towerName.text = currentTower.GetComponent<Tower>().GetTowerName();     
-            
-            if (currentTower.GetComponent<Tower>().GetLevel() == 4)
-            {
-                upgradeCostText.text = string.Empty;
-                buttons[3].gameObject.GetComponentInChildren<Button>().interactable = false;
-                upgradeNameText.text = "Fully Upgraded";
-                upgradeImageIcon.sprite = currentTower.GetComponent<Tower>().GetUpgradeImage(3);
-            }
-            else
-            {
-                upgradeCostText.text = currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()).ToString();
-                buttons[3].gameObject.GetComponentInChildren<Button>().interactable = true;
-                upgradeNameText.text = currentTower.GetComponent<Tower>().GetUpgradeName(currentTower.GetComponent<Tower>().GetLevel()).ToString();
-                upgradeImageIcon.sprite = currentTower.GetComponent<Tower>().GetUpgradeImage(currentTower.GetComponent<Tower>().GetLevel());
+            towerName.text = currentTower.GetComponent<Tower>().GetTowerName();
 
-            }
+            UpdateUpgradeUI();
         }
 
         for (int i = 0; i < 3; i++)
@@ -128,7 +119,7 @@ public class TowerMenu : MonoBehaviour
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[0].GetComponent<Tower>().GetCost());
         }
-        else
+        else 
         {
             print("Not Enough Points");
         }
@@ -159,7 +150,7 @@ public class TowerMenu : MonoBehaviour
             player.GetComponent<PointsManager>().SpendPoints(towers[2].GetComponent<Tower>().GetCost());
         }
         else
-        {
+        {         
             print("Not Enough Points");
         }
     }
@@ -172,7 +163,7 @@ public class TowerMenu : MonoBehaviour
             currentTower.GetComponent<Tower>().Upgrade();
             CanvasManager.Instance.CloseTowerMenu();
         }
-        else
+        else 
         {
             print("Not Enough Points");
         }
@@ -186,5 +177,73 @@ public class TowerMenu : MonoBehaviour
         player.GetComponent<PointsManager>().AddPoints((int)(currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7));
         Destroy(currentTower.gameObject);
         CanvasManager.Instance.CloseTowerMenu();
+    }
+
+    private void CannotPurchaseTower()
+    {
+        if (towers[0].GetComponent<Tower>().GetCost() > player.GetComponent<PointsManager>().GetCurrentPoints())
+        {
+            buttons[0].gameObject.GetComponentInChildren<Button>().interactable = false;
+        }
+        if (towers[1].GetComponent<Tower>().GetCost() > player.GetComponent<PointsManager>().GetCurrentPoints())
+        {
+            buttons[1].gameObject.GetComponentInChildren<Button>().interactable = false;
+        }
+        if (towers[2].GetComponent<Tower>().GetCost() > player.GetComponent<PointsManager>().GetCurrentPoints())
+        {
+            buttons[2].gameObject.GetComponentInChildren<Button>().interactable = false;
+        }
+    }
+
+    private void CanPurchaseTower()
+    {
+        if (towers[0].GetComponent<Tower>().GetCost() <= player.GetComponent<PointsManager>().GetCurrentPoints())
+        {
+            buttons[0].gameObject.GetComponentInChildren<Button>().interactable = true;
+        }
+        if (towers[1].GetComponent<Tower>().GetCost() <= player.GetComponent<PointsManager>().GetCurrentPoints())
+        {
+            buttons[1].gameObject.GetComponentInChildren<Button>().interactable = true;
+        }
+        if (towers[2].GetComponent<Tower>().GetCost() <= player.GetComponent<PointsManager>().GetCurrentPoints())
+        {
+            buttons[2].gameObject.GetComponentInChildren<Button>().interactable = true;
+        }
+    }
+
+    private void UpdateUpgradeUI()
+    {
+        if (currentTower.GetComponent<Tower>().GetLevel() == 4)
+        {
+            isMaxLevel = true;
+
+            upgradeCostText.text = string.Empty;
+            upgradeNameText.text = "Fully Upgraded";
+            upgradeImageIcon.sprite = currentTower.GetComponent<Tower>().GetUpgradeImage(3);        
+        }
+        else
+        {
+            upgradeCostText.text = currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()).ToString();       
+            upgradeNameText.text = currentTower.GetComponent<Tower>().GetUpgradeName(currentTower.GetComponent<Tower>().GetLevel()).ToString();
+            upgradeImageIcon.sprite = currentTower.GetComponent<Tower>().GetUpgradeImage(currentTower.GetComponent<Tower>().GetLevel());
+        }
+
+        if (!isMaxLevel)
+        {
+            if (currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()) <= player.GetComponent<PointsManager>().GetCurrentPoints())
+            {
+                buttons[3].gameObject.GetComponentInChildren<Button>().interactable = true;
+            }
+            if (currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()) > player.GetComponent<PointsManager>().GetCurrentPoints())
+            {
+                buttons[3].gameObject.GetComponentInChildren<Button>().interactable = false;
+            }
+        }
+
+        if (isMaxLevel)
+        {
+            buttons[3].gameObject.GetComponentInChildren<Button>().interactable = false;
+            isMaxLevel = false;
+        }
     }
 }

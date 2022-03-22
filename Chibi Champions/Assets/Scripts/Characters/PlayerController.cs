@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected GameObject[] towers = new GameObject[3];
     [SerializeField] protected Transform respawnLocation;
 
+    [SerializeField] AudioSource jump;
+    [SerializeField] AudioSource dead;
+
     [SerializeField] protected Image abilityImage;
     [SerializeField] protected Image abilityImageMain;
     protected bool isCooldown = false;
@@ -136,6 +139,8 @@ public class PlayerController : MonoBehaviour
             AnimController.Instance.PlayPlayerJumpAnim(GetComponentInChildren<Animator>());
 
             StartCoroutine(Jump());
+
+            jump.Play();
         }
 
         if (!isJumping)
@@ -294,6 +299,8 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(DeathTimer());
 
         AnimController.Instance.PlayPlayerDeathAnim(GetComponentInChildren<Animator>());
+
+        dead.Play();
     }
 
     IEnumerator DeathTimer()

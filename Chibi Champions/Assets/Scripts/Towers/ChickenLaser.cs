@@ -8,6 +8,8 @@ public class ChickenLaser : Tower
     LineRenderer laserbeam;
     bool slowEnemies;
 
+    [SerializeField] AudioSource beam;
+
     // Update is called once per frame
     void Update()
     {
@@ -20,6 +22,7 @@ public class ChickenLaser : Tower
             if (laserbeam.enabled)
             {
                 laserbeam.enabled = false;
+                beam.Stop();
             }
 
             return;
@@ -35,6 +38,7 @@ public class ChickenLaser : Tower
         if (!laserbeam.enabled)
         {
             laserbeam.enabled = true;
+            beam.Play();
         }
 
         laserbeam.SetPosition(0, firePoint.position);

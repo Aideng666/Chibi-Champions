@@ -16,6 +16,8 @@ public class SharpshooterController : Enemy
     [SerializeField] Image enemyLevelBG;
     [SerializeField] TMP_Text enemyLevel;
 
+    [SerializeField] AudioSource shot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +64,8 @@ public class SharpshooterController : Enemy
 
         RaycastHit hit;
 
+        shot.Play();
+
         if (Physics.Raycast(ray, out hit, 100f, ~enemyLayer))
         {
             var selection = hit.transform;
@@ -90,6 +94,8 @@ public class SharpshooterController : Enemy
         Ray ray = new Ray(attackPoint.position, shotDirection);
 
         RaycastHit hit;
+
+        shot.Play();
 
         if (Physics.Raycast(ray, out hit, 100f, ~enemyLayer))
         {

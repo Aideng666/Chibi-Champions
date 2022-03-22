@@ -9,6 +9,10 @@ public class Drumstick : PlayerController
     bool speedParticleActivated;
     ParticleSystem speedParticle;
 
+    [SerializeField] AudioSource fall;
+    [SerializeField] AudioSource land;
+    [SerializeField] AudioSource wack;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +29,9 @@ public class Drumstick : PlayerController
             GroundPoundAttack();
 
             Destroy(speedParticle.gameObject);
+
+            fall.Stop();
+            land.Play();
         }
 
         if (groundPoundActivated && isJumping && controller.velocity.y < 0 && !speedParticleActivated)
@@ -48,6 +55,8 @@ public class Drumstick : PlayerController
         {
             AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>());
 
+            wack.Play();
+
             StartCoroutine(DelayBeforeAttack());
         }
         if (Input.GetMouseButtonDown(1) && CanHeavyAttack())
@@ -57,6 +66,8 @@ public class Drumstick : PlayerController
             ParticleManager.Instance.SpawnParticle(ParticleTypes.HighJump, transform.position);
 
             groundPoundActivated = true;
+
+            fall.Play();
 
             AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>());
         }

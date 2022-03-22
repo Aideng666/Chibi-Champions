@@ -130,6 +130,8 @@ public class TowerMenu : MonoBehaviour
             platform.gameObject.SetActive(false);
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[0].GetComponent<Tower>().GetCost());
+
+            FindObjectOfType<AudioManager>().Play("Build");
         }
         else 
         {
@@ -145,6 +147,8 @@ public class TowerMenu : MonoBehaviour
             platform.gameObject.SetActive(false);
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[1].GetComponent<Tower>().GetCost());
+
+            FindObjectOfType<AudioManager>().Play("Build");
         }
         else
         {
@@ -160,6 +164,8 @@ public class TowerMenu : MonoBehaviour
             platform.gameObject.SetActive(false);
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[2].GetComponent<Tower>().GetCost());
+
+            FindObjectOfType<AudioManager>().Play("Build");
         }
         else
         {         
@@ -174,6 +180,8 @@ public class TowerMenu : MonoBehaviour
             player.GetComponent<PointsManager>().SpendPoints(currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()));
             currentTower.GetComponent<Tower>().Upgrade();
             CanvasManager.Instance.CloseTowerMenu();
+
+            FindObjectOfType<AudioManager>().Play("Improve");
         }
         else 
         {
@@ -188,6 +196,7 @@ public class TowerMenu : MonoBehaviour
         Instantiate(towerPlatformPrefab, new Vector3(towerPosition.x, towerPlatformPrefab.transform.position.y, towerPosition.z), Quaternion.identity, GameObject.Find("Platforms").transform);
         player.GetComponent<PointsManager>().AddPoints((int)(currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7));
         Destroy(currentTower.gameObject);
+        FindObjectOfType<AudioManager>().Play("Sell");
         CanvasManager.Instance.CloseTowerMenu();
     }
 

@@ -667,6 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingPoints: 50000
+  pointsText: {fileID: 0}
 --- !u!114 &6309032079135903695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -687,19 +688,24 @@ MonoBehaviour:
   speed: 10
   lightAttackRange: 0
   heavyAttackRange: 0
-  lightAttackDamage: 3
+  lightAttackDamage: 5
   heavyAttackDamage: 0
   gravity: 1.5
   jumpPower: 3
   interactDistance: 5
   lightAttackDelay: 0.3
   heavyAttackDelay: 5
+  deathTimer: 5
   interactText: {fileID: 0}
   cameraLookAt: {fileID: 6309032078632208579}
   towers:
   - {fileID: 3509385337888705508, guid: 7e0ab2448fe7c534592be9f09e1c95d9, type: 3}
   - {fileID: 5388470936469326682, guid: 1d8fac24cc6fd594f82dca6585443f45, type: 3}
   - {fileID: 522534452703667532, guid: 685f3abfc22c7bf47b12b641e7ddd994, type: 3}
+  respawnLocation: {fileID: 0}
+  abilityImage: {fileID: 0}
+  abilityImageMain: {fileID: 0}
+  characterDB: {fileID: 0}
   interactableLayer:
     serializedVersion: 2
     m_Bits: 4096

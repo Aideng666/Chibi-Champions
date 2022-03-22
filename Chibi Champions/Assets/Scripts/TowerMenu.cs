@@ -102,6 +102,11 @@ public class TowerMenu : MonoBehaviour
         currentTower = t;
     }
 
+    public Transform GetTower()
+    {
+        return currentTower;
+    }
+
     public void SetPlayer(PlayerController p)
     {
         player = p;

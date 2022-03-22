@@ -16,7 +16,5 @@ public class AlertManager : MonoBehaviour
     public void DisplayAlert(Alert alertInfo)
     {
         Instantiate(alertPrefab, gameObject.transform).GetComponent<AlertText>().SetInfo(alertInfo);
-
-        print("Info Sent: " + alertInfo.delayBeforeFade);
     }
 }

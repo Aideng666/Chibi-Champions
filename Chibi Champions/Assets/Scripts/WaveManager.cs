@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class WaveManager : MonoBehaviour
 {
@@ -28,7 +29,8 @@ public class WaveManager : MonoBehaviour
     List<List<GameObject>> enemiesLists = new List<List<GameObject>>();
     List<List<int>> enemyLevels = new List<List<int>>();
 
-    PlayerController[] playerList = new PlayerController[3];
+    int enemiesKilled = 0;
+    int currentLivingEnemies;
 
     public static WaveManager Instance { get; set; }
 
@@ -44,8 +46,6 @@ public class WaveManager : MonoBehaviour
 
         InitEnemiesLists();
 
-        playerList = FindObjectsOfType<PlayerController>();
-
         totalWavesText.text = numberOfWaves.ToString();
 
         currentPhaseText.text = "Build Phase";
@@ -54,18 +54,40 @@ public class WaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (currentWave > 0)
+        {
+            currentLivingEnemies = (enemiesLists[currentWave - 1].Count * enemySpawners.Count) - enemiesKilled;
+        }
+
+        numberOfEnemiesText.text = currentLivingEnemies.ToString();
+
         if (CheckWaveComplete())
         {
+            if (currentWave == 10)
+            {
+                StartCoroutine(WinGame());
+            }
+
             currentPhaseText.text = "Build Phase";
 
-            if (!waveCompletePointsAdded)
+            if (!waveCompletePointsAdded && currentWave > 0)
             {
-                foreach (PlayerController player in playerList)
+                PlayerController[] playerList = FindObjectsOfType<PlayerController>();
+          
+                if (playerList.Length == 1)
                 {
-                    if (player != null)
-                    {           
-                        //player.GetComponent<PointsManager>().AddPoints(200);
-                    }
+                    playerList[0].GetComponent<PointsManager>().AddPoints(300);
+                }
+                else if (playerList.Length == 2)
+                {
+                    playerList[0].GetComponent<PointsManager>().AddPoints(200);
+                    playerList[1].GetComponent<PointsManager>().AddPoints(200);
+                }
+                else if (playerList.Length == 3)
+                {
+                    playerList[0].GetComponent<PointsManager>().AddPoints(100);
+                    playerList[1].GetComponent<PointsManager>().AddPoints(100);
+                    playerList[2].GetComponent<PointsManager>().AddPoints(100);
                 }
 
                 waveCompletePointsAdded = true;
@@ -92,11 +114,10 @@ public class WaveManager : MonoBehaviour
     void BeginWave()
     {
         currentPhaseText.text = "Combat Phase";
-
-        print("The current Wave is " + (currentWave + 1));
        
         waveCompleteAlertFired = false;
         waveCompletePointsAdded = false;
+        ResetEnemiesKilled();
 
         foreach (EnemySpawner spawner in enemySpawners)
         {
@@ -106,8 +127,6 @@ public class WaveManager : MonoBehaviour
         currentWave++;
 
         currentWaveText.text = currentWave.ToString();
-
-        numberOfEnemiesText.text = Instance.GetEnemyCount(currentWave).ToString();
     }
 
     bool CheckWaveComplete()
@@ -117,17 +136,9 @@ public class WaveManager : MonoBehaviour
             return true;
         }
 
-        var enemyList = FindObjectsOfType<Enemy>();
-        int trueCheckCount = 0;
+        List<GameObject> enemyListPerSpawner = enemiesLists[currentWave - 1];
 
-        foreach (EnemySpawner spawner in enemySpawners)
-        {
-            if (spawner.GetFirstEnemySpawned() && enemyList.Length < 1)
-            {
-                trueCheckCount++;
-            }
-        }
-        if (trueCheckCount == enemySpawners.Count)
+        if (enemiesKilled == enemyListPerSpawner.Count * enemySpawners.Count)
         {
             if (!waveCompleteAlertFired)
             {
@@ -202,5 +213,29 @@ public class WaveManager : MonoBehaviour
     public int GetEnemyCount(int waveNum)
     {
         return enemiesLists[waveNum].Count;
+    }
+
+    public void AddEnemyKilled()
+    {
+        enemiesKilled++;
+    }
+
+    public void ResetEnemiesKilled()
+    {
+        enemiesKilled = 0;
+    }
+
+    public int GetCurrentLivingEnemies()
+    {
+        return currentLivingEnemies;
+    }
+
+    IEnumerator WinGame()
+    {
+        AlertManager.Instance.DisplayAlert(new Alert(Color.green, "YOU WIN!!", 2));
+
+        yield return new WaitForSeconds(3);
+
+        SceneManager.LoadScene("Win");
     }
 }

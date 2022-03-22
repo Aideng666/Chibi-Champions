@@ -37,11 +37,7 @@ MonoBehaviour:
     abilityDescriptions:
     - Swings a sharp feather sword
     - Jumps up in the air and slams down with full fury
-    towerBaseCosts: f401000020030000b0040000
-    tower1UpgradeSprites:
-    - {fileID: 21300000, guid: 7718a2c3607a42e4084330c3c92419e4, type: 3}
-    tower2UpgradeSprites: []
-    tower3UpgradeSprites: []
+    towerBaseCosts: f401000058020000b0040000
   - characterName: Rolfe
     classType: Defense
     characterPortrait: {fileID: 21300000, guid: ae242e90a0e9d0d489b054fd893209d8, type: 3}
@@ -68,10 +64,6 @@ MonoBehaviour:
     - Places a mini beacon that sends out signals knocking back any enemies that
       come into contact
     towerBaseCosts: f401000008070000b0040000
-    tower1UpgradeSprites:
-    - {fileID: 21300000, guid: a00ce7b0059e3af4389efa1557d36a8e, type: 3}
-    tower2UpgradeSprites: []
-    tower3UpgradeSprites: []
   - characterName: Potter
     classType: Support
     characterPortrait: {fileID: 21300000, guid: 4d022b733f9837a4a8cbd52b1d79d170, type: 3}
@@ -98,7 +90,3 @@ MonoBehaviour:
     - Shoots flying balls of black ink
     - Injects a needle full of medicine that heals anyone who gets injected by it
     towerBaseCosts: f4010000d007000008070000
-    tower1UpgradeSprites:
-    - {fileID: 21300000, guid: f2a5ac1066f2ca6488daa00d88ec1611, type: 3}
-    tower2UpgradeSprites: []
-    tower3UpgradeSprites: []

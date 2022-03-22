@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Cure : MonoBehaviour
 {
@@ -43,5 +44,19 @@ public class Cure : MonoBehaviour
             alert3Fired = true;
         }
 
+
+        if (GetComponent<Health>().GetCurrentHealth() <= 0)
+        {
+            StartCoroutine(DelayBeforeLoss());
+        }
+    }
+
+    IEnumerator DelayBeforeLoss()
+    {
+        AlertManager.Instance.DisplayAlert(new Alert(Color.blue, "You Lose!", 2));
+
+        yield return new WaitForSeconds(3);
+
+        SceneManager.LoadScene("Lose");
     }
 }

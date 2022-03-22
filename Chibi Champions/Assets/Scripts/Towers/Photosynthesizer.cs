@@ -6,11 +6,7 @@ public class Photosynthesizer : Tower
 {
     [SerializeField] LayerMask playerLayer;
     [SerializeField] float healingAmount;
-
-    private void Start()
-    {
-        ParticleManager.Instance.SpawnParticle(ParticleTypes.Healing, new Vector3(transform.position.x, transform.position.y - 2.5f, transform.position.z), attackRange);
-    }
+    [SerializeField] ParticleSystem healingParticles;
 
     // Update is called once per frame
     void Update()
@@ -19,7 +15,8 @@ public class Photosynthesizer : Tower
 
         Heal();
 
-        ParticleManager.Instance.SetShapeRadius(attackRange);
+        ParticleSystem.ShapeModule radius = healingParticles.shape;
+        radius.radius = attackRange;
     }
 
     void Heal()

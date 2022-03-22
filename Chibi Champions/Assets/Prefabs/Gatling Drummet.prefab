@@ -385,9 +385,21 @@ MonoBehaviour:
   towerCost: 1200
   towerDamage: 0.75
   attackDelay: 0.05
-  upgradeCosts: f4010000e803000098080000
+  upgradeCosts: e8030000d0070000800c0000
   firePoint: {fileID: 5153336333898162678}
+  upgradeNames:
+  - Protein Boost
+  - Rotisserie Machine
+  - Popeye
+  upgradeImages:
+  - {fileID: 21300000, guid: 91c6d26dfa28f9248bfd693e89a9252f, type: 3}
+  - {fileID: 21300000, guid: 6aa3deba761ecbf4585c08e807c36b3c, type: 3}
+  - {fileID: 21300000, guid: aa4baad62af5fd84f982de00ef2f9769, type: 3}
   towerName: Gatling Drummet
+  upgradeDescriptions:
+  - Increased Range
+  - Increased Fire Rate
+  - Increased Damage
   bulletSpeed: 45
   bulletPrefab: {fileID: 210590721982759650, guid: 177d00b56498632418e37441be548698, type: 3}
   partToRotate: {fileID: 8196288730349358280}

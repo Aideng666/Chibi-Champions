@@ -30,17 +30,17 @@ public class Cure : MonoBehaviour
 
         if (GetComponent<Health>().GetCurrentHealth() <= 50 && !alertFired)
         {
-            AlertManager.Instance.DisplayAlert(new Alert(Color.red, "The Cure Is At 50 HP!"));
+            AlertManager.Instance.DisplayAlert(new Alert(Color.red, "The Cure Is At 50 HP!", 1));
             alertFired = true;
         }
         if (GetComponent<Health>().GetCurrentHealth() <= 25 && !alert2Fired)
         {
-            AlertManager.Instance.DisplayAlert(new Alert(Color.red, "The Cure Is At 25 HP!"));
+            AlertManager.Instance.DisplayAlert(new Alert(Color.red, "The Cure Is At 25 HP!", 2));
             alert2Fired = true;
         }
         if (GetComponent<Health>().GetCurrentHealth() <= 10 && !alert3Fired)
         {
-            AlertManager.Instance.DisplayAlert(new Alert(Color.red, "The Cure Only Has 10 HP Left!"));
+            AlertManager.Instance.DisplayAlert(new Alert(Color.red, "The Cure Only Has 10 HP Left!", 2));
             alert3Fired = true;
         }
 
@@ -56,6 +56,8 @@ public class Cure : MonoBehaviour
         AlertManager.Instance.DisplayAlert(new Alert(Color.blue, "You Lose!", 2));
 
         yield return new WaitForSeconds(3);
+
+        CanvasManager.Instance.RemoveCursorLock();
 
         SceneManager.LoadScene("Lose");
     }

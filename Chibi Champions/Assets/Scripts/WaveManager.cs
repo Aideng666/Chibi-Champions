@@ -63,7 +63,7 @@ public class WaveManager : MonoBehaviour
 
         if (CheckWaveComplete())
         {
-            if (currentWave == 10)
+            if (currentWave == enemiesLists.Count)
             {
                 StartCoroutine(WinGame());
             }
@@ -235,6 +235,8 @@ public class WaveManager : MonoBehaviour
         AlertManager.Instance.DisplayAlert(new Alert(Color.green, "YOU WIN!!", 2));
 
         yield return new WaitForSeconds(3);
+
+        CanvasManager.Instance.RemoveCursorLock();
 
         SceneManager.LoadScene("Win");
     }

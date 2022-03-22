@@ -8,6 +8,7 @@ public class FeatherBlaster : Tower
     [SerializeField] GameObject featherPrefab;
     [SerializeField] GameObject partToRotate;
 
+    [SerializeField] AudioSource shot;
     bool shootTwoShots;
 
     // Update is called once per frame
@@ -17,6 +18,8 @@ public class FeatherBlaster : Tower
 
         if (targetEnemy == null)
         {
+            shot.Stop();
+
             return;
         }
 
@@ -43,6 +46,7 @@ public class FeatherBlaster : Tower
 
         AnimController.Instance.PlayTowerShootAnim(GetComponentInChildren<Animator>());
 
+        shot.Play();
         if (shootTwoShots)
         {
             SecondShot(enemy);

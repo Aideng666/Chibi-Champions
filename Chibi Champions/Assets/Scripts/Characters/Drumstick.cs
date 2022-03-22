@@ -8,7 +8,9 @@ public class Drumstick : PlayerController
     bool groundPoundActivated;
     bool speedParticleActivated;
     ParticleSystem speedParticle;
-
+    [SerializeField] AudioSource fall;
+    [SerializeField] AudioSource land;
+    [SerializeField] AudioSource wack;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,8 @@ public class Drumstick : PlayerController
             GroundPoundAttack();
 
             Destroy(speedParticle.gameObject);
+            fall.Stop();
+            land.Play();
         }
 
         if (groundPoundActivated && isJumping && controller.velocity.y < 0 && !speedParticleActivated)
@@ -32,6 +36,8 @@ public class Drumstick : PlayerController
             speedParticle = ParticleManager.Instance.SpawnParticle(ParticleTypes.Speed, transform.position).GetComponent<ParticleSystem>();
 
             speedParticleActivated = true;
+            fall.Play();
+
         }
 
         if (speedParticle != null)
@@ -46,7 +52,7 @@ public class Drumstick : PlayerController
         if (Input.GetMouseButtonDown(0) && CanLightAttack())
         {
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, lightAttackRange, enemyLayer);
-
+            wack.Play();
             foreach (Collider enemy in hitEnemies)
             {
                 if (enemy.tag == "Enemy")

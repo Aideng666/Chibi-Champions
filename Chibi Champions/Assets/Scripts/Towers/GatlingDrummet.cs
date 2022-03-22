@@ -8,6 +8,8 @@ public class GatlingDrummet : Tower
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] GameObject partToRotate;
 
+    [SerializeField] AudioSource shot;
+
     // Update is called once per frame
     void Update()
     {
@@ -15,7 +17,9 @@ public class GatlingDrummet : Tower
 
         if (targetEnemy == null)
         {
+ 
             AnimController.Instance.SetGatlingDrummetFiring(GetComponentInChildren<Animator>(), false);
+            shot.Stop();
 
             return;
         }
@@ -25,6 +29,8 @@ public class GatlingDrummet : Tower
         if (CanAttack())
         {
             Attack(targetEnemy);
+            shot.Play();
+
         }
     }
 

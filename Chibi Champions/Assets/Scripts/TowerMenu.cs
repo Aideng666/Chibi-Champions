@@ -9,6 +9,7 @@ public class TowerMenu : MonoBehaviour
     [SerializeField] GameObject buyPanel;
     [SerializeField] GameObject upgradePanel;
 
+
     GameObject[] towers = new GameObject[3];
     Transform platform;
     Transform currentTower;
@@ -82,10 +83,15 @@ public class TowerMenu : MonoBehaviour
             platform.gameObject.SetActive(false);
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[0].GetComponent<Tower>().GetCost());
+            FindObjectOfType<AudioManager>().Play("Build");
+
+
         }
         else
         {
             print("Not Enough Points");
+            FindObjectOfType<AudioManager>().Play("Error");
+
         }
     }
 
@@ -97,10 +103,15 @@ public class TowerMenu : MonoBehaviour
             platform.gameObject.SetActive(false);
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[1].GetComponent<Tower>().GetCost());
+
+            FindObjectOfType<AudioManager>().Play("Build");
+
         }
         else
         {
             print("Not Enough Points");
+            FindObjectOfType<AudioManager>().Play("Error");
+
         }
     }
 
@@ -112,10 +123,15 @@ public class TowerMenu : MonoBehaviour
             platform.gameObject.SetActive(false);
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[2].GetComponent<Tower>().GetCost());
+
+            FindObjectOfType<AudioManager>().Play("Build");
+
         }
         else
         {
             print("Not Enough Points");
+            FindObjectOfType<AudioManager>().Play("Error");
+
         }
     }
 
@@ -126,10 +142,15 @@ public class TowerMenu : MonoBehaviour
             player.GetComponent<PointsManager>().SpendPoints(currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()));
             currentTower.GetComponent<Tower>().Upgrade();
             CanvasManager.Instance.CloseTowerMenu();
+
+            FindObjectOfType<AudioManager>().Play("Improve");
+
         }
         else
         {
             print("Not Enough Points");
+            FindObjectOfType<AudioManager>().Play("Error");
+
         }
     }
 }

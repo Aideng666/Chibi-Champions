@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float defaultSpeed;
     [SerializeField] protected float attackDelay = 1.5f;
 
+    [SerializeField] AudioSource hit;
+
     protected Transform crystalTransform;
     protected Transform playerTransform;
     protected NavMeshAgent navMeshAgent;
@@ -166,6 +168,8 @@ public class Enemy : MonoBehaviour
     public void Knockback(float knockbackForce, Transform origin)
     {
         Rigidbody body = new Rigidbody();
+
+        hit.Play();
 
         if (!knockbackApplied)
         {

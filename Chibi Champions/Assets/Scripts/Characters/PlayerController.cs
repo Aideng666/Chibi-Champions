@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected GameObject[] towers = new GameObject[3];
     [SerializeField] protected Transform respawnLocation;
 
+    [SerializeField] AudioSource jump;
+    [SerializeField] AudioSource dead;
+
     protected CharacterController controller;
     protected CinemachineVirtualCamera thirdPersonCam;
 
@@ -108,6 +111,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded)
         {
             StartCoroutine(Jump());
+            jump.Play();
         }
 
         if (!isJumping)
@@ -239,6 +243,7 @@ public class PlayerController : MonoBehaviour
         {
             mesh.enabled = false;
         }
+        dead.Play();
     }
 
     IEnumerator DeathTimer()

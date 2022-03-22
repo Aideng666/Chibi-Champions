@@ -8,6 +8,7 @@ public class GruntController : Enemy
     [SerializeField] LayerMask crystalLayer;
     [SerializeField] LayerMask playerLayer;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +55,7 @@ public class GruntController : Enemy
         }
 
         delayBeforeAttackReached = false;
+
     }
 
     protected override IEnumerator DelayBeforeAttack()

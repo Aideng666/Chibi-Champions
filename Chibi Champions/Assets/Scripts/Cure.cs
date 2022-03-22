@@ -10,7 +10,6 @@ public class Cure : MonoBehaviour
     bool alertFired;
     bool alert2Fired;
     bool alert3Fired;
-
     private void Start()
     {
         healthText = GetComponentInChildren<TextMeshProUGUI>();
@@ -26,16 +25,21 @@ public class Cure : MonoBehaviour
         {
             AlertManager.Instance.DisplayAlert(new Alert(Color.red, "The Cure Is At 50 HP!"));
             alertFired = true;
+            FindObjectOfType<AudioManager>().Play("Cure Damage");
         }
         if (GetComponent<Health>().GetCurrentHealth() <= 25 && !alert2Fired)
         {
             AlertManager.Instance.DisplayAlert(new Alert(Color.red, "The Cure Is At 25 HP!"));
             alert2Fired = true;
+            FindObjectOfType<AudioManager>().Play("Cure Damage");
+
         }
         if (GetComponent<Health>().GetCurrentHealth() <= 10 && !alert3Fired)
         {
             AlertManager.Instance.DisplayAlert(new Alert(Color.red, "The Cure Only Has 10 HP Left!"));
             alert3Fired = true;
+            FindObjectOfType<AudioManager>().Play("Cure Damage");
+
         }
 
     }

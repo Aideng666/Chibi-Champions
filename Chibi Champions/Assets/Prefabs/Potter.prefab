@@ -598,6 +598,7 @@ GameObject:
   - component: {fileID: 6309032079135903693}
   - component: {fileID: 6309032079135903694}
   - component: {fileID: 6309032079135903695}
+  - component: {fileID: 2818888643879191058}
   m_Layer: 8
   m_Name: Potter
   m_TagString: Player
@@ -694,12 +695,14 @@ MonoBehaviour:
   interactDistance: 5
   lightAttackDelay: 0.3
   heavyAttackDelay: 5
+  deathTimer: 5
   interactText: {fileID: 0}
   cameraLookAt: {fileID: 6309032078632208579}
   towers:
   - {fileID: 3509385337888705508, guid: 7e0ab2448fe7c534592be9f09e1c95d9, type: 3}
   - {fileID: 5388470936469326682, guid: 1d8fac24cc6fd594f82dca6585443f45, type: 3}
   - {fileID: 522534452703667532, guid: 685f3abfc22c7bf47b12b641e7ddd994, type: 3}
+  respawnLocation: {fileID: 0}
   interactableLayer:
     serializedVersion: 2
     m_Bits: 4096
@@ -707,6 +710,14 @@ MonoBehaviour:
   healingNeedlePrefab: {fileID: 2555814566032613610, guid: 016f9ce8cd87e834096a63f0c168025d, type: 3}
   shotSpeed: 100
   healAmount: 15
+--- !u!81 &2818888643879191058
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6309032079135903664}
+  m_Enabled: 1
 --- !u!1 &6309032079285453264
 GameObject:
   m_ObjectHideFlags: 0

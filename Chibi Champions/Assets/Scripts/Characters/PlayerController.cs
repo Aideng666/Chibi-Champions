@@ -60,8 +60,6 @@ public class PlayerController : MonoBehaviour
     int sporeLevel = 1;
     Effects currentEffect = Effects.None;
 
-    bool lost;
-
     // Start is called before the first frame update
     protected void Start()
     {
@@ -84,6 +82,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            CanvasManager.Instance.RemoveCursorLock();
+
+            SceneManager.LoadScene("MenuScenes");
+        }
+
         if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0 && isAlive)
         {
             Die();
@@ -401,11 +406,6 @@ public class PlayerController : MonoBehaviour
     public void SetSporeLevel(int level)
     {
         sporeLevel = level;
-    }
-
-    public void SetLost(bool l)
-    {
-        lost = l;
     }
 
     public bool GetIsAlive()

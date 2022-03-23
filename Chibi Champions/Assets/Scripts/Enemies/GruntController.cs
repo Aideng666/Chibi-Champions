@@ -18,7 +18,7 @@ public class GruntController : Enemy
     {
         base.Start();
 
-        navMeshAgent.stoppingDistance = 1;
+        navMeshAgent.stoppingDistance = 2;
     }
 
     // Update is called once per frame

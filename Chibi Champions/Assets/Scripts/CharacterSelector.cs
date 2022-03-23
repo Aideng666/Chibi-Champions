@@ -13,19 +13,57 @@ public class CharacterSelector : MonoBehaviour
     Character character;
 
     PlayerController activeCharacter;
+
+    string[] playersCharacters = new string[3];
     // Start is called before the first frame update
     void Start()
     {
         activeCharacter = characterList[PlayerPrefs.GetInt("CharacterIndex")];
 
+        if (PlayerClient.Instance.GetClientStarted())
+        {
+            playersCharacters = PlayerClient.Instance.GetPlayersCharacters();
+
+            for (int i = 0; i < playersCharacters.Length; i++)
+            {
+                print(i + " " + playersCharacters[i]);
+
+                if (playersCharacters[i] != null)
+                {
+                    if (playersCharacters[i] == "Drumstick")
+                    {
+                        characterList[0].gameObject.SetActive(true);
+                    }
+                    if (playersCharacters[i] == "Rolfe")
+                    {
+                        characterList[1].gameObject.SetActive(true);
+                    }
+                    if (playersCharacters[i] == "Potter")
+                    {
+                        characterList[2].gameObject.SetActive(true);
+                    }
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < characterList.Length; i++)
+            {
+                if (PlayerPrefs.GetInt("CharacterIndex") == i)
+                {
+                    characterList[i].gameObject.SetActive(true);
+                }
+            }
+        }
+
         for (int i = 0; i < characterList.Length; i++)
         {
             if (PlayerPrefs.GetInt("CharacterIndex") == i)
             {
-                characterList[i].gameObject.SetActive(true);
-                activeCharacter = characterList[i];
+                characterList[i].SetIsPlayerCharacter(true);
             }
         }
+
 
         character = characterDB.GetCharacter(PlayerPrefs.GetInt("CharacterIndex"));
         characterPortrait.sprite = character.characterPortrait;

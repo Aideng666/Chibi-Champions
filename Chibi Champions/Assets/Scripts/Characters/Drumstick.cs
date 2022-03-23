@@ -22,31 +22,34 @@ public class Drumstick : PlayerController
     // Update is called once per frame
     void Update()
     {
-        base.Update();
-
-        if (groundPoundActivated && controller.isGrounded)
+        if (isPlayerCharacter)
         {
-            GroundPoundAttack();
+            base.Update();
 
-            Destroy(speedParticle.gameObject);
+            if (groundPoundActivated && controller.isGrounded)
+            {
+                GroundPoundAttack();
 
-            fall.Stop();
-            land.Play();
+                Destroy(speedParticle.gameObject);
+
+                fall.Stop();
+                land.Play();
+            }
+
+            if (groundPoundActivated && isJumping && controller.velocity.y < 0 && !speedParticleActivated)
+            {
+                speedParticle = ParticleManager.Instance.SpawnParticle(ParticleTypes.Speed, transform.position).GetComponent<ParticleSystem>();
+
+                speedParticleActivated = true;
+            }
+
+            if (speedParticle != null)
+            {
+                speedParticle.transform.position = transform.position;
+            }
+
+            AbilityCooldown(groundPoundActivated);
         }
-
-        if (groundPoundActivated && isJumping && controller.velocity.y < 0 && !speedParticleActivated)
-        {
-            speedParticle = ParticleManager.Instance.SpawnParticle(ParticleTypes.Speed, transform.position).GetComponent<ParticleSystem>();
-
-            speedParticleActivated = true;
-        }
-
-        if (speedParticle != null)
-        {
-            speedParticle.transform.position = transform.position;
-        }
-
-        AbilityCooldown(groundPoundActivated);
     }
 
     protected override void Attack()

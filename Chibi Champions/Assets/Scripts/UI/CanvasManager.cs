@@ -10,6 +10,8 @@ public class CanvasManager : MonoBehaviour
 
     bool towerMenuOpen;
 
+    //[SerializeField] Animator panelAnim;
+
     public static CanvasManager Instance { get; private set; }
 
     private void Awake()
@@ -40,6 +42,7 @@ public class CanvasManager : MonoBehaviour
         interactMenu.gameObject.SetActive(true);
         RemoveCursorLock();
         towerMenuOpen = true;
+        //ShowPanel();
     }
 
     public void CloseTowerMenu()
@@ -48,6 +51,7 @@ public class CanvasManager : MonoBehaviour
         interactMenu.gameObject.SetActive(false);
         ApplyCursorLock();
         towerMenuOpen = false;
+        //HidePanel();
     }
 
     void ApplyCursorLock()
@@ -66,4 +70,14 @@ public class CanvasManager : MonoBehaviour
     {
         return towerMenuOpen;
     }
+
+    //public void ShowPanel()
+    //{
+    //    panelAnim.SetTrigger("pressed");
+    //}
+
+    //public void HidePanel()
+    //{
+    //    panelAnim.SetTrigger("pressed");
+    //}
 }

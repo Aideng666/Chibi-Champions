@@ -37,6 +37,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected CharacterDatabase characterDB;
     Character character;
 
+    //[SerializeField] protected Image statusEffectImage;
+    //[SerializeField] protected Image statusEffectImageMain;
+    //protected bool isStatusEffectCooldown = false;
+
     protected CharacterController controller;
     protected CinemachineVirtualCamera thirdPersonCam;
     protected Transform rayCastSelection;
@@ -103,7 +107,8 @@ public class PlayerController : MonoBehaviour
             if (canInteract && Input.GetKeyDown(KeyCode.E) && !CanvasManager.Instance.IsTowerMenuOpen())
             {
                 TowerMenu.Instance.SetPlayer(this);
-                CanvasManager.Instance.OpenTowerMenu();
+                CanvasManager.Instance.OpenTowerMenu();             
+                
             }
             else if (CanvasManager.Instance.IsTowerMenuOpen() && (Input.GetKeyDown(KeyCode.Escape) || 
                 Input.GetKeyDown(KeyCode.E)))
@@ -370,6 +375,20 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    //protected void StatusEffectCooldown(bool isStatusEffectActivated)
+    //{
+    //    if (isStatusEffectActivated && isStatusEffectCooldown == false)
+    //    {
+    //        isStatusEffectCooldown = true;
+    //        statusEffectImage.fillAmount = 1;
+    //    }
+
+    //    if (isStatusEffectCooldown)
+    //    {
+    //        statusEffectImage.fillAmount -= 
+    //    }
+    //}
 
     public void CameraLock(bool isLocked)
     {

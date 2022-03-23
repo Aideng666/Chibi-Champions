@@ -29,11 +29,14 @@ public class Rolfe : PlayerController
     // Update is called once per frame
     void Update()
     {
-        base.Update();
+        if (isPlayerCharacter)
+        {
+            base.Update();
 
-        beaconNumberText.text = beaconsPlaced.ToString();
+            beaconNumberText.text = beaconsPlaced.ToString();
 
-        AbilityCooldown(beaconActivated);
+            AbilityCooldown(beaconActivated);
+        }
     }
 
     protected override void Attack()

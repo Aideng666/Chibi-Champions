@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] protected LayerMask enemyLayer;
+    [SerializeField] protected string characterName;
     [SerializeField] protected Transform cam;
     [SerializeField] protected Transform attackPoint;
     [SerializeField] protected float speed = 5;
@@ -439,6 +440,11 @@ public class PlayerController : MonoBehaviour
     public float GetLightAttackDamage()
     {
         return lightAttackDamage;
+    }
+
+    public string GetName()
+    {
+        return characterName;
     }
 
     public bool GetIsPlayerCharacter()

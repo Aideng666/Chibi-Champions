@@ -13,6 +13,13 @@ public class UDPClient : MonoBehaviour
 
     static bool clientStarted;
 
+    public static UDPClient Instance { get; set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +40,16 @@ public class UDPClient : MonoBehaviour
                 client.SendTo(msg, remoteEP);
             }
         }
+    }
+
+    public void SetPlayerPos(int playerIndex, Vector3 newPos)
+    {
+        float[] pos = new float[] {playerIndex, newPos.x, newPos.y, newPos.z };
+        byte[] bpos = new byte[pos.Length * sizeof(float)];
+
+        Buffer.BlockCopy(pos, 0, bpos, 0, bpos.Length);
+
+        client.SendTo(bpos, remoteEP);
     }
 
     public static void StartUDPClient()

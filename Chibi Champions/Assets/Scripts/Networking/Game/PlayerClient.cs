@@ -38,6 +38,7 @@ public class PlayerClient : MonoBehaviour
     List<string> takenCharacters = new List<string>();
 
     string selectedCharacter = "Agumon";
+    int selectedCharacterIndex = 0;
     bool isConfirmed;
     //////////////////////////////////////////////
 
@@ -192,13 +193,16 @@ public class PlayerClient : MonoBehaviour
 
                                 UpdateSelectedCharacters(messageSplit[1], messageSplit[2], true);
                             }
-                            else if (messageReceived.Contains("GAME_START_MESSAGE.KEY"))
-                            {
-                                BeginGameState();
-                            }
                             else
                             {
                                 print("Server: " + messageReceived);
+                            }
+
+                            if (messageReceived.Contains("GAME_START_MESSAGE.KEY"))
+                            {
+                                print("Beginning Game State");
+
+                                BeginGameState();
                             }
 
                             break;
@@ -251,12 +255,6 @@ public class PlayerClient : MonoBehaviour
                         }
 
                         break;
-
-                    case ClientStates.CharacterSelect:
-
-
-
-                        break;
                 }
 
                 #endregion
@@ -264,7 +262,25 @@ public class PlayerClient : MonoBehaviour
             #endregion
             else
             {
+                int recv = 0;
 
+                try
+                {
+                    recv = client.Receive(buffer);
+                }
+                catch (Exception e)
+                {
+
+                }
+
+                if (recv > 0)
+                {
+                    float[] posMessageReceived = new float[recv / sizeof(float)];
+
+                    Buffer.BlockCopy(buffer, 0, posMessageReceived, 0, recv);
+
+                    EntityManager.Instance.UpdateRemotePlayers((int)posMessageReceived[0], new Vector3(posMessageReceived[1], posMessageReceived[2], posMessageReceived[3]));
+                }
             }
 
         }
@@ -607,6 +623,11 @@ public class PlayerClient : MonoBehaviour
         return username;
     }
 
+    public string[] GetConnectedUsers()
+    {
+        return connectedUsers;
+    }
+
     public bool GetClientStarted()
     {
         return clientStarted;
@@ -615,5 +636,15 @@ public class PlayerClient : MonoBehaviour
     public string[] GetPlayersCharacters()
     {
         return playersCharacters;
+    }
+
+    public void SetSelectedCharacterIndex(int index)
+    {
+        selectedCharacterIndex = index;
+    }
+
+    public int GetSelectedCharacterIndex()
+    {
+        return selectedCharacterIndex;
     }
 }

@@ -26,8 +26,6 @@ public class CharacterSelector : MonoBehaviour
 
             for (int i = 0; i < playersCharacters.Length; i++)
             {
-                print(i + " " + playersCharacters[i]);
-
                 if (playersCharacters[i] != null)
                 {
                     if (playersCharacters[i] == "Drumstick")
@@ -44,6 +42,14 @@ public class CharacterSelector : MonoBehaviour
                     }
                 }
             }
+
+            for (int i = 0; i < characterList.Length; i++)
+            {
+                if (PlayerClient.Instance.GetSelectedCharacterIndex() == i)
+                {
+                    characterList[i].SetIsPlayerCharacter(true);
+                }
+            }
         }
         else
         {
@@ -52,17 +58,12 @@ public class CharacterSelector : MonoBehaviour
                 if (PlayerPrefs.GetInt("CharacterIndex") == i)
                 {
                     characterList[i].gameObject.SetActive(true);
+                    characterList[i].SetIsPlayerCharacter(true);
                 }
             }
         }
 
-        for (int i = 0; i < characterList.Length; i++)
-        {
-            if (PlayerPrefs.GetInt("CharacterIndex") == i)
-            {
-                characterList[i].SetIsPlayerCharacter(true);
-            }
-        }
+
 
 
         character = characterDB.GetCharacter(PlayerPrefs.GetInt("CharacterIndex"));

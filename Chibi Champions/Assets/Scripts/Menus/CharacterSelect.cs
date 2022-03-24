@@ -80,6 +80,11 @@ public class CharacterSelect : MonoBehaviour
     public void LockIn()
     {
         PlayerPrefs.SetInt("CharacterIndex", characterIndex);
+
+        if (PlayerClient.Instance.GetClientStarted())
+        { 
+            PlayerClient.Instance.SetSelectedCharacterIndex(characterIndex);
+        }
     }
 
     public int GetCharacterIndex()

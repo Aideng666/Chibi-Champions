@@ -26,7 +26,6 @@ public class CharacterSelector : MonoBehaviour
 
             for (int i = 0; i < playersCharacters.Length; i++)
             {
-                print(i + " " + playersCharacters[i]);
 
                 if (playersCharacters[i] != null)
                 {

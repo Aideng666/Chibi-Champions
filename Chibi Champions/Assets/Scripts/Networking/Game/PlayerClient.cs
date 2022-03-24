@@ -118,8 +118,6 @@ public class PlayerClient : MonoBehaviour
 
                                         if (status == "True")
                                         {
-
-                                            print("Changing The First Color");
                                             userListContent.GetComponentsInChildren<Button>()[0].image.color = Color.green;
                                         }
                                         else
@@ -509,7 +507,10 @@ public class PlayerClient : MonoBehaviour
 
     public void BeginGameState()
     {
+
         currentState = ClientStates.Gameplay;
+
+        gameObject.AddComponent<UDPClient>();
 
         SceneManager.LoadScene("Main");
     }
@@ -519,8 +520,6 @@ public class PlayerClient : MonoBehaviour
         isReady = !isReady;
 
         SetUserList(connectedUsers);
-
-        print(isReady.ToString());
 
         string readyMessage = $"PLAYER_READY_STATUS.KEY:{isReady.ToString()}";
 
@@ -542,8 +541,6 @@ public class PlayerClient : MonoBehaviour
             }
 
             selectedCharacter = character;
-
-            print("Selected: " + selectedCharacter);
 
             string characterMessage = $"NEW_CHARACTER/SELECTED.KEY:{selectedCharacter}";
 

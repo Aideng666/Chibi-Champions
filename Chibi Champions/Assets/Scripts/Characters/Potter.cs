@@ -21,11 +21,12 @@ public class Potter : PlayerController
     // Update is called once per frame
     void Update()
     {
-        base.Update();
+        if (isPlayerCharacter)
+        {
+            base.Update();
 
-        AbilityCooldown(healingNeedleActivated);
-
-        print(GetComponent<Health>().GetCurrentHealth());
+            AbilityCooldown(healingNeedleActivated);
+        }
     }
 
     protected override void Attack()

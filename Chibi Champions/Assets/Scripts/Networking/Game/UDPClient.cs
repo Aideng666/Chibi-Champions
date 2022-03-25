@@ -31,25 +31,28 @@ public class UDPClient : MonoBehaviour
     {
         if (clientStarted)
         {
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                string message = PlayerClient.Instance.GetUsername();
+            //if(Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    string message = PlayerClient.Instance.GetUsername();
 
-                byte[] msg = Encoding.ASCII.GetBytes(message);
+            //    byte[] msg = Encoding.ASCII.GetBytes(message);
 
-                client.SendTo(msg, remoteEP);
-            }
+            //    client.SendTo(msg, remoteEP);
+            //}
         }
     }
 
     public void SetPlayerPos(int playerIndex, Vector3 newPos)
     {
-        float[] pos = new float[] {playerIndex, newPos.x, newPos.y, newPos.z };
-        byte[] bpos = new byte[pos.Length * sizeof(float)];
+        if (clientStarted)
+        {
+            float[] pos = new float[] { playerIndex, newPos.x, newPos.y, newPos.z };
+            byte[] bpos = new byte[pos.Length * sizeof(float)];
 
-        Buffer.BlockCopy(pos, 0, bpos, 0, bpos.Length);
+            Buffer.BlockCopy(pos, 0, bpos, 0, bpos.Length);
 
-        client.SendTo(bpos, remoteEP);
+            client.SendTo(bpos, remoteEP);
+        }
     }
 
     public static void StartUDPClient()

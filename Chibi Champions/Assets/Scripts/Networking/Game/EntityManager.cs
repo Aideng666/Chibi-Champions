@@ -42,10 +42,12 @@ public class EntityManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha0))
         {
             sendsPerSecond++;
+            print($"Raised Sending Interval To {sendsPerSecond} / Second"); ;
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
             sendsPerSecond--;
+            print($"Lowered Sending Interval To {sendsPerSecond} / Second"); ;
         }
 
         if (CanSendMessage())

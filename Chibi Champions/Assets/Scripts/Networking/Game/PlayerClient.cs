@@ -293,8 +293,8 @@ public class PlayerClient : MonoBehaviour
         try
         {
             //REPLACE THE IP BELOW WITH YOUR AWS SERVER IP
-            //IPAddress ip = IPAddress.Parse("54.208.168.94");
-            ip = IPAddress.Parse("127.0.0.1");
+            ip = IPAddress.Parse("54.208.168.94");
+            //ip = IPAddress.Parse("127.0.0.1");
             server = new IPEndPoint(ip, 11112);
 
             client = new Socket(AddressFamily.InterNetwork,

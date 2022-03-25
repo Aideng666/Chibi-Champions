@@ -12,6 +12,10 @@ public class EntityManager : MonoBehaviour
 
     Cure cure;
 
+    float timeToNextSend = 0;
+    float sendsPerSecond = 60;
+    float interval;
+
     public static EntityManager Instance { get; set; }
 
     private void Awake()
@@ -33,9 +37,23 @@ public class EntityManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateLocalPlayer();
+        interval = 1 / sendsPerSecond;
 
-        UpdateEnemies();
+        if(Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            sendsPerSecond++;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            sendsPerSecond--;
+        }
+
+        if (CanSendMessage())
+        {
+            UpdateLocalPlayer();
+
+            UpdateEnemies();
+        }
     }
 
     public void UpdateRemotePlayers(int playerIndex, Vector3 position)
@@ -84,5 +102,17 @@ public class EntityManager : MonoBehaviour
         }
 
         print($"Local Character: {localPlayer.GetName()}");
+    }
+
+    bool CanSendMessage()
+    {
+        if (timeToNextSend <= Time.realtimeSinceStartup)
+        {
+            timeToNextSend = Time.realtimeSinceStartup + interval;
+
+            return true;
+        }
+
+        return false;
     }
 }

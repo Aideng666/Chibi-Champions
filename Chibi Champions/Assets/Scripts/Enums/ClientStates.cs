@@ -5,7 +5,8 @@ using UnityEngine;
 public enum ClientStates
 {
     Lobby,
-    CharacterSelect
+    CharacterSelect,
+    Gameplay
 }
 
 public enum ServerStates

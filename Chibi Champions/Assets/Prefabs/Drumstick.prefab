@@ -1494,6 +1494,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  characterName: Drumstick
   cam: {fileID: 0}
   attackPoint: {fileID: 5120274358207205552}
   speed: 10
@@ -1507,6 +1508,7 @@ MonoBehaviour:
   lightAttackDelay: 1
   heavyAttackDelay: 2
   deathTimer: 5
+  effectSpan: 15
   interactText: {fileID: 0}
   cameraLookAt: {fileID: 3307315161210982373}
   towers:

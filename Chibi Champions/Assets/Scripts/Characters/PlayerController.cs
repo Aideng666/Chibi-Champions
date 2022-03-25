@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] protected LayerMask enemyLayer;
+    [SerializeField] protected string characterName;
     [SerializeField] protected Transform cam;
     [SerializeField] protected Transform attackPoint;
     [SerializeField] protected float speed = 5;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected float lightAttackDelay = 0.75f;
     [SerializeField] protected float heavyAttackDelay = 0.75f;
     [SerializeField] protected float deathTimer = 5;
+    [SerializeField] protected float effectSpan = 15;
     [SerializeField] protected TextMeshProUGUI interactText;
     [SerializeField] protected GameObject cameraLookAt;
     [SerializeField] protected GameObject[] towers = new GameObject[3];
@@ -59,12 +61,11 @@ public class PlayerController : MonoBehaviour
     protected bool effectApplied;
     protected bool isAlive = true;
 
-    protected bool isPlayerCharacter = true;
+    protected bool isPlayerCharacter;
 
     int sporeLevel = 1;
     Effects currentEffect = Effects.None;
 
-    bool lost;
 
     // Start is called before the first frame update
     protected void Start()
@@ -74,9 +75,6 @@ public class PlayerController : MonoBehaviour
         interactText.gameObject.SetActive(false);
 
         thirdPersonCam = FindObjectOfType<CinemachineVirtualCamera>();
-
-        thirdPersonCam.LookAt = cameraLookAt.transform;
-        thirdPersonCam.Follow = cameraLookAt.transform;
 
         abilityImage.fillAmount = 0;
 
@@ -88,41 +86,54 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0 && isAlive)
-        {
-            Die();
-        }
 
-        if (isAlive)
+        if (isPlayerCharacter)
         {
 
-            ApplyEffect();
+            thirdPersonCam.LookAt = cameraLookAt.transform;
+            thirdPersonCam.Follow = cameraLookAt.transform;
 
-            Move();
-
-            Attack();
-
-            CheckRaycastSelection();
-
-            if (canInteract && Input.GetKeyDown(KeyCode.E) && !CanvasManager.Instance.IsTowerMenuOpen())
+            if (Input.GetKeyDown(KeyCode.P))
             {
-                TowerMenu.Instance.SetPlayer(this);
-                CanvasManager.Instance.OpenTowerMenu();             
-                
-            }
-            else if (CanvasManager.Instance.IsTowerMenuOpen() && (Input.GetKeyDown(KeyCode.Escape) || 
-                Input.GetKeyDown(KeyCode.E)))
-            {
-                CanvasManager.Instance.CloseTowerMenu();
+                CanvasManager.Instance.RemoveCursorLock();
+
+                SceneManager.LoadScene("MenuScenes");
             }
 
-            if (CanvasManager.Instance.IsTowerMenuOpen())
+            if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0 && isAlive)
             {
-                CameraLock(true);
+                Die();
             }
-            else
+
+            if (isAlive)
             {
-                CameraLock(false);
+                ApplyEffect();
+
+                Move();
+
+                Attack();
+
+                CheckRaycastSelection();
+
+                if (canInteract && Input.GetKeyDown(KeyCode.E) && !CanvasManager.Instance.IsTowerMenuOpen())
+                {
+                    TowerMenu.Instance.SetPlayer(this);
+                    CanvasManager.Instance.OpenTowerMenu();
+                }
+                else if (CanvasManager.Instance.IsTowerMenuOpen() && (Input.GetKeyDown(KeyCode.Escape) ||
+                    Input.GetKeyDown(KeyCode.E)))
+                {
+                    CanvasManager.Instance.CloseTowerMenu();
+                }
+
+                if (CanvasManager.Instance.IsTowerMenuOpen())
+                {
+                    CameraLock(true);
+                }
+                else
+                {
+                    CameraLock(false);
+                }
             }
         }
     }
@@ -215,23 +226,28 @@ public class PlayerController : MonoBehaviour
             {
                 if (sporeLevel == 1)
                 {
+                    print("Level 1");
                     lightAttackDamage *= 1.5f;
                     heavyAttackDamage *= 1.5f;
                 }
                 if (sporeLevel == 2)
                 {
+                    print("Level 2");
                     lightAttackDamage *= 1.5f;
                     heavyAttackDamage *= 1.5f;
                     speed += 2;
                 }
                 if (sporeLevel >= 3)
                 {
+                    print("Level 3+");
                     lightAttackDamage *= 2f;
                     heavyAttackDamage *= 2f;
                     speed += 2;
                 }
 
                 effectApplied = true;
+
+                StartCoroutine(RemoveEffect());
             }
         }
     }
@@ -268,6 +284,13 @@ public class PlayerController : MonoBehaviour
         }
 
         ParticleManager.Instance.SpawnParticle(ParticleTypes.JumpLanding, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z));
+    }
+
+    IEnumerator RemoveEffect()
+    {
+        yield return new WaitForSeconds(effectSpan);
+
+        effectApplied = false;
     }
 
     protected virtual void Attack()
@@ -417,14 +440,14 @@ public class PlayerController : MonoBehaviour
         currentEffect = effect;
     }
 
+    public void SetEffectApplied(bool applied)
+    {
+        effectApplied = applied;
+    }
+
     public void SetSporeLevel(int level)
     {
         sporeLevel = level;
-    }
-
-    public void SetLost(bool l)
-    {
-        lost = l;
     }
 
     public bool GetIsAlive()
@@ -437,9 +460,19 @@ public class PlayerController : MonoBehaviour
         return lightAttackDamage;
     }
 
+    public string GetName()
+    {
+        return characterName;
+    }
+
     public bool GetIsPlayerCharacter()
     {
         return isPlayerCharacter;
+    }
+
+    public void SetIsPlayerCharacter(bool isPlayer)
+    {
+        isPlayerCharacter = isPlayer;
     }
 
     private void OnDrawGizmosSelected()

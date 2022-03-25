@@ -972,6 +972,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  characterName: Rolfe
   cam: {fileID: 0}
   attackPoint: {fileID: 6888943266550092648}
   speed: 10
@@ -985,6 +986,7 @@ MonoBehaviour:
   lightAttackDelay: 0.75
   heavyAttackDelay: 0.75
   deathTimer: 5
+  effectSpan: 15
   interactText: {fileID: 0}
   cameraLookAt: {fileID: 6888943266243870148}
   towers:

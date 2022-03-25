@@ -685,6 +685,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  characterName: Potter
   cam: {fileID: 0}
   attackPoint: {fileID: 6309032078388833289}
   speed: 10
@@ -698,6 +699,7 @@ MonoBehaviour:
   lightAttackDelay: 0.3
   heavyAttackDelay: 5
   deathTimer: 5
+  effectSpan: 15
   interactText: {fileID: 0}
   cameraLookAt: {fileID: 6309032078632208579}
   towers:

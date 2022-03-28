@@ -1500,13 +1500,13 @@ MonoBehaviour:
   speed: 10
   lightAttackRange: 2
   heavyAttackRange: 10
-  lightAttackDamage: 10
+  lightAttackDamage: 12
   heavyAttackDamage: 20
   gravity: 1.5
   jumpPower: 3
   interactDistance: 5
   lightAttackDelay: 1
-  heavyAttackDelay: 2
+  heavyAttackDelay: 6
   deathTimer: 5
   effectSpan: 15
   interactText: {fileID: 0}

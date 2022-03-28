@@ -93,25 +93,31 @@ public class WaveManager : MonoBehaviour
                 waveCompletePointsAdded = true;
             }
             
-            if (FindObjectsOfType<AlertText>().Length == 0 && !beginWaveAlertFired)
+            if (!beginWaveAlertFired)
             {
-                AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Press Q To Begin Wave {currentWave + 1}", 3));
+                if (PlayerClient.Instance.GetClientNum() == 0)
+                {
+                    AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Press Q To Begin Wave {currentWave + 1}", 3));
+                }
+                else
+                {
+                    print($"Player Num: {PlayerClient.Instance.GetClientNum()}");
+                    AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Waiting For Player 1 To Start Next Wave {currentWave + 1}", 3));
+                }
+
                 beginWaveAlertFired = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (PlayerClient.Instance.GetClientNum() == 0 && Input.GetKeyDown(KeyCode.Q))
             {
-                BeginWave();
+                UDPClient.Instance.SendStartWave();
 
-                if (FindObjectsOfType<AlertText>().Length > 0)
-                {
-                    Destroy(FindObjectOfType<AlertText>().gameObject);
-                }
+                BeginWave();
             }
         }
     }
 
-    void BeginWave()
+    public void BeginWave()
     {
         currentPhaseText.text = "Combat Phase";
        
@@ -127,6 +133,11 @@ public class WaveManager : MonoBehaviour
         currentWave++;
 
         currentWaveText.text = currentWave.ToString();
+
+        if (FindObjectsOfType<AlertText>().Length > 0)
+        {
+            Destroy(FindObjectOfType<AlertText>().gameObject);
+        }
     }
 
     bool CheckWaveComplete()

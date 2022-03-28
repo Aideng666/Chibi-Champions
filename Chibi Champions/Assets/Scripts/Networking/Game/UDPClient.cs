@@ -48,18 +48,28 @@ public class UDPClient : MonoBehaviour
         }
     }
 
-    public void SendTowers(Tower[] towers)
+    public void SendTowers(int clientIndex, Tower[] towers)
     {
         if (clientStarted)
         {
-            string message = "TOWER_UPDATE_SENT.KEY";
-            
+            string message = $"TOWER_UPDATE_SENT.KEY:{clientIndex}";
+
             for (int i = 0; i < towers.Length; i++)
             {
                 message += ":" + towers[i].GetTowerName();
             }
 
-            byte[] msg = Encoding.ASCII.GetBytes(message);
+            for (int i = 0; i < towers.Length; i++)
+            {
+                message += ":" + towers[i].GetLevel();
+            }
+
+            for (int i = 0; i < towers.Length; i++)
+            {
+                message += ":" + towers[i].transform.position.x + ":" + towers[i].transform.position.z;
+            }
+
+        byte[] msg = Encoding.ASCII.GetBytes(message);
 
             client.SendTo(msg, remoteEP);
         }

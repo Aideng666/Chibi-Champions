@@ -447,6 +447,11 @@ public class PlayerController : MonoBehaviour
         return characterName;
     }
 
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
     public bool GetIsPlayerCharacter()
     {
         return isPlayerCharacter;

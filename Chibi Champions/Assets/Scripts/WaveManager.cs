@@ -95,7 +95,7 @@ public class WaveManager : MonoBehaviour
             
             if (!beginWaveAlertFired)
             {
-                if (FindObjectOfType<UDPClient>() == null)
+                if (FindObjectOfType<UDPClient>() != null)
                 {
                     if (PlayerClient.Instance.GetClientNum() == 0)
                     {
@@ -115,11 +115,14 @@ public class WaveManager : MonoBehaviour
                 beginWaveAlertFired = true;
             }
 
-            if ((PlayerClient.Instance.GetClientNum() == 0 && Input.GetKeyDown(KeyCode.Q))
-                || (FindObjectOfType<UDPClient>() == null && Input.GetKeyDown(KeyCode.Q)))
+            if (PlayerClient.Instance.GetClientNum() == 0 && Input.GetKeyDown(KeyCode.Q))
             {
                 UDPClient.Instance.SendStartWave();
 
+                BeginWave();
+            }
+            else if(FindObjectOfType<UDPClient>() == null && Input.GetKeyDown(KeyCode.Q))
+            {
                 BeginWave();
             }
         }

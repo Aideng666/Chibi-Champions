@@ -95,20 +95,28 @@ public class WaveManager : MonoBehaviour
             
             if (!beginWaveAlertFired)
             {
-                if (PlayerClient.Instance.GetClientNum() == 0)
+                if (FindObjectOfType<UDPClient>() == null)
                 {
-                    AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Press Q To Begin Wave {currentWave + 1}", 3));
+                    if (PlayerClient.Instance.GetClientNum() == 0)
+                    {
+                        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Press Q To Begin Wave {currentWave + 1}", 3));
+                    }
+                    else
+                    {
+                        print($"Player Num: {PlayerClient.Instance.GetClientNum()}");
+                        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Waiting For Player 1 To Start Next Wave {currentWave + 1}", 3));
+                    }
                 }
                 else
                 {
-                    print($"Player Num: {PlayerClient.Instance.GetClientNum()}");
-                    AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Waiting For Player 1 To Start Next Wave {currentWave + 1}", 3));
+                    AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Press Q To Begin Wave {currentWave + 1}", 3));
                 }
 
                 beginWaveAlertFired = true;
             }
 
-            if (PlayerClient.Instance.GetClientNum() == 0 && Input.GetKeyDown(KeyCode.Q))
+            if ((PlayerClient.Instance.GetClientNum() == 0 && Input.GetKeyDown(KeyCode.Q))
+                || (FindObjectOfType<UDPClient>() == null && Input.GetKeyDown(KeyCode.Q)))
             {
                 UDPClient.Instance.SendStartWave();
 

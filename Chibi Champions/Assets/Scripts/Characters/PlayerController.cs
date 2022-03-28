@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded)
         {
-            AnimController.Instance.PlayPlayerJumpAnim(GetComponentInChildren<Animator>());
+            AnimController.Instance.PlayPlayerJumpAnim(GetComponentInChildren<Animator>(), false);
 
             StartCoroutine(Jump());
 
@@ -181,34 +181,34 @@ public class PlayerController : MonoBehaviour
 
         if (verticalInput > 0)
         {
-            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, true);
-            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false);
+            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, true, false);
+            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false, false);
         }
         else if (verticalInput < 0)
         {
-            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, false);
-            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, true);
+            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, false, false);
+            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, true, false);
         }
         else
         {
-            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, true);
-            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false);
+            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, true, false);
+            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false, false);
         }
 
         if (horizontalInput > 0)
         {
-            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), true, 1);
-            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 0);
+            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), true, 1, false);
+            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 0, false);
         }
         else if (horizontalInput < 0)
         {
-            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), true, 0);
-            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 1);
+            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), true, 0, false);
+            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 1, false);
         }
         else
         {
-            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 0);
-            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 1);
+            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 0, false);
+            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 1, false);
         }
     }
 
@@ -326,7 +326,7 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(DeathTimer());
 
-        AnimController.Instance.PlayPlayerDeathAnim(GetComponentInChildren<Animator>());
+        AnimController.Instance.PlayPlayerDeathAnim(GetComponentInChildren<Animator>(), false);
 
         dead.Play();
     }
@@ -335,7 +335,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(deathTimer);
 
-        AnimController.Instance.SetPlayerRespawn(GetComponentInChildren<Animator>());
+        AnimController.Instance.SetPlayerRespawn(GetComponentInChildren<Animator>(), false);
 
         GetComponent<Health>().ResetHealth();
 

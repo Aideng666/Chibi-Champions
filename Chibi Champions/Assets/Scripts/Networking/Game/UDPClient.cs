@@ -52,12 +52,16 @@ public class UDPClient : MonoBehaviour
     {
         if (clientStarted)
         {
-            float[] message = new float[towers.Length];
+            string message = "TOWER_UPDATE_SENT.KEY";
             
             for (int i = 0; i < towers.Length; i++)
             {
-
+                message += ":" + towers[i].GetTowerName();
             }
+
+            byte[] msg = Encoding.ASCII.GetBytes(message);
+
+            client.SendTo(msg, remoteEP);
         }
     }
 
@@ -192,5 +196,10 @@ public class UDPClient : MonoBehaviour
         }
 
         clientStarted = true;
+    }
+
+    public bool GetIsClientStarted()
+    {
+        return clientStarted;
     }
 }

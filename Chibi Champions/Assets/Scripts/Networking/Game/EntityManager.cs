@@ -11,9 +11,10 @@ public class EntityManager : MonoBehaviour
 
     Enemy[] enemies;
 
-    Tower[] towers;
+    Tower[] localTowers;
     Tower[] previousTowers;
     [SerializeField] List<GameObject> platforms = new List<GameObject>();
+    [SerializeField] List<GameObject> towers = new List<GameObject>();
 
     Cure cure;
 
@@ -48,38 +49,41 @@ public class EntityManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        interval = 1 / sendsPerSecond;
-        enemies = FindObjectsOfType<Enemy>();
-        towers = FindObjectsOfType<Tower>();
-
-        if (Input.GetKeyDown(KeyCode.Alpha0))
+        if (FindObjectOfType<UDPClient>() != null)
         {
-            sendsPerSecond++;
-            print($"Raised Sending Interval To {sendsPerSecond} / Second");
+            interval = 1 / sendsPerSecond;
+            enemies = FindObjectsOfType<Enemy>();
+            localTowers = FindObjectsOfType<Tower>();
+
+            if (Input.GetKeyDown(KeyCode.Alpha0))
+            {
+                sendsPerSecond++;
+                print($"Raised Sending Interval To {sendsPerSecond} / Second");
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha9))
+            {
+                sendsPerSecond--;
+                print($"Lowered Sending Interval To {sendsPerSecond} / Second");
+            }
+
+            if (CanSendMessage())
+            {
+                SendPlayerUpdates();
+
+                SendEnemyUpdates();
+
+                SendTowerUpdates();
+            }
+
+            for (int i = 0; i < characters.Length; i++)
+            {
+                //characters[i].GetComponent<CharacterController>().Move(velocities[i] * Time.deltaTime);
+
+                characters[i].transform.position += velocities[i] * Time.deltaTime;
+            }
+
+            previousTowers = localTowers;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            sendsPerSecond--;
-            print($"Lowered Sending Interval To {sendsPerSecond} / Second");
-        }
-
-        if (CanSendMessage())
-        {
-            SendPlayerUpdates();
-
-            SendEnemyUpdates();
-
-            //SendTowerUpdates();
-        }
-
-        for (int i = 0; i < characters.Length; i++)
-        {
-            //characters[i].GetComponent<CharacterController>().Move(velocities[i] * Time.deltaTime);
-
-            characters[i].transform.position += velocities[i] * Time.deltaTime;
-        }
-
-        previousTowers = towers;
     }
 
     public void ReceivePlayerUpdates(int playerIndex, Vector3 position, Vector2 rotation)
@@ -158,18 +162,13 @@ public class EntityManager : MonoBehaviour
 
     void SendPlayerUpdates()
     {
-        //if (previousPosition != localPlayer.transform.position)
-        //{
-            for (int j = 0; j < PlayerClient.Instance.GetConnectedUsers().Length; j++)
+        for (int j = 0; j < PlayerClient.Instance.GetConnectedUsers().Length; j++)
+        {
+            if (PlayerClient.Instance.GetUsername() == PlayerClient.Instance.GetConnectedUsers()[j])
             {
-                if (PlayerClient.Instance.GetUsername() == PlayerClient.Instance.GetConnectedUsers()[j])
-                {
-                    UDPClient.Instance.SetPlayerPos(j, localPlayer.transform.position, localPlayer.transform.rotation.eulerAngles);
-                }
+                UDPClient.Instance.SetPlayerPos(j, localPlayer.transform.position, localPlayer.transform.rotation.eulerAngles);
             }
-        //}
-
-        //previousPosition = localPlayer.transform.position;
+        }
     }
 
     void SendEnemyUpdates()
@@ -184,19 +183,21 @@ public class EntityManager : MonoBehaviour
 
     public void SendTowerUpdates()
     {
-        if (previousTowers.Length != towers.Length && towers.Length != 0)
+        if (previousTowers.Length != localTowers.Length && localTowers.Length != 0)
         {
             for (int i = 0; i < PlayerClient.Instance.GetConnectedUsers().Length; i++)
             {
                 if (PlayerClient.Instance.GetUsername() == PlayerClient.Instance.GetConnectedUsers()[i])
                 {
-                    for (int j = 0; j < towers.Length; j++)
-                    {
-                        if (towers[j] != previousTowers[j])
-                        {
-                            //UDPClient.Instance.SendTowers(towers[j]);
-                        }
-                    }
+                    //for (int j = 0; j < localTowers.Length; j++)
+                    //{
+                    //    if (localTowers[j] != previousTowers[j])
+                    //    {
+                    //        UDPClient.Instance.SendTowers(towers[j]);
+                    //    }
+                    //}
+
+                    UDPClient.Instance.SendTowers(localTowers);
                 }
             }
         }

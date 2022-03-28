@@ -19,6 +19,7 @@ public class Tower : MonoBehaviour
     [SerializeField] protected Sprite[] upgradeImages = new Sprite[3];
     [SerializeField] protected string towerName;
     [SerializeField] protected string[] upgradeDescriptions = new string[3];
+    [SerializeField] protected string owner;
 
     protected TowerAttackPriority currentAttackPriority;
     

@@ -56,7 +56,7 @@ public class Drumstick : PlayerController
     {
         if (Input.GetMouseButtonDown(0) && CanLightAttack())
         {
-            AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>());
+            AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>(), false);
 
             wack.Play();
 
@@ -72,7 +72,7 @@ public class Drumstick : PlayerController
 
             fall.Play();
 
-            AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>());
+            AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>(), false);
         }
     }
 

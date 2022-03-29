@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
             thirdPersonCam.LookAt = cameraLookAt.transform;
             thirdPersonCam.Follow = cameraLookAt.transform;
 
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
             {            
                 if (CanvasManager.isGamePaused)
                 {
@@ -118,8 +118,7 @@ public class PlayerController : MonoBehaviour
                     TowerMenu.Instance.SetPlayer(this);
                     CanvasManager.Instance.OpenTowerMenu();
                 }
-                else if (CanvasManager.Instance.IsTowerMenuOpen() && (Input.GetKeyDown(KeyCode.Escape) ||
-                    Input.GetKeyDown(KeyCode.E)))
+                else if (CanvasManager.Instance.IsTowerMenuOpen() && Input.GetKeyDown(KeyCode.E))
                 {
                     CanvasManager.Instance.CloseTowerMenu();
                 }

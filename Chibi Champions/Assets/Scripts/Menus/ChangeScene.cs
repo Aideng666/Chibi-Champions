@@ -22,4 +22,9 @@ public class ChangeScene : MonoBehaviour
     {
         LevelManager.Instance.LoadScene("Main");
     }
+
+    public void PauseQuit()
+    {
+        SceneManager.LoadScene("MenuScenes");
+    }
 }

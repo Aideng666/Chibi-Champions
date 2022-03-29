@@ -54,26 +54,29 @@ public class Drumstick : PlayerController
 
     protected override void Attack()
     {
-        if (Input.GetMouseButtonDown(0) && CanLightAttack())
+        if (!CanvasManager.isGamePaused)
         {
-            AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>(), false);
+            if (Input.GetMouseButtonDown(0) && CanLightAttack())
+            {
+                AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>(), false);
 
-            wack.Play();
+                wack.Play();
 
-            StartCoroutine(DelayBeforeAttack());
-        }
-        if (Input.GetMouseButtonDown(1) && CanHeavyAttack())
-        {
-            StartCoroutine(Jump());
+                StartCoroutine(DelayBeforeAttack());
+            }
+            if (Input.GetMouseButtonDown(1) && CanHeavyAttack())
+            {
+                StartCoroutine(Jump());
 
-            ParticleManager.Instance.SpawnParticle(ParticleTypes.HighJump, transform.position);
+                ParticleManager.Instance.SpawnParticle(ParticleTypes.HighJump, transform.position);
 
-            groundPoundActivated = true;
+                groundPoundActivated = true;
 
-            fall.Play();
+                fall.Play();
 
-            AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>(), false);
-        }
+                AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>(), false);
+            }
+        }      
     }
 
     void GroundPoundAttack()

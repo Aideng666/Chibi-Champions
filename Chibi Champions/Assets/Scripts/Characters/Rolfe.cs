@@ -41,39 +41,42 @@ public class Rolfe : PlayerController
 
     protected override void Attack()
     {
-        if (Input.GetMouseButtonDown(0) && CanLightAttack())
+        if (!CanvasManager.isGamePaused)
         {
-            Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, lightAttackRange, enemyLayer);
-
-            foreach (Collider enemy in hitEnemies)
+            if (Input.GetMouseButtonDown(0) && CanLightAttack())
             {
-                if (enemy.tag == "Enemy")
+                Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, lightAttackRange, enemyLayer);
+
+                foreach (Collider enemy in hitEnemies)
                 {
-                    enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
-                    enemy.GetComponentInParent<Enemy>().Knockback(20, transform);
-                    enemy.GetComponentInParent<Enemy>().SetLastHit(this);
-                    //GetComponent<PointsManager>().AddPoints(20);
+                    if (enemy.tag == "Enemy")
+                    {
+                        enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
+                        enemy.GetComponentInParent<Enemy>().Knockback(20, transform);
+                        enemy.GetComponentInParent<Enemy>().SetLastHit(this);
+                        //GetComponent<PointsManager>().AddPoints(20);
 
-                    ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);
+                        ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);
+                    }
                 }
+
+                StartCoroutine(WaitForSecondSwipe());
+
+                //AnimController.Instance.PlayPlayerAttackAnim();
             }
+            if (Input.GetMouseButtonDown(1) && CanHeavyAttack() && currentBeacons < maxBeacons)
+            {
+                var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
+                currentBeacons++;
 
-            StartCoroutine(WaitForSecondSwipe());
-
-            //AnimController.Instance.PlayPlayerAttackAnim();
-        }
-        if (Input.GetMouseButtonDown(1) && CanHeavyAttack() && currentBeacons < maxBeacons)
-        {
-            var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
-            currentBeacons++;
-
-            beaconsPlaced--;
-            beaconActivated = true;
-        }
-        else
-        {
-            beaconActivated = false;
-        }
+                beaconsPlaced--;
+                beaconActivated = true;
+            }
+            else
+            {
+                beaconActivated = false;
+            }
+        }      
     }
 
     void SecondSwipeAttack()

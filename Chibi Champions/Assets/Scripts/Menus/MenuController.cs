@@ -51,7 +51,7 @@ public class MenuController : MonoBehaviour
             isMultiplayerButtonClicked = false;
         }
 
-        if (ChangeScene.hasReturnedToMenu == true)
+        if (ChangeScene.hasReturnedToMenu)
         {
             frames[0].SetActive(false);
             frames[1].SetActive(true);

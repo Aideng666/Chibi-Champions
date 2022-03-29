@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour
     int sporeLevel = 1;
     Effects currentEffect = Effects.None;
 
-
     // Start is called before the first frame update
     protected void Start()
     {
@@ -88,11 +87,16 @@ public class PlayerController : MonoBehaviour
             thirdPersonCam.Follow = cameraLookAt.transform;
 
             if (Input.GetKeyDown(KeyCode.P))
-            {
-                CanvasManager.Instance.RemoveCursorLock();
-
-                SceneManager.LoadScene("MenuScenes");
-            }
+            {            
+                if (CanvasManager.isGamePaused)
+                {
+                    CanvasManager.Instance.Resume();
+                }
+                else
+                {
+                    CanvasManager.Instance.Pause();
+                }
+            }        
 
             if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0 && isAlive)
             {
@@ -120,15 +124,17 @@ public class PlayerController : MonoBehaviour
                     CanvasManager.Instance.CloseTowerMenu();
                 }
 
-                if (CanvasManager.Instance.IsTowerMenuOpen())
+                if (CanvasManager.Instance.IsTowerMenuOpen() || CanvasManager.isGamePaused)
                 {
                     CameraLock(true);
+                    CanvasManager.Instance.RemoveCursorLock();
                 }
                 else
                 {
                     CameraLock(false);
+                    CanvasManager.Instance.ApplyCursorLock();
                 }
-            }
+            }        
         }
     }
 
@@ -179,37 +185,40 @@ public class PlayerController : MonoBehaviour
             controller.Move(moveDir * speed * Time.deltaTime);
         }
 
-        if (verticalInput > 0)
+        if (!CanvasManager.isGamePaused)
         {
-            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, true, false);
-            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false, false);
-        }
-        else if (verticalInput < 0)
-        {
-            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, false, false);
-            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, true, false);
-        }
-        else
-        {
-            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, true, false);
-            AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false, false);
-        }
+            if (verticalInput > 0)
+            {
+                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, true, false);
+                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false, false);
+            }
+            else if (verticalInput < 0)
+            {
+                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, false, false);
+                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, true, false);
+            }
+            else
+            {
+                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, true, false);
+                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false, false);
+            }
 
-        if (horizontalInput > 0)
-        {
-            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), true, 1, false);
-            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 0, false);
-        }
-        else if (horizontalInput < 0)
-        {
-            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), true, 0, false);
-            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 1, false);
-        }
-        else
-        {
-            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 0, false);
-            AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 1, false);
-        }
+            if (horizontalInput > 0)
+            {
+                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), true, 1, false);
+                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 0, false);
+            }
+            else if (horizontalInput < 0)
+            {
+                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), true, 0, false);
+                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 1, false);
+            }
+            else
+            {
+                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 0, false);
+                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 1, false);
+            }
+        }       
     }
 
     void ApplyEffect()

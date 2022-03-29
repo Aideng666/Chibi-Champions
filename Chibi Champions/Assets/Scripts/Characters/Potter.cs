@@ -31,60 +31,63 @@ public class Potter : PlayerController
 
     protected override void Attack()
     {
-        if (Input.GetMouseButton(0) && CanLightAttack())
+        if (!CanvasManager.isGamePaused)
         {
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit hit;
-
-            Vector3 direction = new Vector3();
-
-            if (Physics.Raycast(ray, out hit, 1000f, ~interactableLayer))
+            if (Input.GetMouseButton(0) && CanLightAttack())
             {
-                var endPoint = hit.point;
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                if (endPoint != null)
+                RaycastHit hit;
+
+                Vector3 direction = new Vector3();
+
+                if (Physics.Raycast(ray, out hit, 1000f, ~interactableLayer))
                 {
-                    direction = (endPoint - attackPoint.position).normalized;
+                    var endPoint = hit.point;
+
+                    if (endPoint != null)
+                    {
+                        direction = (endPoint - attackPoint.position).normalized;
+                    }
                 }
+
+                //var paintball = Instantiate(paintballPrefab, attackPoint.position, Quaternion.identity);
+                var paintball = ProjectilePool.Instance.GetPaintballFromPool(attackPoint.position);
+
+                paintball.GetComponentInChildren<Rigidbody>().velocity = direction * shotSpeed;
+
             }
-
-            //var paintball = Instantiate(paintballPrefab, attackPoint.position, Quaternion.identity);
-            var paintball = ProjectilePool.Instance.GetPaintballFromPool(attackPoint.position);
-
-            paintball.GetComponentInChildren<Rigidbody>().velocity = direction * shotSpeed;
-            
-        }
-        if (Input.GetMouseButton(1) && CanHeavyAttack())
-        {
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit hit;
-
-            Vector3 direction = new Vector3();
-
-            healingNeedleActivated = true;
-
-            if (Physics.Raycast(ray, out hit, 1000f, ~interactableLayer))
+            if (Input.GetMouseButton(1) && CanHeavyAttack())
             {
-                var endPoint = hit.point;
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                if (endPoint != null)
+                RaycastHit hit;
+
+                Vector3 direction = new Vector3();
+
+                healingNeedleActivated = true;
+
+                if (Physics.Raycast(ray, out hit, 1000f, ~interactableLayer))
                 {
-                    direction = (endPoint - attackPoint.position).normalized;
+                    var endPoint = hit.point;
+
+                    if (endPoint != null)
+                    {
+                        direction = (endPoint - attackPoint.position).normalized;
+                    }
                 }
+
+                var needle = Instantiate(healingNeedlePrefab, attackPoint.position, Quaternion.identity);
+
+                needle.GetComponentInChildren<Rigidbody>().velocity = direction * shotSpeed;
+
+                Destroy(needle, 3);
             }
-
-            var needle = Instantiate(healingNeedlePrefab, attackPoint.position, Quaternion.identity);
-
-            needle.GetComponentInChildren<Rigidbody>().velocity = direction * shotSpeed;
-
-            Destroy(needle, 3);
-        }
-        else
-        {
-            healingNeedleActivated = false;
-        }
+            else
+            {
+                healingNeedleActivated = false;
+            }
+        }    
     }
 
     public float GetHealAmount()

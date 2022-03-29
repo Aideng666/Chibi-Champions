@@ -151,7 +151,7 @@ public class WaveManager : MonoBehaviour
             Destroy(FindObjectOfType<AlertText>().gameObject);
         }
 
-        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"WAVE STARTED! DEFEND THE CRYSTAL!", 5));
+        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"WAVE STARTED! DEFEND THE CURE!", 5));
     }
 
     bool CheckWaveComplete()

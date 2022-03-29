@@ -8,7 +8,15 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] Canvas interactMenu;
     [SerializeField] TMP_Text interactText;
 
+    [SerializeField] GameObject pausePanel;
+
+    public static bool isGamePaused = false;
+
     bool towerMenuOpen;
+
+    public static float savedTime = 0;
+
+    float timeToSpawn = 0;
 
     public static CanvasManager Instance { get; private set; }
 
@@ -24,14 +32,10 @@ public class CanvasManager : MonoBehaviour
         interactMenu.gameObject.SetActive(false);
 
         if (!FindObjectOfType<AudioManager>().IsPlaying("Level") && !FindObjectOfType<AudioManager>().IsPlaying("Level"))
-
         {
-
             FindObjectOfType<AudioManager>().Play("Level");
-
             FindObjectOfType<AudioManager>().Loop("Level");
-
-        }
+        }    
     }
 
     public void OpenTowerMenu()
@@ -50,7 +54,7 @@ public class CanvasManager : MonoBehaviour
         towerMenuOpen = false;
     }
 
-    void ApplyCursorLock()
+    public void ApplyCursorLock()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -65,5 +69,28 @@ public class CanvasManager : MonoBehaviour
     public bool IsTowerMenuOpen()
     {
         return towerMenuOpen;
+    }
+
+    public void Resume()
+    {
+        ApplyCursorLock();
+        pausePanel.SetActive(false);
+        Time.timeScale = 1f;
+        isGamePaused = false;
+        timeToSpawn = Time.realtimeSinceStartup + (Time.realtimeSinceStartup - savedTime);
+
+        foreach(EnemySpawner spawner in FindObjectsOfType<EnemySpawner>())
+        {
+            spawner.SetTimeToNextSpawn(timeToSpawn);
+        }
+    }
+
+    public void Pause()
+    {
+        RemoveCursorLock();
+        pausePanel.SetActive(true);
+        Time.timeScale = 0f;
+        isGamePaused = true;
+        savedTime = Time.realtimeSinceStartup;
     }
 }

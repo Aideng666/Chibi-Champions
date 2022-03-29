@@ -50,6 +50,13 @@ public class MenuController : MonoBehaviour
             StartCoroutine(LoadFadeTransitions(frames[2], frames[5]));
             isMultiplayerButtonClicked = false;
         }
+
+        if (ChangeScene.hasReturnedToMenu == true)
+        {
+            frames[0].SetActive(false);
+            frames[1].SetActive(true);
+            ChangeScene.hasReturnedToMenu = false;
+        }
     }
 
     public void PlayButtonFade()
@@ -87,5 +94,5 @@ public class MenuController : MonoBehaviour
         yield return new WaitForSeconds(fadeTransitionTime);
         currentFrame.SetActive(false);
         targetFrame.SetActive(true);
-    }
+    }   
 }

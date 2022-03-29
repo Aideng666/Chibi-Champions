@@ -59,7 +59,7 @@ public class Cure : MonoBehaviour
 
     IEnumerator DelayBeforeLoss()
     {
-        AlertManager.Instance.DisplayAlert(new Alert(Color.blue, "You Lose!", 2));
+        AlertManager.Instance.DisplayAlert(new Alert(Color.blue, "You Lose!", 2));       
 
         yield return new WaitForSeconds(3);
 

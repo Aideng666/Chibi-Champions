@@ -62,11 +62,11 @@ public class Drumstick : PlayerController
 
                 wack.Play();
 
-                StartCoroutine(DelayBeforeAttack());
-            }
-            if (Input.GetMouseButtonDown(1) && CanHeavyAttack())
-            {
-                StartCoroutine(Jump());
+            StartCoroutine(DelayBeforeAttack());
+        }
+        if (Input.GetMouseButtonDown(1) && CanHeavyAttack() && controller.isGrounded)
+        {
+            StartCoroutine(GroundPoundJump());
 
                 ParticleManager.Instance.SpawnParticle(ParticleTypes.HighJump, transform.position);
 

@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour
             {
                 navMeshAgent.destination = crystalTransform.position;
 
-                if ((Vector3.Distance(transform.position, crystalTransform.position) < attackRange * 2) && CanAttack())
+                if ((Vector3.Distance(transform.position, crystalTransform.position) < attackRange * 2.5f) && CanAttack())
                 {
                     StartCoroutine(DelayBeforeAttack());
                 }
@@ -99,7 +99,7 @@ public class Enemy : MonoBehaviour
             {
                 navMeshAgent.destination = playerTransform.position;
 
-                if ((Vector3.Distance(transform.position, playerTransform.position) < attackRange * 2) && CanAttack())
+                if ((Vector3.Distance(transform.position, playerTransform.position) < attackRange * 2.2f) && CanAttack())
                 {
                     StartCoroutine(DelayBeforeAttack());
                 }

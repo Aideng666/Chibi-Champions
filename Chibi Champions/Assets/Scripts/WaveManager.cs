@@ -99,17 +99,17 @@ public class WaveManager : MonoBehaviour
                 {
                     if (PlayerClient.Instance.GetClientNum() == 0)
                     {
-                        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Press Q To Begin Wave {currentWave + 1}", 3));
+                        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Press Q When You Are Ready To Begin The Wave {currentWave + 1}", 10));
                     }
                     else
                     {
                         print($"Player Num: {PlayerClient.Instance.GetClientNum()}");
-                        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Waiting For Player 1 To Start Next Wave {currentWave + 1}", 3));
+                        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Waiting For Player 1 To Start Next Wave {currentWave + 1}", 10));
                     }
                 }
                 else
                 {
-                    AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Press Q To Begin Wave {currentWave + 1}", 3));
+                    AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Press Q When You Are Ready To Begin The Wave {currentWave + 1}", 10));
                 }
 
                 beginWaveAlertFired = true;
@@ -149,6 +149,8 @@ public class WaveManager : MonoBehaviour
         {
             Destroy(FindObjectOfType<AlertText>().gameObject);
         }
+
+        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"WAVE STARTED! DEFEND THE CRYSTAL!", 5));
     }
 
     bool CheckWaveComplete()

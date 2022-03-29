@@ -23,8 +23,6 @@ public class EntityManager : MonoBehaviour
     float interval;
 
     Vector3[] predictedPositions = new Vector3[] { Vector3.zero, Vector3.zero, Vector3.zero };
-    Vector3 originalPosition;
-    bool newPositionPredicted;
     Vector3[] velocities = new Vector3[] { Vector3.zero, Vector3.zero, Vector3.zero };
 
     public static EntityManager Instance { get; set; }
@@ -55,6 +53,11 @@ public class EntityManager : MonoBehaviour
             enemies = FindObjectsOfType<Enemy>();
             localTowers = FindObjectsOfType<Tower>();
 
+            if (previousTowers == null)
+            {
+                previousTowers = localTowers;
+            }
+
             if (Input.GetKeyDown(KeyCode.Alpha0))
             {
                 sendsPerSecond++;
@@ -77,8 +80,6 @@ public class EntityManager : MonoBehaviour
 
             for (int i = 0; i < characters.Length; i++)
             {
-                //characters[i].GetComponent<CharacterController>().Move(velocities[i] * Time.deltaTime);
-
                 characters[i].transform.position += velocities[i] * Time.deltaTime;
             }
 
@@ -88,19 +89,15 @@ public class EntityManager : MonoBehaviour
 
     public void ReceivePlayerUpdates(int playerIndex, Vector3 position, Vector2 rotation)
     {
-        print("Received Update");
-
         for (int j = 0; j < characters.Length; j++)
         {
             if (PlayerClient.Instance.GetPlayersCharacters()[playerIndex] == characters[j].GetName())
             {
                 predictedPositions[j] = Vector3.zero;
-                //StopCoroutine(MoveToPredictedPosition(j));
-                print($"Received A Move Update For {characters[j].GetName()}");
+
                 characters[j].transform.position = position;
                 characters[j].transform.rotation = Quaternion.Euler(rotation);
 
-                //originalPosition = previousReceivedPositions[playerIndex];
                 PredictPlayerMovement(j, previousReceivedPositions[j], position);
 
                 previousReceivedPositions[j] = position;
@@ -122,42 +119,6 @@ public class EntityManager : MonoBehaviour
         velocities[characterIndex] = direction * speed;
 
         predictedPositions[characterIndex] = currentPos + (velocities[characterIndex] * Time.deltaTime);
-
-        //print(predictedPositions[characterIndex]);
-
-        newPositionPredicted = true;
-
-        //StartCoroutine(MoveToPredictedPosition(characterIndex));
-    }
-
-    IEnumerator MoveToPredictedPosition(int characterIndex)
-    {
-        print("Starting Move For Player " + characterIndex);
-
-        bool positionReached = false;
-        float totalTime = interval;
-        float t = 0;
-
-        while(!positionReached)
-        {
-            print("Moving");
-            characters[characterIndex].transform.position = Vector3.Lerp(originalPosition, predictedPositions[characterIndex], t);
-
-            t += Time.deltaTime;
-
-            if (t >= totalTime)
-            {
-                positionReached = true;
-            }
-
-            yield return null;
-        }
-
-        print("Finished Move");
-
-        //PredictPlayerMovement(characterIndex, originalPosition, predictedPosition);
-
-        yield return null;
     }
 
     void SendPlayerUpdates()
@@ -197,15 +158,152 @@ public class EntityManager : MonoBehaviour
                     //    }
                     //}
 
-                    UDPClient.Instance.SendTowers(localTowers);
+                    print($"Local Towers Length: {localTowers.Length}");
+
+                    UDPClient.Instance.SendTowers(i, localTowers);
                 }
             }
         }
     }
 
-    public void ReceiveTowerUpdates()
+    public void ReceiveTowerUpdates(string[] receivedTowers, string[] levels, List<Vector2> positions)
     {
+        for (int i = 0; i < receivedTowers.Length; i++)
+        {
+            switch(receivedTowers[i])
+            {
+                case "Feather Blaster":
 
+                    Instantiate(towers[0], new Vector3(positions[i].x, towers[0].transform.position.y, positions[i].y), Quaternion.identity);
+
+                    foreach (GameObject plat in platforms)
+                    {
+                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        {
+                            plat.SetActive(false);
+                        }
+                    }
+
+                    FindObjectOfType<AudioManager>().Play("Build");
+
+                    break;
+
+                case "Chicken Laser":
+
+                    Instantiate(towers[1], new Vector3(positions[i].x, towers[1].transform.position.y, positions[i].y), Quaternion.identity);
+
+                    foreach (GameObject plat in platforms)
+                    {
+                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        {
+                            plat.SetActive(false);
+                        }
+                    }
+
+                    FindObjectOfType<AudioManager>().Play("Build");
+
+                    break;
+
+                case "Gatling Drummet":
+
+                    Instantiate(towers[2], new Vector3(positions[i].x, towers[2].transform.position.y, positions[i].y), Quaternion.identity);
+
+                    foreach (GameObject plat in platforms)
+                    {
+                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        {
+                            plat.SetActive(false);
+                        }
+                    }
+
+                    break;
+
+                case "Web Shooter":
+
+                    Instantiate(towers[3], new Vector3(positions[i].x, towers[3].transform.position.y, positions[i].y), Quaternion.identity);
+
+                    foreach (GameObject plat in platforms)
+                    {
+                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        {
+                            plat.SetActive(false);
+                        }
+                    }
+
+                    break;
+
+                case "Tennis Bomb":
+
+                    Instantiate(towers[4], new Vector3(positions[i].x, towers[4].transform.position.y, positions[i].y), Quaternion.identity);
+
+                    foreach (GameObject plat in platforms)
+                    {
+                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        {
+                            plat.SetActive(false);
+                        }
+                    }
+
+                    break;
+
+                case "Spider House":
+
+                    Instantiate(towers[5], new Vector3(positions[i].x, towers[5].transform.position.y, positions[i].y), Quaternion.identity);
+
+                    foreach (GameObject plat in platforms)
+                    {
+                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        {
+                            plat.SetActive(false);
+                        }
+                    }
+
+                    break;
+
+                case "Ink Bomber":
+
+                    Instantiate(towers[6], new Vector3(positions[i].x, towers[6].transform.position.y, positions[i].y), Quaternion.identity);
+
+                    foreach (GameObject plat in platforms)
+                    {
+                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        {
+                            plat.SetActive(false);
+                        }
+                    }
+
+                    break;
+
+                case "Photosynthesizer":
+
+                    Instantiate(towers[7], new Vector3(positions[i].x, towers[7].transform.position.y, positions[i].y), Quaternion.identity);
+
+                    foreach (GameObject plat in platforms)
+                    {
+                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        {
+                            plat.SetActive(false);
+                        }
+                    }
+
+                    break;
+
+                case "S.A.P":
+
+                    Instantiate(towers[8], new Vector3(positions[i].x, towers[8].transform.position.y, positions[i].y), Quaternion.identity);
+
+                    foreach (GameObject plat in platforms)
+                    {
+                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        {
+                            plat.SetActive(false);
+                        }
+                    }
+
+                    break;
+            }
+        }
+        previousTowers = FindObjectsOfType<Tower>();
     }
 
     void GetLocalPlayer()
@@ -218,8 +316,6 @@ public class EntityManager : MonoBehaviour
                 localPlayer = characters[i];
             }
         }
-
-        print($"Local Character: {localPlayer.GetName()}");
     }
 
     bool CanSendMessage()

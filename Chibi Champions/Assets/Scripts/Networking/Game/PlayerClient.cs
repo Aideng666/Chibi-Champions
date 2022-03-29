@@ -202,8 +202,6 @@ public class PlayerClient : MonoBehaviour
 
                             if (messageReceived.Contains("GAME_START_MESSAGE.KEY"))
                             {
-                                print("Beginning Game State");
-
                                 BeginGameState();
                             }
 
@@ -379,6 +377,50 @@ public class PlayerClient : MonoBehaviour
                                     break;
                             }
                         }
+                    }
+                    else if(messageReceived.Contains("TOWER_UPDATE_SENT.KEY"))
+                    {
+                        string[] messageSplit = messageReceived.Split(':');
+
+                        string[] towers = new string[(messageSplit.Length - 2) / 4];
+                        string[] levels = new string[(messageSplit.Length - 2) / 4];
+                        string[] XYPositions = new string[(messageSplit.Length - 2) / 2];
+
+                        List<string> xPositions = new List<string>();
+                        List<string> yPositions = new List<string>();
+
+                        List<Vector2> towerPositions = new List<Vector2>();
+
+                        for (int i = 0; i < towers.Length; i++)
+                        {
+                            towers[i] = messageSplit[i + 2];
+                        }
+
+                        for (int i = 0; i < levels.Length; i++)
+                        {
+                            levels[i] = messageSplit[i + towers.Length + 2];
+                        }
+
+                        for (int i = 0; i < XYPositions.Length; i++)
+                        {
+                            XYPositions[i] = messageSplit[i + towers.Length + levels.Length + 2];
+
+                            if (i % 2 == 0)
+                            {
+                                xPositions.Add(messageSplit[i + towers.Length + levels.Length + 2]);
+                            }
+                            else
+                            {
+                                yPositions.Add(messageSplit[i + towers.Length + levels.Length + 2]);
+                            }
+                        }
+
+                        for (int i = 0; i < xPositions.Count; i++)
+                        {
+                            towerPositions.Add(new Vector2(float.Parse(xPositions[i]), float.Parse(yPositions[i])));
+                        }
+
+                        EntityManager.Instance.ReceiveTowerUpdates(towers, levels, towerPositions);
                     }
                     else
                     {

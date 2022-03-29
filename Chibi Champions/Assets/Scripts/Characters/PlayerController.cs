@@ -39,10 +39,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected CharacterDatabase characterDB;
     Character character;
 
-    //[SerializeField] protected Image statusEffectImage;
-    //[SerializeField] protected Image statusEffectImageMain;
-    //protected bool isStatusEffectCooldown = false;
-
     protected CharacterController controller;
     protected CinemachineVirtualCamera thirdPersonCam;
     protected Transform rayCastSelection;
@@ -398,20 +394,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-    //protected void StatusEffectCooldown(bool isStatusEffectActivated)
-    //{
-    //    if (isStatusEffectActivated && isStatusEffectCooldown == false)
-    //    {
-    //        isStatusEffectCooldown = true;
-    //        statusEffectImage.fillAmount = 1;
-    //    }
-
-    //    if (isStatusEffectCooldown)
-    //    {
-    //        statusEffectImage.fillAmount -= 
-    //    }
-    //}
 
     public void CameraLock(bool isLocked)
     {

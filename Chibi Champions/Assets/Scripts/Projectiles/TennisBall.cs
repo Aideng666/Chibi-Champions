@@ -7,6 +7,9 @@ public class TennisBall : MonoBehaviour
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] float explosionRadius;
 
+    [SerializeField] AudioSource boom;
+    [SerializeField] AudioSource siz;
+
     Tower tower;
     float fuseDuration;
 
@@ -23,12 +26,14 @@ public class TennisBall : MonoBehaviour
     {
         if (fuseEnded)
         {
+            siz.Stop();
             Explode();
         }
     }
 
     void Explode()
     {
+        boom.Play();
         ParticleManager.Instance.SpawnParticle(ParticleTypes.Explosion, transform.position);
 
         Collider[] enemiesHit = Physics.OverlapSphere(transform.position, explosionRadius, enemyLayer);
@@ -47,9 +52,11 @@ public class TennisBall : MonoBehaviour
 
     IEnumerator Fuse()
     {
+        siz.Play();
         yield return new WaitForSeconds(fuseDuration);
 
         fuseEnded = true;
+
     }
 
     public void SetFuseDuration(float duration)

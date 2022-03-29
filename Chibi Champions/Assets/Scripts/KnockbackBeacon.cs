@@ -9,6 +9,8 @@ public class KnockbackBeacon : MonoBehaviour
     [SerializeField] float pulseDelay = 2;
     [SerializeField] float pulseRange = 10;
 
+    [SerializeField] AudioSource blast;
+
     int currentPulses = 0;
 
     float timeBeforeNextPulse;
@@ -24,6 +26,7 @@ public class KnockbackBeacon : MonoBehaviour
     {
         if (currentPulses >= maxPulses)
         {
+            blast.Play();
             Destroy(gameObject);
             FindObjectOfType<Rolfe>().RemoveBeacon();
         }
@@ -47,6 +50,7 @@ public class KnockbackBeacon : MonoBehaviour
 
     void Pulse()
     {
+        blast.Play();
         ParticleManager.Instance.SpawnParticle(ParticleTypes.Knockback, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z));
 
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, pulseRange, enemyLayer);

@@ -9,6 +9,8 @@ public class WebShooter : Tower
     [SerializeField] float slowDuration;
     [SerializeField] GameObject webPrefab;
 
+    [SerializeField] AudioSource spidy;
+
     bool dealDamage;
 
     // Update is called once per frame
@@ -31,6 +33,7 @@ public class WebShooter : Tower
 
     protected override void Attack(GameObject enemy = null)
     {
+        spidy.Play();
         Vector3 direction = (enemy.transform.position - firePoint.position).normalized;
 
         var web = Instantiate(webPrefab, firePoint.position, Quaternion.identity);

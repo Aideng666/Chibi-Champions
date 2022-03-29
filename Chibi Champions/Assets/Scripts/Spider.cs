@@ -11,6 +11,9 @@ public class Spider : MonoBehaviour
     SpiderStates currentState = SpiderStates.noEnemySighted;
     GameObject targetEnemy;
 
+    [SerializeField] AudioSource walk;
+    [SerializeField] AudioSource atk;
+
     Vector3 moveDirection;
     bool isMoving;
 
@@ -92,6 +95,8 @@ public class Spider : MonoBehaviour
 
     void ChaseEnemy(GameObject enemy)
     {
+
+        walk.Play();
         moveDirection = (enemy.transform.position - transform.position).normalized;
 
         moveDirection.y = 0;
@@ -102,6 +107,7 @@ public class Spider : MonoBehaviour
 
         if (Vector3.Distance(transform.position, enemy.transform.position) < applyEffectDistance)
         {
+            atk.Play();
             ApplyEffect();
         }
     }

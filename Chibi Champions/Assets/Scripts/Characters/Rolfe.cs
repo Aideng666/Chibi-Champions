@@ -8,6 +8,9 @@ public class Rolfe : PlayerController
     [SerializeField] GameObject beaconPrefab;
     [SerializeField] int maxBeacons = 2;
 
+    [SerializeField] AudioSource scratch;
+    [SerializeField] AudioSource set;
+
     int currentBeacons = 0;
 
     public TMP_Text beaconNumberText;
@@ -43,6 +46,7 @@ public class Rolfe : PlayerController
     {
         if (Input.GetMouseButtonDown(0) && CanLightAttack())
         {
+            scratch.Play();
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, lightAttackRange, enemyLayer);
 
             foreach (Collider enemy in hitEnemies)
@@ -64,6 +68,7 @@ public class Rolfe : PlayerController
         }
         if (Input.GetMouseButtonDown(1) && CanHeavyAttack() && currentBeacons < maxBeacons)
         {
+            set.Play();
             var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
             currentBeacons++;
 

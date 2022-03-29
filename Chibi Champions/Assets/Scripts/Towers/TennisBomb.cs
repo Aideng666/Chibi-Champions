@@ -8,6 +8,9 @@ public class TennisBomb : Tower
     [SerializeField] float launchForce;
     [SerializeField] float fuseDuration;
 
+    [SerializeField] AudioSource serve;
+
+
     // Update is called once per frame
     void Update()
     {
@@ -28,6 +31,7 @@ public class TennisBomb : Tower
 
     protected override void Attack(GameObject enemy = null)
     {
+        serve.Play();
         Vector3 direction = (enemy.transform.position - firePoint.position).normalized;
 
         direction.y = 1;

@@ -82,10 +82,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-
         if (isPlayerCharacter)
         {
-
             thirdPersonCam.LookAt = cameraLookAt.transform;
             thirdPersonCam.Follow = cameraLookAt.transform;
 
@@ -153,6 +151,12 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Jump());
 
             jump.Play();
+        }
+
+        if (isJumping && controller.isGrounded)
+        {
+            print("Jumping Done");
+            isJumping = false;
         }
 
         if (!isJumping)
@@ -270,6 +274,52 @@ public class PlayerController : MonoBehaviour
         isJumping = false;
 
         StartCoroutine(PlayJumpEffect());
+    }
+
+    protected IEnumerator GroundPoundJump()
+    {
+        moveDir.y = jumpPower;
+
+        isJumping = true;
+
+        float elasped = 0f;
+        float totalJumpTime = 0.6f;
+        float totalUpTime = 0.2f;
+        float totalStallTime = 0.4f;
+
+        while(elasped < totalUpTime)
+        {
+            elasped += Time.deltaTime;
+            moveDir.y = Mathf.Lerp(jumpPower, 0.1f, elasped / totalUpTime);
+
+            controller.Move(moveDir * speed * Time.deltaTime);
+
+            yield return null;
+        }
+
+        elasped = 0;
+
+        while (elasped < totalStallTime)
+        {
+            elasped += Time.deltaTime;
+            moveDir.y = Mathf.Lerp(0.1f, 0, elasped / totalStallTime);
+
+            controller.Move(moveDir * speed * Time.deltaTime);
+
+            yield return null;
+        }
+
+        elasped = 0;
+
+        while (elasped < totalJumpTime)
+        {
+            elasped += Time.deltaTime;
+            moveDir.y = Mathf.Lerp(-1, -gravity * 5, elasped / totalJumpTime);
+
+            controller.Move(moveDir * speed * Time.deltaTime);
+
+            yield return null;
+        }
     }
 
     IEnumerator PlayJumpEffect()

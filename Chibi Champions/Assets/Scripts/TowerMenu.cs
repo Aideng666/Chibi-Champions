@@ -11,6 +11,8 @@ public class TowerMenu : MonoBehaviour
 
     [SerializeField] GameObject towerPlatformPrefab;
 
+    [SerializeField] List<GameObject> platforms = new List<GameObject>();
+
     [SerializeField] Image[] towerImages;
     [SerializeField] TMP_Text[] towerBaseCosts;
     [SerializeField] TMP_Text[] towerBaseDescriptions;
@@ -175,6 +177,16 @@ public class TowerMenu : MonoBehaviour
 
     public void UpgradeTower()
     {
+        foreach (Tower tower in EntityManager.Instance.GetLocalTowers())
+        {
+            if (Vector3.Distance(currentTower.position, tower.transform.position) < 2 && currentTower.GetComponent<Tower>().GetTowerName() == tower.GetTowerName())
+            {
+                print("Calling UDP Send");
+
+                UDPClient.Instance.SendTowerUpgrade(currentTower.position, tower.GetTowerName());
+            }
+        }
+
         if (currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()) <= player.GetComponent<PointsManager>().GetCurrentPoints())
         {
             player.GetComponent<PointsManager>().SpendPoints(currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()));
@@ -187,13 +199,22 @@ public class TowerMenu : MonoBehaviour
         {
             print("Not Enough Points");
         }
+
     }
 
     public void SellTower()
     {
         Vector3 towerPosition = currentTower.transform.position;
 
-        Instantiate(towerPlatformPrefab, new Vector3(towerPosition.x, towerPlatformPrefab.transform.position.y, towerPosition.z), Quaternion.identity, GameObject.Find("Platforms").transform);
+        foreach (GameObject plat in platforms)
+        {
+            if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z),
+                                 new Vector2(towerPosition.x, towerPosition.z)) < 5)
+            {
+                plat.SetActive(true);
+            }
+        }
+
         player.GetComponent<PointsManager>().AddPoints((int)(currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7));
         Destroy(currentTower.gameObject);
         FindObjectOfType<AudioManager>().Play("Sell");

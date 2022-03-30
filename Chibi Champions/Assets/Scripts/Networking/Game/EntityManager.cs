@@ -13,8 +13,11 @@ public class EntityManager : MonoBehaviour
 
     Tower[] localTowers;
     Tower[] previousTowers;
+    [SerializeField] GameObject platformPrefab;
     [SerializeField] List<GameObject> platforms = new List<GameObject>();
     [SerializeField] List<GameObject> towers = new List<GameObject>();
+    bool resetTower = true;
+    bool placeNewTower = true;
 
     Cure cure;
 
@@ -74,9 +77,9 @@ public class EntityManager : MonoBehaviour
                 SendPlayerUpdates();
 
                 SendEnemyUpdates();
+            }
 
                 SendTowerUpdates();
-            }
 
             for (int i = 0; i < characters.Length; i++)
             {
@@ -144,21 +147,13 @@ public class EntityManager : MonoBehaviour
 
     public void SendTowerUpdates()
     {
-        if (previousTowers.Length != localTowers.Length && localTowers.Length != 0)
+        if (previousTowers.Length != localTowers.Length)
         {
             for (int i = 0; i < PlayerClient.Instance.GetConnectedUsers().Length; i++)
             {
                 if (PlayerClient.Instance.GetUsername() == PlayerClient.Instance.GetConnectedUsers()[i])
                 {
-                    //for (int j = 0; j < localTowers.Length; j++)
-                    //{
-                    //    if (localTowers[j] != previousTowers[j])
-                    //    {
-                    //        UDPClient.Instance.SendTowers(towers[j]);
-                    //    }
-                    //}
-
-                    print($"Local Towers Length: {localTowers.Length}");
+                    print("Sending!");
 
                     UDPClient.Instance.SendTowers(i, localTowers);
                 }
@@ -168,142 +163,227 @@ public class EntityManager : MonoBehaviour
 
     public void ReceiveTowerUpdates(string[] receivedTowers, string[] levels, List<Vector2> positions)
     {
+        print($"Receiving! {receivedTowers.Length}");
+
+        int towerIndex = 0;
+        foreach(Tower tower in localTowers)
+        {
+            for (int i = 0; i < receivedTowers.Length; i++)
+            {
+                if (receivedTowers[i] == localTowers[towerIndex].GetTowerName()
+                    && Vector2.Distance(positions[i], new Vector2(tower.transform.position.x, tower.transform.position.z)) < 2)
+                {
+                    resetTower = false;
+
+                    break;
+                }
+                else
+                {
+                    resetTower = true;
+                }
+            }
+
+            if (receivedTowers.Length == 0)
+            {
+                resetTower = true;
+            }
+
+            if (resetTower)
+            {
+                foreach (GameObject plat in platforms)
+                {
+                    if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z),
+                                         new Vector2(tower.transform.position.x, tower.transform.position.z)) < 5)
+                    {
+                        plat.SetActive(true);
+                        //plat.transform.position = new Vector3(tower.transform.position.x, plat.transform.position.y, tower.transform.position.z);
+
+                        //print($"Deleted Tower {tower.GetTowerName()} At ({tower.transform.position}) | And Reactivated Platform At {plat.transform.position}");
+                    }
+                }
+
+                Destroy(tower.gameObject);
+
+            }
+
+            towerIndex++;
+        }
+
         for (int i = 0; i < receivedTowers.Length; i++)
         {
-            switch(receivedTowers[i])
+            for (int j = 0; j < localTowers.Length; j++)
             {
-                case "Feather Blaster":
-
-                    Instantiate(towers[0], new Vector3(positions[i].x, towers[0].transform.position.y, positions[i].y), Quaternion.identity);
-
-                    foreach (GameObject plat in platforms)
-                    {
-                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
-                        {
-                            plat.SetActive(false);
-                        }
-                    }
-
-                    FindObjectOfType<AudioManager>().Play("Build");
-
+                if (receivedTowers[i] == localTowers[j].GetTowerName() 
+                    && Vector2.Distance(positions[i], new Vector2(localTowers[j].transform.position.x, localTowers[j].transform.position.z)) < 2)
+                {
+                    placeNewTower = false;
                     break;
+                }
+                else
+                {
+                    placeNewTower = true;
+                }
+            }
 
-                case "Chicken Laser":
+            if (localTowers.Length == 0)
+            {
+                placeNewTower = true;
+            }
 
-                    Instantiate(towers[1], new Vector3(positions[i].x, towers[1].transform.position.y, positions[i].y), Quaternion.identity);
+            if (placeNewTower)
+            {
+                switch (receivedTowers[i])
+                {
+                    case "Feather Blaster":
 
-                    foreach (GameObject plat in platforms)
-                    {
-                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        Instantiate(towers[0], new Vector3(positions[i].x, towers[0].transform.position.y, positions[i].y), Quaternion.identity);
+
+                        foreach (GameObject plat in platforms)
                         {
-                            plat.SetActive(false);
+                            if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                            {
+                                plat.SetActive(false);
+                            }
                         }
-                    }
 
-                    FindObjectOfType<AudioManager>().Play("Build");
+                        FindObjectOfType<AudioManager>().Play("Build");
 
-                    break;
+                        break;
 
-                case "Gatling Drummet":
+                    case "Chicken Laser":
 
-                    Instantiate(towers[2], new Vector3(positions[i].x, towers[2].transform.position.y, positions[i].y), Quaternion.identity);
+                        Instantiate(towers[1], new Vector3(positions[i].x, towers[1].transform.position.y, positions[i].y), Quaternion.identity);
 
-                    foreach (GameObject plat in platforms)
-                    {
-                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        foreach (GameObject plat in platforms)
                         {
-                            plat.SetActive(false);
+                            if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                            {
+                                plat.SetActive(false);
+                            }
                         }
-                    }
 
-                    break;
+                        FindObjectOfType<AudioManager>().Play("Build");
 
-                case "Web Shooter":
+                        break;
 
-                    Instantiate(towers[3], new Vector3(positions[i].x, towers[3].transform.position.y, positions[i].y), Quaternion.identity);
+                    case "Gatling Drummet":
 
-                    foreach (GameObject plat in platforms)
-                    {
-                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        Instantiate(towers[2], new Vector3(positions[i].x, towers[2].transform.position.y, positions[i].y), Quaternion.identity);
+
+                        foreach (GameObject plat in platforms)
                         {
-                            plat.SetActive(false);
+                            if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                            {
+                                plat.SetActive(false);
+                            }
                         }
-                    }
 
-                    break;
+                        break;
 
-                case "Tennis Bomb":
+                    case "Web Shooter":
 
-                    Instantiate(towers[4], new Vector3(positions[i].x, towers[4].transform.position.y, positions[i].y), Quaternion.identity);
+                        Instantiate(towers[3], new Vector3(positions[i].x, towers[3].transform.position.y, positions[i].y), Quaternion.identity);
 
-                    foreach (GameObject plat in platforms)
-                    {
-                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        foreach (GameObject plat in platforms)
                         {
-                            plat.SetActive(false);
+                            if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                            {
+                                plat.SetActive(false);
+                            }
                         }
-                    }
 
-                    break;
+                        break;
 
-                case "Spider House":
+                    case "Tennis Bomb":
 
-                    Instantiate(towers[5], new Vector3(positions[i].x, towers[5].transform.position.y, positions[i].y), Quaternion.identity);
+                        Instantiate(towers[4], new Vector3(positions[i].x, towers[4].transform.position.y, positions[i].y), Quaternion.identity);
 
-                    foreach (GameObject plat in platforms)
-                    {
-                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        foreach (GameObject plat in platforms)
                         {
-                            plat.SetActive(false);
+                            if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                            {
+                                plat.SetActive(false);
+                            }
                         }
-                    }
 
-                    break;
+                        break;
 
-                case "Ink Bomber":
+                    case "Spider House":
 
-                    Instantiate(towers[6], new Vector3(positions[i].x, towers[6].transform.position.y, positions[i].y), Quaternion.identity);
+                        Instantiate(towers[5], new Vector3(positions[i].x, towers[5].transform.position.y, positions[i].y), Quaternion.identity);
 
-                    foreach (GameObject plat in platforms)
-                    {
-                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        foreach (GameObject plat in platforms)
                         {
-                            plat.SetActive(false);
+                            if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                            {
+                                plat.SetActive(false);
+                            }
                         }
-                    }
 
-                    break;
+                        break;
 
-                case "Photosynthesizer":
+                    case "Ink Bomber":
 
-                    Instantiate(towers[7], new Vector3(positions[i].x, towers[7].transform.position.y, positions[i].y), Quaternion.identity);
+                        Instantiate(towers[6], new Vector3(positions[i].x, towers[6].transform.position.y, positions[i].y), Quaternion.identity);
 
-                    foreach (GameObject plat in platforms)
-                    {
-                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        foreach (GameObject plat in platforms)
                         {
-                            plat.SetActive(false);
+                            if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                            {
+                                plat.SetActive(false);
+                            }
                         }
-                    }
 
-                    break;
+                        break;
 
-                case "S.A.P":
+                    case "Photosynthesizer":
 
-                    Instantiate(towers[8], new Vector3(positions[i].x, towers[8].transform.position.y, positions[i].y), Quaternion.identity);
+                        Instantiate(towers[7], new Vector3(positions[i].x, towers[7].transform.position.y, positions[i].y), Quaternion.identity);
 
-                    foreach (GameObject plat in platforms)
-                    {
-                        if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                        foreach (GameObject plat in platforms)
                         {
-                            plat.SetActive(false);
+                            if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                            {
+                                plat.SetActive(false);
+                            }
                         }
-                    }
 
-                    break;
+                        break;
+
+                    case "S.A.P":
+
+                        Instantiate(towers[8], new Vector3(positions[i].x, towers[8].transform.position.y, positions[i].y), Quaternion.identity);
+
+                        foreach (GameObject plat in platforms)
+                        {
+                            if (Vector2.Distance(new Vector2(plat.transform.position.x, plat.transform.position.z), positions[i]) < 5)
+                            {
+                                plat.SetActive(false);
+                            }
+                        }
+
+                        break;
+                }
             }
         }
         previousTowers = FindObjectsOfType<Tower>();
+    }
+
+    public void ReceiveTowerUpgrades(string towerName, Vector3 position)
+    {
+        print("Upgrading!");
+
+        foreach (Tower tower in localTowers)
+        {
+            if (towerName == tower.GetTowerName() && Vector3.Distance(position, tower.transform.position) < 2)
+            {
+                tower.Upgrade();
+
+                print($"{tower.GetTowerName()} has been upgraded to level {tower.GetLevel()}");
+
+                FindObjectOfType<AudioManager>().Play("Improve");
+            }
+        }
     }
 
     void GetLocalPlayer()
@@ -316,6 +396,11 @@ public class EntityManager : MonoBehaviour
                 localPlayer = characters[i];
             }
         }
+    }
+
+    public Tower[] GetLocalTowers()
+    {
+        return localTowers;
     }
 
     bool CanSendMessage()

@@ -14,6 +14,7 @@ public class PointsManager : MonoBehaviour
     private void Start()
     {
         currentPoints = startingPoints;
+
         pointsText.text = startingPoints.ToString();
     }
 
@@ -33,7 +34,10 @@ public class PointsManager : MonoBehaviour
         Mathf.Clamp(currentPoints, 0, 100000);
 
         //print("Points: " + currentPoints);
-        pointsText.text = currentPoints.ToString();
+        if (GetComponent<PlayerController>().GetIsPlayerCharacter())
+        {
+            pointsText.text = currentPoints.ToString();
+        }
     }
 
     public int GetCurrentPoints()

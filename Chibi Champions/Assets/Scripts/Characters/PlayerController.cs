@@ -234,20 +234,17 @@ public class PlayerController : MonoBehaviour
             {
                 if (sporeLevel == 1)
                 {
-                    print("Level 1");
                     lightAttackDamage *= 1.5f;
                     heavyAttackDamage *= 1.5f;
                 }
                 if (sporeLevel == 2)
                 {
-                    print("Level 2");
                     lightAttackDamage *= 1.5f;
                     heavyAttackDamage *= 1.5f;
                     speed += 2;
                 }
                 if (sporeLevel >= 3)
                 {
-                    print("Level 3+");
                     lightAttackDamage *= 2f;
                     heavyAttackDamage *= 2f;
                     speed += 2;

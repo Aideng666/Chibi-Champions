@@ -93,25 +93,42 @@ public class WaveManager : MonoBehaviour
                 waveCompletePointsAdded = true;
             }
             
-            if (FindObjectsOfType<AlertText>().Length == 0 && !beginWaveAlertFired)
+            if (!beginWaveAlertFired)
             {
-                AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Press Q To Begin Wave {currentWave + 1}", 3));
+                if (FindObjectOfType<UDPClient>() != null)
+                {
+                    if (PlayerClient.Instance.GetClientNum() == 0)
+                    {
+                        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Press Q When Ready To Begin Wave {currentWave + 1}", 10));
+                    }
+                    else
+                    {
+                        print($"Player Num: {PlayerClient.Instance.GetClientNum()}");
+                        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Waiting For Player 1 To Start Wave {currentWave + 1}", 10));
+                    }
+                }
+                else
+                {
+                    AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Press Q When Ready To Begin Wave {currentWave + 1}", 10));
+                }
+
                 beginWaveAlertFired = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (PlayerClient.Instance.GetClientNum() == 0 && Input.GetKeyDown(KeyCode.Q))
+            {
+                UDPClient.Instance.SendStartWave();
+
+                BeginWave();
+            }
+            else if(FindObjectOfType<UDPClient>() == null && Input.GetKeyDown(KeyCode.Q))
             {
                 BeginWave();
-
-                if (FindObjectsOfType<AlertText>().Length > 0)
-                {
-                    Destroy(FindObjectOfType<AlertText>().gameObject);
-                }
             }
         }
     }
 
-    void BeginWave()
+    public void BeginWave()
     {
         currentPhaseText.text = "Combat Phase";
        
@@ -127,6 +144,14 @@ public class WaveManager : MonoBehaviour
         currentWave++;
 
         currentWaveText.text = currentWave.ToString();
+
+        if (FindObjectsOfType<AlertText>().Length > 0)
+        {
+            AlertManager.Instance.SetAlertPlaying(false);
+            Destroy(FindObjectOfType<AlertText>().gameObject);
+        }
+
+        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"WAVE STARTED! DEFEND THE CURE!", 5));
     }
 
     bool CheckWaveComplete()

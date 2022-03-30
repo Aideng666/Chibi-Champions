@@ -32,16 +32,22 @@ public class Cure : MonoBehaviour
         {
             AlertManager.Instance.DisplayAlert(new Alert(Color.red, "The Cure Is At 50 HP!", 1));
             alertFired = true;
+
+            FindObjectOfType<AudioManager>().Play("Cure Damage");
         }
         if (GetComponent<Health>().GetCurrentHealth() <= 25 && !alert2Fired)
         {
             AlertManager.Instance.DisplayAlert(new Alert(Color.red, "The Cure Is At 25 HP!", 2));
             alert2Fired = true;
+
+            FindObjectOfType<AudioManager>().Play("Cure Damage");
         }
         if (GetComponent<Health>().GetCurrentHealth() <= 10 && !alert3Fired)
         {
             AlertManager.Instance.DisplayAlert(new Alert(Color.red, "The Cure Only Has 10 HP Left!", 2));
             alert3Fired = true;
+
+            FindObjectOfType<AudioManager>().Play("Cure Damage");
         }
 
 
@@ -53,7 +59,7 @@ public class Cure : MonoBehaviour
 
     IEnumerator DelayBeforeLoss()
     {
-        AlertManager.Instance.DisplayAlert(new Alert(Color.blue, "You Lose!", 2));
+        AlertManager.Instance.DisplayAlert(new Alert(Color.blue, "You Lose!", 2));       
 
         yield return new WaitForSeconds(3);
 

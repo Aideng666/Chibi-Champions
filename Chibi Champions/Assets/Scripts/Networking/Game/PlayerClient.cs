@@ -59,6 +59,8 @@ public class PlayerClient : MonoBehaviour
 
     ClientStates currentState = ClientStates.Lobby;
 
+    static int clientNum = -1;
+
     public static PlayerClient Instance { get; set; }
 
     private void Awake()
@@ -200,8 +202,6 @@ public class PlayerClient : MonoBehaviour
 
                             if (messageReceived.Contains("GAME_START_MESSAGE.KEY"))
                             {
-                                print("Beginning Game State");
-
                                 BeginGameState();
                             }
 
@@ -275,11 +275,164 @@ public class PlayerClient : MonoBehaviour
 
                 if (recv > 0)
                 {
-                    float[] posMessageReceived = new float[recv / sizeof(float)];
+                    string messageReceived = Encoding.ASCII.GetString(buffer, 0, recv);
 
-                    Buffer.BlockCopy(buffer, 0, posMessageReceived, 0, recv);
+                    if (messageReceived.Contains("STARTING_WAVE_MESSAGE.KEY"))
+                    {
+                        print("Starting Wave");
 
-                    EntityManager.Instance.UpdateRemotePlayers((int)posMessageReceived[0], new Vector3(posMessageReceived[1], posMessageReceived[2], posMessageReceived[3]));
+                        WaveManager.Instance.BeginWave();
+                    }
+                    else if (messageReceived.Contains("ANIMATION_TRIGGERED_MESSAGE.KEY"))
+                    {
+                        string[] messageSplit = messageReceived.Split(':');
+
+                        bool isAnimOn = (messageSplit[3] == "True");
+
+                        PlayerController[] players = FindObjectsOfType<PlayerController>();
+
+                        foreach (PlayerController player in players)
+                        {
+                            switch (messageSplit[2])
+                            {
+                                case "WalkForward":
+
+                                    if (player.GetName() == messageSplit[1])
+                                    {
+                                        AnimController.Instance.SetPlayerWalking(player.GetComponentInChildren<Animator>(), isAnimOn, true, false);
+                                    }
+
+                                    break;
+
+                                case "WalkBackward":
+
+                                    if (player.GetName() == messageSplit[1])
+                                    {
+                                        AnimController.Instance.SetPlayerWalking(player.GetComponentInChildren<Animator>(), isAnimOn, false, false);
+                                    }
+
+                                    break;
+
+                                case "WalkLeft":
+
+                                    if (player.GetName() == messageSplit[1])
+                                    {
+                                        AnimController.Instance.SetPlayerStrafing(player.GetComponentInChildren<Animator>(), isAnimOn, 0, false);
+                                    }
+
+                                    break;
+
+                                case "WalkRight":
+
+                                    if (player.GetName() == messageSplit[1])
+                                    {
+                                        AnimController.Instance.SetPlayerStrafing(player.GetComponentInChildren<Animator>(), isAnimOn, 1, false);
+                                    }
+
+                                    break;
+
+                                case "Jump":
+
+                                    if (player.GetName() == messageSplit[1])
+                                    {
+                                        AnimController.Instance.PlayPlayerJumpAnim(player.GetComponentInChildren<Animator>(), false);
+                                    }
+
+                                    break;
+
+                                case "Death":
+
+                                    if (player.GetName() == messageSplit[1])
+                                    {
+                                        AnimController.Instance.PlayPlayerDeathAnim(player.GetComponentInChildren<Animator>(), false);
+                                    }
+
+                                    break;
+
+                                case "Respawn":
+
+                                    if (player.GetName() == messageSplit[1])
+                                    {
+                                        AnimController.Instance.SetPlayerRespawn(player.GetComponentInChildren<Animator>(), false);
+                                    }
+
+                                    break;
+
+                                case "Attack":
+
+                                    if (player.GetName() == messageSplit[1])
+                                    {
+                                        AnimController.Instance.PlayPlayerAttackAnim(player.GetComponentInChildren<Animator>(), false);
+                                    }
+
+                                    break;
+
+                                case "Ability":
+
+                                    if (player.GetName() == messageSplit[1])
+                                    {
+                                        AnimController.Instance.PlayPlayerAbilityAnim(player.GetComponentInChildren<Animator>(), false);
+                                    }
+
+                                    break;
+                            }
+                        }
+                    }
+                    else if(messageReceived.Contains("TOWER_UPDATE_SENT.KEY"))
+                    {
+                        string[] messageSplit = messageReceived.Split(':');
+
+                        string[] towers = new string[(messageSplit.Length - 2) / 4];
+                        string[] levels = new string[(messageSplit.Length - 2) / 4];
+                        string[] XYPositions = new string[(messageSplit.Length - 2) / 2];
+
+                        List<string> xPositions = new List<string>();
+                        List<string> yPositions = new List<string>();
+
+                        List<Vector2> towerPositions = new List<Vector2>();
+
+                        for (int i = 0; i < towers.Length; i++)
+                        {
+                            towers[i] = messageSplit[i + 2];
+                        }
+
+                        for (int i = 0; i < levels.Length; i++)
+                        {
+                            levels[i] = messageSplit[i + towers.Length + 2];
+                        }
+
+                        for (int i = 0; i < XYPositions.Length; i++)
+                        {
+                            XYPositions[i] = messageSplit[i + towers.Length + levels.Length + 2];
+
+                            if (i % 2 == 0)
+                            {
+                                xPositions.Add(messageSplit[i + towers.Length + levels.Length + 2]);
+                            }
+                            else
+                            {
+                                yPositions.Add(messageSplit[i + towers.Length + levels.Length + 2]);
+                            }
+                        }
+
+                        for (int i = 0; i < xPositions.Count; i++)
+                        {
+                            towerPositions.Add(new Vector2(float.Parse(xPositions[i]), float.Parse(yPositions[i])));
+                        }
+
+                        EntityManager.Instance.ReceiveTowerUpdates(towers, levels, towerPositions);
+                    }
+                    else
+                    {
+                        //Can put an if here for different sized float arrays to distinguish between message types?
+                        float[] posMessageReceived = new float[recv / sizeof(float)];
+
+                        Buffer.BlockCopy(buffer, 0, posMessageReceived, 0, recv);
+
+                        EntityManager.Instance.ReceivePlayerUpdates((int)posMessageReceived[0],
+                            new Vector3(posMessageReceived[1], posMessageReceived[2], posMessageReceived[3]),
+                            new Vector3(posMessageReceived[4], posMessageReceived[5], posMessageReceived[6]));
+                    }
                 }
             }
 
@@ -293,8 +446,8 @@ public class PlayerClient : MonoBehaviour
         try
         {
             //REPLACE THE IP BELOW WITH YOUR AWS SERVER IP
-            ip = IPAddress.Parse("54.208.168.94");
-            //ip = IPAddress.Parse("127.0.0.1");
+            //ip = IPAddress.Parse("54.208.168.94");
+            ip = IPAddress.Parse("127.0.0.1");
             server = new IPEndPoint(ip, 11112);
 
             client = new Socket(AddressFamily.InterNetwork,
@@ -372,6 +525,8 @@ public class PlayerClient : MonoBehaviour
                 {
                     if (username == oldUsers[i].text)
                     {
+                        clientNum = i;
+
                         if (isReady)
                         {
                             oldUsers[i].GetComponentInParent<Image>().gameObject.GetComponentInChildren<Button>().image.color = Color.green;
@@ -646,5 +801,15 @@ public class PlayerClient : MonoBehaviour
     public int GetSelectedCharacterIndex()
     {
         return selectedCharacterIndex;
+    }
+
+    public void SetClientNum(int num)
+    {
+        clientNum = num;
+    }
+
+    public int GetClientNum()
+    {
+        return clientNum;
     }
 }

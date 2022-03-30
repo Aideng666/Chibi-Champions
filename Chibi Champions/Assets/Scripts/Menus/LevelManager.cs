@@ -28,12 +28,12 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        PickRandomBlurb();
     }
 
     public async void LoadScene(string sceneName)
     {
+        PickRandomBlurb();
+
         target = 0;
         progressBar.fillAmount = 0;
 
@@ -59,7 +59,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        progressBar.fillAmount = Mathf.MoveTowards(progressBar.fillAmount, target, 3 * Time.deltaTime);
+        progressBar.fillAmount = Mathf.MoveTowards(progressBar.fillAmount, target, 3 * Time.deltaTime);      
     }
 
     private void PickRandomBlurb()

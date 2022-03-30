@@ -57,6 +57,13 @@ public class MenuController : MonoBehaviour
             frames[1].SetActive(true);
             ChangeScene.hasReturnedToMenu = false;
         }
+
+        if (ChangeScene.hasPausedQuit)
+        {
+            frames[0].SetActive(false);
+            frames[1].SetActive(true);
+            ChangeScene.hasPausedQuit = false;
+        }
     }
 
     public void PlayButtonFade()

@@ -7,6 +7,8 @@ public class ChangeScene : MonoBehaviour
 {
     public static bool hasReturnedToMenu = false;
 
+    public static bool hasPausedQuit = false;
+
     public void SwitchScenes(string sceneName)
     {
         LevelManager.Instance.LoadScene(sceneName);
@@ -25,6 +27,8 @@ public class ChangeScene : MonoBehaviour
 
     public void PauseQuit()
     {
-        SceneManager.LoadScene("MenuScenes");
+        LevelManager.Instance.LoadScene("MenuScenes");
+        Time.timeScale = 1f;
+        hasPausedQuit = true;      
     }
 }

@@ -14,7 +14,13 @@ public class HealthBar : MonoBehaviour
     {
         if (isPlayer)
         {
-            FindObjectOfType<PlayerController>().gameObject.GetComponent<Health>().OnHealthChange += HandleHealthChanged;
+            foreach(PlayerController player in FindObjectsOfType<PlayerController>())
+            {
+                if (player.GetIsPlayerCharacter())
+                {
+                    player.gameObject.GetComponent<Health>().OnHealthChange += HandleHealthChanged;
+                }
+            }
         }
         else
         {

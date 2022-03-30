@@ -69,9 +69,23 @@ public class UDPClient : MonoBehaviour
                 message += ":" + towers[i].transform.position.x + ":" + towers[i].transform.position.z;
             }
 
-        byte[] msg = Encoding.ASCII.GetBytes(message);
+            byte[] msg = Encoding.ASCII.GetBytes(message);
 
             client.SendTo(msg, remoteEP);
+        }
+    }
+
+    public void SendTowerUpgrade(Vector3 position, string towerName)
+    {
+        if (clientStarted)
+        {
+            string message = $"TOWER_UPGRADE_SENT.KEY:{PlayerClient.Instance.GetClientNum()}:{towerName}:{position.x}:{position.y}:{position.z}";
+
+            byte[] msg = Encoding.ASCII.GetBytes(message);
+
+            client.SendTo(msg, remoteEP);
+            
+            print("Sent to Server");
         }
     }
 

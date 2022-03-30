@@ -29,6 +29,6 @@ public class ChangeScene : MonoBehaviour
     {
         LevelManager.Instance.LoadScene("MenuScenes");
         Time.timeScale = 1f;
-        hasPausedQuit = true;
+        hasPausedQuit = true;      
     }
 }

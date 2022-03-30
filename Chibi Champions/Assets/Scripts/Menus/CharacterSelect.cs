@@ -85,6 +85,8 @@ public class CharacterSelect : MonoBehaviour
         { 
             PlayerClient.Instance.SetSelectedCharacterIndex(characterIndex);
         }
+
+        CanvasManager.isGamePaused = false;
     }
 
     public int GetCharacterIndex()

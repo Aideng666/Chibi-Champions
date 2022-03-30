@@ -382,45 +382,69 @@ public class PlayerClient : MonoBehaviour
                     {
                         string[] messageSplit = messageReceived.Split(':');
 
-                        string[] towers = new string[(messageSplit.Length - 2) / 4];
-                        string[] levels = new string[(messageSplit.Length - 2) / 4];
-                        string[] XYPositions = new string[(messageSplit.Length - 2) / 2];
-
-                        List<string> xPositions = new List<string>();
-                        List<string> yPositions = new List<string>();
+                        string[] towers;
+                        string[] levels;
+                        string[] XYPositions;
 
                         List<Vector2> towerPositions = new List<Vector2>();
 
-                        for (int i = 0; i < towers.Length; i++)
+                        if (messageSplit.Length == 2)
                         {
-                            towers[i] = messageSplit[i + 2];
+                            towers = new string[0];
+                            levels = new string[0];
+                            XYPositions = new string[0];
                         }
-
-                        for (int i = 0; i < levels.Length; i++)
+                        else
                         {
-                            levels[i] = messageSplit[i + towers.Length + 2];
-                        }
 
-                        for (int i = 0; i < XYPositions.Length; i++)
-                        {
-                            XYPositions[i] = messageSplit[i + towers.Length + levels.Length + 2];
+                            towers = new string[(messageSplit.Length - 2) / 4];
+                            levels = new string[(messageSplit.Length - 2) / 4];
+                            XYPositions = new string[(messageSplit.Length - 2) / 2];
 
-                            if (i % 2 == 0)
+                            List<string> xPositions = new List<string>();
+                            List<string> yPositions = new List<string>();
+
+                            for (int i = 0; i < towers.Length; i++)
                             {
-                                xPositions.Add(messageSplit[i + towers.Length + levels.Length + 2]);
+                                towers[i] = messageSplit[i + 2];
                             }
-                            else
-                            {
-                                yPositions.Add(messageSplit[i + towers.Length + levels.Length + 2]);
-                            }
-                        }
 
-                        for (int i = 0; i < xPositions.Count; i++)
-                        {
-                            towerPositions.Add(new Vector2(float.Parse(xPositions[i]), float.Parse(yPositions[i])));
+                            for (int i = 0; i < levels.Length; i++)
+                            {
+                                levels[i] = messageSplit[i + towers.Length + 2];
+                            }
+
+                            for (int i = 0; i < XYPositions.Length; i++)
+                            {
+                                XYPositions[i] = messageSplit[i + towers.Length + levels.Length + 2];
+
+                                if (i % 2 == 0)
+                                {
+                                    xPositions.Add(messageSplit[i + towers.Length + levels.Length + 2]);
+                                }
+                                else
+                                {
+                                    yPositions.Add(messageSplit[i + towers.Length + levels.Length + 2]);
+                                }
+                            }
+
+                            for (int i = 0; i < xPositions.Count; i++)
+                            {
+                                towerPositions.Add(new Vector2(float.Parse(xPositions[i]), float.Parse(yPositions[i])));
+                            }
                         }
 
                         EntityManager.Instance.ReceiveTowerUpdates(towers, levels, towerPositions);
+                    }
+                    else if (messageReceived.Contains("TOWER_UPGRADE_SENT.KEY"))
+                    {
+                        string[] messageSplit = messageReceived.Split(':');
+
+                        string towerName = messageSplit[2];
+
+                        Vector3 towerPosition = new Vector3(float.Parse(messageSplit[3]), float.Parse(messageSplit[4]), float.Parse(messageSplit[5]));
+
+                        EntityManager.Instance.ReceiveTowerUpgrades(towerName, towerPosition);
                     }
                     else
                     {

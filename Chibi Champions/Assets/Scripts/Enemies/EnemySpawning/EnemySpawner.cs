@@ -16,10 +16,18 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (CanSpawn())
+        if (!CanvasManager.isGamePaused)
         {
-            SpawnEnemy();
+            if (CanSpawn())
+            {
+                SpawnEnemy();
+            }                               
         }
+          
+        //if (CanSpawn())
+        //{
+        //    SpawnEnemy();
+        //}
     }
 
     bool CanSpawn()
@@ -77,5 +85,10 @@ public class EnemySpawner : MonoBehaviour
     public void SetLevelList(List<int> list)
     {
         levelList = list;
+    }
+
+    public void SetTimeToNextSpawn(float timeToSpawn)
+    {
+        timeToNextSpawn = timeToSpawn;
     }
 }

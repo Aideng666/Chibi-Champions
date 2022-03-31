@@ -45,6 +45,11 @@ public class Rolfe : PlayerController
         {
             if (Input.GetMouseButtonDown(0) && CanLightAttack())
             {
+                if (FindObjectOfType<UDPClient>() != null)
+                {
+                    UDPClient.Instance.SendPlayerUpdates("Attack", GetName());
+                }
+
                 Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, lightAttackRange, enemyLayer);
 
                 foreach (Collider enemy in hitEnemies)
@@ -66,6 +71,11 @@ public class Rolfe : PlayerController
             }
             if (Input.GetMouseButtonDown(1) && CanHeavyAttack() && currentBeacons < maxBeacons)
             {
+                if (FindObjectOfType<UDPClient>() != null)
+                {
+                    UDPClient.Instance.SendPlayerUpdates("Ability", GetName());
+                }
+
                 var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
                 currentBeacons++;
 
@@ -77,6 +87,30 @@ public class Rolfe : PlayerController
                 beaconActivated = false;
             }
         }      
+    }
+
+    public override void ReceiveAttackTrigger()
+    {
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, lightAttackRange, enemyLayer);
+
+        foreach (Collider enemy in hitEnemies)
+        {
+            if (enemy.tag == "Enemy")
+            {
+                enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
+                enemy.GetComponentInParent<Enemy>().Knockback(20, transform);
+                enemy.GetComponentInParent<Enemy>().SetLastHit(this);
+
+                ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);
+            }
+        }
+
+        StartCoroutine(WaitForSecondSwipe());
+    }
+
+    public override void ReceiveAbilityTrigger()
+    {
+        var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
     }
 
     void SecondSwipeAttack()

@@ -100,6 +100,11 @@ public class PlayerController : MonoBehaviour
 
             if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0 && isAlive)
             {
+                if (FindObjectOfType<UDPClient>() != null)
+                {
+                    UDPClient.Instance.SendPlayerUpdates("Death", GetName());
+                }
+
                 Die();
             }
 
@@ -152,6 +157,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded)
         {
             AnimController.Instance.PlayPlayerJumpAnim(GetComponentInChildren<Animator>(), false);
+
+            if (FindObjectOfType<UDPClient>() != null)
+            {
+                UDPClient.Instance.SendPlayerUpdates("Jump", GetName());
+            }
 
             StartCoroutine(Jump());
 
@@ -281,52 +291,6 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(PlayJumpEffect());
     }
 
-    protected IEnumerator GroundPoundJump()
-    {
-        moveDir.y = jumpPower;
-
-        isJumping = true;
-
-        float elasped = 0f;
-        float totalJumpTime = 0.6f;
-        float totalUpTime = 0.2f;
-        float totalStallTime = 0.4f;
-
-        while(elasped < totalUpTime)
-        {
-            elasped += Time.deltaTime;
-            moveDir.y = Mathf.Lerp(jumpPower, 0.1f, elasped / totalUpTime);
-
-            controller.Move(moveDir * speed * Time.deltaTime);
-
-            yield return null;
-        }
-
-        elasped = 0;
-
-        while (elasped < totalStallTime)
-        {
-            elasped += Time.deltaTime;
-            moveDir.y = Mathf.Lerp(0.1f, 0, elasped / totalStallTime);
-
-            controller.Move(moveDir * speed * Time.deltaTime);
-
-            yield return null;
-        }
-
-        elasped = 0;
-
-        while (elasped < totalJumpTime)
-        {
-            elasped += Time.deltaTime;
-            moveDir.y = Mathf.Lerp(-1, -gravity * 5, elasped / totalJumpTime);
-
-            controller.Move(moveDir * speed * Time.deltaTime);
-
-            yield return null;
-        }
-    }
-
     IEnumerator PlayJumpEffect()
     {
         while(!controller.isGrounded)
@@ -345,6 +309,16 @@ public class PlayerController : MonoBehaviour
     }
 
     protected virtual void Attack()
+    {
+
+    }
+
+    public virtual void ReceiveAttackTrigger()
+    {
+
+    }
+
+    public virtual void ReceiveAbilityTrigger()
     {
 
     }
@@ -371,7 +345,7 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    void Die()
+    public void Die()
     {
         isAlive = false;
 
@@ -515,6 +489,11 @@ public class PlayerController : MonoBehaviour
     public void SetIsPlayerCharacter(bool isPlayer)
     {
         isPlayerCharacter = isPlayer;
+
+        if (isPlayer)
+        {
+            gameObject.AddComponent<AudioListener>();
+        }
     }
 
     private void OnDrawGizmosSelected()

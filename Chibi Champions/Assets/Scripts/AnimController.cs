@@ -9,8 +9,6 @@ public class AnimController : MonoBehaviour
     [SerializeField] Animator rolfeAnimator;
     [SerializeField] Animator potterAnimator;
 
-    Animator playerAnimator;
-
     bool gatlingFiring;
 
     public static AnimController Instance { get; set; }
@@ -18,14 +16,6 @@ public class AnimController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
-
-    private void Start()
-    {
-        if (playerAnimator == null)
-        {
-            playerAnimator = FindObjectOfType<PlayerController>().GetComponent<Animator>();
-        }
     }
 
     public void SetEnemyIsWalking(Animator anim, bool walking)

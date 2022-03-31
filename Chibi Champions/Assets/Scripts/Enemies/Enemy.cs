@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
 
     protected Transform crystalTransform;
     protected Transform playerTransform;
+    protected PlayerController[] playerControllers;
     protected NavMeshAgent navMeshAgent;
     protected EnemyAttackStates currentAttackState;
 
@@ -43,7 +44,7 @@ public class Enemy : MonoBehaviour
         currentAttackState = EnemyAttackStates.Crystal;
 
         crystalTransform = FindObjectOfType<Cure>().transform;
-        playerTransform = FindObjectOfType<PlayerController>().transform;
+        playerControllers = FindObjectsOfType<PlayerController>();
 
         navMeshAgent.speed = defaultSpeed;
     }
@@ -55,6 +56,16 @@ public class Enemy : MonoBehaviour
 
         if (!knockbackApplied)
         {
+            playerTransform = playerControllers[0].transform;
+
+            foreach(PlayerController player in playerControllers)
+            {
+                if (Vector3.Distance(player.transform.position, transform.position) < Vector3.Distance(playerTransform.position, transform.position))
+                {
+                    playerTransform = player.transform;
+                }
+            }
+
             if (tennisBalls.Length > 0)
             {
                 closestBall = tennisBalls[0];

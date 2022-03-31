@@ -22,31 +22,33 @@ public class Drumstick : PlayerController
     // Update is called once per frame
     void Update()
     {
+
+        if (groundPoundActivated && controller.isGrounded)
+        {
+            GroundPoundAttack();
+
+            Destroy(speedParticle.gameObject);
+
+            fall.Stop();
+            land.Play();
+        }
+
+        if (groundPoundActivated && isJumping && controller.velocity.y < 0 && !speedParticleActivated)
+        {
+            speedParticle = ParticleManager.Instance.SpawnParticle(ParticleTypes.Speed, transform.position).GetComponent<ParticleSystem>();
+
+            speedParticleActivated = true;
+        }
+
+        if (speedParticle != null)
+        {
+            speedParticle.transform.position = transform.position;
+        }
+
+
         if (isPlayerCharacter)
         {
             base.Update();
-
-            if (groundPoundActivated && controller.isGrounded)
-            {
-                GroundPoundAttack();
-
-                Destroy(speedParticle.gameObject);
-
-                fall.Stop();
-                land.Play();
-            }
-
-            if (groundPoundActivated && isJumping && controller.velocity.y < 0 && !speedParticleActivated)
-            {
-                speedParticle = ParticleManager.Instance.SpawnParticle(ParticleTypes.Speed, transform.position).GetComponent<ParticleSystem>();
-
-                speedParticleActivated = true;
-            }
-
-            if (speedParticle != null)
-            {
-                speedParticle.transform.position = transform.position;
-            }
 
             AbilityCooldown(groundPoundActivated);
         }
@@ -58,15 +60,25 @@ public class Drumstick : PlayerController
         {
             if (Input.GetMouseButtonDown(0) && CanLightAttack())
             {
+                if (FindObjectOfType<UDPClient>() != null)
+                {
+                    UDPClient.Instance.SendPlayerUpdates("Attack", GetName());
+                }
+
                 AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>(), false);
 
                 wack.Play();
 
-            StartCoroutine(DelayBeforeAttack());
-        }
-        if (Input.GetMouseButtonDown(1) && CanHeavyAttack()/* && controller.isGrounded*/)
-        {
-            StartCoroutine(GroundPoundJump());
+                StartCoroutine(DelayBeforeAttack());
+            }
+            if (Input.GetMouseButtonDown(1) && CanHeavyAttack()/* && controller.isGrounded*/)
+            {
+                if (FindObjectOfType<UDPClient>() != null)
+                {
+                    UDPClient.Instance.SendPlayerUpdates("Ability", GetName());
+                }
+
+                StartCoroutine(GroundPoundJump());
 
                 ParticleManager.Instance.SpawnParticle(ParticleTypes.HighJump, transform.position);
 
@@ -76,7 +88,29 @@ public class Drumstick : PlayerController
 
                 AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>(), false);
             }
-        }      
+        }     
+    }
+
+    public override void ReceiveAttackTrigger()
+    {
+        AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>(), false);
+
+        wack.Play();
+
+        StartCoroutine(DelayBeforeAttack());
+    }
+
+    public override void ReceiveAbilityTrigger()
+    {
+        StartCoroutine(GroundPoundJump());
+
+        ParticleManager.Instance.SpawnParticle(ParticleTypes.HighJump, transform.position);
+
+        groundPoundActivated = true;
+
+        fall.Play();
+
+        AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>(), false);
     }
 
     void GroundPoundAttack()
@@ -94,11 +128,56 @@ public class Drumstick : PlayerController
                 enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-heavyAttackDamage);
                 enemy.GetComponentInParent<Enemy>().Knockback(35, transform);
                 enemy.GetComponentInParent<Enemy>().SetLastHit(this);
-                //GetComponent<PointsManager>().AddPoints(20);
             }
         }
 
         speedParticleActivated = false;
+    }
+
+    protected IEnumerator GroundPoundJump()
+    {
+        moveDir.y = jumpPower;
+
+        isJumping = true;
+
+        float elasped = 0f;
+        float totalJumpTime = 0.6f;
+        float totalUpTime = 0.2f;
+        float totalStallTime = 0.4f;
+
+        while (elasped < totalUpTime)
+        {
+            elasped += Time.deltaTime;
+            moveDir.y = Mathf.Lerp(jumpPower, 0.1f, elasped / totalUpTime);
+
+            controller.Move(moveDir * speed * Time.deltaTime);
+
+            yield return null;
+        }
+
+        elasped = 0;
+
+        while (elasped < totalStallTime)
+        {
+            elasped += Time.deltaTime;
+            moveDir.y = Mathf.Lerp(0.1f, 0, elasped / totalStallTime);
+
+            controller.Move(moveDir * speed * Time.deltaTime);
+
+            yield return null;
+        }
+
+        elasped = 0;
+
+        while (elasped < totalJumpTime)
+        {
+            elasped += Time.deltaTime;
+            moveDir.y = Mathf.Lerp(-1, -gravity * 5, elasped / totalJumpTime);
+
+            controller.Move(moveDir * speed * Time.deltaTime);
+
+            yield return null;
+        }
     }
 
     IEnumerator DelayBeforeAttack()

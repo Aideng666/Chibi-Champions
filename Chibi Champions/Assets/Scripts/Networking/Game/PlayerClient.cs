@@ -446,6 +446,16 @@ public class PlayerClient : MonoBehaviour
 
                         EntityManager.Instance.ReceiveTowerUpgrades(towerName, towerPosition);
                     }
+                    else if (messageReceived.Contains("PLAYER_UPDATE_SENT.KEY"))
+                    {
+                        string[] messageSplit = messageReceived.Split(':');
+
+                        string character = messageSplit[2];
+
+                        string updateName = messageSplit[3];
+
+                        EntityManager.Instance.ReceivePlayerUpdates(character, updateName);
+                    }
                     else
                     {
                         //Can put an if here for different sized float arrays to distinguish between message types?
@@ -453,7 +463,7 @@ public class PlayerClient : MonoBehaviour
 
                         Buffer.BlockCopy(buffer, 0, posMessageReceived, 0, recv);
 
-                        EntityManager.Instance.ReceivePlayerUpdates((int)posMessageReceived[0],
+                        EntityManager.Instance.ReceivePlayerMovementUpdates((int)posMessageReceived[0],
                             new Vector3(posMessageReceived[1], posMessageReceived[2], posMessageReceived[3]),
                             new Vector3(posMessageReceived[4], posMessageReceived[5], posMessageReceived[6]));
                     }
@@ -465,47 +475,51 @@ public class PlayerClient : MonoBehaviour
 
     public static void StartClient()
     {
-        buffer = new byte[512];
-
-        try
+        if (!clientStarted)
         {
-            //REPLACE THE IP BELOW WITH YOUR AWS SERVER IP
-            //ip = IPAddress.Parse("54.208.168.94");
-            ip = IPAddress.Parse("127.0.0.1");
-            server = new IPEndPoint(ip, 11112);
 
-            client = new Socket(AddressFamily.InterNetwork,
-                SocketType.Stream, ProtocolType.Tcp);
+            buffer = new byte[512];
 
             try
             {
-                print("Connecting to Server...");
-                client.Connect(server);
+                //REPLACE THE IP BELOW WITH YOUR AWS SERVER IP
+                //ip = IPAddress.Parse("54.208.168.94");
+                ip = IPAddress.Parse("127.0.0.1");
+                server = new IPEndPoint(ip, 11112);
 
-                print("Connected to IP: " + client.RemoteEndPoint.ToString());
+                client = new Socket(AddressFamily.InterNetwork,
+                    SocketType.Stream, ProtocolType.Tcp);
 
-                client.Blocking = false;
+                try
+                {
+                    print("Connecting to Server...");
+                    client.Connect(server);
 
+                    print("Connected to IP: " + client.RemoteEndPoint.ToString());
+
+                    client.Blocking = false;
+
+                }
+                catch (ArgumentNullException anexc)
+                {
+                    print("ArgumentNullException: " + anexc.ToString());
+                }
+                catch (SocketException sexc)
+                {
+                    print("SocketException: " + sexc.ToString());
+                }
+                catch (Exception exc)
+                {
+                    print("Unexpected exception: " + exc.ToString());
+                }
             }
-            catch (ArgumentNullException anexc)
+            catch (Exception e)
             {
-                print("ArgumentNullException: " + anexc.ToString());
+                print("Exception: " + e.ToString());
             }
-            catch (SocketException sexc)
-            {
-                print("SocketException: " + sexc.ToString());
-            }
-            catch (Exception exc)
-            {
-                print("Unexpected exception: " + exc.ToString());
-            }
+
+            clientStarted = true;
         }
-        catch (Exception e)
-        {
-            print("Exception: " + e.ToString());
-        }
-
-        clientStarted = true;
     }
 
     public void SetUserList(string[] users)

@@ -62,6 +62,8 @@ public class PlayerController : MonoBehaviour
     int sporeLevel = 1;
     Effects currentEffect = Effects.None;
 
+    GameObject radiusToDeactivate;
+
     // Start is called before the first frame update
     protected void Start()
     {
@@ -123,7 +125,7 @@ public class PlayerController : MonoBehaviour
                     TowerMenu.Instance.SetPlayer(this);
                     CanvasManager.Instance.OpenTowerMenu();
                 }
-                else if (CanvasManager.Instance.IsTowerMenuOpen() && Input.GetKeyDown(KeyCode.E))
+                else if (CanvasManager.Instance.IsTowerMenuOpen() && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape)))
                 {
                     CanvasManager.Instance.CloseTowerMenu();
                 }
@@ -227,7 +229,17 @@ public class PlayerController : MonoBehaviour
                 AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 0, false);
                 AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 1, false);
             }
-        }       
+        }
+        
+        //if (Input.GetKeyDown(KeyCode.LeftShift))
+        //{
+        //    speed += 5;
+        //}
+
+        //if (Input.GetKeyUp(KeyCode.LeftShift))
+        //{
+        //    speed -= 5;
+        //}
     }
 
     void ApplyEffect()
@@ -390,6 +402,10 @@ public class PlayerController : MonoBehaviour
                 {
                     TowerMenu.Instance.SetMenuState(MenuState.Upgrade);
                     TowerMenu.Instance.SetTower(selection.parent);
+
+                    selection.parent.GetComponent<Tower>().SetTowerRadiusActive(true);
+
+                    radiusToDeactivate = selection.parent.gameObject;
                 }
                 else
                 {
@@ -401,6 +417,18 @@ public class PlayerController : MonoBehaviour
             {
                 canInteract = false;
                 interactText.gameObject.SetActive(false);
+
+                try
+                {
+                    if (!CanvasManager.Instance.IsTowerMenuOpen())
+                    {
+                        radiusToDeactivate.GetComponent<Tower>().SetTowerRadiusActive(false);
+                    }
+                }
+                catch
+                {
+
+                }
             }
         }
     }

@@ -977,7 +977,7 @@ MonoBehaviour:
   characterName: Rolfe
   cam: {fileID: 0}
   attackPoint: {fileID: 6888943266550092648}
-  speed: 10
+  speed: 15
   lightAttackRange: 1.45
   heavyAttackRange: 10
   lightAttackDamage: 5

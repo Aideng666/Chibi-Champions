@@ -177,13 +177,16 @@ public class TowerMenu : MonoBehaviour
 
     public void UpgradeTower()
     {
-        foreach (Tower tower in EntityManager.Instance.GetLocalTowers())
+        if (FindObjectOfType<UDPClient>() != null)
         {
-            if (Vector3.Distance(currentTower.position, tower.transform.position) < 2 && currentTower.GetComponent<Tower>().GetTowerName() == tower.GetTowerName())
+            foreach (Tower tower in EntityManager.Instance.GetLocalTowers())
             {
-                print("Calling UDP Send");
+                if (Vector3.Distance(currentTower.position, tower.transform.position) < 2 && currentTower.GetComponent<Tower>().GetTowerName() == tower.GetTowerName())
+                {
+                    print("Calling UDP Send");
 
-                UDPClient.Instance.SendTowerUpgrade(currentTower.position, tower.GetTowerName());
+                    UDPClient.Instance.SendTowerUpgrade(currentTower.position, tower.GetTowerName());
+                }
             }
         }
 
@@ -199,7 +202,6 @@ public class TowerMenu : MonoBehaviour
         {
             print("Not Enough Points");
         }
-
     }
 
     public void SellTower()

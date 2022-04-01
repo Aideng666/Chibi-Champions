@@ -1497,7 +1497,7 @@ MonoBehaviour:
   characterName: Drumstick
   cam: {fileID: 0}
   attackPoint: {fileID: 5120274358207205552}
-  speed: 10
+  speed: 15
   lightAttackRange: 2
   heavyAttackRange: 10
   lightAttackDamage: 12

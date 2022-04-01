@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.ProBuilder;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class Tower : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class Tower : MonoBehaviour
     [SerializeField] protected float attackDelay;
     [SerializeField] protected int[] upgradeCosts = new int[3];
     [SerializeField] protected Transform firePoint;
+    [SerializeField] protected GameObject towerRadius;
 
     [SerializeField] protected string[] upgradeNames = new string[3];
     [SerializeField] protected Sprite[] upgradeImages = new Sprite[3];
@@ -36,10 +39,17 @@ public class Tower : MonoBehaviour
         currentAttackPriority = defaultAttackPriority;
 
         totalPointsSpent = towerCost;
+
+        towerRadius.transform.localScale = new Vector3((attackRange * 2) - 1, 1, (attackRange * 2) - 1);
+
+        towerRadius.SetActive(false);
     }
 
     protected void UpdateView()
     {
+        towerRadius.transform.localScale = new Vector3((attackRange * 2) - 1, 1, (attackRange * 2) - 1);
+        towerRadius.transform.rotation = Quaternion.identity;
+
         Collider[] EnemiesInView = Physics.OverlapSphere(transform.position, attackRange, enemyLayer);
 
         if (EnemiesInView == null || EnemiesInView.Length < 1)
@@ -153,6 +163,18 @@ public class Tower : MonoBehaviour
     public string GetTowerName()
     {
         return towerName;
+    }
+
+    public void SetTowerRadiusActive(bool active)
+    {
+        if (active)
+        {
+            towerRadius.SetActive(true);
+        }
+        else
+        {
+            towerRadius.SetActive(false);
+        }
     }
 
     public string GetUpgradeDescriptions(int level)

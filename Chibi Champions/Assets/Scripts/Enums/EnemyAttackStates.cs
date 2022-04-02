@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum EnemyAttackStates
 {
-   Crystal,
+   Cure,
    Player,
    Tennis
 }

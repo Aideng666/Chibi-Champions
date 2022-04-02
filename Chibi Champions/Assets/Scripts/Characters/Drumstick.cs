@@ -12,11 +12,14 @@ public class Drumstick : PlayerController
     [SerializeField] AudioSource fall;
     [SerializeField] AudioSource land;
     [SerializeField] AudioSource wack;
+    [SerializeField] TrailRenderer swordTrail;
 
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
+
+        swordTrail.emitting = false;
     }
 
     // Update is called once per frame
@@ -58,7 +61,7 @@ public class Drumstick : PlayerController
     {
         if (!CanvasManager.isGamePaused)
         {
-            if (Input.GetMouseButtonDown(0) && CanLightAttack())
+            if (Input.GetMouseButton(0) && CanLightAttack())
             {
                 if (FindObjectOfType<UDPClient>() != null)
                 {
@@ -182,7 +185,11 @@ public class Drumstick : PlayerController
 
     IEnumerator DelayBeforeAttack()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
+
+        swordTrail.emitting = true;
+
+        yield return new WaitForSeconds(0.1f);
 
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, lightAttackRange, enemyLayer);
 
@@ -197,5 +204,7 @@ public class Drumstick : PlayerController
                 ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);
             }
         }
+
+        swordTrail.emitting = false;
     }
 }

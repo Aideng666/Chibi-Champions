@@ -103,7 +103,6 @@ public class WaveManager : MonoBehaviour
                     }
                     else
                     {
-                        print($"Player Num: {PlayerClient.Instance.GetClientNum()}");
                         AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Prepare Your Defences! Waiting For Player 1 To Start Wave", 1000));
                     }
                 }

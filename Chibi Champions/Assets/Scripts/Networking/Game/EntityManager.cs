@@ -18,6 +18,7 @@ public class EntityManager : MonoBehaviour
     [SerializeField] List<GameObject> towers = new List<GameObject>();
     bool resetTower = true;
     bool placeNewTower = true;
+    bool towerUpdateReceived;
 
     Cure cure;
 
@@ -79,13 +80,14 @@ public class EntityManager : MonoBehaviour
                 //SendEnemyUpdates();
             }
 
-                SendTowerUpdates();
+            SendTowerUpdates();
 
             for (int i = 0; i < characters.Length; i++)
             {
                 characters[i].transform.position += velocities[i] * Time.deltaTime;
             }
 
+            previousTowers = null;
             previousTowers = localTowers;
         }
     }
@@ -134,13 +136,11 @@ public class EntityManager : MonoBehaviour
                 {
                     case "Attack":
 
-                        print("Attacking");
                         characters[i].ReceiveAttackTrigger();
 
                         break;
 
                     case "Ability":
-                        print("Ability Used");
                         characters[i].ReceiveAbilityTrigger();
 
                         break;
@@ -186,12 +186,12 @@ public class EntityManager : MonoBehaviour
     {
         if (previousTowers.Length != localTowers.Length)
         {
+            print($"Sending Tower Update Because Previous Towers is Length {previousTowers.Length} and Local Towers is {localTowers.Length}");
+
             for (int i = 0; i < PlayerClient.Instance.GetConnectedUsers().Length; i++)
             {
                 if (PlayerClient.Instance.GetUsername() == PlayerClient.Instance.GetConnectedUsers()[i])
                 {
-                    print("Sending!");
-
                     UDPClient.Instance.SendTowers(i, localTowers);
                 }
             }
@@ -200,7 +200,7 @@ public class EntityManager : MonoBehaviour
 
     public void ReceiveTowerUpdates(string[] receivedTowers, string[] levels, List<Vector2> positions)
     {
-        print($"Receiving! {receivedTowers.Length}");
+        towerUpdateReceived = true;
 
         int towerIndex = 0;
         foreach(Tower tower in localTowers)
@@ -403,20 +403,18 @@ public class EntityManager : MonoBehaviour
                 }
             }
         }
+
+        localTowers = FindObjectsOfType<Tower>();
         previousTowers = FindObjectsOfType<Tower>();
     }
 
     public void ReceiveTowerUpgrades(string towerName, Vector3 position)
     {
-        print("Upgrading!");
-
         foreach (Tower tower in localTowers)
         {
             if (towerName == tower.GetTowerName() && Vector3.Distance(position, tower.transform.position) < 2)
             {
                 tower.Upgrade();
-
-                print($"{tower.GetTowerName()} has been upgraded to level {tower.GetLevel()}");
 
                 FindObjectOfType<AudioManager>().Play("Improve");
             }

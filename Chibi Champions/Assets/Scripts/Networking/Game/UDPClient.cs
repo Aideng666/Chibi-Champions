@@ -217,8 +217,8 @@ public class UDPClient : MonoBehaviour
     {
         try
         {
-            ip = IPAddress.Parse("127.0.0.1");
-            //ip = IPAddress.Parse("54.208.168.94");
+            //ip = IPAddress.Parse("127.0.0.1");
+            ip = IPAddress.Parse("54.208.168.94");
 
             remoteEP = new IPEndPoint(ip, 11111);
 

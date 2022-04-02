@@ -183,8 +183,6 @@ public class TowerMenu : MonoBehaviour
             {
                 if (Vector3.Distance(currentTower.position, tower.transform.position) < 2 && currentTower.GetComponent<Tower>().GetTowerName() == tower.GetTowerName())
                 {
-                    print("Calling UDP Send");
-
                     UDPClient.Instance.SendTowerUpgrade(currentTower.position, tower.GetTowerName());
                 }
             }

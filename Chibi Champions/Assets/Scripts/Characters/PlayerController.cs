@@ -64,6 +64,8 @@ public class PlayerController : MonoBehaviour
 
     GameObject radiusToDeactivate;
 
+    Vector3 savedPosForMenuClose;
+
     // Start is called before the first frame update
     protected void Start()
     {
@@ -88,17 +90,19 @@ public class PlayerController : MonoBehaviour
             thirdPersonCam.LookAt = cameraLookAt.transform;
             thirdPersonCam.Follow = cameraLookAt.transform;
 
-            if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && !CanvasManager.Instance.IsTowerMenuOpen())
             {            
                 if (CanvasManager.isGamePaused)
                 {
                     CanvasManager.Instance.Resume();
+                    CanvasManager.Instance.ApplyCursorLock();
                 }
                 else
                 {
                     CanvasManager.Instance.Pause();
+                    CanvasManager.Instance.RemoveCursorLock();
                 }
-            }        
+            }   
 
             if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0 && isAlive)
             {
@@ -125,7 +129,9 @@ public class PlayerController : MonoBehaviour
                     TowerMenu.Instance.SetPlayer(this);
                     CanvasManager.Instance.OpenTowerMenu();
                 }
-                else if (CanvasManager.Instance.IsTowerMenuOpen() && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape)))
+                else if (CanvasManager.Instance.IsTowerMenuOpen() 
+                    && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape) 
+                    || Vector3.Distance(transform.position, savedPosForMenuClose) > 8))
                 {
                     CanvasManager.Instance.CloseTowerMenu();
                 }
@@ -170,9 +176,28 @@ public class PlayerController : MonoBehaviour
             jump.Play();
         }
 
+        if (Input.mouseScrollDelta.y > 0)
+        {
+            thirdPersonCam.m_Lens.FieldOfView -= 3;
+
+            if (thirdPersonCam.m_Lens.FieldOfView > 60)
+            {
+                thirdPersonCam.m_Lens.FieldOfView = 60;
+            }
+
+        }
+        if (Input.mouseScrollDelta.y < 0)
+        {
+            thirdPersonCam.m_Lens.FieldOfView += 3;
+
+            if (thirdPersonCam.m_Lens.FieldOfView < 45)
+            {
+                thirdPersonCam.m_Lens.FieldOfView = 45;
+            }
+        }
+
         if (isJumping && controller.isGrounded)
         {
-            print("Jumping Done");
             isJumping = false;
         }
 
@@ -230,16 +255,6 @@ public class PlayerController : MonoBehaviour
                 AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 1, false);
             }
         }
-        
-        //if (Input.GetKeyDown(KeyCode.LeftShift))
-        //{
-        //    speed += 5;
-        //}
-
-        //if (Input.GetKeyUp(KeyCode.LeftShift))
-        //{
-        //    speed -= 5;
-        //}
     }
 
     void ApplyEffect()
@@ -406,11 +421,15 @@ public class PlayerController : MonoBehaviour
                     selection.parent.GetComponent<Tower>().SetTowerRadiusActive(true);
 
                     radiusToDeactivate = selection.parent.gameObject;
+
+                    savedPosForMenuClose = selection.position;
                 }
                 else
                 {
                     TowerMenu.Instance.SetMenuState(MenuState.Buy);
                     TowerMenu.Instance.SetPlatform(selection);
+
+                    savedPosForMenuClose = selection.position;
                 }
             }
             else

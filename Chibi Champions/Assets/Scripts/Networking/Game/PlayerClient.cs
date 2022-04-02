@@ -195,10 +195,6 @@ public class PlayerClient : MonoBehaviour
 
                                 UpdateSelectedCharacters(messageSplit[1], messageSplit[2], true);
                             }
-                            else
-                            {
-                                print("Server: " + messageReceived);
-                            }
 
                             if (messageReceived.Contains("GAME_START_MESSAGE.KEY"))
                             {
@@ -240,8 +236,6 @@ public class PlayerClient : MonoBehaviour
                                 namePanel.SetActive(false);
                                 userListPanel.SetActive(true);
 
-                                print($"Name: {message}");
-
                                 nameText.text = message;
                                 username = message;
                             }
@@ -279,8 +273,6 @@ public class PlayerClient : MonoBehaviour
 
                     if (messageReceived.Contains("STARTING_WAVE_MESSAGE.KEY"))
                     {
-                        print("Starting Wave");
-
                         WaveManager.Instance.BeginWave();
                     }
                     else if (messageReceived.Contains("ANIMATION_TRIGGERED_MESSAGE.KEY"))
@@ -396,7 +388,6 @@ public class PlayerClient : MonoBehaviour
                         }
                         else
                         {
-
                             towers = new string[(messageSplit.Length - 2) / 4];
                             levels = new string[(messageSplit.Length - 2) / 4];
                             XYPositions = new string[(messageSplit.Length - 2) / 2];
@@ -426,11 +417,20 @@ public class PlayerClient : MonoBehaviour
                                 {
                                     yPositions.Add(messageSplit[i + towers.Length + levels.Length + 2]);
                                 }
+
                             }
 
                             for (int i = 0; i < xPositions.Count; i++)
                             {
-                                towerPositions.Add(new Vector2(float.Parse(xPositions[i]), float.Parse(yPositions[i])));
+                                try
+                                {
+                                    towerPositions.Add(new Vector2((float)double.Parse(xPositions[i]), (float)double.Parse(yPositions[i])));
+                                }
+                                catch
+                                {
+                                    print("Couldn't Parse Data");
+                                    towerPositions.Add(Vector2.zero);
+                                }
                             }
                         }
 
@@ -438,6 +438,7 @@ public class PlayerClient : MonoBehaviour
                     }
                     else if (messageReceived.Contains("TOWER_UPGRADE_SENT.KEY"))
                     {
+
                         string[] messageSplit = messageReceived.Split(':');
 
                         string towerName = messageSplit[2];
@@ -483,8 +484,8 @@ public class PlayerClient : MonoBehaviour
             try
             {
                 //REPLACE THE IP BELOW WITH YOUR AWS SERVER IP
-                //ip = IPAddress.Parse("54.208.168.94");
-                ip = IPAddress.Parse("127.0.0.1");
+                ip = IPAddress.Parse("54.208.168.94");
+                //ip = IPAddress.Parse("127.0.0.1");
                 server = new IPEndPoint(ip, 11112);
 
                 client = new Socket(AddressFamily.InterNetwork,

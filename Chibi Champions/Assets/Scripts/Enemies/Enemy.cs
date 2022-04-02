@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] AudioSource hit;
 
-    protected Transform crystalTransform;
+    protected Transform cureTransform;
     protected Transform playerTransform;
     protected PlayerController[] playerControllers;
     protected NavMeshAgent navMeshAgent;
@@ -41,9 +41,9 @@ public class Enemy : MonoBehaviour
     protected void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        currentAttackState = EnemyAttackStates.Crystal;
+        currentAttackState = EnemyAttackStates.Cure;
 
-        crystalTransform = FindObjectOfType<Cure>().transform;
+        cureTransform = FindObjectOfType<Cure>().transform;
         playerControllers = FindObjectsOfType<PlayerController>();
 
         navMeshAgent.speed = defaultSpeed;
@@ -89,14 +89,14 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                currentAttackState = EnemyAttackStates.Crystal;
+                currentAttackState = EnemyAttackStates.Cure;
             }
 
-            if (currentAttackState == EnemyAttackStates.Crystal && navMeshAgent.gameObject.activeSelf)
+            if (currentAttackState == EnemyAttackStates.Cure && navMeshAgent.gameObject.activeSelf)
             {
-                navMeshAgent.destination = crystalTransform.position;
+                navMeshAgent.destination = cureTransform.position;
 
-                if ((Vector3.Distance(transform.position, crystalTransform.position) < attackRange * 2.5f) && CanAttack())
+                if ((Vector3.Distance(transform.position, cureTransform.position) < attackRange * 2.5f) && CanAttack())
                 {
                     StartCoroutine(DelayBeforeAttack());
                 }

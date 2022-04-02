@@ -78,7 +78,7 @@ public class SharpshooterController : Enemy
 
             if (selection.tag == "Cure")
             {
-                crystalTransform.gameObject.GetComponentInParent<Health>().ModifyHealth(-2);
+                cureTransform.gameObject.GetComponentInParent<Health>().ModifyHealth(-2);
             }
         }
 
@@ -130,23 +130,31 @@ public class SharpshooterController : Enemy
 
     protected override IEnumerator DelayBeforeAttack()
     {
-        if ((Vector3.Distance(transform.position, playerTransform.position) < attackRange))
-        {
-            navMeshAgent.isStopped = true;
-
-            AnimController.Instance.SetEnemyIsWalking(GetComponent<Animator>(), false);
-        }
-
-        yield return new WaitForSeconds(0.8f);
-
-
         if (currentAttackState == EnemyAttackStates.Player)
         {
+            if ((Vector3.Distance(transform.position, playerTransform.position) < attackRange))
+            {
+                navMeshAgent.isStopped = true;
+
+                AnimController.Instance.SetEnemyIsWalking(GetComponent<Animator>(), false);
+            }
+
+            yield return new WaitForSeconds(0.4f);
+
             shotDirection = (playerTransform.position - attackPoint.position).normalized;
         }
-        else if (currentAttackState == EnemyAttackStates.Crystal)
+        else if (currentAttackState == EnemyAttackStates.Cure)
         {
-            shotDirection = (crystalTransform.position - attackPoint.position).normalized;
+            if ((Vector3.Distance(transform.position, cureTransform.position) < attackRange))
+            {
+                navMeshAgent.isStopped = true;
+
+                AnimController.Instance.SetEnemyIsWalking(GetComponent<Animator>(), false);
+            }
+
+            yield return new WaitForSeconds(0.4f);
+
+            shotDirection = (cureTransform.position - attackPoint.position).normalized;
         }
 
         yield return new WaitForSeconds(0.2f);

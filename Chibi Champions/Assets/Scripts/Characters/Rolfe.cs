@@ -43,7 +43,7 @@ public class Rolfe : PlayerController
     {
         if (!CanvasManager.isGamePaused)
         {
-            if (Input.GetMouseButtonDown(0) && CanLightAttack())
+            if (Input.GetMouseButton(0) && CanLightAttack())
             {
                 if (FindObjectOfType<UDPClient>() != null)
                 {

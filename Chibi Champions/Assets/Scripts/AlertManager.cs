@@ -25,7 +25,6 @@ public class AlertManager : MonoBehaviour
     {
         if (!alertPlaying && alertQueue.Count > 0)
         {
-            print("Alert Playing");
             Instantiate(alertQueue.Dequeue(), transform).GetComponent<AlertText>().SetInfo(infoQueue.Dequeue());
 
             currentAlert = FindObjectOfType<AlertText>();

@@ -48,6 +48,18 @@ public class UDPClient : MonoBehaviour
         }
     }
 
+    public void SendPlayerUpdates(string updateName, string characterName)
+    {
+        if (clientStarted)
+        {
+            string message = $"PLAYER_UPDATE_SENT.KEY:{PlayerClient.Instance.GetClientNum()}:{characterName}:{updateName}";
+
+            byte[] msg = Encoding.ASCII.GetBytes(message);
+
+            client.SendTo(msg, remoteEP);
+        }
+    }
+
     public void SendTowers(int clientIndex, Tower[] towers)
     {
         if (clientStarted)
@@ -84,8 +96,6 @@ public class UDPClient : MonoBehaviour
             byte[] msg = Encoding.ASCII.GetBytes(message);
 
             client.SendTo(msg, remoteEP);
-            
-            print("Sent to Server");
         }
     }
 

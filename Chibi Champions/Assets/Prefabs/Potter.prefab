@@ -690,7 +690,7 @@ MonoBehaviour:
   characterName: Potter
   cam: {fileID: 0}
   attackPoint: {fileID: 6309032078388833289}
-  speed: 10
+  speed: 15
   lightAttackRange: 0
   heavyAttackRange: 0
   lightAttackDamage: 5

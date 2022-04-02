@@ -99,17 +99,17 @@ public class WaveManager : MonoBehaviour
                 {
                     if (PlayerClient.Instance.GetClientNum() == 0)
                     {
-                        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Press Q When Ready To Begin Wave {currentWave + 1}", 10));
+                        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Prepare Your Defences! When Ready, Press Q", 1000));
                     }
                     else
                     {
                         print($"Player Num: {PlayerClient.Instance.GetClientNum()}");
-                        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Waiting For Player 1 To Start Wave {currentWave + 1}", 10));
+                        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Prepare Your Defences! Waiting For Player 1 To Start Wave", 1000));
                     }
                 }
                 else
                 {
-                    AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Press Q When Ready To Begin Wave {currentWave + 1}", 10));
+                    AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Prepare Your Defences! When Ready, Press Q", 1000));
                 }
 
                 beginWaveAlertFired = true;

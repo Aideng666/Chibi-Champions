@@ -74,9 +74,9 @@ public class EntityManager : MonoBehaviour
 
             if (CanSendMessage())
             {
-                SendPlayerUpdates();
+                SendPlayerPositionUpdates();
 
-                SendEnemyUpdates();
+                //SendEnemyUpdates();
             }
 
                 SendTowerUpdates();
@@ -90,7 +90,7 @@ public class EntityManager : MonoBehaviour
         }
     }
 
-    public void ReceivePlayerUpdates(int playerIndex, Vector3 position, Vector2 rotation)
+    public void ReceivePlayerMovementUpdates(int playerIndex, Vector3 position, Vector2 rotation)
     {
         for (int j = 0; j < characters.Length; j++)
         {
@@ -124,7 +124,44 @@ public class EntityManager : MonoBehaviour
         predictedPositions[characterIndex] = currentPos + (velocities[characterIndex] * Time.deltaTime);
     }
 
-    void SendPlayerUpdates()
+    public void ReceivePlayerUpdates(string character, string updateName)
+    {
+        for (int i = 0; i < characters.Length; i++)
+        {
+            if (characters[i].GetName() == character)
+            {
+                switch(updateName)
+                {
+                    case "Attack":
+
+                        print("Attacking");
+                        characters[i].ReceiveAttackTrigger();
+
+                        break;
+
+                    case "Ability":
+                        print("Ability Used");
+                        characters[i].ReceiveAbilityTrigger();
+
+                        break;
+
+                    case "Jump":
+
+                        AnimController.Instance.PlayPlayerJumpAnim(characters[i].GetComponentInChildren<Animator>());
+
+                        break;
+
+                    case "Death":
+
+                        characters[i].Die();
+
+                        break;
+                }
+            }
+        }
+    }
+
+    void SendPlayerPositionUpdates()
     {
         for (int j = 0; j < PlayerClient.Instance.GetConnectedUsers().Length; j++)
         {

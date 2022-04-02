@@ -35,6 +35,11 @@ public class Potter : PlayerController
         {
             if (Input.GetMouseButton(0) && CanLightAttack())
             {
+                if (FindObjectOfType<UDPClient>() != null)
+                {
+                    UDPClient.Instance.SendPlayerUpdates("Attack", GetName());
+                }
+
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 RaycastHit hit;
@@ -59,6 +64,11 @@ public class Potter : PlayerController
             }
             if (Input.GetMouseButton(1) && CanHeavyAttack())
             {
+                if (FindObjectOfType<UDPClient>() != null)
+                {
+                    UDPClient.Instance.SendPlayerUpdates("Ability", GetName());
+                }
+
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 RaycastHit hit;
@@ -88,6 +98,56 @@ public class Potter : PlayerController
                 healingNeedleActivated = false;
             }
         }    
+    }
+
+    public override void ReceiveAttackTrigger()
+    {
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hit;
+
+        Vector3 direction = new Vector3();
+
+        if (Physics.Raycast(ray, out hit, 1000f, ~interactableLayer))
+        {
+            var endPoint = hit.point;
+
+            if (endPoint != null)
+            {
+                direction = (endPoint - attackPoint.position).normalized;
+            }
+        }
+
+        var paintball = ProjectilePool.Instance.GetPaintballFromPool(attackPoint.position);
+
+        paintball.GetComponentInChildren<Rigidbody>().velocity = direction * shotSpeed;
+    }
+
+    public override void ReceiveAbilityTrigger()
+    {
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hit;
+
+        Vector3 direction = new Vector3();
+
+        healingNeedleActivated = true;
+
+        if (Physics.Raycast(ray, out hit, 1000f, ~interactableLayer))
+        {
+            var endPoint = hit.point;
+
+            if (endPoint != null)
+            {
+                direction = (endPoint - attackPoint.position).normalized;
+            }
+        }
+
+        var needle = Instantiate(healingNeedlePrefab, attackPoint.position, Quaternion.identity);
+
+        needle.GetComponentInChildren<Rigidbody>().velocity = direction * shotSpeed;
+
+        Destroy(needle, 3);
     }
 
     public float GetHealAmount()

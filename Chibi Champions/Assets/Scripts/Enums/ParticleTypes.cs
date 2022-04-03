@@ -13,5 +13,6 @@ public enum ParticleTypes
     GroundPound,
     Speed,
     HighJump,
-    Ink
+    Ink,
+    InkBlast
 }

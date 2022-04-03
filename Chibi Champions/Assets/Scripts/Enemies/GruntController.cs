@@ -32,15 +32,15 @@ public class GruntController : Enemy
             {
                 if (level == 1)
                 {
-                    player.GetComponent<PointsManager>().AddPoints(100);
+                    player.GetComponent<PointsManager>().AddPoints(30);
                 }
                 else if (level == 2)
                 {
-                    player.GetComponent<PointsManager>().AddPoints(150);
+                    player.GetComponent<PointsManager>().AddPoints(60);
                 }
                 else if (level == 3)
                 {
-                    player.GetComponent<PointsManager>().AddPoints(400);
+                    player.GetComponent<PointsManager>().AddPoints(120);
                 }
             }
 

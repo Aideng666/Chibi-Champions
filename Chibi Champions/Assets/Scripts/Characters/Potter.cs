@@ -6,11 +6,11 @@ public class Potter : PlayerController
 {
     [SerializeField] LayerMask interactableLayer;
     [SerializeField] GameObject paintballPrefab;
-    [SerializeField] GameObject healingNeedlePrefab;
+    [SerializeField] GameObject inkBlastPrefab;
     [SerializeField] float shotSpeed;
     [SerializeField] float healAmount;
 
-    bool healingNeedleActivated = false;
+    bool InkBlastActivated = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +25,7 @@ public class Potter : PlayerController
         {
             base.Update();
 
-            AbilityCooldown(healingNeedleActivated);
+            AbilityCooldown(InkBlastActivated);
         }
     }
 
@@ -75,7 +75,7 @@ public class Potter : PlayerController
 
                 Vector3 direction = new Vector3();
 
-                healingNeedleActivated = true;
+                InkBlastActivated = true;
 
                 if (Physics.Raycast(ray, out hit, 1000f, ~interactableLayer))
                 {
@@ -87,15 +87,15 @@ public class Potter : PlayerController
                     }
                 }
 
-                var needle = Instantiate(healingNeedlePrefab, attackPoint.position, Quaternion.identity);
+                var inkBlast = Instantiate(inkBlastPrefab, attackPoint.position, Quaternion.identity);
 
-                needle.GetComponentInChildren<Rigidbody>().velocity = direction * shotSpeed;
+                inkBlast.GetComponentInChildren<Rigidbody>().velocity = direction * shotSpeed;
 
-                Destroy(needle, 3);
+                Destroy(inkBlast, 3);
             }
             else
             {
-                healingNeedleActivated = false;
+                InkBlastActivated = false;
             }
         }    
     }
@@ -131,7 +131,7 @@ public class Potter : PlayerController
 
         Vector3 direction = new Vector3();
 
-        healingNeedleActivated = true;
+        InkBlastActivated = true;
 
         if (Physics.Raycast(ray, out hit, 1000f, ~interactableLayer))
         {
@@ -143,7 +143,7 @@ public class Potter : PlayerController
             }
         }
 
-        var needle = Instantiate(healingNeedlePrefab, attackPoint.position, Quaternion.identity);
+        var needle = Instantiate(inkBlastPrefab, attackPoint.position, Quaternion.identity);
 
         needle.GetComponentInChildren<Rigidbody>().velocity = direction * shotSpeed;
 

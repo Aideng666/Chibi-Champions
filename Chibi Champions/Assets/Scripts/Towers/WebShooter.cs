@@ -9,8 +9,6 @@ public class WebShooter : Tower
     [SerializeField] float slowDuration;
     [SerializeField] GameObject webPrefab;
 
-    bool dealDamage;
-
     // Update is called once per frame
     void Update()
     {
@@ -38,7 +36,6 @@ public class WebShooter : Tower
         web.transform.LookAt(enemy.transform);
         web.GetComponentInChildren<Rigidbody>().velocity = direction * webSpeed;
         web.GetComponentInChildren<Web>().SetTower(this);
-        web.GetComponentInChildren<Web>().SetDealDamage(dealDamage);
 
         Destroy(web, 3);
     }
@@ -69,7 +66,7 @@ public class WebShooter : Tower
         }
         else if (towerLevel == 3)
         {
-            dealDamage = true;
+            towerDamage *= 2;
         }
         else
         {

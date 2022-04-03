@@ -694,12 +694,12 @@ MonoBehaviour:
   lightAttackRange: 0
   heavyAttackRange: 0
   lightAttackDamage: 5
-  heavyAttackDamage: 0
+  abilityDamage: 10
   gravity: 1.5
   jumpPower: 3
   interactDistance: 5
   lightAttackDelay: 0.3
-  heavyAttackDelay: 5
+  heavyAttackDelay: 3.5
   deathTimer: 5
   effectSpan: 15
   interactText: {fileID: 0}
@@ -718,7 +718,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   paintballPrefab: {fileID: 4977529211249051071, guid: 76f52f49856098644a20796755efef6f, type: 3}
-  healingNeedlePrefab: {fileID: 2555814566032613610, guid: 016f9ce8cd87e834096a63f0c168025d, type: 3}
+  inkBlastPrefab: {fileID: 2555814566032613610, guid: 016f9ce8cd87e834096a63f0c168025d, type: 3}
   shotSpeed: 100
   healAmount: 15
 --- !u!81 &2512605592597857071

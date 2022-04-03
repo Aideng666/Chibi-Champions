@@ -84,6 +84,12 @@ public class CanvasManager : MonoBehaviour
             spawner.SetTimeToNextSpawn(timeToSpawn);
         }
     }
+    public void MultiplayerResume()
+    {
+        ApplyCursorLock();
+        pausePanel.SetActive(false);
+        isGamePaused = false;
+    }
 
     public void Pause()
     {
@@ -93,4 +99,12 @@ public class CanvasManager : MonoBehaviour
         isGamePaused = true;
         savedTime = Time.realtimeSinceStartup;
     }
+
+    public void MultiplayerPause()
+    {
+        RemoveCursorLock();
+        pausePanel.SetActive(true);
+        isGamePaused = true;
+    }
+
 }

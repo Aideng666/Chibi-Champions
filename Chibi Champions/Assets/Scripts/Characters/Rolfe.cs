@@ -76,7 +76,7 @@ public class Rolfe : PlayerController
                     UDPClient.Instance.SendPlayerUpdates("Ability", GetName());
                 }
 
-                var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
+                var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z), Quaternion.identity);
                 currentBeacons++;
 
                 beaconsPlaced--;

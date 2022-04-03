@@ -41,15 +41,15 @@ public class SharpshooterController : Enemy
             {
                 if (level == 1)
                 {
-                    player.GetComponent<PointsManager>().AddPoints(50);
+                    player.GetComponent<PointsManager>().AddPoints(25);
                 }
                 else if (level == 2)
                 {
-                    player.GetComponent<PointsManager>().AddPoints(100);
+                    player.GetComponent<PointsManager>().AddPoints(50);
                 }
                 else if (level == 3)
                 {
-                    player.GetComponent<PointsManager>().AddPoints(300);
+                    player.GetComponent<PointsManager>().AddPoints(100);
                 }
             }
 

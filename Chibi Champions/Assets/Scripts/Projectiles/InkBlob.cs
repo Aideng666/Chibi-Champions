@@ -12,7 +12,7 @@ public class InkBlob : MonoBehaviour
         {
             tower.GetComponent<InkBomber>().ApplyStunEffect(collision.gameObject);
 
-            collision.gameObject.GetComponentInParent<Health>().ModifyHealth(-8);
+            collision.gameObject.GetComponentInParent<Health>().ModifyHealth(-tower.GetDamage());
 
             ParticleManager.Instance.SpawnParticle(ParticleTypes.Ink, transform.position);
 

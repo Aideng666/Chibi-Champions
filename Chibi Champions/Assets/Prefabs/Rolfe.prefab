@@ -978,9 +978,9 @@ MonoBehaviour:
   cam: {fileID: 0}
   attackPoint: {fileID: 6888943266550092648}
   speed: 15
-  lightAttackRange: 1.45
+  lightAttackRange: 2
   heavyAttackRange: 10
-  lightAttackDamage: 5
+  lightAttackDamage: 8
   heavyAttackDamage: 15
   gravity: 1.5
   jumpPower: 3

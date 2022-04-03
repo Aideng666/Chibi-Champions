@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class HealingNeedle : MonoBehaviour
 {
-    [SerializeField] float healingRadius = 3;
-    float healAmount = 15;
+    [SerializeField] float splashRadius = 6;
 
     private void OnCollisionEnter(Collision collision)
     {
-        Collider[] hitPlayers = Physics.OverlapSphere(transform.position, healingRadius);
+        Collider[] hitEnemies = Physics.OverlapSphere(transform.position, splashRadius);
 
-        foreach (Collider player in hitPlayers)
+        ParticleManager.Instance.SpawnParticle(ParticleTypes.InkBlast, transform.position);
+
+        foreach (Collider enemy in hitEnemies)
         {
-            if (player.tag == "Player")
+            if (enemy.tag == "Enemy")
             {
-                player.GetComponentInParent<Health>().ModifyHealth(FindObjectOfType<Potter>().GetHealAmount());
+                enemy.GetComponentInParent<Health>().ModifyHealth(-FindObjectOfType<Potter>().GetAbilityDamage());
             }
         }
 
@@ -24,6 +25,6 @@ public class HealingNeedle : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.position, healingRadius);
+        Gizmos.DrawWireSphere(transform.position, splashRadius);
     }
 }

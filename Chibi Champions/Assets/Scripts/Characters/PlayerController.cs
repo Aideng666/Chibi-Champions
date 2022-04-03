@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected float lightAttackRange;
     [SerializeField] protected float heavyAttackRange;
     [SerializeField] protected float lightAttackDamage = 10;
-    [SerializeField] protected float heavyAttackDamage = 15;
+    [SerializeField] protected float abilityDamage = 15;
     [SerializeField] protected float gravity = 1.5f;
     [SerializeField] protected float jumpPower = 10;
     [SerializeField] protected float interactDistance = 3;
@@ -65,6 +65,10 @@ public class PlayerController : MonoBehaviour
     GameObject radiusToDeactivate;
 
     Vector3 savedPosForMenuClose;
+
+    float savedBasicAttackDamage;
+    float savedAbilityDamage;
+    float savedSpeed;
 
     // Start is called before the first frame update
     protected void Start()
@@ -269,21 +273,25 @@ public class PlayerController : MonoBehaviour
         {
             if (!effectApplied)
             {
+                savedBasicAttackDamage = lightAttackDamage;
+                savedAbilityDamage = abilityDamage;
+                savedSpeed = speed;
+
                 if (sporeLevel == 1)
                 {
                     lightAttackDamage *= 1.5f;
-                    heavyAttackDamage *= 1.5f;
+                    abilityDamage *= 1.5f;
                 }
                 if (sporeLevel == 2)
                 {
                     lightAttackDamage *= 1.5f;
-                    heavyAttackDamage *= 1.5f;
+                    abilityDamage *= 1.5f;
                     speed += 2;
                 }
                 if (sporeLevel >= 3)
                 {
                     lightAttackDamage *= 2f;
-                    heavyAttackDamage *= 2f;
+                    abilityDamage *= 2f;
                     speed += 2;
                 }
 
@@ -333,6 +341,10 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(effectSpan);
 
         effectApplied = false;
+
+        lightAttackDamage = savedBasicAttackDamage;
+        abilityDamage = savedAbilityDamage;
+        speed = savedSpeed;
     }
 
     protected virtual void Attack()
@@ -516,6 +528,11 @@ public class PlayerController : MonoBehaviour
     public float GetLightAttackDamage()
     {
         return lightAttackDamage;
+    }
+
+    public float GetAbilityDamage()
+    {
+        return abilityDamage;
     }
 
     public string GetName()

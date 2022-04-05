@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected float lightAttackDelay = 0.75f;
     [SerializeField] protected float heavyAttackDelay = 0.75f;
     [SerializeField] protected float deathTimer = 5;
-    [SerializeField] protected float effectSpan = 15;
+    [SerializeField] protected float effectSpan = 10;
     [SerializeField] protected TextMeshProUGUI interactText;
     [SerializeField] protected GameObject cameraLookAt;
     [SerializeField] protected GameObject[] towers = new GameObject[3];
@@ -341,10 +341,13 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(effectSpan);
 
         effectApplied = false;
+        currentEffect = Effects.None;
 
         lightAttackDamage = savedBasicAttackDamage;
         abilityDamage = savedAbilityDamage;
         speed = savedSpeed;
+
+        print($"Reset Stats: Damage: {lightAttackDamage}");
     }
 
     protected virtual void Attack()

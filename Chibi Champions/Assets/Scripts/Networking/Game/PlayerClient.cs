@@ -76,6 +76,8 @@ public class PlayerClient : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        buffer = new byte[512];
+
         if (clientStarted)
         {
             #region LOBBY
@@ -269,110 +271,110 @@ public class PlayerClient : MonoBehaviour
 
                 if (recv > 0)
                 {
-                    string messageReceived = Encoding.ASCII.GetString(buffer, 0, recv);
+                    string udpMessageReceived = Encoding.ASCII.GetString(buffer, 0, recv);
 
-                    if (messageReceived.Contains("STARTING_WAVE_MESSAGE.KEY"))
+                    if (udpMessageReceived.Contains("STARTING_WAVE_MESSAGE.KEY"))
                     {
                         WaveManager.Instance.BeginWave();
                     }
-                    else if (messageReceived.Contains("ANIMATION_TRIGGERED_MESSAGE.KEY"))
+                    //else if (messageReceived.Contains("ANIMATION_TRIGGERED_MESSAGE.KEY"))
+                    //{
+                    //    string[] messageSplit = messageReceived.Split(':');
+
+                    //    bool isAnimOn = (messageSplit[3] == "True");
+
+                    //    PlayerController[] players = FindObjectsOfType<PlayerController>();
+
+                    //    foreach (PlayerController player in players)
+                    //    {
+                    //        switch (messageSplit[2])
+                    //        {
+                    //            case "WalkForward":
+
+                    //                if (player.GetName() == messageSplit[1])
+                    //                {
+                    //                    AnimController.Instance.SetPlayerWalking(player.GetComponentInChildren<Animator>(), isAnimOn, true, false);
+                    //                }
+
+                    //                break;
+
+                    //            case "WalkBackward":
+
+                    //                if (player.GetName() == messageSplit[1])
+                    //                {
+                    //                    AnimController.Instance.SetPlayerWalking(player.GetComponentInChildren<Animator>(), isAnimOn, false, false);
+                    //                }
+
+                    //                break;
+
+                    //            case "WalkLeft":
+
+                    //                if (player.GetName() == messageSplit[1])
+                    //                {
+                    //                    AnimController.Instance.SetPlayerStrafing(player.GetComponentInChildren<Animator>(), isAnimOn, 0, false);
+                    //                }
+
+                    //                break;
+
+                    //            case "WalkRight":
+
+                    //                if (player.GetName() == messageSplit[1])
+                    //                {
+                    //                    AnimController.Instance.SetPlayerStrafing(player.GetComponentInChildren<Animator>(), isAnimOn, 1, false);
+                    //                }
+
+                    //                break;
+
+                    //            case "Jump":
+
+                    //                if (player.GetName() == messageSplit[1])
+                    //                {
+                    //                    AnimController.Instance.PlayPlayerJumpAnim(player.GetComponentInChildren<Animator>(), false);
+                    //                }
+
+                    //                break;
+
+                    //            case "Death":
+
+                    //                if (player.GetName() == messageSplit[1])
+                    //                {
+                    //                    AnimController.Instance.PlayPlayerDeathAnim(player.GetComponentInChildren<Animator>(), false);
+                    //                }
+
+                    //                break;
+
+                    //            case "Respawn":
+
+                    //                if (player.GetName() == messageSplit[1])
+                    //                {
+                    //                    AnimController.Instance.SetPlayerRespawn(player.GetComponentInChildren<Animator>(), false);
+                    //                }
+
+                    //                break;
+
+                    //            case "Attack":
+
+                    //                if (player.GetName() == messageSplit[1])
+                    //                {
+                    //                    AnimController.Instance.PlayPlayerAttackAnim(player.GetComponentInChildren<Animator>(), false);
+                    //                }
+
+                    //                break;
+
+                    //            case "Ability":
+
+                    //                if (player.GetName() == messageSplit[1])
+                    //                {
+                    //                    AnimController.Instance.PlayPlayerAbilityAnim(player.GetComponentInChildren<Animator>(), false);
+                    //                }
+
+                    //                break;
+                    //        }
+                    //    }
+                    //}
+                    else if(udpMessageReceived.Contains("TOWER_UPDATE_SENT.KEY"))
                     {
-                        string[] messageSplit = messageReceived.Split(':');
-
-                        bool isAnimOn = (messageSplit[3] == "True");
-
-                        PlayerController[] players = FindObjectsOfType<PlayerController>();
-
-                        foreach (PlayerController player in players)
-                        {
-                            switch (messageSplit[2])
-                            {
-                                case "WalkForward":
-
-                                    if (player.GetName() == messageSplit[1])
-                                    {
-                                        AnimController.Instance.SetPlayerWalking(player.GetComponentInChildren<Animator>(), isAnimOn, true, false);
-                                    }
-
-                                    break;
-
-                                case "WalkBackward":
-
-                                    if (player.GetName() == messageSplit[1])
-                                    {
-                                        AnimController.Instance.SetPlayerWalking(player.GetComponentInChildren<Animator>(), isAnimOn, false, false);
-                                    }
-
-                                    break;
-
-                                case "WalkLeft":
-
-                                    if (player.GetName() == messageSplit[1])
-                                    {
-                                        AnimController.Instance.SetPlayerStrafing(player.GetComponentInChildren<Animator>(), isAnimOn, 0, false);
-                                    }
-
-                                    break;
-
-                                case "WalkRight":
-
-                                    if (player.GetName() == messageSplit[1])
-                                    {
-                                        AnimController.Instance.SetPlayerStrafing(player.GetComponentInChildren<Animator>(), isAnimOn, 1, false);
-                                    }
-
-                                    break;
-
-                                case "Jump":
-
-                                    if (player.GetName() == messageSplit[1])
-                                    {
-                                        AnimController.Instance.PlayPlayerJumpAnim(player.GetComponentInChildren<Animator>(), false);
-                                    }
-
-                                    break;
-
-                                case "Death":
-
-                                    if (player.GetName() == messageSplit[1])
-                                    {
-                                        AnimController.Instance.PlayPlayerDeathAnim(player.GetComponentInChildren<Animator>(), false);
-                                    }
-
-                                    break;
-
-                                case "Respawn":
-
-                                    if (player.GetName() == messageSplit[1])
-                                    {
-                                        AnimController.Instance.SetPlayerRespawn(player.GetComponentInChildren<Animator>(), false);
-                                    }
-
-                                    break;
-
-                                case "Attack":
-
-                                    if (player.GetName() == messageSplit[1])
-                                    {
-                                        AnimController.Instance.PlayPlayerAttackAnim(player.GetComponentInChildren<Animator>(), false);
-                                    }
-
-                                    break;
-
-                                case "Ability":
-
-                                    if (player.GetName() == messageSplit[1])
-                                    {
-                                        AnimController.Instance.PlayPlayerAbilityAnim(player.GetComponentInChildren<Animator>(), false);
-                                    }
-
-                                    break;
-                            }
-                        }
-                    }
-                    else if(messageReceived.Contains("TOWER_UPDATE_SENT.KEY"))
-                    {
-                        string[] messageSplit = messageReceived.Split(':');
+                        string[] messageSplit = udpMessageReceived.Split(':');
 
                         string[] towers;
                         string[] levels;
@@ -436,10 +438,9 @@ public class PlayerClient : MonoBehaviour
 
                         EntityManager.Instance.ReceiveTowerUpdates(towers, levels, towerPositions);
                     }
-                    else if (messageReceived.Contains("TOWER_UPGRADE_SENT.KEY"))
+                    else if (udpMessageReceived.Contains("TOWER_UPGRADE_SENT.KEY"))
                     {
-
-                        string[] messageSplit = messageReceived.Split(':');
+                        string[] messageSplit = udpMessageReceived.Split(':');
 
                         string towerName = messageSplit[2];
 
@@ -447,13 +448,17 @@ public class PlayerClient : MonoBehaviour
 
                         EntityManager.Instance.ReceiveTowerUpgrades(towerName, towerPosition);
                     }
-                    else if (messageReceived.Contains("PLAYER_UPDATE_SENT.KEY"))
+                    else if (udpMessageReceived.Contains("PLAYER_UPDATE_SENT.KEY"))
                     {
-                        string[] messageSplit = messageReceived.Split(':');
+                        print("Received: " + udpMessageReceived);
+
+                        string[] messageSplit = udpMessageReceived.Split(':');
 
                         string character = messageSplit[2];
 
                         string updateName = messageSplit[3];
+
+                        print($"Sending an {updateName} Update From {character}");
 
                         EntityManager.Instance.ReceivePlayerUpdates(character, updateName);
                     }

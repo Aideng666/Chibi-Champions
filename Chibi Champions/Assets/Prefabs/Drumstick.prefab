@@ -1632,7 +1632,7 @@ MonoBehaviour:
   lightAttackRange: 2.5
   heavyAttackRange: 10
   lightAttackDamage: 12
-  heavyAttackDamage: 20
+  abilityDamage: 15
   gravity: 1.5
   jumpPower: 3
   interactDistance: 5

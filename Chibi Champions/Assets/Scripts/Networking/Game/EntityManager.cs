@@ -18,7 +18,6 @@ public class EntityManager : MonoBehaviour
     [SerializeField] List<GameObject> towers = new List<GameObject>();
     bool resetTower = true;
     bool placeNewTower = true;
-    bool towerUpdateReceived;
 
     Cure cure;
 
@@ -128,6 +127,8 @@ public class EntityManager : MonoBehaviour
 
     public void ReceivePlayerUpdates(string character, string updateName)
     {
+        print($"Received An {updateName} Update For {character}");
+        
         for (int i = 0; i < characters.Length; i++)
         {
             if (characters[i].GetName() == character)
@@ -200,8 +201,6 @@ public class EntityManager : MonoBehaviour
 
     public void ReceiveTowerUpdates(string[] receivedTowers, string[] levels, List<Vector2> positions)
     {
-        towerUpdateReceived = true;
-
         int towerIndex = 0;
         foreach(Tower tower in localTowers)
         {

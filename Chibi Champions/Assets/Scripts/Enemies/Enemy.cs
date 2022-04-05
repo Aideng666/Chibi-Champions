@@ -82,6 +82,17 @@ public class Enemy : MonoBehaviour
                 {
                     currentAttackState = EnemyAttackStates.Tennis;
                 }
+                else
+                {
+                    if (Vector3.Distance(transform.position, playerTransform.position) < playerSpottedRange && playerTransform.GetComponent<PlayerController>().GetIsAlive())
+                    {
+                        currentAttackState = EnemyAttackStates.Player;
+                    }
+                    else
+                    {
+                        currentAttackState = EnemyAttackStates.Cure;
+                    }
+                }
             }
             else if (Vector3.Distance(transform.position, playerTransform.position) < playerSpottedRange && playerTransform.GetComponent<PlayerController>().GetIsAlive())
             {

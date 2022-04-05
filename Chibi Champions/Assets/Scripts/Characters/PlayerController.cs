@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] AudioSource jump;
     [SerializeField] AudioSource dead;
+    [SerializeField] AudioSource hit;
 
     [SerializeField] protected Image abilityImage;
     [SerializeField] protected Image abilityImageMain;
@@ -569,5 +570,9 @@ public class PlayerController : MonoBehaviour
 
         Gizmos.DrawWireSphere(attackPoint.position, lightAttackRange);
         Gizmos.DrawWireSphere(attackPoint.position, heavyAttackRange);
+    }
+    public void hitSound()
+    {
+        hit.Play();
     }
 }

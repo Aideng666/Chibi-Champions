@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InkBlob : MonoBehaviour
 {
+
     Tower tower;
 
     private void OnCollisionEnter(Collision collision)
@@ -15,11 +16,12 @@ public class InkBlob : MonoBehaviour
             collision.gameObject.GetComponentInParent<Health>().ModifyHealth(-tower.GetDamage());
 
             ParticleManager.Instance.SpawnParticle(ParticleTypes.Ink, transform.position);
-
             Destroy(gameObject);
         }
 
     }
+
+
 
     public void SetTower(Tower t)
     {

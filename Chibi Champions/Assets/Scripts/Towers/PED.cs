@@ -6,9 +6,11 @@ using UnityEngine.AI;
 public class PED : Tower
 {
     [SerializeField] GameObject sporePrefab;
+    [SerializeField] AudioSource bloop;
 
     void Update()
     {
+
         if (CanAttack())
         {
             Attack();

@@ -10,6 +10,8 @@ public class InkBomber : Tower
     [SerializeField] float stunDuration;
     [SerializeField] float inkSpeed;
 
+    [SerializeField] AudioSource shot;
+
     // Update is called once per frame
     void Update()
     {
@@ -30,6 +32,7 @@ public class InkBomber : Tower
 
     protected override void Attack(GameObject enemy = null)
     {
+        shot.Play();
         Vector3 direction = (enemy.transform.position - firePoint.position).normalized;
 
         var ink = Instantiate(inkPrefab, firePoint.position, Quaternion.identity);

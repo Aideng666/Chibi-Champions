@@ -285,6 +285,8 @@ public class PlayerClient : MonoBehaviour
                             new Vector3(messageReceived[2], messageReceived[3], messageReceived[4]),
                             new Vector3(messageReceived[5], messageReceived[6], messageReceived[7]));
 
+                            //UDPClient.Instance.SendUpdateConfirmed();
+
                             break;
 
                         case 1: // Player Action Update
@@ -305,6 +307,8 @@ public class PlayerClient : MonoBehaviour
                             }
 
                             EntityManager.Instance.ReceivePlayerUpdates(character, (int)messageReceived[3]);
+
+                            UDPClient.Instance.SendUpdateConfirmed();
 
                             break;
 
@@ -348,6 +352,8 @@ public class PlayerClient : MonoBehaviour
 
                             EntityManager.Instance.ReceiveTowerUpdates(towers, towerPositions);
 
+                            UDPClient.Instance.SendUpdateConfirmed();
+
                             break;
 
                         case 3: // Tower Upgrade
@@ -358,11 +364,15 @@ public class PlayerClient : MonoBehaviour
 
                             EntityManager.Instance.ReceiveTowerUpgrades(towerType, towerPosition);
 
+                            UDPClient.Instance.SendUpdateConfirmed();
+
                             break;
 
                         case 4: // Start Wave Update
 
                             WaveManager.Instance.BeginWave();
+
+                            UDPClient.Instance.SendUpdateConfirmed();
 
                             break;
                     }
@@ -382,8 +392,8 @@ public class PlayerClient : MonoBehaviour
             try
             {
                 //REPLACE THE IP BELOW WITH YOUR AWS SERVER IP
-                //ip = IPAddress.Parse("54.208.168.94");
-                ip = IPAddress.Parse("127.0.0.1");
+                ip = IPAddress.Parse("54.208.168.94");
+                //ip = IPAddress.Parse("127.0.0.1");
                 server = new IPEndPoint(ip, 11112);
 
                 client = new Socket(AddressFamily.InterNetwork,

@@ -18,6 +18,7 @@ public class EntityManager : MonoBehaviour
     [SerializeField] List<GameObject> towers = new List<GameObject>();
     bool resetTower = true;
     bool placeNewTower = true;
+    bool dontSendOnReceive;
 
     Cure cure;
 
@@ -185,6 +186,12 @@ public class EntityManager : MonoBehaviour
     {
         if (previousTowers.Length != localTowers.Length)
         {
+            if (dontSendOnReceive)
+            {
+                dontSendOnReceive = false;
+                return;
+            }
+
             print($"Sending Tower Update Because Previous Towers is Length {previousTowers.Length} and Local Towers is {localTowers.Length}");
 
             for (int i = 0; i < PlayerClient.Instance.GetConnectedUsers().Length; i++)
@@ -401,8 +408,15 @@ public class EntityManager : MonoBehaviour
             }
         }
 
+        if (receivedTowers.Length < localTowers.Length)
+        {
+            dontSendOnReceive = true;
+        }
+
         localTowers = FindObjectsOfType<Tower>();
         previousTowers = FindObjectsOfType<Tower>();
+
+        print($"Previous Length After Receive: {previousTowers.Length} | Current Length After Receive: {localTowers.Length}");
     }
 
     public void ReceiveTowerUpgrades(int towerType, Vector3 position)

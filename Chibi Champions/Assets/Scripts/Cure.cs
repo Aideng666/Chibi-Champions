@@ -12,12 +12,17 @@ public class Cure : MonoBehaviour
     bool alert2Fired;
     bool alert3Fired;
 
+    float pastHP;
+    bool ow;
     [SerializeField] TMP_Text cureUIHPText;
 
     private void Start()
     {
         healthText = GetComponentInChildren<TextMeshProUGUI>();
         cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString();
+        pastHP = GetComponent<Health>().GetCurrentHealth();
+        FindObjectOfType<AudioManager>().Loop("Alarm");
+
     }
     // Update is called once per frame
     void Update()
@@ -57,6 +62,19 @@ public class Cure : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (GetComponent<Health>().GetCurrentHealth() < pastHP)
+        {
+            pastHP = GetComponent<Health>().GetCurrentHealth();
+            if (!FindObjectOfType<AudioManager>().IsPlaying("Alarm"))
+                FindObjectOfType<AudioManager>().Play("Alarm");
+        }
+        else
+        {
+            FindObjectOfType<AudioManager>().StopLoop("Alarm");
+        }
+    }
     IEnumerator DelayBeforeLoss()
     {
         AlertManager.Instance.DisplayAlert(new Alert(Color.blue, "You Lose!", 2));       
@@ -66,5 +84,14 @@ public class Cure : MonoBehaviour
         CanvasManager.Instance.RemoveCursorLock();
 
         SceneManager.LoadScene("Lose");
+    }
+    
+    IEnumerator DelayHit()
+    {
+        if(ow==true)
+        Debug.Log("Fire");
+        Debug.Log("ow: " + ow);
+        yield return new WaitForSeconds(2);
+ 
     }
 }

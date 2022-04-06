@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioSource jump;
     [SerializeField] AudioSource dead;
     [SerializeField] AudioSource hit;
+    [SerializeField] AudioSource refresh;
 
     [SerializeField] protected Image abilityImage;
     [SerializeField] protected Image abilityImageMain;
@@ -480,6 +481,7 @@ public class PlayerController : MonoBehaviour
             if (abilityImage.fillAmount <= 0)
             {
                 isCooldown = false;
+                refresh.Play();
             }
         }
     }

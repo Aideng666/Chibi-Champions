@@ -112,6 +112,8 @@ public class SharpshooterController : Enemy
                 if (selection.tag == "Player")
                 {
                     playerTransform.gameObject.GetComponentInParent<Health>().ModifyHealth(-attackDamage);
+                    playerTransform.gameObject.GetComponentInParent<PlayerController>().hitSound();
+
                 }
             }
             else

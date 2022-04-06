@@ -8,6 +8,8 @@ public class Rolfe : PlayerController
     [SerializeField] GameObject beaconPrefab;
     [SerializeField] int maxBeacons = 2;
 
+    [SerializeField] AudioSource scratch;
+    [SerializeField] AudioSource set;
     int currentBeacons = 0;
 
     public TMP_Text beaconNumberText;
@@ -64,7 +66,7 @@ public class Rolfe : PlayerController
                         ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);
                     }
                 }
-
+                scratch.Play();
                 StartCoroutine(WaitForSecondSwipe());
 
                 //AnimController.Instance.PlayPlayerAttackAnim();
@@ -81,6 +83,7 @@ public class Rolfe : PlayerController
 
                 beaconsPlaced--;
                 beaconActivated = true;
+                set.Play();
             }
             else
             {

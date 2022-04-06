@@ -20,7 +20,7 @@ public class PED : Tower
     protected override void Attack(GameObject enemy = null)
     {
         PlayerController[] players = FindObjectsOfType<PlayerController>();
-
+        bloop.Play();
         foreach (PlayerController player in players)
         {
             var spore = Instantiate(sporePrefab, firePoint.position, Quaternion.identity);

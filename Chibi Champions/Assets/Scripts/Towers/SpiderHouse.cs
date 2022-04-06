@@ -8,6 +8,7 @@ public class SpiderHouse : Tower
     [SerializeField] float spiderSpawnAmount;
     [SerializeField] float effectTickDelay;
     [SerializeField] int maximumSpiders = 6;
+    [SerializeField] AudioSource hatch;
 
     int currentSpiders = 0;
 
@@ -33,8 +34,10 @@ public class SpiderHouse : Tower
                 currentSpiders++;
                 spider.GetComponent<Spider>().SetTower(this);
                 spider.GetComponent<Spider>().SetTickDelay(effectTickDelay);
+                hatch.Play();
             }
         }
+
     }
 
     public override void Upgrade()

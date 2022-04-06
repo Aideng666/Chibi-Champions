@@ -7,6 +7,7 @@ public class TennisBomb : Tower
     [SerializeField] GameObject tennisBallPrefab;
     [SerializeField] float launchForce;
     [SerializeField] float fuseDuration;
+    [SerializeField] AudioSource shot;
 
     // Update is called once per frame
     void Update()
@@ -39,6 +40,7 @@ public class TennisBomb : Tower
         tennisBall.GetComponent<Rigidbody>().AddForce(direction * launchForce, ForceMode.Impulse);
         tennisBall.GetComponent<TennisBall>().SetTower(this);
         tennisBall.GetComponent<TennisBall>().SetFuseDuration(fuseDuration);
+        shot.Play();
     }
 
     public override void Upgrade()

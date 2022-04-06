@@ -55,7 +55,11 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.loop = true;
     }
-
+    public void StopLoop(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.loop = false;
+    }
     public void SetMusicVolume()
     {
         sounds[0].source.volume = musicSlider.value;

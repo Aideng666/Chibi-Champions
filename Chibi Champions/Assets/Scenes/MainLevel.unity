@@ -51374,6 +51374,11 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 8c079e54cf9e5684d8f18c92f110bec1, type: 3}
+    name: Alarm
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
   musicSlider: {fileID: 0}
   sfxSlider: {fileID: 0}
   muteToggle: {fileID: 0}

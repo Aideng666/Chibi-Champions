@@ -8,6 +8,7 @@ public class WebShooter : Tower
     [SerializeField] float webSpeed;
     [SerializeField] float slowDuration;
     [SerializeField] GameObject webPrefab;
+    [SerializeField] AudioSource shot;
 
     // Update is called once per frame
     void Update()
@@ -36,6 +37,7 @@ public class WebShooter : Tower
         web.transform.LookAt(enemy.transform);
         web.GetComponentInChildren<Rigidbody>().velocity = direction * webSpeed;
         web.GetComponentInChildren<Web>().SetTower(this);
+        shot.Play();
 
         Destroy(web, 3);
     }

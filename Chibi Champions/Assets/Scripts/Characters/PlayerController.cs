@@ -182,21 +182,21 @@ public class PlayerController : MonoBehaviour
 
         if (Input.mouseScrollDelta.y > 0)
         {
-            thirdPersonCam.m_Lens.FieldOfView -= 3;
+            thirdPersonCam.m_Lens.FieldOfView -= 2;
 
-            if (thirdPersonCam.m_Lens.FieldOfView > 60)
+            if (thirdPersonCam.m_Lens.FieldOfView < 45)
             {
-                thirdPersonCam.m_Lens.FieldOfView = 60;
+                thirdPersonCam.m_Lens.FieldOfView = 45;
             }
 
         }
         if (Input.mouseScrollDelta.y < 0)
         {
-            thirdPersonCam.m_Lens.FieldOfView += 3;
+            thirdPersonCam.m_Lens.FieldOfView += 2;
 
-            if (thirdPersonCam.m_Lens.FieldOfView < 45)
+            if (thirdPersonCam.m_Lens.FieldOfView > 60)
             {
-                thirdPersonCam.m_Lens.FieldOfView = 45;
+                thirdPersonCam.m_Lens.FieldOfView = 60;
             }
         }
 

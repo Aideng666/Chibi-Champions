@@ -9,6 +9,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] TMP_Text interactText;
 
     [SerializeField] GameObject pausePanel;
+    [SerializeField] GameObject optionsPanel;
 
     public static bool isGamePaused = false;
 
@@ -75,6 +76,7 @@ public class CanvasManager : MonoBehaviour
     {
         ApplyCursorLock();
         pausePanel.SetActive(false);
+        optionsPanel.SetActive(false);
         Time.timeScale = 1f;
         isGamePaused = false;
         timeToSpawn = Time.realtimeSinceStartup + (Time.realtimeSinceStartup - savedTime);
@@ -88,6 +90,7 @@ public class CanvasManager : MonoBehaviour
     {
         ApplyCursorLock();
         pausePanel.SetActive(false);
+        optionsPanel.SetActive(false);
         isGamePaused = false;
     }
 

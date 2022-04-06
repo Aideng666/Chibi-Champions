@@ -12,7 +12,7 @@ public class AlertManager : MonoBehaviour
 
     bool alertPlaying;
 
-    AlertText currentAlert;
+    //AlertText currentAlert;
 
     public static AlertManager Instance { get; private set; }
 
@@ -27,7 +27,7 @@ public class AlertManager : MonoBehaviour
         {
             Instantiate(alertQueue.Dequeue(), transform).GetComponent<AlertText>().SetInfo(infoQueue.Dequeue());
 
-            currentAlert = FindObjectOfType<AlertText>();
+            //currentAlert = FindObjectOfType<AlertText>();
 
             alertPlaying = true;
         }

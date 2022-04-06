@@ -43,13 +43,13 @@ public class Rolfe : PlayerController
 
     protected override void Attack()
     {
-        if (!CanvasManager.isGamePaused)
+        if (!CanvasManager.isGamePaused && !CanvasManager.isMultiplayerPaused)
         {
             if (Input.GetMouseButton(0) && CanLightAttack())
             {
                 if (FindObjectOfType<UDPClient>() != null)
                 {
-                    UDPClient.Instance.SendPlayerUpdates("Attack", GetName());
+                    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Attack, GetCharacterNameEnum());
                 }
 
                 Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, lightAttackRange, enemyLayer);
@@ -75,7 +75,7 @@ public class Rolfe : PlayerController
             {
                 if (FindObjectOfType<UDPClient>() != null)
                 {
-                    UDPClient.Instance.SendPlayerUpdates("Ability", GetName());
+                    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Ability, GetCharacterNameEnum());
                 }
 
                 var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z), Quaternion.identity);

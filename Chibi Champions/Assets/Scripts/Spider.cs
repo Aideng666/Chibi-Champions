@@ -130,13 +130,6 @@ public class Spider : MonoBehaviour
         }
     }
 
-    IEnumerator SearchMovement()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        isMoving = !isMoving;
-    }
-
     bool ShouldChangeMovement()
     {
         if (timeToMovementChange < Time.realtimeSinceStartup)

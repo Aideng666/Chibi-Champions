@@ -18,7 +18,6 @@ public class EntityManager : MonoBehaviour
     [SerializeField] List<GameObject> towers = new List<GameObject>();
     bool resetTower = true;
     bool placeNewTower = true;
-    bool towerUpdateReceived;
 
     Cure cure;
 
@@ -126,32 +125,32 @@ public class EntityManager : MonoBehaviour
         predictedPositions[characterIndex] = currentPos + (velocities[characterIndex] * Time.deltaTime);
     }
 
-    public void ReceivePlayerUpdates(string character, string updateName)
-    {
+    public void ReceivePlayerUpdates(string character, int updateName)
+    {   
         for (int i = 0; i < characters.Length; i++)
         {
             if (characters[i].GetName() == character)
             {
                 switch(updateName)
                 {
-                    case "Attack":
+                    case 0: // Attack
 
                         characters[i].ReceiveAttackTrigger();
 
                         break;
 
-                    case "Ability":
+                    case 1: // Ability
                         characters[i].ReceiveAbilityTrigger();
 
                         break;
 
-                    case "Jump":
+                    case 2: // Jump
 
                         AnimController.Instance.PlayPlayerJumpAnim(characters[i].GetComponentInChildren<Animator>());
 
                         break;
 
-                    case "Death":
+                    case 3: // Death
 
                         characters[i].Die();
 
@@ -198,16 +197,14 @@ public class EntityManager : MonoBehaviour
         }
     }
 
-    public void ReceiveTowerUpdates(string[] receivedTowers, string[] levels, List<Vector2> positions)
+    public void ReceiveTowerUpdates(int[] receivedTowers, List<Vector2> positions)
     {
-        towerUpdateReceived = true;
-
         int towerIndex = 0;
         foreach(Tower tower in localTowers)
         {
             for (int i = 0; i < receivedTowers.Length; i++)
             {
-                if (receivedTowers[i] == localTowers[towerIndex].GetTowerName()
+                if (receivedTowers[i] == (int)localTowers[towerIndex].GetTowerType()
                     && Vector2.Distance(positions[i], new Vector2(tower.transform.position.x, tower.transform.position.z)) < 2)
                 {
                     resetTower = false;
@@ -250,7 +247,7 @@ public class EntityManager : MonoBehaviour
         {
             for (int j = 0; j < localTowers.Length; j++)
             {
-                if (receivedTowers[i] == localTowers[j].GetTowerName() 
+                if (receivedTowers[i] == (int)localTowers[j].GetTowerType() 
                     && Vector2.Distance(positions[i], new Vector2(localTowers[j].transform.position.x, localTowers[j].transform.position.z)) < 2)
                 {
                     placeNewTower = false;
@@ -271,7 +268,7 @@ public class EntityManager : MonoBehaviour
             {
                 switch (receivedTowers[i])
                 {
-                    case "Feather Blaster":
+                    case 0: // Feather Blaster
 
                         Instantiate(towers[0], new Vector3(positions[i].x, towers[0].transform.position.y, positions[i].y), Quaternion.identity);
 
@@ -287,7 +284,7 @@ public class EntityManager : MonoBehaviour
 
                         break;
 
-                    case "Chicken Laser":
+                    case 1: // Chicken Laser
 
                         Instantiate(towers[1], new Vector3(positions[i].x, towers[1].transform.position.y, positions[i].y), Quaternion.identity);
 
@@ -303,7 +300,7 @@ public class EntityManager : MonoBehaviour
 
                         break;
 
-                    case "Gatling Drummet":
+                    case 2: // Gatling Drummet
 
                         Instantiate(towers[2], new Vector3(positions[i].x, towers[2].transform.position.y, positions[i].y), Quaternion.identity);
 
@@ -317,7 +314,7 @@ public class EntityManager : MonoBehaviour
 
                         break;
 
-                    case "Web Shooter":
+                    case 3: // Web Shooter
 
                         Instantiate(towers[3], new Vector3(positions[i].x, towers[3].transform.position.y, positions[i].y), Quaternion.identity);
 
@@ -331,7 +328,7 @@ public class EntityManager : MonoBehaviour
 
                         break;
 
-                    case "Tennis Bomb":
+                    case 4: // Tennis Bomb
 
                         Instantiate(towers[4], new Vector3(positions[i].x, towers[4].transform.position.y, positions[i].y), Quaternion.identity);
 
@@ -345,7 +342,7 @@ public class EntityManager : MonoBehaviour
 
                         break;
 
-                    case "Spider House":
+                    case 5: // Spider House
 
                         Instantiate(towers[5], new Vector3(positions[i].x, towers[5].transform.position.y, positions[i].y), Quaternion.identity);
 
@@ -359,7 +356,7 @@ public class EntityManager : MonoBehaviour
 
                         break;
 
-                    case "Ink Bomber":
+                    case 6: // Ink bomber
 
                         Instantiate(towers[6], new Vector3(positions[i].x, towers[6].transform.position.y, positions[i].y), Quaternion.identity);
 
@@ -373,7 +370,7 @@ public class EntityManager : MonoBehaviour
 
                         break;
 
-                    case "Photosynthesizer":
+                    case 7: // Photosynthesizer
 
                         Instantiate(towers[7], new Vector3(positions[i].x, towers[7].transform.position.y, positions[i].y), Quaternion.identity);
 
@@ -387,7 +384,7 @@ public class EntityManager : MonoBehaviour
 
                         break;
 
-                    case "S.A.P":
+                    case 8: // S.A.P
 
                         Instantiate(towers[8], new Vector3(positions[i].x, towers[8].transform.position.y, positions[i].y), Quaternion.identity);
 
@@ -408,11 +405,11 @@ public class EntityManager : MonoBehaviour
         previousTowers = FindObjectsOfType<Tower>();
     }
 
-    public void ReceiveTowerUpgrades(string towerName, Vector3 position)
+    public void ReceiveTowerUpgrades(int towerType, Vector3 position)
     {
         foreach (Tower tower in localTowers)
         {
-            if (towerName == tower.GetTowerName() && Vector3.Distance(position, tower.transform.position) < 2)
+            if (towerType == (int)tower.GetTowerType() && Vector3.Distance(position, tower.transform.position) < 2)
             {
                 tower.Upgrade();
 

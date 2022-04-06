@@ -87,6 +87,7 @@ public class CharacterSelect : MonoBehaviour
         }
 
         CanvasManager.isGamePaused = false;
+        CanvasManager.isMultiplayerPaused = false;
     }
 
     public int GetCharacterIndex()

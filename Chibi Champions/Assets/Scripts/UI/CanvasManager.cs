@@ -12,6 +12,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] GameObject optionsPanel;
 
     public static bool isGamePaused = false;
+    public static bool isMultiplayerPaused = false;
 
     bool towerMenuOpen;
 
@@ -91,7 +92,7 @@ public class CanvasManager : MonoBehaviour
         ApplyCursorLock();
         pausePanel.SetActive(false);
         optionsPanel.SetActive(false);
-        isGamePaused = false;
+        isMultiplayerPaused = false;
     }
 
     public void Pause()
@@ -107,7 +108,7 @@ public class CanvasManager : MonoBehaviour
     {
         RemoveCursorLock();
         pausePanel.SetActive(true);
-        isGamePaused = true;
+        isMultiplayerPaused = true;
     }
 
 }

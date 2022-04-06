@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
                     CanvasManager.Instance.CloseTowerMenu();
                 }
 
-                if (CanvasManager.Instance.IsTowerMenuOpen() || CanvasManager.isGamePaused)
+                if (CanvasManager.Instance.IsTowerMenuOpen() || CanvasManager.isGamePaused || CanvasManager.isMultiplayerPaused)
                 {
                     CameraLock(true);
                     CanvasManager.Instance.RemoveCursorLock();
@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour
             controller.Move(moveDir * speed * Time.deltaTime);
         }
 
-        if (!CanvasManager.isGamePaused)
+        if (!CanvasManager.isGamePaused && !CanvasManager.isMultiplayerPaused)
         {
             if (verticalInput > 0)
             {

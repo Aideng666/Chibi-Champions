@@ -37,7 +37,7 @@ public class Potter : PlayerController
             {
                 if (FindObjectOfType<UDPClient>() != null)
                 {
-                    UDPClient.Instance.SendPlayerUpdates("Attack", GetName());
+                    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Attack, GetCharacterNameEnum());
                 }
 
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -66,7 +66,7 @@ public class Potter : PlayerController
             {
                 if (FindObjectOfType<UDPClient>() != null)
                 {
-                    UDPClient.Instance.SendPlayerUpdates("Ability", GetName());
+                    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Ability, GetCharacterNameEnum());
                 }
 
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);

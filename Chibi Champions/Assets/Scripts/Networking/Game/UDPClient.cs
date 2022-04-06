@@ -39,7 +39,7 @@ public class UDPClient : MonoBehaviour
     {
         if (clientStarted)
         {
-            float[] pos = new float[] { playerIndex, newPos.x, newPos.y, newPos.z, newRotation.x, newRotation.y, newRotation.z };
+            float[] pos = new float[] { (int)MessageTypes.PlayerMovement, playerIndex, newPos.x, newPos.y, newPos.z, newRotation.x, newRotation.y, newRotation.z };
             byte[] bpos = new byte[pos.Length * sizeof(float)];
 
             Buffer.BlockCopy(pos, 0, bpos, 0, bpos.Length);
@@ -48,15 +48,17 @@ public class UDPClient : MonoBehaviour
         }
     }
 
-    public void SendPlayerUpdates(string updateName, string characterName)
+    public void SendPlayerUpdates(ActionTypes updateType, CharacterNames characterName)
     {
         if (clientStarted)
         {
-            string message = $"PLAYER_UPDATE_SENT.KEY:{PlayerClient.Instance.GetClientNum()}:{characterName}:{updateName}";
+            float[] msg = new float[] { (int)MessageTypes.PlayerAction, PlayerClient.Instance.GetClientNum(), (int)characterName, (int)updateType };
 
-            byte[] msg = Encoding.ASCII.GetBytes(message);
+            byte[] bpos = new byte[msg.Length * sizeof(float)];
 
-            client.SendTo(msg, remoteEP);
+            Buffer.BlockCopy(msg, 0, bpos, 0, bpos.Length);
+
+            client.SendTo(bpos, remoteEP);
         }
     }
 
@@ -64,140 +66,78 @@ public class UDPClient : MonoBehaviour
     {
         if (clientStarted)
         {
-            string message = $"TOWER_UPDATE_SENT.KEY:{clientIndex}";
+            List<float> towerInfo = new List<float>();
+
+            towerInfo.Add((int)MessageTypes.TowerUpdate);
+            towerInfo.Add(clientIndex);
 
             for (int i = 0; i < towers.Length; i++)
             {
-                message += ":" + towers[i].GetTowerName();
+                towerInfo.Add((int)towers[i].GetTowerType());
             }
 
             for (int i = 0; i < towers.Length; i++)
             {
-                message += ":" + towers[i].GetLevel();
+                towerInfo.Add(towers[i].transform.position.x);
+                towerInfo.Add(towers[i].transform.position.z);
             }
 
-            for (int i = 0; i < towers.Length; i++)
+            float[] towerMsg = new float[towerInfo.Count];
+
+            for (int i = 0; i < towerMsg.Length; i++)
             {
-                message += ":" + towers[i].transform.position.x + ":" + towers[i].transform.position.z;
+                towerMsg[i] = towerInfo[i];
             }
 
-            byte[] msg = Encoding.ASCII.GetBytes(message);
+            print($"Tower Update: {towerMsg[0]}");
 
-            client.SendTo(msg, remoteEP);
-        }
-    }
+            byte[] bpos = new byte[towerMsg.Length * sizeof(float)];
 
-    public void SendTowerUpgrade(Vector3 position, string towerName)
-    {
-        if (clientStarted)
-        {
-            string message = $"TOWER_UPGRADE_SENT.KEY:{PlayerClient.Instance.GetClientNum()}:{towerName}:{position.x}:{position.y}:{position.z}";
+            Buffer.BlockCopy(towerMsg, 0, bpos, 0, bpos.Length);
 
-            byte[] msg = Encoding.ASCII.GetBytes(message);
+            client.SendTo(bpos, remoteEP);
 
-            client.SendTo(msg, remoteEP);
-        }
-    }
+            //string message = $"TOWER_UPDATE_SENT.KEY:{clientIndex}";
 
-    public void SendAnimationUpdates(string characterName, AnimationTypes type, bool animOn = true) // false means that the anim's bool was set to false no true
-    {
-        if (clientStarted)
-        {
-            string message;
-            byte[] msg;
-
-            //switch (type)
+            //for (int i = 0; i < towers.Length; i++)
             //{
-            //    case AnimationTypes.WalkForward:
-
-            //        message = $"ANIMATION_TRIGGERED_MESSAGE.KEY:{characterName}:WalkForward:{animOn.ToString()}";
-
-            //        msg = Encoding.ASCII.GetBytes(message);
-
-            //        client.SendTo(msg, remoteEP);
-
-            //        break;
-
-            //    case AnimationTypes.WalkBackward:
-
-            //        message = $"ANIMATION_TRIGGERED_MESSAGE.KEY:{characterName}:WalkBackward:{animOn.ToString()}";
-
-            //        msg = Encoding.ASCII.GetBytes(message);
-
-            //        client.SendTo(msg, remoteEP);
-
-            //        break;
-
-            //    case AnimationTypes.WalkLeft:
-
-            //        message = $"ANIMATION_TRIGGERED_MESSAGE.KEY:{characterName}:WalkLeft:{animOn.ToString()}";
-
-            //        msg = Encoding.ASCII.GetBytes(message);
-
-            //        client.SendTo(msg, remoteEP);
-
-            //        break;
-
-            //    case AnimationTypes.WalkRight:
-
-            //        message = $"ANIMATION_TRIGGERED_MESSAGE.KEY:{characterName}:WalkRight:{animOn.ToString()}";
-
-            //        msg = Encoding.ASCII.GetBytes(message);
-
-            //        client.SendTo(msg, remoteEP);
-
-            //        break;
-
-            //    case AnimationTypes.Jump:
-
-            //        message = $"ANIMATION_TRIGGERED_MESSAGE.KEY:{characterName}:Jump:{animOn.ToString()}";
-
-            //        msg = Encoding.ASCII.GetBytes(message);
-
-            //        client.SendTo(msg, remoteEP);
-
-            //        break;
-
-            //    case AnimationTypes.Death:
-
-            //        message = $"ANIMATION_TRIGGERED_MESSAGE.KEY:{characterName}:Death:{animOn.ToString()}";
-
-            //        msg = Encoding.ASCII.GetBytes(message);
-
-            //        client.SendTo(msg, remoteEP);
-
-            //        break;
-
-            //    case AnimationTypes.BasicAttack:
-
-            //        message = $"ANIMATION_TRIGGERED_MESSAGE.KEY:{characterName}:Attack:{animOn.ToString()}";
-
-            //        msg = Encoding.ASCII.GetBytes(message);
-
-            //        client.SendTo(msg, remoteEP);
-
-            //        break;
-
-            //    case AnimationTypes.UseAbility:
-
-            //        message = $"ANIMATION_TRIGGERED_MESSAGE.KEY:{characterName}:Ability:{animOn.ToString()}";
-
-            //        msg = Encoding.ASCII.GetBytes(message);
-
-            //        client.SendTo(msg, remoteEP);
-
-            //        break;
-
-            //    case AnimationTypes.Respawn:
-
-            //        message = $"ANIMATION_TRIGGERED_MESSAGE.KEY:{characterName}:Respawn:{animOn.ToString()}";
-
-            //        msg = Encoding.ASCII.GetBytes(message);
-
-            //        client.SendTo(msg, remoteEP);
-
-            //        break;
+            //    message += ":" + towers[i].GetTowerName();
             //}
+
+            //for (int i = 0; i < towers.Length; i++)
+            //{
+            //    message += ":" + towers[i].GetLevel();
+            //}
+
+            //for (int i = 0; i < towers.Length; i++)
+            //{
+            //    message += ":" + towers[i].transform.position.x + ":" + towers[i].transform.position.z;
+            //}
+
+            //byte[] msg = Encoding.ASCII.GetBytes(message);
+
+            //client.SendTo(msg, remoteEP);
+        }
+    }
+
+    public void SendTowerUpgrade(Vector3 position, TowerType towerType)
+    {
+        if (clientStarted)
+        {
+            float[] msg = new float[]
+            { (int)MessageTypes.TowerUpgrade, PlayerClient.Instance.GetClientNum(), (int)towerType, position.x, position.y, position.z};
+
+            byte[] bpos = new byte[msg.Length * sizeof(float)];
+
+            Buffer.BlockCopy(msg, 0, bpos, 0, bpos.Length);
+
+            client.SendTo(bpos, remoteEP);
+
+            //string message = $"TOWER_UPGRADE_SENT.KEY:{PlayerClient.Instance.GetClientNum()}:{towerName}:{position.x}:{position.y}:{position.z}";
+
+            //byte[] msg = Encoding.ASCII.GetBytes(message);
+
+            //client.SendTo(msg, remoteEP);
         }
     }
 
@@ -205,11 +145,19 @@ public class UDPClient : MonoBehaviour
     {
         if (clientStarted)
         {
-            string message = "STARTING_WAVE_MESSAGE.KEY";
+            float[] msg = new float[] { (int)MessageTypes.StartWave };
 
-            byte[] msg = Encoding.ASCII.GetBytes(message);
+            byte[] bpos = new byte[msg.Length * sizeof(float)];
 
-            client.SendTo(msg, remoteEP);
+            Buffer.BlockCopy(msg, 0, bpos, 0, bpos.Length);
+
+            client.SendTo(bpos, remoteEP);
+
+            //string message = "STARTING_WAVE_MESSAGE.KEY";
+
+            //byte[] msg = Encoding.ASCII.GetBytes(message);
+
+            //client.SendTo(msg, remoteEP);
         }
     }
 
@@ -217,8 +165,8 @@ public class UDPClient : MonoBehaviour
     {
         try
         {
-            //ip = IPAddress.Parse("127.0.0.1");
-            ip = IPAddress.Parse("54.208.168.94");
+            ip = IPAddress.Parse("127.0.0.1");
+            //ip = IPAddress.Parse("54.208.168.94");
 
             remoteEP = new IPEndPoint(ip, 11111);
 

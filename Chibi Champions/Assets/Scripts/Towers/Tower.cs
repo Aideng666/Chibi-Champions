@@ -165,6 +165,11 @@ public class Tower : MonoBehaviour
         return towerName;
     }
 
+    public TowerType GetTowerType()
+    {
+        return type;
+    }
+
     public void SetTowerRadiusActive(bool active)
     {
         if (active)

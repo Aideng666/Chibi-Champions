@@ -975,6 +975,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   characterName: Rolfe
+  characterNameEnum: 1
   cam: {fileID: 0}
   attackPoint: {fileID: 6888943266550092648}
   speed: 15

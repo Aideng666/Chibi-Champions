@@ -688,6 +688,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   characterName: Potter
+  characterNameEnum: 2
   cam: {fileID: 0}
   attackPoint: {fileID: 6309032078388833289}
   speed: 15

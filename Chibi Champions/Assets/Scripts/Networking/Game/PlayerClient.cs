@@ -271,207 +271,100 @@ public class PlayerClient : MonoBehaviour
 
                 if (recv > 0)
                 {
-                    string udpMessageReceived = Encoding.ASCII.GetString(buffer, 0, recv);
+                    //string messageReceived = Encoding.ASCII.GetString(buffer, 0, recv);
 
-                    if (udpMessageReceived.Contains("STARTING_WAVE_MESSAGE.KEY"))
+                    float[] messageReceived = new float[recv / sizeof(float)];
+
+                    Buffer.BlockCopy(buffer, 0, messageReceived, 0, recv);
+
+                    switch (messageReceived[0])
                     {
-                        WaveManager.Instance.BeginWave();
-                    }
-                    //else if (messageReceived.Contains("ANIMATION_TRIGGERED_MESSAGE.KEY"))
-                    //{
-                    //    string[] messageSplit = messageReceived.Split(':');
+                        case 0: //Player Movement Update
 
-                    //    bool isAnimOn = (messageSplit[3] == "True");
+                            EntityManager.Instance.ReceivePlayerMovementUpdates((int)messageReceived[1],
+                            new Vector3(messageReceived[2], messageReceived[3], messageReceived[4]),
+                            new Vector3(messageReceived[5], messageReceived[6], messageReceived[7]));
 
-                    //    PlayerController[] players = FindObjectsOfType<PlayerController>();
+                            break;
 
-                    //    foreach (PlayerController player in players)
-                    //    {
-                    //        switch (messageSplit[2])
-                    //        {
-                    //            case "WalkForward":
+                        case 1: // Player Action Update
 
-                    //                if (player.GetName() == messageSplit[1])
-                    //                {
-                    //                    AnimController.Instance.SetPlayerWalking(player.GetComponentInChildren<Animator>(), isAnimOn, true, false);
-                    //                }
+                            string character = "";
 
-                    //                break;
+                            if (messageReceived[2] == 0)
+                            {
+                                character = "Drumstick";
+                            }
+                            else if (messageReceived[2] == 1)
+                            {
+                                character = "Rolfe";
+                            }
+                            else if (messageReceived[2] == 2)
+                            {
+                                character = "Potter";
+                            }
 
-                    //            case "WalkBackward":
+                            EntityManager.Instance.ReceivePlayerUpdates(character, (int)messageReceived[3]);
 
-                    //                if (player.GetName() == messageSplit[1])
-                    //                {
-                    //                    AnimController.Instance.SetPlayerWalking(player.GetComponentInChildren<Animator>(), isAnimOn, false, false);
-                    //                }
+                            break;
 
-                    //                break;
+                        case 2: // Tower Update
 
-                    //            case "WalkLeft":
+                            int[] towers;
+                            List<float> xPositions = new List<float>();
+                            List<float> yPositions = new List<float>();
+                            List<Vector2> towerPositions = new List<Vector2>();
 
-                    //                if (player.GetName() == messageSplit[1])
-                    //                {
-                    //                    AnimController.Instance.SetPlayerStrafing(player.GetComponentInChildren<Animator>(), isAnimOn, 0, false);
-                    //                }
-
-                    //                break;
-
-                    //            case "WalkRight":
-
-                    //                if (player.GetName() == messageSplit[1])
-                    //                {
-                    //                    AnimController.Instance.SetPlayerStrafing(player.GetComponentInChildren<Animator>(), isAnimOn, 1, false);
-                    //                }
-
-                    //                break;
-
-                    //            case "Jump":
-
-                    //                if (player.GetName() == messageSplit[1])
-                    //                {
-                    //                    AnimController.Instance.PlayPlayerJumpAnim(player.GetComponentInChildren<Animator>(), false);
-                    //                }
-
-                    //                break;
-
-                    //            case "Death":
-
-                    //                if (player.GetName() == messageSplit[1])
-                    //                {
-                    //                    AnimController.Instance.PlayPlayerDeathAnim(player.GetComponentInChildren<Animator>(), false);
-                    //                }
-
-                    //                break;
-
-                    //            case "Respawn":
-
-                    //                if (player.GetName() == messageSplit[1])
-                    //                {
-                    //                    AnimController.Instance.SetPlayerRespawn(player.GetComponentInChildren<Animator>(), false);
-                    //                }
-
-                    //                break;
-
-                    //            case "Attack":
-
-                    //                if (player.GetName() == messageSplit[1])
-                    //                {
-                    //                    AnimController.Instance.PlayPlayerAttackAnim(player.GetComponentInChildren<Animator>(), false);
-                    //                }
-
-                    //                break;
-
-                    //            case "Ability":
-
-                    //                if (player.GetName() == messageSplit[1])
-                    //                {
-                    //                    AnimController.Instance.PlayPlayerAbilityAnim(player.GetComponentInChildren<Animator>(), false);
-                    //                }
-
-                    //                break;
-                    //        }
-                    //    }
-                    //}
-                    else if(udpMessageReceived.Contains("TOWER_UPDATE_SENT.KEY"))
-                    {
-                        string[] messageSplit = udpMessageReceived.Split(':');
-
-                        string[] towers;
-                        string[] levels;
-                        string[] XYPositions;
-
-                        List<Vector2> towerPositions = new List<Vector2>();
-
-                        if (messageSplit.Length == 2)
-                        {
-                            towers = new string[0];
-                            levels = new string[0];
-                            XYPositions = new string[0];
-                        }
-                        else
-                        {
-                            towers = new string[(messageSplit.Length - 2) / 4];
-                            levels = new string[(messageSplit.Length - 2) / 4];
-                            XYPositions = new string[(messageSplit.Length - 2) / 2];
-
-                            List<string> xPositions = new List<string>();
-                            List<string> yPositions = new List<string>();
+                            if (messageReceived.Length == 2)
+                            {
+                                towers = new int[0];
+                            }
+                            else
+                            {
+                                towers = new int[(messageReceived.Length - 2) / 3];
+                            }
 
                             for (int i = 0; i < towers.Length; i++)
                             {
-                                towers[i] = messageSplit[i + 2];
+                                towers[i] = (int)messageReceived[i + 2];
                             }
 
-                            for (int i = 0; i < levels.Length; i++)
+                            for (int i = 0; i < towers.Length * 2; i++)
                             {
-                                levels[i] = messageSplit[i + towers.Length + 2];
-                            }
-
-                            for (int i = 0; i < XYPositions.Length; i++)
-                            {
-                                XYPositions[i] = messageSplit[i + towers.Length + levels.Length + 2];
-
                                 if (i % 2 == 0)
                                 {
-                                    xPositions.Add(messageSplit[i + towers.Length + levels.Length + 2]);
+                                    xPositions.Add(messageReceived[i + 2 + towers.Length]);
                                 }
                                 else
                                 {
-                                    yPositions.Add(messageSplit[i + towers.Length + levels.Length + 2]);
+                                    yPositions.Add(messageReceived[i + 2 + towers.Length]);
                                 }
-
                             }
 
                             for (int i = 0; i < xPositions.Count; i++)
                             {
-                                try
-                                {
-                                    towerPositions.Add(new Vector2((float)double.Parse(xPositions[i]), (float)double.Parse(yPositions[i])));
-                                }
-                                catch
-                                {
-                                    print("Couldn't Parse Data");
-                                    towerPositions.Add(Vector2.zero);
-                                }
+                                towerPositions.Add(new Vector2(xPositions[i], yPositions[i]));
                             }
-                        }
 
-                        EntityManager.Instance.ReceiveTowerUpdates(towers, levels, towerPositions);
-                    }
-                    else if (udpMessageReceived.Contains("TOWER_UPGRADE_SENT.KEY"))
-                    {
-                        string[] messageSplit = udpMessageReceived.Split(':');
+                            EntityManager.Instance.ReceiveTowerUpdates(towers, towerPositions);
 
-                        string towerName = messageSplit[2];
+                            break;
 
-                        Vector3 towerPosition = new Vector3(float.Parse(messageSplit[3]), float.Parse(messageSplit[4]), float.Parse(messageSplit[5]));
+                        case 3: // Tower Upgrade
 
-                        EntityManager.Instance.ReceiveTowerUpgrades(towerName, towerPosition);
-                    }
-                    else if (udpMessageReceived.Contains("PLAYER_UPDATE_SENT.KEY"))
-                    {
-                        print("Received: " + udpMessageReceived);
+                            int towerType = (int)messageReceived[2];
 
-                        string[] messageSplit = udpMessageReceived.Split(':');
+                            Vector3 towerPosition = new Vector3(messageReceived[3], messageReceived[4], messageReceived[5]);
 
-                        string character = messageSplit[2];
+                            EntityManager.Instance.ReceiveTowerUpgrades(towerType, towerPosition);
 
-                        string updateName = messageSplit[3];
+                            break;
 
-                        print($"Sending an {updateName} Update From {character}");
+                        case 4: // Start Wave Update
 
-                        EntityManager.Instance.ReceivePlayerUpdates(character, updateName);
-                    }
-                    else
-                    {
-                        //Can put an if here for different sized float arrays to distinguish between message types?
-                        float[] posMessageReceived = new float[recv / sizeof(float)];
+                            WaveManager.Instance.BeginWave();
 
-                        Buffer.BlockCopy(buffer, 0, posMessageReceived, 0, recv);
-
-                        EntityManager.Instance.ReceivePlayerMovementUpdates((int)posMessageReceived[0],
-                            new Vector3(posMessageReceived[1], posMessageReceived[2], posMessageReceived[3]),
-                            new Vector3(posMessageReceived[4], posMessageReceived[5], posMessageReceived[6]));
+                            break;
                     }
                 }
             }
@@ -489,8 +382,8 @@ public class PlayerClient : MonoBehaviour
             try
             {
                 //REPLACE THE IP BELOW WITH YOUR AWS SERVER IP
-                ip = IPAddress.Parse("54.208.168.94");
-                //ip = IPAddress.Parse("127.0.0.1");
+                //ip = IPAddress.Parse("54.208.168.94");
+                ip = IPAddress.Parse("127.0.0.1");
                 server = new IPEndPoint(ip, 11112);
 
                 client = new Socket(AddressFamily.InterNetwork,

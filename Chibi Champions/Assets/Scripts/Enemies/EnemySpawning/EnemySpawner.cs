@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (!CanvasManager.isGamePaused && FindObjectOfType<UDPClient>() == null)
+        if (!CanvasManager.isGamePaused)
         {
             if (CanSpawn())
             {

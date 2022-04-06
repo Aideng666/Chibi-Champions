@@ -31,7 +31,7 @@ public class Potter : PlayerController
 
     protected override void Attack()
     {
-        if (!CanvasManager.isGamePaused)
+        if (!CanvasManager.isGamePaused && !CanvasManager.isMultiplayerPaused)
         {
             if (Input.GetMouseButton(0) && CanLightAttack())
             {

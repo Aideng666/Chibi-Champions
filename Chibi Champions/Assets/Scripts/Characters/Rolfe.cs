@@ -10,9 +10,7 @@ public class Rolfe : PlayerController
 
     int currentBeacons = 0;
 
-    public TMP_Text beaconNumberText;
-    public GameObject beaconAmount;
-    int beaconsPlaced = 0;
+    //public GameObject beaconAmount;
     bool beaconActivated = false;
 
     // Start is called before the first frame update
@@ -20,10 +18,7 @@ public class Rolfe : PlayerController
     {
         base.Start();
 
-        beaconsPlaced = maxBeacons;
-
-        beaconAmount.SetActive(true);
-        beaconNumberText.text = beaconsPlaced.ToString();
+        //beaconAmount.SetActive(true);
     }
 
     // Update is called once per frame
@@ -32,8 +27,6 @@ public class Rolfe : PlayerController
         if (isPlayerCharacter)
         {
             base.Update();
-
-            beaconNumberText.text = beaconsPlaced.ToString();
 
             AbilityCooldown(beaconActivated);
         }
@@ -79,7 +72,6 @@ public class Rolfe : PlayerController
                 var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z), Quaternion.identity);
                 currentBeacons++;
 
-                beaconsPlaced--;
                 beaconActivated = true;
             }
             else
@@ -135,9 +127,7 @@ public class Rolfe : PlayerController
     {
         if (currentBeacons > 0)
         {
-            currentBeacons--;
-
-            beaconsPlaced++;
+            currentBeacons--;         
         }
     }
 

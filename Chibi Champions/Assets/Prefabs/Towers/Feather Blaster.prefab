@@ -4558,7 +4558,7 @@ MonoBehaviour:
   towerCost: 500
   towerDamage: 10
   attackDelay: 1
-  upgradeCosts: 2003000040060000a00f0000
+  upgradeCosts: 58020000a4060000d80e0000
   firePoint: {fileID: 3258824005039446072}
   towerRadius: {fileID: 5528698758805209792}
   upgradeNames:
@@ -4568,12 +4568,12 @@ MonoBehaviour:
   upgradeImages:
   - {fileID: 21300000, guid: 7718a2c3607a42e4084330c3c92419e4, type: 3}
   - {fileID: 21300000, guid: 1783127056aabb14692d545f63bd1c5b, type: 3}
-  - {fileID: 21300000, guid: 1504a4b9344d74e4f9cf811c0bb555e2, type: 3}
+  - {fileID: 21300000, guid: f7779b578484106498adc54bf2c8420a, type: 3}
   towerName: Feather Blaster
   upgradeDescriptions:
-  - Increased Range
-  - Increased Damage
-  - Shoots 2 feathers at a time
+  - Increases the Feather Blaster's range
+  - Increases the damage dealt to enemies
+  - Feather Blaster now shoots two feathers at once
   owner: Drumstick
   featherSpeed: 150
   featherPrefab: {fileID: 210590721982759650, guid: 177d00b56498632418e37441be548698, type: 3}

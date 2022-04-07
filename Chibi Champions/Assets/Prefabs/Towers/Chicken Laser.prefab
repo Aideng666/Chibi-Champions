@@ -4392,22 +4392,22 @@ MonoBehaviour:
   towerCost: 800
   towerDamage: 0.1
   attackDelay: 0
-  upgradeCosts: e803000040060000b80b0000
+  upgradeCosts: 2003000008070000b80b0000
   firePoint: {fileID: 5573766545861167648}
   towerRadius: {fileID: 1839241071829877862}
   upgradeNames:
   - Global Ordinance
-  - Death Ray
-  - Melting Beam
+  - Particle Accelerator
+  - Mega Detah Ray
   upgradeImages:
-  - {fileID: 21300000, guid: 337e3aada58c10c45bde8dab9edd5d08, type: 3}
+  - {fileID: 21300000, guid: dcc0552d6bcb1c74b9c1c66f4e417c57, type: 3}
   - {fileID: 21300000, guid: 7b71c5c36e928f94fb6d4f32bcb98712, type: 3}
-  - {fileID: 21300000, guid: 60f0fda13995bc4448df59ea92d2d2ad, type: 3}
+  - {fileID: 21300000, guid: cb3704995ca86d840b4f9b1834bad676, type: 3}
   towerName: Chicken Laser
   upgradeDescriptions:
-  - Increased Range
-  - Increased Damage
-  - Laser now slows enemies
+  - Chicken Laser gains increased range
+  - Chicken Laser now deals increased damage to enemies
+  - The chicken laser now applies a slowing effect to enemies hit
   owner: Drumstick
   beam: {fileID: 3231466468357118777}
 --- !u!82 &3231466468357118777

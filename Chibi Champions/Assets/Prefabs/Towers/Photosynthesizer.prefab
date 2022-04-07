@@ -163,13 +163,13 @@ MonoBehaviour:
   - Energized
   upgradeImages:
   - {fileID: 21300000, guid: 2bb56b4fe4fb9464d91392333b00da55, type: 3}
-  - {fileID: 21300000, guid: 85a1c7d77fcf5f14ea9e24aba2aa44a1, type: 3}
-  - {fileID: 21300000, guid: d2d45fcf4d939e846b4e54e0e7a863dd, type: 3}
+  - {fileID: 21300000, guid: fa12f5e1c11b6a24fa481da5c4b133a0, type: 3}
+  - {fileID: 21300000, guid: 8c6c3aed64b75fc4bbf7ffd1be7fd891, type: 3}
   towerName: Photosynthesizer
   upgradeDescriptions:
-  - Increased Radius
-  - Increased Healing
-  - Allies gain increased max health
+  - Photosynthesizer's radius increases
+  - Increases healing received overtime
+  - All allies increase their max health by 10
   owner: Potter
   playerLayer:
     serializedVersion: 2

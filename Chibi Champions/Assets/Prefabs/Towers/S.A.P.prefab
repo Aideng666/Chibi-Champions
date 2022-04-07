@@ -152,13 +152,13 @@ MonoBehaviour:
   - Amped Up
   upgradeImages:
   - {fileID: 21300000, guid: 4c0d2682ed8c01846baaa2b8c66d7a29, type: 3}
-  - {fileID: 21300000, guid: af5f00f04dc4dc840821a7745bd389be, type: 3}
-  - {fileID: 21300000, guid: 5d47aab024075dd4092d4e7dbd4f0adc, type: 3}
+  - {fileID: 21300000, guid: 63ffd246e4f7160468078c19f476377c, type: 3}
+  - {fileID: 21300000, guid: 5577e8940b3a0eb48b23294656c1f95b, type: 3}
   towerName: S.A.P
   upgradeDescriptions:
-  - Grants Movement Speed
-  - Increased Damage Given
-  - Faster Travel Time
+  - 'S.A.P grants increased movement speed '
+  - S.A.P buffs allies increasing their damage
+  - The S.A.P's spore travels faster towards allies
   owner: Potter
   sporePrefab: {fileID: 6634593626932089271, guid: 57beb904983b2aa4c9692e89ca3a0116, type: 3}
 --- !u!1 &6605816549774745954

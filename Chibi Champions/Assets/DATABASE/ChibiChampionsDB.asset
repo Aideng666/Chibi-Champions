@@ -78,9 +78,9 @@ MonoBehaviour:
     - Photosynthesizer
     - S.A.P
     towerDescriptions:
-    - Shoots a blob of ink that stuns enemies hit freezing them in place
-    - Emits a therapeutic aura that heals players standing inside the radius overtime
-    - Deploys a pollen spore that attaches to allies and buffs them
+    - 'Shoots a blob of ink that stuns enemies hit '
+    - ' Heals players standing inside its radius overtime'
+    - 'Deploys a pollen spore that buffs allies '
     abilityNames:
     - Ink Shot
     - Octo Blast

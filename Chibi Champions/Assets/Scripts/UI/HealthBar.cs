@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HealthBar : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class HealthBar : MonoBehaviour
     [SerializeField] float updateSpeedSeconds = 0.5f;
 
     [SerializeField] bool isPlayer = false;
+
+    [SerializeField] TMP_Text healthText;
 
     private void Start()
     {
@@ -46,6 +49,15 @@ public class HealthBar : MonoBehaviour
         }
 
         healthImage.fillAmount = pct;
+
+        if (isPlayer)
+        {
+            healthText.text = (pct * 100) + " / 100";
+            if (pct < 0)
+            {
+                healthText.text = "0 / 100";
+            }
+        }
     }
 
     private void LateUpdate()

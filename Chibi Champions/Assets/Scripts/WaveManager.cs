@@ -91,6 +91,8 @@ public class WaveManager : MonoBehaviour
                 }
 
                 waveCompletePointsAdded = true;
+
+                PlayerPrefs.SetInt("WavesCompleted", PlayerPrefs.GetInt("WavesCompleted") + 1);
             }
             
             if (!beginWaveAlertFired)

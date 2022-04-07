@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] protected LayerMask enemyLayer;
     [SerializeField] protected string characterName;
+    [SerializeField] protected CharacterNames characterNameEnum;
     [SerializeField] protected Transform cam;
     [SerializeField] protected Transform attackPoint;
     [SerializeField] protected float speed = 5;
@@ -112,7 +113,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (FindObjectOfType<UDPClient>() != null)
                 {
-                    UDPClient.Instance.SendPlayerUpdates("Death", GetName());
+                    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Death, GetCharacterNameEnum());
                 }
 
                 Die();
@@ -140,7 +141,7 @@ public class PlayerController : MonoBehaviour
                     CanvasManager.Instance.CloseTowerMenu();
                 }
 
-                if (CanvasManager.Instance.IsTowerMenuOpen() || CanvasManager.isGamePaused)
+                if (CanvasManager.Instance.IsTowerMenuOpen() || CanvasManager.isGamePaused || CanvasManager.isMultiplayerPaused)
                 {
                     CameraLock(true);
                     CanvasManager.Instance.RemoveCursorLock();
@@ -168,11 +169,11 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded)
         {
-            AnimController.Instance.PlayPlayerJumpAnim(GetComponentInChildren<Animator>(), false);
+            AnimController.Instance.PlayPlayerJumpAnim(GetComponentInChildren<Animator>());
 
             if (FindObjectOfType<UDPClient>() != null)
             {
-                UDPClient.Instance.SendPlayerUpdates("Jump", GetName());
+                UDPClient.Instance.SendPlayerUpdates(ActionTypes.Jump, GetCharacterNameEnum());
             }
 
             StartCoroutine(Jump());
@@ -225,38 +226,38 @@ public class PlayerController : MonoBehaviour
             controller.Move(moveDir * speed * Time.deltaTime);
         }
 
-        if (!CanvasManager.isGamePaused)
+        if (!CanvasManager.isGamePaused && !CanvasManager.isMultiplayerPaused)
         {
             if (verticalInput > 0)
             {
-                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, true, false);
-                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false, false);
+                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, true);
+                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false);
             }
             else if (verticalInput < 0)
             {
-                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, false, false);
-                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, true, false);
+                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, false);
+                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, true);
             }
             else
             {
-                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, true, false);
-                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false, false);
+                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, true);
+                AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false);
             }
 
             if (horizontalInput > 0)
             {
-                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), true, 1, false);
-                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 0, false);
+                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), true, 1);
+                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 0);
             }
             else if (horizontalInput < 0)
             {
-                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), true, 0, false);
-                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 1, false);
+                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), true, 0);
+                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 1);
             }
             else
             {
-                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 0, false);
-                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 1, false);
+                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 0);
+                AnimController.Instance.SetPlayerStrafing(GetComponentInChildren<Animator>(), false, 1);
             }
         }
     }
@@ -393,7 +394,7 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(DeathTimer());
 
-        AnimController.Instance.PlayPlayerDeathAnim(GetComponentInChildren<Animator>(), false);
+        AnimController.Instance.PlayPlayerDeathAnim(GetComponentInChildren<Animator>());
 
         dead.Play();
     }
@@ -402,7 +403,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(deathTimer);
 
-        AnimController.Instance.SetPlayerRespawn(GetComponentInChildren<Animator>(), false);
+        AnimController.Instance.SetPlayerRespawn(GetComponentInChildren<Animator>());
 
         GetComponent<Health>().ResetHealth();
 
@@ -541,6 +542,11 @@ public class PlayerController : MonoBehaviour
     public string GetName()
     {
         return characterName;
+    }
+
+    public CharacterNames GetCharacterNameEnum()
+    {
+        return characterNameEnum;
     }
 
     public float GetSpeed()

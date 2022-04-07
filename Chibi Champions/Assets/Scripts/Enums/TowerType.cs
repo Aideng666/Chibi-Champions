@@ -12,5 +12,5 @@ public enum TowerType
     SpiderHouse,
     InkBomber,
     Photosynthesiser,
-    PED
+    SAP
 }

@@ -59,16 +59,16 @@ public class Drumstick : PlayerController
 
     protected override void Attack()
     {
-        if (!CanvasManager.isGamePaused)
+        if (!CanvasManager.isGamePaused && !CanvasManager.isMultiplayerPaused)
         {
             if (Input.GetMouseButton(0) && CanLightAttack())
             {
                 if (FindObjectOfType<UDPClient>() != null)
                 {
-                    UDPClient.Instance.SendPlayerUpdates("Attack", GetName());
+                    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Attack, GetCharacterNameEnum());
                 }
 
-                AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>(), false);
+                AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>());
 
                 wack.Play();
 
@@ -78,7 +78,7 @@ public class Drumstick : PlayerController
             {
                 if (FindObjectOfType<UDPClient>() != null)
                 {
-                    UDPClient.Instance.SendPlayerUpdates("Ability", GetName());
+                    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Ability, GetCharacterNameEnum());
                 }
 
                 StartCoroutine(GroundPoundJump());
@@ -89,14 +89,14 @@ public class Drumstick : PlayerController
 
                 fall.Play();
 
-                AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>(), false);
+                AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>());
             }
         }     
     }
 
     public override void ReceiveAttackTrigger()
     {
-        AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>(), false);
+        AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>());
 
         wack.Play();
 
@@ -113,7 +113,7 @@ public class Drumstick : PlayerController
 
         fall.Play();
 
-        AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>(), false);
+        AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>());
     }
 
     void GroundPoundAttack()

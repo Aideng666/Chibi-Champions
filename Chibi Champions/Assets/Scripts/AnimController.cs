@@ -66,27 +66,17 @@ public class AnimController : MonoBehaviour
         }
     }
 
-    public void SetPlayerWalking(Animator anim, bool isWalking, bool forward, bool sendToOtherClients = true)
+    public void SetPlayerWalking(Animator anim, bool isWalking, bool forward)
     {
         if (anim == drumstickAnimator)
         {
             if (forward)
             {
                 drumstickAnimator.SetBool("WalkForward", isWalking);
-
-                if (sendToOtherClients)
-                {
-                    UDPClient.Instance.SendAnimationUpdates("Drumstick", AnimationTypes.WalkForward, isWalking);
-                }
             }
             else
             {
                 drumstickAnimator.SetBool("WalkBackward", isWalking);
-
-                if (sendToOtherClients)
-                {
-                    UDPClient.Instance.SendAnimationUpdates("Drumstick", AnimationTypes.WalkBackward, isWalking);
-                }
             }
         }
         if (anim == rolfeAnimator)
@@ -94,20 +84,10 @@ public class AnimController : MonoBehaviour
             if (forward)
             {
                 rolfeAnimator.SetBool("WalkForward", isWalking);
-
-                if (sendToOtherClients)
-                {
-                    UDPClient.Instance.SendAnimationUpdates("Rolfe", AnimationTypes.WalkForward, isWalking);
-                }
             }
             else
             {
                 rolfeAnimator.SetBool("WalkBackward", isWalking);
-
-                if (sendToOtherClients)
-                {
-                    UDPClient.Instance.SendAnimationUpdates("Rolfe", AnimationTypes.WalkBackward, isWalking);
-                }
             }
         }
         if (anim == potterAnimator)
@@ -115,45 +95,25 @@ public class AnimController : MonoBehaviour
             if (forward)
             {
                 potterAnimator.SetBool("WalkForward", isWalking);
-
-                if (sendToOtherClients)
-                {
-                    UDPClient.Instance.SendAnimationUpdates("Potter", AnimationTypes.WalkForward, isWalking);
-                }
             }
             else
             {
                 potterAnimator.SetBool("WalkBackward", isWalking);
-
-                if (sendToOtherClients)
-                {
-                    UDPClient.Instance.SendAnimationUpdates("Potter", AnimationTypes.WalkBackward, isWalking);
-                }
             }
         }
     }
 
-    public void SetPlayerStrafing(Animator anim, bool isStrafing, int direction = 0, bool sendToOtherClients = true) //0 = left 1 = right
+    public void SetPlayerStrafing(Animator anim, bool isStrafing, int direction = 0) //0 = left 1 = right
     {
         if (anim == drumstickAnimator)
         {
             if (direction == 0)
             {
                 drumstickAnimator.SetBool("StrafeLeft", isStrafing);
-
-                if (sendToOtherClients)
-                {
-                    UDPClient.Instance.SendAnimationUpdates("Drumstick", AnimationTypes.WalkLeft, isStrafing);
-                }
             }
             else if (direction == 1)
             {
                 drumstickAnimator.SetBool("StrafeRight", isStrafing);
-
-                if (sendToOtherClients)
-                {
-                    UDPClient.Instance.SendAnimationUpdates("Drumstick", AnimationTypes.WalkRight, isStrafing);
-                }
             }
         }
         if (anim == rolfeAnimator)
@@ -161,20 +121,10 @@ public class AnimController : MonoBehaviour
             if (direction == 0)
             {
                 rolfeAnimator.SetBool("StrafeLeft", isStrafing);
-
-                if (sendToOtherClients)
-                {
-                    UDPClient.Instance.SendAnimationUpdates("Rolfe", AnimationTypes.WalkLeft, isStrafing);
-                }
             }
             else if (direction == 1)
             {
                 rolfeAnimator.SetBool("StrafeRight", isStrafing);
-
-                if (sendToOtherClients)
-                {
-                    UDPClient.Instance.SendAnimationUpdates("Rolfe", AnimationTypes.WalkRight, isStrafing);
-                }
             }
         }
         if (anim == potterAnimator)
@@ -182,71 +132,37 @@ public class AnimController : MonoBehaviour
             if (direction == 0)
             {
                 potterAnimator.SetBool("StrafeLeft", isStrafing);
-
-                if (sendToOtherClients)
-                {
-                    UDPClient.Instance.SendAnimationUpdates("Potter", AnimationTypes.WalkLeft, isStrafing);
-                }
             }
             else if (direction == 1)
             {
                 potterAnimator.SetBool("StrafeRight", isStrafing);
-
-                if (sendToOtherClients)
-                {
-                    UDPClient.Instance.SendAnimationUpdates("Potter", AnimationTypes.WalkRight, isStrafing);
-                }
             }
         }
     }
 
-    public void PlayPlayerJumpAnim(Animator anim, bool sendToOtherClients = true)
+    public void PlayPlayerJumpAnim(Animator anim)
     {
         anim.SetTrigger("Jump");
-
-        if (sendToOtherClients)
-        {
-            UDPClient.Instance.SendAnimationUpdates(anim.GetComponentInParent<PlayerController>().GetName(), AnimationTypes.Jump);
-        }
     }
 
-    public void PlayPlayerAttackAnim(Animator anim, bool sendToOtherClients = true)
+    public void PlayPlayerAttackAnim(Animator anim)
     {
         anim.SetTrigger("Attack");
-
-        if (sendToOtherClients)
-        {
-            UDPClient.Instance.SendAnimationUpdates(anim.GetComponentInParent<PlayerController>().GetName(), AnimationTypes.BasicAttack);
-        }
     }
 
-    public void PlayPlayerDeathAnim(Animator anim, bool sendToOtherClients = true)
+    public void PlayPlayerDeathAnim(Animator anim)
     {
         anim.SetTrigger("Died");
-
-        if (sendToOtherClients)
-        {
-            UDPClient.Instance.SendAnimationUpdates(anim.GetComponentInParent<PlayerController>().GetName(), AnimationTypes.Death);
-        }
     }
 
-    public void SetPlayerRespawn(Animator anim, bool sendToOtherClients = true)
+    public void SetPlayerRespawn(Animator anim)
     {
         anim.SetTrigger("Respawn");
 
-        if (sendToOtherClients)
-        {
-            UDPClient.Instance.SendAnimationUpdates(anim.GetComponentInParent<PlayerController>().GetName(), AnimationTypes.Respawn);
-        }
     }
 
-    public void PlayPlayerAbilityAnim(Animator anim, bool sendToOtherClients = true)
+    public void PlayPlayerAbilityAnim(Animator anim)
     {
         anim.SetTrigger("Ability");
-
-        if (sendToOtherClients)
-        {
-            UDPClient.Instance.SendAnimationUpdates(anim.GetComponentInParent<PlayerController>().GetName(), AnimationTypes.UseAbility);
-        }
     }
 }

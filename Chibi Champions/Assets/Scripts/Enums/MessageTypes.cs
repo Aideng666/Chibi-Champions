@@ -8,7 +8,8 @@ public enum MessageTypes
     PlayerAction,
     TowerUpdate,
     TowerUpgrade,
-    StartWave
+    StartWave,
+    UpdateConfirmed
 }
 
 public enum ActionTypes

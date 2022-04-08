@@ -173,12 +173,29 @@ public class UDPClient : MonoBehaviour
         }
     }
 
+    public void SendLeaderboardStats()
+    {
+        if (clientStarted)
+        {
+            int totalWavesCompleted = PlayerPrefs.GetInt("Wavescompleted");
+
+            float[] msg = new float[] { (int)MessageTypes.LeaderboardStatus, PlayerClient.Instance.GetClientNum(), totalWavesCompleted };
+
+            byte[] bpos = new byte[msg.Length * sizeof(float)];
+
+            Buffer.BlockCopy(msg, 0, bpos, 0, bpos.Length);
+
+            client.SendTo(bpos, remoteEP);
+
+        }
+    }
+
     public static void StartUDPClient()
     {
         try
         {
-            //ip = IPAddress.Parse("127.0.0.1");
-            ip = IPAddress.Parse("54.208.168.94");
+            ip = IPAddress.Parse("127.0.0.1");
+            //ip = IPAddress.Parse("54.208.168.94");
 
             remoteEP = new IPEndPoint(ip, 11111);
 
@@ -191,6 +208,7 @@ public class UDPClient : MonoBehaviour
 
         clientStarted = true;
     }
+
 
     public bool GetIsClientStarted()
     {

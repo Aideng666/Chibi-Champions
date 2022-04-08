@@ -12,6 +12,8 @@ public class Cure : MonoBehaviour
     bool alert2Fired;
     bool alert3Fired;
 
+    bool loseStarted;
+
     [SerializeField] TMP_Text cureUIHPText;
 
     private void Start()
@@ -51,14 +53,21 @@ public class Cure : MonoBehaviour
         }
 
 
-        if (GetComponent<Health>().GetCurrentHealth() <= 0)
+        if (GetComponent<Health>().GetCurrentHealth() <= 0 && !loseStarted)
         {
             StartCoroutine(DelayBeforeLoss());
+
+            loseStarted = true;
         }
     }
 
     IEnumerator DelayBeforeLoss()
     {
+        if (FindObjectOfType<UDPClient>() != null)
+        {
+            UDPClient.Instance.SendLeaderboardStats();
+        }
+
         AlertManager.Instance.DisplayAlert(new Alert(Color.blue, "You Lose!", 2));       
 
         yield return new WaitForSeconds(3);

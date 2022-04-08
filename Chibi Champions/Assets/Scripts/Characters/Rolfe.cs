@@ -43,6 +43,8 @@ public class Rolfe : PlayerController
                     UDPClient.Instance.SendPlayerUpdates(ActionTypes.Attack, GetCharacterNameEnum());
                 }
 
+                AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>());
+
                 Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, lightAttackRange, enemyLayer);
 
                 foreach (Collider enemy in hitEnemies)
@@ -69,7 +71,9 @@ public class Rolfe : PlayerController
                     UDPClient.Instance.SendPlayerUpdates(ActionTypes.Ability, GetCharacterNameEnum());
                 }
 
-                var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z), Quaternion.identity);
+                AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>());
+
+                var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                 currentBeacons++;
 
                 beaconActivated = true;
@@ -83,6 +87,8 @@ public class Rolfe : PlayerController
 
     public override void ReceiveAttackTrigger()
     {
+        AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>());
+
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, lightAttackRange, enemyLayer);
 
         foreach (Collider enemy in hitEnemies)
@@ -102,7 +108,9 @@ public class Rolfe : PlayerController
 
     public override void ReceiveAbilityTrigger()
     {
-        var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
+        AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>());
+
+        var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
     }
 
     void SecondSwipeAttack()

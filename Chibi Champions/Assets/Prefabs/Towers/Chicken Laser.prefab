@@ -4398,7 +4398,7 @@ MonoBehaviour:
   towerRadius: {fileID: 1839241071829877862}
   upgradeNames:
   - Global Ordinance
-  - Particle Accelerator
+  - Particle Chip
   - Mega Detah Ray
   upgradeImages:
   - {fileID: 21300000, guid: dcc0552d6bcb1c74b9c1c66f4e417c57, type: 3}

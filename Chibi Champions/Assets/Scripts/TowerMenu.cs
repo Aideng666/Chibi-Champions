@@ -242,10 +242,14 @@ public class TowerMenu : MonoBehaviour
             isMaxLevel = true;
 
             upgradeCostText.text = string.Empty;
-            upgradeNameText.text = "Fully Upgraded";
+            //upgradeNameText.text = "Fully Upgraded";
+            upgradeNameText.text = string.Empty;
+
             upgradeImageIcon.sprite = currentTower.GetComponent<Tower>().GetUpgradeImage(3);
 
-            descriptionText.text = currentTower.GetComponent<Tower>().GetUpgradeDescriptions(3);
+            //descriptionText.text = string.Empty; 
+            descriptionText.text = "Fully Upgraded";
+            descriptionText.fontSize = 32;
 
             coinIcon.enabled = false;
         }
@@ -256,6 +260,7 @@ public class TowerMenu : MonoBehaviour
             upgradeImageIcon.sprite = currentTower.GetComponent<Tower>().GetUpgradeImage(currentTower.GetComponent<Tower>().GetLevel());
 
             descriptionText.text = currentTower.GetComponent<Tower>().GetUpgradeDescriptions(currentTower.GetComponent<Tower>().GetLevel());
+            descriptionText.fontSize = 25;
 
             coinIcon.enabled = true;
         }

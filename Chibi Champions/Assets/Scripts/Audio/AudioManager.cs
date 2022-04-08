@@ -38,6 +38,16 @@ public class AudioManager : MonoBehaviour
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.Play();
+    } 
+    public void Pause(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.Pause();
+    }
+    public void UnPause(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.UnPause();
     }
 
     public bool IsPlaying(string name)
@@ -65,6 +75,7 @@ public class AudioManager : MonoBehaviour
     public void SetMusicVolume()
     {
         sounds[0].source.volume = musicSlider.value;
+        sounds[1].source.volume = musicSlider.value;
     }
     public float GetMusicVolume()
     {
@@ -73,7 +84,7 @@ public class AudioManager : MonoBehaviour
 
     public void SetSFXVolume()
     {
-        for (int i = 1; i < sounds.Length; i++)
+        for (int i = 2; i < sounds.Length; i++)
         {
             sounds[i].source.volume = sfxSlider.value;
         }

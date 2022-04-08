@@ -132,6 +132,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   explosionRadius: 8
+  fuze: {fileID: 7764949801642135163}
 --- !u!82 &7764949801642135163
 AudioSource:
   m_ObjectHideFlags: 0

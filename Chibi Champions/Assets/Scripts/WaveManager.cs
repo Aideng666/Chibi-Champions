@@ -49,6 +49,17 @@ public class WaveManager : MonoBehaviour
         totalWavesText.text = numberOfWaves.ToString();
 
         currentPhaseText.text = "Build Phase";
+
+        //if (!FindObjectOfType<AudioManager>().IsPlaying("Level") && !FindObjectOfType<AudioManager>().IsPlaying("Level"))
+        {
+            FindObjectOfType<AudioManager>().Play("Level");
+            FindObjectOfType<AudioManager>().Pause("Level");
+            FindObjectOfType<AudioManager>().Loop("Level");
+            FindObjectOfType<AudioManager>().Play("BuildPhase");
+            FindObjectOfType<AudioManager>().Loop("BuildPhase");
+            FindObjectOfType<AudioManager>().SetMusicVolume();
+
+        }
     }
 
     // Update is called once per frame
@@ -129,6 +140,10 @@ public class WaveManager : MonoBehaviour
 
     public void BeginWave()
     {
+        FindObjectOfType<AudioManager>().UnPause("Level");
+        FindObjectOfType<AudioManager>().Pause("BuildPhase");
+
+
         currentPhaseText.text = "Combat Phase";
        
         waveCompleteAlertFired = false;
@@ -155,6 +170,7 @@ public class WaveManager : MonoBehaviour
 
     bool CheckWaveComplete()
     {
+
         if (currentWave == 0)
         {
             return true;
@@ -168,6 +184,9 @@ public class WaveManager : MonoBehaviour
             {
                 AlertManager.Instance.DisplayAlert(new Alert(Color.red, "Wave Complete!"));
                 waveCompleteAlertFired = true;
+                FindObjectOfType<AudioManager>().Pause("Level");
+                FindObjectOfType<AudioManager>().UnPause("BuildPhase");
+
             }
 
             return true;

@@ -52,11 +52,22 @@ public class HealthBar : MonoBehaviour
 
         if (isPlayer)
         {
-            healthText.text = (pct * 100) + " / 100";
-            if (pct < 0)
+            foreach(PlayerController player in FindObjectsOfType<PlayerController>())
             {
-                healthText.text = "0 / 100";
+                healthText.text = (int)player.gameObject.GetComponent<Health>().GetCurrentHealth() + " / " + player.gameObject.GetComponent<Health>().GetMaxHealth();
+
+                if (pct < 0)
+                {
+                    healthText.text = "0 / " + player.gameObject.GetComponent<Health>().GetMaxHealth();
+                }
             }
+
+            //healthText.text = (pct * 100) + " / 100"; 
+                      
+            //if (pct < 0)
+            //{
+            //    healthText.text = "0 / 100";
+            //}
         }
     }
 

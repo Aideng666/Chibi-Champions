@@ -6,7 +6,7 @@ public class TennisBall : MonoBehaviour
 {
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] float explosionRadius;
-
+    [SerializeField] AudioSource fuze;
     Tower tower;
     float fuseDuration;
 
@@ -21,6 +21,16 @@ public class TennisBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            fuze.mute = true;
+        }
+        else
+        {
+            fuze.mute = false;
+        }
+        fuze.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
         if (fuseEnded)
         {
             Explode();

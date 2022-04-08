@@ -15,6 +15,15 @@ public class SpiderHouse : Tower
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            hatch.mute = true;
+        }
+        else
+        {
+            hatch.mute = false;
+        }
+        hatch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
         UpdateView();
 
         if (CanAttack())

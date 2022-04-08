@@ -37,6 +37,8 @@ public class CanvasManager : MonoBehaviour
         {
             FindObjectOfType<AudioManager>().Play("Level");
             FindObjectOfType<AudioManager>().Loop("Level");
+            FindObjectOfType<AudioManager>().SetMusicVolume();
+            
         }    
     }
 

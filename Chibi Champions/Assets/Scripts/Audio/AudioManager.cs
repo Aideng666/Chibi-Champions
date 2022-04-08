@@ -24,9 +24,11 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
         }
+        musicSlider.value = sounds[0].source.volume;
+        sfxSlider.value = sounds[1].source.volume;
+        muteToggle.isOn = false;
 
         savedVolumes = new float[sounds.Length];
-
         musicSlider.onValueChanged.AddListener(delegate { SetMusicVolume(); });
         sfxSlider.onValueChanged.AddListener(delegate { SetSFXVolume(); });
         muteToggle.onValueChanged.AddListener(delegate { ToggleMute(); });
@@ -64,6 +66,10 @@ public class AudioManager : MonoBehaviour
     {
         sounds[0].source.volume = musicSlider.value;
     }
+    public float GetMusicVolume()
+    {
+        return musicSlider.value;
+    }
 
     public void SetSFXVolume()
     {
@@ -73,6 +79,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public float GetSFXVolume()
+    {
+        return sfxSlider.value;
+    }
+
     public void ToggleMute()
     {
         if (muteToggle.isOn)
@@ -80,15 +91,20 @@ public class AudioManager : MonoBehaviour
             for (int i = 0; i < sounds.Length; i++)
             {
                 savedVolumes[i] = sounds[i].source.volume;
-                sounds[i].source.volume = 0;
+                sounds[i].source.mute = true;
             }
         }
         else
         {
             for (int i = 0; i < sounds.Length; i++)
             {
-                sounds[i].source.volume = savedVolumes[i];
+                sounds[i].source.mute = false; //savedVolumes[i];
             }
         }
+    }
+
+    public bool isMute()
+    {
+        return muteToggle.isOn;
     }
 }

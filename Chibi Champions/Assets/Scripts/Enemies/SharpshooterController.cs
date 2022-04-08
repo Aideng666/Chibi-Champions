@@ -33,6 +33,15 @@ public class SharpshooterController : Enemy
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            shot.mute = true;
+        }
+        else
+        {
+            shot.mute = false;
+        }
+        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
         base.Update();
 
         if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0)

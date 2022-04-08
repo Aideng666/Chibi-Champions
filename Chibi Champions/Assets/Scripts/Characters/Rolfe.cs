@@ -20,6 +20,7 @@ public class Rolfe : PlayerController
     // Start is called before the first frame update
     void Start()
     {
+        
         base.Start();
 
         beaconsPlaced = maxBeacons;
@@ -31,6 +32,19 @@ public class Rolfe : PlayerController
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            scratch.mute = true;
+            set.mute = true;
+        }
+        else
+        {
+            scratch.mute = false;
+            set.mute = false;
+        }
+        scratch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        set.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
         if (isPlayerCharacter)
         {
             base.Update();

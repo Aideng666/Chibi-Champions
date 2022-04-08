@@ -13,7 +13,15 @@ public class Photosynthesizer : Tower
     // Update is called once per frame
     void Update()
     {
-        //music.Play();
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            music.mute = true;
+        }
+        else
+        {
+            music.mute = false;
+        }
+        music.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
         UpdateView();
 
         Heal();

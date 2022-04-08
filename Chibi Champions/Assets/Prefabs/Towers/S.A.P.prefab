@@ -164,6 +164,7 @@ MonoBehaviour:
   owner: Potter
   sporePrefab: {fileID: 6634593626932089271, guid: 57beb904983b2aa4c9692e89ca3a0116, type: 3}
   bloop: {fileID: 7002484429691799175}
+  shake: {fileID: 4124283815667640028}
 --- !u!82 &4124283815667640028
 AudioSource:
   m_ObjectHideFlags: 0

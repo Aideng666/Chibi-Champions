@@ -19,5 +19,18 @@ public class Particle : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (GetComponent<AudioSource>() !=null)
+        {
+            if (FindObjectOfType<AudioManager>().isMute() == true)
+            {
+                GetComponent<AudioSource>().mute = true;
+            }
+            else
+            {
+                GetComponent<AudioSource>().mute = false;
+            }
+            GetComponent<AudioSource>().volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        }
     }
 }

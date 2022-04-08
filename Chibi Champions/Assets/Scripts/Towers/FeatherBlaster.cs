@@ -15,6 +15,15 @@ public class FeatherBlaster : Tower
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            shot.mute = true;
+        }
+        else
+        {
+            shot.mute = false;
+        }
+        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
         UpdateView();
 
         if (targetEnemy == null)

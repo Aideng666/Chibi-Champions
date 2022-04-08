@@ -25,6 +25,18 @@ public class Potter : PlayerController
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            shot.mute = true;
+            blast.mute = true;
+        }
+        else
+        {
+            shot.mute = false;
+            blast.mute = false;
+        }
+        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        blast.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
         if (isPlayerCharacter)
         {
             base.Update();

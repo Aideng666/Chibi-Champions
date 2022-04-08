@@ -13,6 +13,15 @@ public class ChickenLaser : Tower
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            beam.mute = true;
+        }
+        else
+        {
+            beam.mute = false;
+        }
+        beam.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
         laserbeam = GetComponentInChildren<LineRenderer>();
 
         UpdateView();

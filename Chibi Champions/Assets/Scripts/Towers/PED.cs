@@ -7,10 +7,22 @@ public class PED : Tower
 {
     [SerializeField] GameObject sporePrefab;
     [SerializeField] AudioSource bloop;
+    [SerializeField] AudioSource shake;
 
     void Update()
     {
-
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            bloop.mute = true;
+            shake.mute = true;
+        }
+        else
+        {
+            bloop.mute = false;
+            shake.mute = false;
+        }
+        bloop.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        shake.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
         if (CanAttack())
         {
             Attack();

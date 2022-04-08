@@ -18,7 +18,9 @@ public class PlayerClient : MonoBehaviour
     [SerializeField] GameObject userListPanel;
     [SerializeField] GameObject characterSelectPanel;
     [SerializeField] GameObject lobbyPanel;
+    [SerializeField] GameObject leaderboardPanel;
     [SerializeField] GameObject userListContent;
+    [SerializeField] GameObject leaderboardContent;
     [SerializeField] GameObject userPrefab;
     [SerializeField] GameObject messageHistoryContent;
     [SerializeField] GameObject messagePrefab;
@@ -60,6 +62,9 @@ public class PlayerClient : MonoBehaviour
     ClientStates currentState = ClientStates.Lobby;
 
     static int clientNum = -1;
+
+    List<string> currentLeaderboardStats = new List<string>();
+    bool showLeaderboard;
 
     public static PlayerClient Instance { get; set; }
 
@@ -168,9 +173,31 @@ public class PlayerClient : MonoBehaviour
                                 for (int i = 1; i < names.Length; i++)
                                 {
                                     connectedUsers[i - 1] = names[i];
+
+                                    if (names[i] == username)
+                                    {
+                                        clientNum = i - 1;
+
+                                        print("Set Client Num to " + clientNum);
+                                    }
+
+
                                 }
 
                                 SetUserList(connectedUsers);
+                            }
+                            else if (messageReceived.Contains("LEADERBOARD_MSG_REQUEST.KEY"))
+                            {
+                                string[] messageSplit = messageReceived.Split(':');
+
+                                for (int i = 1; i < messageSplit.Length; i++)
+                                {
+                                    currentLeaderboardStats.Add(messageSplit[i]);
+
+                                    print($"Found This Stat in the Leaderboards: {messageSplit[i]}");
+                                }
+
+                                SetLeaderboardInfo();
                             }
                             else if (nameChosen)
                             {
@@ -271,19 +298,6 @@ public class PlayerClient : MonoBehaviour
 
                 if (recv > 0)
                 {
-                    string messageReceivedString = Encoding.ASCII.GetString(buffer, 0, recv);
-
-                    if (messageReceivedString.Contains("LEADERBOARD_MSG_UPDATE.KEY"))
-                    {
-                        print("Stats Received");
-
-                        string[] msgSplit = messageReceivedString.Split(':');
-
-                        WaveManager.Instance.WriteDataToLeaderboard(msgSplit[1]);
-
-                        return;
-                    }
-
                     float[] messageReceived = new float[recv / sizeof(float)];
 
                     Buffer.BlockCopy(buffer, 0, messageReceived, 0, recv);
@@ -483,7 +497,7 @@ public class PlayerClient : MonoBehaviour
                 {
                     if (username == oldUsers[i].text)
                     {
-                        clientNum = i;
+                        //clientNum = i;
 
                         if (isReady)
                         {
@@ -655,6 +669,68 @@ public class PlayerClient : MonoBehaviour
         byte[] msg = Encoding.ASCII.GetBytes(readyMessage);
 
         client.Send(msg);
+    }
+
+    public void RequestLeaderboard()
+    {
+        string requestMessage = $"LEADERBOARD_MSG_REQUEST.KEY:{clientNum}";
+
+        byte[] msg = Encoding.ASCII.GetBytes(requestMessage);
+
+        client.Send(msg);
+
+        showLeaderboard = !showLeaderboard;
+
+        if (showLeaderboard)
+        {
+            leaderboardPanel.SetActive(true);
+        }
+        else
+        {
+            leaderboardPanel.SetActive(false);
+        }
+    }
+
+    void SetLeaderboardInfo()
+    {
+        TextMeshProUGUI[] oldStats = leaderboardContent.GetComponentsInChildren<TextMeshProUGUI>();
+
+        bool addNewEntry = false;
+
+        for (int i = 0; i < currentLeaderboardStats.Count; i++)
+        {
+
+            for (int j = 0; j < oldStats.Length; j++)
+            {
+                if (currentLeaderboardStats[i] == oldStats[j].text)
+                {
+                    addNewEntry = false;
+                    break;
+                }
+                
+                if (j == oldStats.Length - 1 && currentLeaderboardStats[i] != oldStats[j].text)
+                {
+                    addNewEntry = true;
+                }
+            }
+
+            if (oldStats.Length == 0)
+            {
+                addNewEntry = true;
+            }
+
+            if (addNewEntry)
+            {
+                messagePrefab.GetComponent<Image>().color = Color.gray;
+                messagePrefab.GetComponentInChildren<TextMeshProUGUI>().text = currentLeaderboardStats[i];
+
+                Instantiate(messagePrefab, leaderboardContent.transform);
+
+                addNewEntry = false;
+            }
+        }
+
+        currentLeaderboardStats = new List<string>();
     }
 
     public void SetSelectedCharacter(string character)

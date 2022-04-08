@@ -177,7 +177,9 @@ public class UDPClient : MonoBehaviour
     {
         if (clientStarted)
         {
-            int totalWavesCompleted = PlayerPrefs.GetInt("Wavescompleted");
+            int totalWavesCompleted = PlayerPrefs.GetInt("WavesCompleted");
+
+            print(totalWavesCompleted);
 
             float[] msg = new float[] { (int)MessageTypes.LeaderboardStatus, PlayerClient.Instance.GetClientNum(), totalWavesCompleted };
 

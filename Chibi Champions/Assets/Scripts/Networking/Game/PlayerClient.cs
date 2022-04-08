@@ -63,7 +63,8 @@ public class PlayerClient : MonoBehaviour
 
     static int clientNum = -1;
 
-    List<string> currentLeaderboardStats = new List<string>();
+    //List<string> currentLeaderboardStats = new List<string>();
+    List<string[]> currentLeaderboardMessageSplits = new List<string[]>();
     bool showLeaderboard;
 
     public static PlayerClient Instance { get; set; }
@@ -192,9 +193,9 @@ public class PlayerClient : MonoBehaviour
 
                                 for (int i = 1; i < messageSplit.Length; i++)
                                 {
-                                    currentLeaderboardStats.Add(messageSplit[i]);
+                                    //currentLeaderboardStats.Add(messageSplit[i]);
 
-                                    print($"Found This Stat in the Leaderboards: {messageSplit[i]}");
+                                    currentLeaderboardMessageSplits.Add(messageSplit[i].Split('|'));
                                 }
 
                                 SetLeaderboardInfo();
@@ -693,22 +694,24 @@ public class PlayerClient : MonoBehaviour
 
     void SetLeaderboardInfo()
     {
+        print("Setting Info For Leaderboard");
         TextMeshProUGUI[] oldStats = leaderboardContent.GetComponentsInChildren<TextMeshProUGUI>();
 
         bool addNewEntry = false;
 
-        for (int i = 0; i < currentLeaderboardStats.Count; i++)
-        {
+        SortCurrentLeaderboard();
 
+        for (int i = 0; i < currentLeaderboardMessageSplits.Count; i++)
+        {
             for (int j = 0; j < oldStats.Length; j++)
             {
-                if (currentLeaderboardStats[i] == oldStats[j].text)
+                if (oldStats[j].text.Contains(currentLeaderboardMessageSplits[i][0]))
                 {
                     addNewEntry = false;
                     break;
                 }
                 
-                if (j == oldStats.Length - 1 && currentLeaderboardStats[i] != oldStats[j].text)
+                if (j == oldStats.Length - 1 && !oldStats[j].text.Contains(currentLeaderboardMessageSplits[i][0]))
                 {
                     addNewEntry = true;
                 }
@@ -722,7 +725,8 @@ public class PlayerClient : MonoBehaviour
             if (addNewEntry)
             {
                 messagePrefab.GetComponent<Image>().color = Color.gray;
-                messagePrefab.GetComponentInChildren<TextMeshProUGUI>().text = currentLeaderboardStats[i];
+                messagePrefab.GetComponentInChildren<TextMeshProUGUI>().text 
+                    = currentLeaderboardMessageSplits[i][0] + ": " + currentLeaderboardMessageSplits[i][1] + " Waves";
 
                 Instantiate(messagePrefab, leaderboardContent.transform);
 
@@ -730,7 +734,43 @@ public class PlayerClient : MonoBehaviour
             }
         }
 
-        currentLeaderboardStats = new List<string>();
+        currentLeaderboardMessageSplits = new List<string[]>();
+    }
+
+    void SortCurrentLeaderboard()
+    {
+        string[] temp;
+
+        for (int i = 0; i < currentLeaderboardMessageSplits.Count; i++)
+        {
+            for (int j = i + 1; j < currentLeaderboardMessageSplits.Count; j++)
+            {
+                if (currentLeaderboardMessageSplits[i][0] == currentLeaderboardMessageSplits[j][0])
+                {
+                    if (int.Parse(currentLeaderboardMessageSplits[i][1]) >= int.Parse(currentLeaderboardMessageSplits[j][1]))
+                    {
+                        currentLeaderboardMessageSplits.RemoveAt(j);
+                    }
+                    else
+                    {
+                        currentLeaderboardMessageSplits.RemoveAt(i);
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < currentLeaderboardMessageSplits.Count; i++)
+        {
+            for (int j = i + 1; j < currentLeaderboardMessageSplits.Count; j++)
+            {
+                if (int.Parse(currentLeaderboardMessageSplits[j][1]) > int.Parse(currentLeaderboardMessageSplits[i][1]))
+                {
+                    temp = currentLeaderboardMessageSplits[j];
+                    currentLeaderboardMessageSplits[j] = currentLeaderboardMessageSplits[i];
+                    currentLeaderboardMessageSplits[i] = temp;
+                }
+            }
+        }
     }
 
     public void SetSelectedCharacter(string character)

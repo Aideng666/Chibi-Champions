@@ -23,7 +23,7 @@ public class Cure : MonoBehaviour
         pastHP = GetComponent<Health>().GetCurrentHealth();
         FindObjectOfType<AudioManager>().Loop("Alarm");
 
-        cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString() + " / 100";
+        cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString() + " / "+GetComponent<Health>().GetMaxHealth().ToString();
     }
     // Update is called once per frame
     void Update()

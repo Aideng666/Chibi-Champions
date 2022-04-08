@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class TowerMenu : MonoBehaviour
 {
@@ -23,8 +24,8 @@ public class TowerMenu : MonoBehaviour
     public CharacterDatabase characterDB;
     Character character;
 
-    [SerializeField] TMP_Text towerLevelText;
     [SerializeField] TMP_Text descriptionText;
+    [SerializeField] Image coinIcon;
 
     GameObject[] towers = new GameObject[3];
     Transform platform;
@@ -33,7 +34,7 @@ public class TowerMenu : MonoBehaviour
 
     MenuState currentMenuState;
 
-    Button[] buttons;
+    [SerializeField] Button[] buttons;
 
     bool isMaxLevel = false;
 
@@ -46,8 +47,6 @@ public class TowerMenu : MonoBehaviour
 
     private void Start()
     {
-        buttons = GetComponentsInChildren<Button>();
-
         character = characterDB.GetCharacter(PlayerPrefs.GetInt("CharacterIndex"));
     }
 
@@ -80,9 +79,8 @@ public class TowerMenu : MonoBehaviour
         {
             upgradePanel.SetActive(true);
             buyPanel.SetActive(false);
-            buttons[4].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Sell For {currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7} Points";
+            buttons[4].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Sell For {currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7} Coins";
                     
-            towerLevelText.text = (currentTower.GetComponent<Tower>().GetLevel() - 1).ToString();
             towerName.text = currentTower.GetComponent<Tower>().GetTowerName();
 
             UpdateUpgradeUI();
@@ -135,10 +133,6 @@ public class TowerMenu : MonoBehaviour
 
             FindObjectOfType<AudioManager>().Play("Build");
         }
-        else 
-        {
-            print("Not Enough Points");
-        }
     }
 
     public void BuyTower2()
@@ -152,10 +146,6 @@ public class TowerMenu : MonoBehaviour
 
             FindObjectOfType<AudioManager>().Play("Build");
         }
-        else
-        {
-            print("Not Enough Points");
-        }
     }
 
     public void BuyTower3()
@@ -168,10 +158,6 @@ public class TowerMenu : MonoBehaviour
             player.GetComponent<PointsManager>().SpendPoints(towers[2].GetComponent<Tower>().GetCost());
 
             FindObjectOfType<AudioManager>().Play("Build");
-        }
-        else
-        {         
-            print("Not Enough Points");
         }
     }
 
@@ -192,13 +178,9 @@ public class TowerMenu : MonoBehaviour
         {
             player.GetComponent<PointsManager>().SpendPoints(currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()));
             currentTower.GetComponent<Tower>().Upgrade();
-            CanvasManager.Instance.CloseTowerMenu();
+            //CanvasManager.Instance.CloseTowerMenu();
 
             FindObjectOfType<AudioManager>().Play("Improve");
-        }
-        else 
-        {
-            print("Not Enough Points");
         }
     }
 
@@ -260,18 +242,27 @@ public class TowerMenu : MonoBehaviour
             isMaxLevel = true;
 
             upgradeCostText.text = string.Empty;
-            upgradeNameText.text = "Fully Upgraded";
+            //upgradeNameText.text = "Fully Upgraded";
+            upgradeNameText.text = string.Empty;
+
             upgradeImageIcon.sprite = currentTower.GetComponent<Tower>().GetUpgradeImage(3);
-            
-            descriptionText.text = currentTower.GetComponent<Tower>().GetUpgradeDescriptions(3);
+
+            //descriptionText.text = string.Empty; 
+            descriptionText.text = "Fully Upgraded";
+            descriptionText.fontSize = 32;
+
+            coinIcon.enabled = false;
         }
         else
         {
-            upgradeCostText.text = currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()).ToString();       
+            upgradeCostText.text = currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()).ToString();
             upgradeNameText.text = currentTower.GetComponent<Tower>().GetUpgradeName(currentTower.GetComponent<Tower>().GetLevel()).ToString();
             upgradeImageIcon.sprite = currentTower.GetComponent<Tower>().GetUpgradeImage(currentTower.GetComponent<Tower>().GetLevel());
 
             descriptionText.text = currentTower.GetComponent<Tower>().GetUpgradeDescriptions(currentTower.GetComponent<Tower>().GetLevel());
+            descriptionText.fontSize = 25;
+
+            coinIcon.enabled = true;
         }
 
         if (!isMaxLevel)
@@ -281,7 +272,7 @@ public class TowerMenu : MonoBehaviour
                 buttons[3].gameObject.GetComponentInChildren<Button>().interactable = true;
             }
             if (currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()) > player.GetComponent<PointsManager>().GetCurrentPoints())
-            {
+            {             
                 buttons[3].gameObject.GetComponentInChildren<Button>().interactable = false;
             }
         }
@@ -291,5 +282,15 @@ public class TowerMenu : MonoBehaviour
             buttons[3].gameObject.GetComponentInChildren<Button>().interactable = false;
             isMaxLevel = false;
         }
+    }
+
+    public void CloseTowerMenu()
+    {
+        CanvasManager.Instance.CloseTowerMenu();
+    }
+
+    public void ResetButton()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }

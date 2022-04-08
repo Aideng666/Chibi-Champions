@@ -17,14 +17,20 @@ public class Cure : MonoBehaviour
     private void Start()
     {
         healthText = GetComponentInChildren<TextMeshProUGUI>();
-        cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString();
+        cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString() + " / 100";
     }
     // Update is called once per frame
     void Update()
     {
         healthText.text = GetComponent<Health>().GetCurrentHealth() + "/" + GetComponent<Health>().GetMaxHealth();
 
-        cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString();
+        cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString() + " / " + GetComponent<Health>().GetMaxHealth();
+
+        if (GetComponent<Health>().GetCurrentHealth() < 0)
+        {
+            cureUIHPText.text = "0 / " + GetComponent<Health>().GetMaxHealth();
+            healthText.text = " 0 / " + GetComponent<Health>().GetMaxHealth();
+        }
 
         transform.RotateAround(transform.position, new Vector3(0, 1, 0), 0.1f);
 
@@ -49,7 +55,6 @@ public class Cure : MonoBehaviour
 
             FindObjectOfType<AudioManager>().Play("Cure Damage");
         }
-
 
         if (GetComponent<Health>().GetCurrentHealth() <= 0)
         {

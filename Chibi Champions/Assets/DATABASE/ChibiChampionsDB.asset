@@ -54,8 +54,8 @@ MonoBehaviour:
     - Spider House
     towerDescriptions:
     - Shoots sticky webs that slow enemies by 30%
-    - Launches a tennis bomb that attracts enemies before exploding after a few seconds
-    - Spawns spiders to latch onto enemies, dealing damage overtime
+    - Launches a bomb that attracts enemies before exploding
+    - Spawns spiders that latch onto enemies
     abilityNames:
     - Claw Swipe
     - Knockback Beacon

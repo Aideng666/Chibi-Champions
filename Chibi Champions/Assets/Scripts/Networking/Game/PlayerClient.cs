@@ -271,12 +271,23 @@ public class PlayerClient : MonoBehaviour
 
                 if (recv > 0)
                 {
-                    //string messageReceived = Encoding.ASCII.GetString(buffer, 0, recv);
+                    string messageReceivedString = Encoding.ASCII.GetString(buffer, 0, recv);
+
+                    if (messageReceivedString.Contains("LEADERBOARD_MSG_UPDATE.KEY"))
+                    {
+                        print("Stats Received");
+
+                        string[] msgSplit = messageReceivedString.Split(':');
+
+                        WaveManager.Instance.WriteDataToLeaderboard(msgSplit[1]);
+
+                        return;
+                    }
 
                     float[] messageReceived = new float[recv / sizeof(float)];
 
                     Buffer.BlockCopy(buffer, 0, messageReceived, 0, recv);
-
+         
                     switch (messageReceived[0])
                     {
                         case 0: //Player Movement Update
@@ -392,8 +403,8 @@ public class PlayerClient : MonoBehaviour
             try
             {
                 //REPLACE THE IP BELOW WITH YOUR AWS SERVER IP
-                ip = IPAddress.Parse("54.208.168.94");
-                //ip = IPAddress.Parse("127.0.0.1");
+                //ip = IPAddress.Parse("54.208.168.94");
+                ip = IPAddress.Parse("127.0.0.1");
                 server = new IPEndPoint(ip, 11112);
 
                 client = new Socket(AddressFamily.InterNetwork,

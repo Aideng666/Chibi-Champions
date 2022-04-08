@@ -242,7 +242,23 @@ public class WaveManager : MonoBehaviour
 
     public void WriteDataToLeaderboard(string data)
     {
+        StreamReader reader = new StreamReader("Assets/Leaderboards.txt");
+
+        List<string> oldLeaderboard = new List<string>();
+        
+        while(!reader.EndOfStream)
+        {
+            oldLeaderboard.Add(reader.ReadLine());
+        }
+
+        reader.Close();
+
         StreamWriter writer = new StreamWriter("Assets/Leaderboards.txt");
+
+        for (int i = 0; i < oldLeaderboard.Count; i++)
+        {
+            writer.WriteLine(oldLeaderboard[i]);
+        }
 
         writer.WriteLine(data);
 

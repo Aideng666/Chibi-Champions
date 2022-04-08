@@ -24,6 +24,9 @@ public class Tower : MonoBehaviour
     [SerializeField] protected string[] upgradeDescriptions = new string[3];
     [SerializeField] protected string owner;
 
+    [SerializeField] protected Image m_towerImage;
+    [SerializeField] protected Sprite[] towerLevelIcons = new Sprite[3];
+
     protected TowerAttackPriority currentAttackPriority;
     
     protected GameObject targetEnemy = null;
@@ -102,6 +105,19 @@ public class Tower : MonoBehaviour
         towerLevel++;
 
         totalPointsSpent += upgradeCosts[towerLevel - 2];
+
+        if (towerLevel == 2)
+        {
+            m_towerImage.sprite = towerLevelIcons[0];
+        }
+        else if (towerLevel == 3)
+        {
+            m_towerImage.sprite = towerLevelIcons[1];
+        }
+        else if (towerLevel == 4)
+        {
+            m_towerImage.sprite = towerLevelIcons[2];
+        }
     }
 
     protected bool CanAttack()

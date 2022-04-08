@@ -24,12 +24,12 @@ public class Cure : MonoBehaviour
     {
         healthText.text = GetComponent<Health>().GetCurrentHealth() + "/" + GetComponent<Health>().GetMaxHealth();
 
-        cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString() + " /" + GetComponent<Health>().GetMaxHealth();
+        cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString() + " / " + GetComponent<Health>().GetMaxHealth();
 
         if (GetComponent<Health>().GetCurrentHealth() < 0)
         {
-            cureUIHPText.text = "0 /" + GetComponent<Health>().GetMaxHealth();
-            healthText.text = " 0 /" + GetComponent<Health>().GetMaxHealth();
+            cureUIHPText.text = "0 / " + GetComponent<Health>().GetMaxHealth();
+            healthText.text = " 0 / " + GetComponent<Health>().GetMaxHealth();
         }
 
         transform.RotateAround(transform.position, new Vector3(0, 1, 0), 0.1f);

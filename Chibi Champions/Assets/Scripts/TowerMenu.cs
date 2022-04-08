@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class TowerMenu : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class TowerMenu : MonoBehaviour
 
     MenuState currentMenuState;
 
-    Button[] buttons;
+    [SerializeField] Button[] buttons;
 
     bool isMaxLevel = false;
 
@@ -46,8 +47,6 @@ public class TowerMenu : MonoBehaviour
 
     private void Start()
     {
-        buttons = GetComponentsInChildren<Button>();
-
         character = characterDB.GetCharacter(PlayerPrefs.GetInt("CharacterIndex"));
     }
 
@@ -179,7 +178,7 @@ public class TowerMenu : MonoBehaviour
         {
             player.GetComponent<PointsManager>().SpendPoints(currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()));
             currentTower.GetComponent<Tower>().Upgrade();
-            CanvasManager.Instance.CloseTowerMenu();
+            //CanvasManager.Instance.CloseTowerMenu();
 
             FindObjectOfType<AudioManager>().Play("Improve");
         }
@@ -283,5 +282,10 @@ public class TowerMenu : MonoBehaviour
     public void CloseTowerMenu()
     {
         CanvasManager.Instance.CloseTowerMenu();
+    }
+
+    public void ResetButton()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }

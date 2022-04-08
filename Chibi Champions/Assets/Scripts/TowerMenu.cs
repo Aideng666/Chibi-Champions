@@ -292,4 +292,9 @@ public class TowerMenu : MonoBehaviour
             isMaxLevel = false;
         }
     }
+
+    public void CloseTowerMenu()
+    {
+        CanvasManager.Instance.CloseTowerMenu();
+    }
 }

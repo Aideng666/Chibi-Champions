@@ -12,9 +12,7 @@ public class Rolfe : PlayerController
     [SerializeField] AudioSource set;
     int currentBeacons = 0;
 
-    public TMP_Text beaconNumberText;
-    public GameObject beaconAmount;
-    int beaconsPlaced = 0;
+    //public GameObject beaconAmount;
     bool beaconActivated = false;
 
     // Start is called before the first frame update
@@ -23,10 +21,7 @@ public class Rolfe : PlayerController
         
         base.Start();
 
-        beaconsPlaced = maxBeacons;
-
-        beaconAmount.SetActive(true);
-        beaconNumberText.text = beaconsPlaced.ToString();
+        //beaconAmount.SetActive(true);
     }
 
     // Update is called once per frame
@@ -49,8 +44,6 @@ public class Rolfe : PlayerController
         {
             base.Update();
 
-            beaconNumberText.text = beaconsPlaced.ToString();
-
             AbilityCooldown(beaconActivated);
         }
     }
@@ -65,6 +58,8 @@ public class Rolfe : PlayerController
                 {
                     UDPClient.Instance.SendPlayerUpdates(ActionTypes.Attack, GetCharacterNameEnum());
                 }
+
+                AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>());
 
                 Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, lightAttackRange, enemyLayer);
 
@@ -92,10 +87,11 @@ public class Rolfe : PlayerController
                     UDPClient.Instance.SendPlayerUpdates(ActionTypes.Ability, GetCharacterNameEnum());
                 }
 
-                var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z), Quaternion.identity);
+                AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>());
+
+                var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                 currentBeacons++;
 
-                beaconsPlaced--;
                 beaconActivated = true;
                 set.Play();
             }
@@ -108,6 +104,8 @@ public class Rolfe : PlayerController
 
     public override void ReceiveAttackTrigger()
     {
+        AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>());
+
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, lightAttackRange, enemyLayer);
 
         foreach (Collider enemy in hitEnemies)
@@ -127,7 +125,9 @@ public class Rolfe : PlayerController
 
     public override void ReceiveAbilityTrigger()
     {
-        var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
+        AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>());
+
+        var beacon = Instantiate(beaconPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
     }
 
     void SecondSwipeAttack()
@@ -152,9 +152,7 @@ public class Rolfe : PlayerController
     {
         if (currentBeacons > 0)
         {
-            currentBeacons--;
-
-            beaconsPlaced++;
+            currentBeacons--;         
         }
     }
 

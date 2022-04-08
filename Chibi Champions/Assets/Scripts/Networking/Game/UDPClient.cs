@@ -89,8 +89,6 @@ public class UDPClient : MonoBehaviour
                 towerMsg[i] = towerInfo[i];
             }
 
-            print($"Tower Update: {towerMsg[0]}");
-
             byte[] bpos = new byte[towerMsg.Length * sizeof(float)];
 
             Buffer.BlockCopy(towerMsg, 0, bpos, 0, bpos.Length);
@@ -161,6 +159,37 @@ public class UDPClient : MonoBehaviour
         }
     }
 
+    public void SendUpdateConfirmed()
+    {
+        if (clientStarted)
+        {
+            float[] msg = new float[] { (int)MessageTypes.UpdateConfirmed, PlayerClient.Instance.GetClientNum() };
+
+            byte[] bpos = new byte[msg.Length * sizeof(float)];
+
+            Buffer.BlockCopy(msg, 0, bpos, 0, bpos.Length);
+
+            client.SendTo(bpos, remoteEP);
+        }
+    }
+
+    public void SendLeaderboardStats()
+    {
+        if (clientStarted)
+        {
+            int totalWavesCompleted = PlayerPrefs.GetInt("Wavescompleted");
+
+            float[] msg = new float[] { (int)MessageTypes.LeaderboardStatus, PlayerClient.Instance.GetClientNum(), totalWavesCompleted };
+
+            byte[] bpos = new byte[msg.Length * sizeof(float)];
+
+            Buffer.BlockCopy(msg, 0, bpos, 0, bpos.Length);
+
+            client.SendTo(bpos, remoteEP);
+
+        }
+    }
+
     public static void StartUDPClient()
     {
         try
@@ -179,6 +208,7 @@ public class UDPClient : MonoBehaviour
 
         clientStarted = true;
     }
+
 
     public bool GetIsClientStarted()
     {

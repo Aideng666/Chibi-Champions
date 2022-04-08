@@ -4368,6 +4368,7 @@ Transform:
   - {fileID: 7540970448476818789}
   - {fileID: 5062622283048083402}
   - {fileID: 5186145635522290043}
+  - {fileID: 7341919467345761461}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4392,23 +4393,28 @@ MonoBehaviour:
   towerCost: 800
   towerDamage: 0.1
   attackDelay: 0
-  upgradeCosts: e803000040060000b80b0000
+  upgradeCosts: 2003000008070000b80b0000
   firePoint: {fileID: 5573766545861167648}
   towerRadius: {fileID: 1839241071829877862}
   upgradeNames:
   - Global Ordinance
-  - Death Ray
-  - Melting Beam
+  - Particle Chip
+  - Mega Detah Ray
   upgradeImages:
-  - {fileID: 21300000, guid: 337e3aada58c10c45bde8dab9edd5d08, type: 3}
+  - {fileID: 21300000, guid: dcc0552d6bcb1c74b9c1c66f4e417c57, type: 3}
   - {fileID: 21300000, guid: 7b71c5c36e928f94fb6d4f32bcb98712, type: 3}
-  - {fileID: 21300000, guid: 60f0fda13995bc4448df59ea92d2d2ad, type: 3}
+  - {fileID: 21300000, guid: cb3704995ca86d840b4f9b1834bad676, type: 3}
   towerName: Chicken Laser
   upgradeDescriptions:
-  - Increased Range
-  - Increased Damage
-  - Laser now slows enemies
+  - Chicken Laser gains increased range
+  - Chicken Laser now deals increased damage to enemies
+  - The chicken laser now applies a slowing effect to enemies hit
   owner: Drumstick
+  m_towerImage: {fileID: 182211467060852809}
+  towerLevelIcons:
+  - {fileID: 21300000, guid: ac6951f8073cb2047b7ca4462c2096e4, type: 3}
+  - {fileID: 21300000, guid: 1f705d9cdeab89f42918e5147c45835f, type: 3}
+  - {fileID: 21300000, guid: dbf09114ffc191b449bab54b906600a1, type: 3}
   beam: {fileID: 3231466468357118777}
 --- !u!82 &3231466468357118777
 AudioSource:
@@ -4802,6 +4808,123 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &2768461824043990505
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7540970447587639793}
+    m_Modifications:
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.7519
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1.5356
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.030029297
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177527924777509601, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323666297301970381, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+      propertyPath: m_Name
+      value: TowerDisplayCanvas
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+--- !u!114 &182211467060852809 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2660735681289323936, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+  m_PrefabInstance: {fileID: 2768461824043990505}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &7341919467345761461 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
+  m_PrefabInstance: {fileID: 2768461824043990505}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4740238004947499041
 PrefabInstance:
   m_ObjectHideFlags: 0

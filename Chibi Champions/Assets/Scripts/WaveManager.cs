@@ -32,6 +32,8 @@ public class WaveManager : MonoBehaviour
     int enemiesKilled = 0;
     int currentLivingEnemies;
 
+    bool winStarted;
+
     public static WaveManager Instance { get; set; }
 
     private void Awake()
@@ -74,9 +76,11 @@ public class WaveManager : MonoBehaviour
 
         if (CheckWaveComplete())
         {
-            if (currentWave == enemiesLists.Count)
+            if (currentWave == enemiesLists.Count && !winStarted)
             {
                 StartCoroutine(WinGame());
+
+                winStarted = true;
             }
 
             currentPhaseText.text = "Build Phase";
@@ -102,6 +106,8 @@ public class WaveManager : MonoBehaviour
                 }
 
                 waveCompletePointsAdded = true;
+
+                PlayerPrefs.SetInt("WavesCompleted", PlayerPrefs.GetInt("WavesCompleted") + 1);
             }
             
             if (!beginWaveAlertFired)
@@ -253,6 +259,15 @@ public class WaveManager : MonoBehaviour
         reader.Close();
     }
 
+    public void WriteDataToLeaderboard(string data)
+    {
+        StreamWriter writer = new StreamWriter("Assets/Leaderboards.txt");
+
+        writer.WriteLine(data);
+
+        writer.Close();
+    }
+
     public int GetEnemyCount(int waveNum)
     {
         return enemiesLists[waveNum].Count;
@@ -275,6 +290,11 @@ public class WaveManager : MonoBehaviour
 
     IEnumerator WinGame()
     {
+        if (FindObjectOfType<UDPClient>() != null)
+        {
+            UDPClient.Instance.SendLeaderboardStats();
+        }
+
         AlertManager.Instance.DisplayAlert(new Alert(Color.green, "YOU WIN!!", 2));
 
         yield return new WaitForSeconds(3);

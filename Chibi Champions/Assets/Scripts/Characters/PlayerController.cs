@@ -250,6 +250,7 @@ public class PlayerController : MonoBehaviour
         {
             if (verticalInput > 0)
             {
+                print("Hi");
                 AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, true);
                 AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false);
             }

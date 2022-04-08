@@ -271,12 +271,23 @@ public class PlayerClient : MonoBehaviour
 
                 if (recv > 0)
                 {
-                    //string messageReceived = Encoding.ASCII.GetString(buffer, 0, recv);
+                    string messageReceivedString = Encoding.ASCII.GetString(buffer, 0, recv);
+
+                    if (messageReceivedString.Contains("LEADERBOARD_MSG_UPDATE.KEY"))
+                    {
+                        print("Stats Received");
+
+                        string[] msgSplit = messageReceivedString.Split(':');
+
+                        WaveManager.Instance.WriteDataToLeaderboard(msgSplit[1]);
+
+                        return;
+                    }
 
                     float[] messageReceived = new float[recv / sizeof(float)];
 
                     Buffer.BlockCopy(buffer, 0, messageReceived, 0, recv);
-
+         
                     switch (messageReceived[0])
                     {
                         case 0: //Player Movement Update
@@ -284,6 +295,8 @@ public class PlayerClient : MonoBehaviour
                             EntityManager.Instance.ReceivePlayerMovementUpdates((int)messageReceived[1],
                             new Vector3(messageReceived[2], messageReceived[3], messageReceived[4]),
                             new Vector3(messageReceived[5], messageReceived[6], messageReceived[7]));
+
+                            //UDPClient.Instance.SendUpdateConfirmed();
 
                             break;
 
@@ -305,6 +318,8 @@ public class PlayerClient : MonoBehaviour
                             }
 
                             EntityManager.Instance.ReceivePlayerUpdates(character, (int)messageReceived[3]);
+
+                            UDPClient.Instance.SendUpdateConfirmed();
 
                             break;
 
@@ -348,6 +363,8 @@ public class PlayerClient : MonoBehaviour
 
                             EntityManager.Instance.ReceiveTowerUpdates(towers, towerPositions);
 
+                            UDPClient.Instance.SendUpdateConfirmed();
+
                             break;
 
                         case 3: // Tower Upgrade
@@ -358,11 +375,15 @@ public class PlayerClient : MonoBehaviour
 
                             EntityManager.Instance.ReceiveTowerUpgrades(towerType, towerPosition);
 
+                            UDPClient.Instance.SendUpdateConfirmed();
+
                             break;
 
                         case 4: // Start Wave Update
 
                             WaveManager.Instance.BeginWave();
+
+                            UDPClient.Instance.SendUpdateConfirmed();
 
                             break;
                     }

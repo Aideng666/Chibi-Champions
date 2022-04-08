@@ -17,27 +17,27 @@ MonoBehaviour:
     classType: Offense
     characterPortrait: {fileID: 21300000, guid: 4581446e5935d6544837346d3eb6d377, type: 3}
     towerSprites:
-    - {fileID: 21300000, guid: 912adadc8c94ec7499174ed7cca439aa, type: 3}
-    - {fileID: 21300000, guid: 77ac75ff5db008f43b2d1f71c94fab36, type: 3}
-    - {fileID: 21300000, guid: 0c5e863059eb2dc49b6132763e508560, type: 3}
+    - {fileID: 21300000, guid: bae42cd3e130a2e4fb8d84d378a88c25, type: 3}
+    - {fileID: 21300000, guid: ee52ea367eaddbd43bbe032cf15bafc4, type: 3}
+    - {fileID: 21300000, guid: 26210da7a57f88c4199ba3288ff68883, type: 3}
     abilitySprites:
-    - {fileID: 21300000, guid: 7b71c5c36e928f94fb6d4f32bcb98712, type: 3}
-    - {fileID: 21300000, guid: aa4baad62af5fd84f982de00ef2f9769, type: 3}
+    - {fileID: 21300000, guid: 702a379847ade414c8778bd575bca5b4, type: 3}
+    - {fileID: 21300000, guid: 926d09165b0c2c544b9ff3aa3ee650e6, type: 3}
     towerNames:
     - Feather Blaster
     - Chicken Laser
     - Gatling Drummet
     towerDescriptions:
-    - Shoots sharp feathers at nearby enemies
-    - Fires a continuos beam of destruction
-    - A mounted turret with a high fire rate
+    - Shoots a single sharp feather at nearby enemies
+    - Fires a laser beam that fries enemies hit
+    - A mounted feather-shooting machine gun
     abilityNames:
     - Sword Slash
     - Ground Pound
     abilityDescriptions:
-    - Swings a sharp feather sword
-    - Jumps up in the air and slams down with full fury
-    towerBaseCosts: f401000020030000b0040000
+    - 'Drumstick swings his sword slashing enemies in front '
+    - Drumstick jumps up and slams down damaging enemies in the radius
+    towerBaseCosts: f401000020030000280a0000
   - characterName: Rolfe
     classType: Defense
     characterPortrait: {fileID: 21300000, guid: ae242e90a0e9d0d489b054fd893209d8, type: 3}
@@ -46,46 +46,45 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 55d8b199bddfa5b4d884b2064990d4c3, type: 3}
     - {fileID: 21300000, guid: 1a272fc14e5d2e8499754cd3e1d1a674, type: 3}
     abilitySprites:
-    - {fileID: 21300000, guid: 87a97f65e7929c24a9257c227fd86a3e, type: 3}
+    - {fileID: 21300000, guid: e8645a51a3139e24d88009ccbeab156a, type: 3}
     - {fileID: 21300000, guid: bd6ffa8d57b10c148b2c38a362c22698, type: 3}
     towerNames:
     - Web Shooter
     - Tennis Bomb
     - Spider House
     towerDescriptions:
-    - Shoots sticky webs that slow down enemies
-    - Lobs a tennis ball that distracts enemies before exploding
-    - Spawns miniature spiders that latch onto enemies
+    - Shoots sticky webs that slow enemies by 30%
+    - Launches a bomb that attracts enemies before exploding
+    - Spawns spiders that latch onto enemies
     abilityNames:
     - Claw Swipe
     - Knockback Beacon
     abilityDescriptions:
-    - Swipes forwards twice with both claws
-    - Places a mini beacon that sends out signals knocking back any enemies that
-      come into contact
+    - Rolfe swipes with his sharp claws one after another dealing damage per swipe
+    - Rolfe places a beacon that knocks enemies away in the direction from the cure
     towerBaseCosts: f401000008070000b0040000
   - characterName: Potter
     classType: Support
     characterPortrait: {fileID: 21300000, guid: 4d022b733f9837a4a8cbd52b1d79d170, type: 3}
     towerSprites:
-    - {fileID: 21300000, guid: 30308aff79334064fb04c4cc7f353ba2, type: 3}
-    - {fileID: 21300000, guid: 7f656e6e6ace4f74fb3711e09ab7f6f5, type: 3}
-    - {fileID: 21300000, guid: 4b071edd99d70774aa0e9a871a4fb4d7, type: 3}
+    - {fileID: 21300000, guid: 3b9471d3cc5d88c47b3f69bff1770fe4, type: 3}
+    - {fileID: 21300000, guid: 3bf7184aea1d10945a901928afcb60d0, type: 3}
+    - {fileID: 21300000, guid: e27b27ce62ac9bf43ba591361ba3fa42, type: 3}
     abilitySprites:
-    - {fileID: 21300000, guid: 2bb56b4fe4fb9464d91392333b00da55, type: 3}
-    - {fileID: 21300000, guid: af5f00f04dc4dc840821a7745bd389be, type: 3}
+    - {fileID: 21300000, guid: 1006855d9986fce418898445d10a9d08, type: 3}
+    - {fileID: 21300000, guid: 20349f0f3966db54786739ed2ef46350, type: 3}
     towerNames:
     - Ink Bomber
     - Photosynthesizer
     - S.A.P
     towerDescriptions:
-    - Shoots a black blob of paralyzing ink
-    - Heals players standing inside the radius overtime
-    - Deploys a pollen spore that buffs allies
+    - 'Shoots a blob of ink that stuns enemies hit '
+    - ' Heals players standing inside its radius overtime'
+    - 'Deploys a pollen spore that buffs allies '
     abilityNames:
-    - Octo Blaster
-    - Healing Needle
+    - Ink Shot
+    - Octo Blast
     abilityDescriptions:
-    - Shoots flying balls of black ink
-    - Injects a needle full of medicine that heals anyone who gets injected by it
+    - Potter shoots blobs of ink in a target direction
+    - Potter blasts a ball of ink that explodes damaging enemies in the radius
     towerBaseCosts: f4010000d007000008070000

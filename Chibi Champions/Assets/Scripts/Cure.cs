@@ -15,21 +15,28 @@ public class Cure : MonoBehaviour
     float pastHP;
     bool ow;
     [SerializeField] TMP_Text cureUIHPText;
+    bool loseStarted;
 
     private void Start()
     {
         healthText = GetComponentInChildren<TextMeshProUGUI>();
-        cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString();
         pastHP = GetComponent<Health>().GetCurrentHealth();
         FindObjectOfType<AudioManager>().Loop("Alarm");
 
+        cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString() + " / 100";
     }
     // Update is called once per frame
     void Update()
     {
         healthText.text = GetComponent<Health>().GetCurrentHealth() + "/" + GetComponent<Health>().GetMaxHealth();
 
-        cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString();
+        cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString() + " / " + GetComponent<Health>().GetMaxHealth();
+
+        if (GetComponent<Health>().GetCurrentHealth() < 0)
+        {
+            cureUIHPText.text = "0 / " + GetComponent<Health>().GetMaxHealth();
+            healthText.text = " 0 / " + GetComponent<Health>().GetMaxHealth();
+        }
 
         transform.RotateAround(transform.position, new Vector3(0, 1, 0), 0.1f);
 
@@ -56,9 +63,11 @@ public class Cure : MonoBehaviour
         }
 
 
-        if (GetComponent<Health>().GetCurrentHealth() <= 0)
+        if (GetComponent<Health>().GetCurrentHealth() <= 0 && !loseStarted)
         {
             StartCoroutine(DelayBeforeLoss());
+
+            loseStarted = true;
         }
     }
 
@@ -77,6 +86,11 @@ public class Cure : MonoBehaviour
     }
     IEnumerator DelayBeforeLoss()
     {
+        if (FindObjectOfType<UDPClient>() != null)
+        {
+            UDPClient.Instance.SendLeaderboardStats();
+        }
+
         AlertManager.Instance.DisplayAlert(new Alert(Color.blue, "You Lose!", 2));       
 
         yield return new WaitForSeconds(3);

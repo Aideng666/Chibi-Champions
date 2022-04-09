@@ -38,8 +38,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected Image abilityImageMain;
     protected bool isCooldown = false;
     [SerializeField] protected Image statusImage;
-    [SerializeField] protected Image statusImageMain;
-    [SerializeField] protected Image statusBackdrop;
     protected bool isStatusCooldown = false;
     [SerializeField] protected CharacterDatabase characterDB;
     Character character;
@@ -87,8 +85,6 @@ public class PlayerController : MonoBehaviour
         abilityImage.fillAmount = 0;
         statusImage.fillAmount = 0;
         statusImage.enabled = false;
-        statusImageMain.enabled = false;
-        statusBackdrop.enabled = false;
 
         character = characterDB.GetCharacter(PlayerPrefs.GetInt("CharacterIndex"));
         abilityImage.sprite = character.abilitySprites[1];
@@ -503,8 +499,6 @@ public class PlayerController : MonoBehaviour
         if (isStatusActive && isStatusCooldown == false)
         {
             statusImage.enabled = true;
-            statusImageMain.enabled = true;
-            statusBackdrop.enabled = true;
             isStatusCooldown = true;
             statusImage.fillAmount = 1;
         }
@@ -516,8 +510,6 @@ public class PlayerController : MonoBehaviour
             if (statusImage.fillAmount <= 0)
             {
                 statusImage.enabled = false;
-                statusImageMain.enabled = false;
-                statusBackdrop.enabled = false;
                 isStatusCooldown = false;
             }
         }

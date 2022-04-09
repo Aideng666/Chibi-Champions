@@ -37,6 +37,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected Image abilityImage;
     [SerializeField] protected Image abilityImageMain;
     protected bool isCooldown = false;
+    [SerializeField] protected Image statusImage;
+    [SerializeField] protected Image statusImageMain;
+    [SerializeField] protected Image statusBackdrop;
+    protected bool isStatusCooldown = false;
     [SerializeField] protected CharacterDatabase characterDB;
     Character character;
 
@@ -81,6 +85,10 @@ public class PlayerController : MonoBehaviour
         thirdPersonCam = FindObjectOfType<CinemachineVirtualCamera>();
 
         abilityImage.fillAmount = 0;
+        statusImage.fillAmount = 0;
+        statusImage.enabled = false;
+        statusImageMain.enabled = false;
+        statusBackdrop.enabled = false;
 
         character = characterDB.GetCharacter(PlayerPrefs.GetInt("CharacterIndex"));
         abilityImage.sprite = character.abilitySprites[1];
@@ -121,6 +129,8 @@ public class PlayerController : MonoBehaviour
 
             if (isAlive)
             {
+                StatusCooldown(effectApplied);
+
                 ApplyEffect();
 
                 Move();
@@ -484,6 +494,31 @@ public class PlayerController : MonoBehaviour
             if (abilityImage.fillAmount <= 0)
             {
                 isCooldown = false;
+            }
+        }
+    }
+
+    protected void StatusCooldown(bool isStatusActive)
+    {
+        if (isStatusActive && isStatusCooldown == false)
+        {
+            statusImage.enabled = true;
+            statusImageMain.enabled = true;
+            statusBackdrop.enabled = true;
+            isStatusCooldown = true;
+            statusImage.fillAmount = 1;
+        }
+
+        if (isStatusCooldown)
+        {
+            statusImage.fillAmount -= 1 / effectSpan * Time.deltaTime;
+
+            if (statusImage.fillAmount <= 0)
+            {
+                statusImage.enabled = false;
+                statusImageMain.enabled = false;
+                statusBackdrop.enabled = false;
+                isStatusCooldown = false;
             }
         }
     }

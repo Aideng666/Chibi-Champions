@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Cinemachine;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -50,5 +51,16 @@ public class SettingsMenu : MonoBehaviour
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
+    public void SetSensitivity(float sensitivity)
+    {
+        foreach(PlayerController player in FindObjectsOfType<PlayerController>())
+        {
+            if (player.GetIsPlayerCharacter())
+            {
+                player.SetMouseSensitivity(sensitivity);
+            }
+        }
     }
 }

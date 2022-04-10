@@ -34,6 +34,8 @@ public class TennisBomb : Tower
 
         direction = direction.normalized;
 
+        AnimController.Instance.PlayTowerShootAnim(GetComponentInChildren<Animator>());
+
         var tennisBall = Instantiate(tennisBallPrefab, firePoint.position, Quaternion.identity);
 
         tennisBall.GetComponent<Rigidbody>().AddForce(direction * launchForce, ForceMode.Impulse);

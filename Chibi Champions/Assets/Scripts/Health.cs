@@ -28,6 +28,11 @@ public class Health : MonoBehaviour
 
         float currentHealthPercent = currentHealth / maxHealth;
         OnHealthChange(currentHealthPercent);
+
+        if (gameObject.tag == "Player" && amount < 0)
+        {
+            //FLASH SCREEN RED HERE
+        }
     }
 
     public float GetCurrentHealth()

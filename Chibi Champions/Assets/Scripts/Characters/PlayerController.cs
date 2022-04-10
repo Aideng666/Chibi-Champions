@@ -71,6 +71,10 @@ public class PlayerController : MonoBehaviour
     float savedAbilityDamage;
     float savedSpeed;
 
+    int deathCount = 0;
+
+    float mouseSensitivity = 1;
+
     // Start is called before the first frame update
     protected void Start()
     {
@@ -151,7 +155,7 @@ public class PlayerController : MonoBehaviour
                     CameraLock(false);
                     CanvasManager.Instance.ApplyCursorLock();
                 }
-            }        
+            }
         }
     }
 
@@ -230,7 +234,6 @@ public class PlayerController : MonoBehaviour
         {
             if (verticalInput > 0)
             {
-                print("Hi");
                 AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, true);
                 AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false);
             }
@@ -392,6 +395,12 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         isAlive = false;
+
+        deathTimer += deathCount;
+
+        deathCount++;
+
+        print($"You've Died {deathCount} Times, you will respawn in {deathTimer} Seconds");
 
         StartCoroutine(DeathTimer());
 
@@ -568,6 +577,14 @@ public class PlayerController : MonoBehaviour
         {
             gameObject.AddComponent<AudioListener>();
         }
+    }
+
+    public void SetMouseSensitivity(float value)
+    {
+        mouseSensitivity = value;
+
+        thirdPersonCam.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = 5 * mouseSensitivity;
+        thirdPersonCam.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = 5 * mouseSensitivity;
     }
 
     private void OnDrawGizmosSelected()

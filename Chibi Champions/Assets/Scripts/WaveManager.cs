@@ -59,28 +59,7 @@ public class WaveManager : MonoBehaviour
     {
         if (currentWave > 0)
         {
-            int numberOfPlayers = FindObjectsOfType<PlayerController>().Length;
-
-            switch (numberOfPlayers)
-            {
-                case 1:
-
-                    currentLivingEnemies = (enemiesLists[currentWave - 1].Count * 4) - enemiesKilled;
-
-                    break;
-
-                case 2:
-
-                    currentLivingEnemies = (enemiesLists[currentWave - 1].Count * 6) - enemiesKilled;
-
-                    break;
-
-                case 3:
-
-                    currentLivingEnemies = (enemiesLists[currentWave - 1].Count * 8) - enemiesKilled;
-
-                    break;
-            }
+            currentLivingEnemies = (enemiesLists[currentWave - 1].Count * enemySpawners.Count) - enemiesKilled;
         }
 
         numberOfEnemiesText.text = currentLivingEnemies.ToString();
@@ -127,16 +106,16 @@ public class WaveManager : MonoBehaviour
                 {
                     if (PlayerClient.Instance.GetClientNum() == 0)
                     {
-                        AlertManager.Instance.DisplayAlert(new Alert(Color.white, $"Prepare Your Defences! When Ready, Press Q", 1000));
+                        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Prepare Your Defences! When Ready, Press Q", 1000));
                     }
                     else
                     {
-                        AlertManager.Instance.DisplayAlert(new Alert(Color.white, $"Prepare Your Defences! Waiting For Player 1 To Start Wave", 1000));
+                        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Prepare Your Defences! Waiting For Player 1 To Start Wave", 1000));
                     }
                 }
                 else
                 {
-                    AlertManager.Instance.DisplayAlert(new Alert(Color.white, $"Prepare Your Defences! When Ready, Press Q", 1000));
+                    AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"Prepare Your Defences! When Ready, Press Q", 1000));
                 }
 
                 beginWaveAlertFired = true;
@@ -163,56 +142,17 @@ public class WaveManager : MonoBehaviour
         waveCompletePointsAdded = false;
         ResetEnemiesKilled();
 
-        int numberOfPlayers = FindObjectsOfType<PlayerController>().Length;
-
-        switch (numberOfPlayers)
+        foreach (EnemySpawner spawner in enemySpawners)
         {
-            case 1:
+            if (currentWave == 0)
+            {
+                print("Anim Playing");
+                AnimController.Instance.PlayOpenDoorAnim(spawner.gameObject.transform.parent.GetComponentInChildren<Animator>());
+            }
 
-                for (int i = 0; i < 4; i++)
-                {
-                    if (currentWave == 0 && i != 2 && i != 3)
-                    {
-                        AnimController.Instance.PlayOpenDoorAnim(enemySpawners[i].gameObject.transform.parent.GetComponentInChildren<Animator>());
-                    }
-
-                    enemySpawners[i].SetSpawnList(enemiesLists[currentWave]);
-                    enemySpawners[i].SetLevelList(enemyLevels[currentWave]);
-                }
-
-                break;
-
-            case 2:
-
-                for (int i = 0; i < 6; i++)
-                {
-                    if (currentWave == 0 && i != 2 && i != 3)
-                    {
-                        AnimController.Instance.PlayOpenDoorAnim(enemySpawners[i].gameObject.transform.parent.GetComponentInChildren<Animator>());
-                    }
-
-                    enemySpawners[i].SetSpawnList(enemiesLists[currentWave]);
-                    enemySpawners[i].SetLevelList(enemyLevels[currentWave]);
-                }
-
-                break;
-
-            case 3:
-
-                for (int i = 0; i < 8; i++)
-                {
-                    if (currentWave == 0 && i != 2 && i != 3)
-                    {
-                        AnimController.Instance.PlayOpenDoorAnim(enemySpawners[i].gameObject.transform.parent.GetComponentInChildren<Animator>());
-                    }
-
-                    enemySpawners[i].SetSpawnList(enemiesLists[currentWave]);
-                    enemySpawners[i].SetLevelList(enemyLevels[currentWave]);
-                }
-
-                break;
+            spawner.SetSpawnList(enemiesLists[currentWave]);
+            spawner.SetLevelList(enemyLevels[currentWave]);
         }
-
         currentWave++;
 
         currentWaveText.text = currentWave.ToString();
@@ -221,11 +161,9 @@ public class WaveManager : MonoBehaviour
         {
             AlertManager.Instance.SetAlertPlaying(false);
             Destroy(FindObjectOfType<AlertText>().gameObject);
-
-            print("Destroyed");
         }
 
-        AlertManager.Instance.DisplayAlert(new Alert(Color.white, $"WAVE STARTED! DEFEND THE CURE!", 5));
+        AlertManager.Instance.DisplayAlert(new Alert(Color.red, $"WAVE STARTED! DEFEND THE CURE!", 5));
     }
 
     bool CheckWaveComplete()
@@ -237,54 +175,15 @@ public class WaveManager : MonoBehaviour
 
         List<GameObject> enemyListPerSpawner = enemiesLists[currentWave - 1];
 
-        int numberOfPlayers = FindObjectsOfType<PlayerController>().Length;
-
-        switch (numberOfPlayers)
+        if (enemiesKilled == enemyListPerSpawner.Count * enemySpawners.Count)
         {
-            case 1:
+            if (!waveCompleteAlertFired)
+            {
+                AlertManager.Instance.DisplayAlert(new Alert(Color.red, "Wave Complete!"));
+                waveCompleteAlertFired = true;
+            }
 
-                if (enemiesKilled == enemyListPerSpawner.Count * 4)
-                {
-                    if (!waveCompleteAlertFired)
-                    {
-                        AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete!", 10));
-                        waveCompleteAlertFired = true;
-                    }
-
-                    return true;
-                }
-
-                break;
-
-            case 2:
-
-                if (enemiesKilled == enemyListPerSpawner.Count * 6)
-                {
-                    if (!waveCompleteAlertFired)
-                    {
-                        AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete!"));
-                        waveCompleteAlertFired = true;
-                    }
-
-                    return true;
-                }
-
-                break;
-
-            case 3:
-
-                if (enemiesKilled == enemyListPerSpawner.Count * 8)
-                {
-                    if (!waveCompleteAlertFired)
-                    {
-                        AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete!"));
-                        waveCompleteAlertFired = true;
-                    }
-
-                    return true;
-                }
-
-                break;
+            return true;
         }
 
         return false;

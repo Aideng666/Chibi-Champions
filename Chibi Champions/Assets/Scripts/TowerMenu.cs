@@ -242,12 +242,10 @@ public class TowerMenu : MonoBehaviour
             isMaxLevel = true;
 
             upgradeCostText.text = string.Empty;
-            //upgradeNameText.text = "Fully Upgraded";
             upgradeNameText.text = string.Empty;
 
             upgradeImageIcon.sprite = currentTower.GetComponent<Tower>().GetUpgradeImage(3);
 
-            //descriptionText.text = string.Empty; 
             descriptionText.text = "Fully Upgraded";
             descriptionText.fontSize = 32;
 

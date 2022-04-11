@@ -4367,12 +4367,12 @@ MonoBehaviour:
   - 8 Eyes
   - Spider Swarm
   upgradeImages:
-  - {fileID: 21300000, guid: bd6ffa8d57b10c148b2c38a362c22698, type: 3}
-  - {fileID: 21300000, guid: e5f5ab9b2de16194b9dca1ecc3daab40, type: 3}
-  - {fileID: 21300000, guid: 1a272fc14e5d2e8499754cd3e1d1a674, type: 3}
+  - {fileID: 21300000, guid: 6b7f92271f6f3e540a5e1fb7e8af909a, type: 3}
+  - {fileID: 21300000, guid: c8cb0805faa99454480a0ccb478988e6, type: 3}
+  - {fileID: 21300000, guid: 4f0c31e62bc78d44c87afed777e3baa2, type: 3}
   towerName: Spider House
   upgradeDescriptions:
-  - Tick Speed Increased
+  - Spiders deal more damage overtime
   - Spider Vision Range Increased
   - Increased Number of Spiders Spawned
   owner: Rolfe

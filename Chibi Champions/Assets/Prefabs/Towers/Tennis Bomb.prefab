@@ -195,14 +195,14 @@ MonoBehaviour:
   - Smash
   - Ace
   upgradeImages:
-  - {fileID: 21300000, guid: 07fe386576aae564a94398d1ec2590fe, type: 3}
-  - {fileID: 21300000, guid: 2b303974dbf1b4347bbb5de44f0f177c, type: 3}
-  - {fileID: 21300000, guid: 6ae39776f1271fd43bb7f83736587866, type: 3}
+  - {fileID: 21300000, guid: fbaac40f0b47fd64e9d5450714dc467d, type: 3}
+  - {fileID: 21300000, guid: c1a67159967ede44fbf2f546af36cffe, type: 3}
+  - {fileID: 21300000, guid: 7b9286b050a05a444aa372ab47e55efe, type: 3}
   towerName: Tennis Bomb
   upgradeDescriptions:
-  - Longer Fuse Duration
+  - Increased Fuse Duration
   - Increased Explosion Damage
-  - Cooldown Decreased
+  - Launches tennis bombs at a faster rate
   owner: Rolfe
   m_towerImage: {fileID: 3123634443652797834}
   towerLevelIcons:
@@ -4592,7 +4592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 3.38
+      value: 3.93
       objectReference: {fileID: 0}
     - target: {fileID: 4866193854622361948, guid: 1c32709bf4aeade449777db8b95679a1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -48,6 +48,7 @@ public class WaveManager : MonoBehaviour
 
         InitEnemiesLists();
 
+        currentWaveText.text = currentWave.ToString();
         totalWavesText.text = numberOfWaves.ToString();
 
         currentPhaseText.text = "Build Phase";

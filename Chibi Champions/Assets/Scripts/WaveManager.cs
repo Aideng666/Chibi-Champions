@@ -162,6 +162,7 @@ public class WaveManager : MonoBehaviour
             {
                 print("Anim Playing");
                 AnimController.Instance.PlayOpenDoorAnim(spawner.gameObject.transform.parent.GetComponentInChildren<Animator>());
+                spawner.gameObject.transform.parent.GetComponent<AudioSource>().Play();
             }
 
             spawner.SetSpawnList(enemiesLists[currentWave]);

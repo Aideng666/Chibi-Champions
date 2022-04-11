@@ -16,7 +16,7 @@ public class KnockbackBeacon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timeBeforeNextPulse = Time.realtimeSinceStartup + pulseDelay;
+        timeBeforeNextPulse = Time.time + pulseDelay;
     }
 
     // Update is called once per frame
@@ -36,9 +36,9 @@ public class KnockbackBeacon : MonoBehaviour
 
     bool ShouldPulse()
     {
-        if (timeBeforeNextPulse < Time.realtimeSinceStartup)
+        if (timeBeforeNextPulse < Time.time)
         {
-            timeBeforeNextPulse = Time.realtimeSinceStartup + pulseDelay;
+            timeBeforeNextPulse = Time.time + pulseDelay;
             return true;
         }
 

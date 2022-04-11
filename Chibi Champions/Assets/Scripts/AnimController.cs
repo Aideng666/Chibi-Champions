@@ -66,6 +66,7 @@ public class AnimController : MonoBehaviour
         }
     }
 
+
     public void SetPlayerWalking(Animator anim, bool isWalking, bool forward)
     {
         if (anim == drumstickAnimator)
@@ -138,6 +139,10 @@ public class AnimController : MonoBehaviour
                 potterAnimator.SetBool("StrafeRight", isStrafing);
             }
         }
+    }
+    public void PlayOpenDoorAnim(Animator anim)
+    {
+        anim.SetTrigger("Open");
     }
 
     public void PlayPlayerJumpAnim(Animator anim)

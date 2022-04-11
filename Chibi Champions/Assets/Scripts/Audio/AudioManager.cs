@@ -13,9 +13,13 @@ public class AudioManager : MonoBehaviour
 
     float[] savedVolumes;
 
+    public static AudioManager Instance { get; set; }
+
     // Start is called before the first frame update
     void Awake()
     {
+        Instance = this;
+
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();

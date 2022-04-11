@@ -37,9 +37,9 @@ public class EnemySpawner : MonoBehaviour
             return false;
         }
 
-        if (timeToNextSpawn < Time.realtimeSinceStartup)
+        if (timeToNextSpawn < Time.time)
         {
-            timeToNextSpawn = Time.realtimeSinceStartup + spawnDelay;
+            timeToNextSpawn = Time.time + spawnDelay;
             return true;
         }
 

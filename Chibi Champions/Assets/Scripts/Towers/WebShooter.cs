@@ -8,6 +8,7 @@ public class WebShooter : Tower
     [SerializeField] float webSpeed;
     [SerializeField] float slowDuration;
     [SerializeField] GameObject webPrefab;
+    [SerializeField] GameObject partToRotate;
 
     // Update is called once per frame
     void Update()
@@ -19,7 +20,9 @@ public class WebShooter : Tower
             return;
         }
 
-        transform.LookAt(targetEnemy.transform.position);
+        //transform.LookAt(targetEnemy.transform.position);
+       // partToRotate.transform.LookAt(new Vector3(targetEnemy.transform.position.x, targetEnemy.transform.position.y - 1.5f, targetEnemy.transform.position.z));
+        partToRotate.transform.LookAt(targetEnemy.transform.position);
 
         if (CanAttack())
         {
@@ -30,6 +33,8 @@ public class WebShooter : Tower
     protected override void Attack(GameObject enemy = null)
     {
         Vector3 direction = (enemy.transform.position - firePoint.position).normalized;
+
+        AnimController.Instance.PlayTowerShootAnim(GetComponentInChildren<Animator>());
 
         var web = Instantiate(webPrefab, firePoint.position, Quaternion.identity);
 

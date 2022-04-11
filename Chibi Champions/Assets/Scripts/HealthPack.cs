@@ -10,7 +10,7 @@ public class HealthPack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(new Vector3(0, 1, 0), 0.1f);
+        transform.Rotate(new Vector3(0, 1, 0), 1 * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)

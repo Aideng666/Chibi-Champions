@@ -161,9 +161,9 @@ public class Enemy : MonoBehaviour
     }
     protected bool CanAttack()
     {
-        if (timeUntilNextAttack < Time.realtimeSinceStartup)
+        if (timeUntilNextAttack < Time.time)
         {
-            timeUntilNextAttack = Time.realtimeSinceStartup + attackDelay;
+            timeUntilNextAttack = Time.time + attackDelay;
             return true;
         }
 
@@ -177,9 +177,9 @@ public class Enemy : MonoBehaviour
         }
         else if (currentEffect == Effects.Spider)
         {
-            if (timeToNextEffectTick < Time.realtimeSinceStartup)
+            if (timeToNextEffectTick < Time.time)
             {
-                timeToNextEffectTick = Time.realtimeSinceStartup + effectTickDelay;
+                timeToNextEffectTick = Time.time + effectTickDelay;
 
                 GetComponent<Health>().ModifyHealth(-2);
 

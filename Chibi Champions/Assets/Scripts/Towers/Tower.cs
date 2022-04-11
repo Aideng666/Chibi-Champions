@@ -122,9 +122,9 @@ public class Tower : MonoBehaviour
 
     protected bool CanAttack()
     {
-        if (timeToNextAttack < Time.realtimeSinceStartup)
+        if (timeToNextAttack < Time.time)
         {
-            timeToNextAttack = Time.realtimeSinceStartup + attackDelay;
+            timeToNextAttack = Time.time + attackDelay;
             return true;
         }
 

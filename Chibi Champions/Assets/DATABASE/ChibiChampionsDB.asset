@@ -42,12 +42,12 @@ MonoBehaviour:
     classType: Defense
     characterPortrait: {fileID: 21300000, guid: ae242e90a0e9d0d489b054fd893209d8, type: 3}
     towerSprites:
-    - {fileID: 21300000, guid: 00bf3dd0c7475c54fa52304ff1c886fc, type: 3}
-    - {fileID: 21300000, guid: 55d8b199bddfa5b4d884b2064990d4c3, type: 3}
-    - {fileID: 21300000, guid: 1a272fc14e5d2e8499754cd3e1d1a674, type: 3}
+    - {fileID: 21300000, guid: 3c99d5b3101ddd24a8b1b13a6287e0bd, type: 3}
+    - {fileID: 21300000, guid: fcbbb635d6b283d43bee3e143805203e, type: 3}
+    - {fileID: 21300000, guid: 68e9529b108d8f54b859e622b792ce9e, type: 3}
     abilitySprites:
     - {fileID: 21300000, guid: e8645a51a3139e24d88009ccbeab156a, type: 3}
-    - {fileID: 21300000, guid: bd6ffa8d57b10c148b2c38a362c22698, type: 3}
+    - {fileID: 21300000, guid: 5644460124a26b44e992009b9cc0bee2, type: 3}
     towerNames:
     - Web Shooter
     - Tennis Bomb

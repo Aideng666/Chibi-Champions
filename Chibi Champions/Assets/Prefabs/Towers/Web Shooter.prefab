@@ -97,14 +97,14 @@ MonoBehaviour:
   - Silk Shot
   - Acidic Webs
   upgradeImages:
-  - {fileID: 21300000, guid: a00ce7b0059e3af4389efa1557d36a8e, type: 3}
-  - {fileID: 21300000, guid: 87a97f65e7929c24a9257c227fd86a3e, type: 3}
-  - {fileID: 21300000, guid: cd5b65e385ced5946a152310a68c206c, type: 3}
+  - {fileID: 21300000, guid: 9cd83152b805e8a40929c4564ccf550d, type: 3}
+  - {fileID: 21300000, guid: b4ebc08a7b3ec9044a5a5ff49e584856, type: 3}
+  - {fileID: 21300000, guid: 13fd128e4b859c4449b6297a78a1fa83, type: 3}
   towerName: Web Shooter
   upgradeDescriptions:
-  - Increased Range
-  - Increased Slow Duration
-  - Webs now deal damage
+  - Can launch webs further than normal
+  - Stickier webs slow down enemies even more
+  - Shoots corrosive webs that deal increased damage
   owner: Rolfe
   m_towerImage: {fileID: 407054284878165209}
   towerLevelIcons:

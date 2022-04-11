@@ -16,7 +16,7 @@ public class Photosynthesizer : Tower
         Heal();
 
         ParticleSystem.ShapeModule radius = healingParticles.shape;
-        radius.radius = attackRange;
+        radius.radius = (attackRange / 2) + 1;
     }
 
     void Heal()

@@ -81,7 +81,7 @@ public class CanvasManager : MonoBehaviour
         Time.timeScale = 1f;
         isGamePaused = false;
 
-        AudioListener.pause = false;
+        //AudioListener.pause = false;
     }
     public void MultiplayerResume()
     {
@@ -97,7 +97,7 @@ public class CanvasManager : MonoBehaviour
         pausePanel.SetActive(true);
         Time.timeScale = 0f;
         isGamePaused = true;
-        AudioListener.pause = true;
+        //AudioListener.pause = true;
     }
 
     public void MultiplayerPause()

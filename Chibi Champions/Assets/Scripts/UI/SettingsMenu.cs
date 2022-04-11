@@ -4,12 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Cinemachine;
+using UnityEngine.Audio;
 
 public class SettingsMenu : MonoBehaviour
 {
     Resolution[] resolutions;
 
     [SerializeField] TMP_Dropdown resolutionDropdown;
+    [SerializeField] AudioMixer audioMixer;
+
+    float savedVolume;
 
     private void Start()
     {
@@ -45,6 +49,24 @@ public class SettingsMenu : MonoBehaviour
     public void SetFullScreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
+    }
+
+    public void SetVolume(float volume)
+    {
+        audioMixer.SetFloat("Volume", volume);
+    }
+
+    public void SetMute(bool isMuted)
+    {
+        if (isMuted)
+        {
+            audioMixer.GetFloat("Volume", out savedVolume);
+            audioMixer.SetFloat("Volume", -80);
+        }
+        else
+        {
+            audioMixer.SetFloat("Volume", savedVolume);
+        }
     }
 
     public void SetResolution(int resolutionIndex)

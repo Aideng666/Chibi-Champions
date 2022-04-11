@@ -139,7 +139,7 @@ public class Drumstick : PlayerController
 
     protected IEnumerator GroundPoundJump()
     {
-        moveDir.y = jumpPower;
+        moveDir.y = jumpPower * 3;
 
         isJumping = true;
 

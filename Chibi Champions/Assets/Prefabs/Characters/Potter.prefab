@@ -697,7 +697,7 @@ MonoBehaviour:
   lightAttackDamage: 5
   abilityDamage: 10
   gravity: 1.5
-  jumpPower: 3
+  jumpPower: 1.5
   interactDistance: 5
   lightAttackDelay: 0.3
   heavyAttackDelay: 3.5

@@ -1626,6 +1626,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   characterName: Drumstick
+  characterNameEnum: 0
   cam: {fileID: 0}
   attackPoint: {fileID: 5120274358207205552}
   speed: 15
@@ -1634,7 +1635,7 @@ MonoBehaviour:
   lightAttackDamage: 12
   abilityDamage: 15
   gravity: 1.5
-  jumpPower: 3
+  jumpPower: 1.5
   interactDistance: 5
   lightAttackDelay: 1
   heavyAttackDelay: 6
@@ -2347,7 +2348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c7494b95509a34e40ad11bfdac687036, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1590792740816958413, guid: c7494b95509a34e40ad11bfdac687036, type: 3}
       propertyPath: m_Layer
@@ -2462,7 +2463,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 5778438389708156893}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1

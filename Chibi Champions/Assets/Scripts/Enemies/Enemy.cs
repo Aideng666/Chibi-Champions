@@ -52,6 +52,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
+        //print($"Position: {transform.position}");
+
         TennisBall[] tennisBalls = FindObjectsOfType<TennisBall>();
 
         if (!knockbackApplied)

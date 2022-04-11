@@ -18,7 +18,7 @@ public class EnemyPool : MonoBehaviour
         CreatePools();
     }
 
-    public GameObject GetGruntFromPool()
+    public GameObject GetGruntFromPool(Vector3 spawnerPos)
     {
         if (availableGrunts.Count == 0)
         {
@@ -26,11 +26,14 @@ public class EnemyPool : MonoBehaviour
         }
 
         var instance = availableGrunts.Dequeue();
+
+        instance.transform.position = spawnerPos;
+
         instance.SetActive(true);
         return instance;
     }
 
-    public GameObject GetShooterFromPool()
+    public GameObject GetShooterFromPool(Vector3 spawnerPos)
     {
         if (availableShooters.Count == 0)
         {
@@ -38,6 +41,9 @@ public class EnemyPool : MonoBehaviour
         }
 
         var instance = availableShooters.Dequeue();
+
+        instance.transform.position = spawnerPos;
+
         instance.SetActive(true);
         return instance;
     }

@@ -1555,7 +1555,7 @@ GameObject:
   - component: {fileID: 8560583877485687569}
   m_Layer: 8
   m_Name: Drumstick
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1610,6 +1610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  hurtImage: {fileID: 0}
 --- !u!114 &5120274358207205554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1626,6 +1627,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   characterName: Drumstick
+  characterNameEnum: 0
   cam: {fileID: 0}
   attackPoint: {fileID: 5120274358207205552}
   speed: 15

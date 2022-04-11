@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
@@ -10,11 +10,22 @@ public class Health : MonoBehaviour
 
     float currentHealth;
 
+    [SerializeField] public Image hurtImage;
+    Color splatterAlpha;
+
     public event Action<float> OnHealthChange = delegate { };
 
     private void OnEnable()
     {
         currentHealth = maxHealth;
+    }
+
+    private void Start()
+    {
+        if (hurtImage != null)
+        {
+            splatterAlpha = hurtImage.color;
+        }         
     }
 
     public void ModifyHealth(float amount)
@@ -32,6 +43,47 @@ public class Health : MonoBehaviour
         if (gameObject.tag == "Player" && amount < 0)
         {
             //FLASH SCREEN RED HERE
+            TakeDamage();
+        }
+    }
+
+    void UpdateHealth()
+    {
+        if (hurtImage != null)
+        {
+            splatterAlpha = hurtImage.color;
+
+            if (currentHealth <= 60)
+            {
+                splatterAlpha.a = 1 - (currentHealth / maxHealth);
+                hurtImage.color = splatterAlpha;
+            }      
+
+            if (currentHealth <= 0)
+            {
+                splatterAlpha.a = 0;
+                hurtImage.color = splatterAlpha;
+            }
+        }       
+    }
+
+    public void TakeDamage()
+    {
+        if (currentHealth >= 0)
+        {
+            UpdateHealth();
+        }
+    }
+
+    private void Update()
+    {
+        if (currentHealth <= maxHealth - 0.01)
+        {
+            UpdateHealth();
+        }
+        else 
+        {
+            currentHealth = maxHealth;
         }
     }
 

@@ -1555,7 +1555,7 @@ GameObject:
   - component: {fileID: 8560583877485687569}
   m_Layer: 8
   m_Name: Drumstick
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

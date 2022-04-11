@@ -10,6 +10,8 @@ public class CanvasManager : MonoBehaviour
 
     [SerializeField] GameObject pausePanel;
     [SerializeField] GameObject optionsPanel;
+    [SerializeField] GameObject deathPanel;
+    [SerializeField] TMP_Text respawnTimerText;
 
     public static bool isGamePaused = false;
     public static bool isMultiplayerPaused = false;
@@ -37,7 +39,7 @@ public class CanvasManager : MonoBehaviour
         {
             FindObjectOfType<AudioManager>().Play("Level");
             FindObjectOfType<AudioManager>().Loop("Level");
-        }    
+        }
     }
 
     public void OpenTowerMenu()
@@ -107,4 +109,14 @@ public class CanvasManager : MonoBehaviour
         isMultiplayerPaused = true;
     }
 
+    public void ShowDeathPanel(float respawnTime)
+    {
+        deathPanel.SetActive(true);     
+        respawnTimerText.text = respawnTime.ToString("0");
+    }
+
+    public void HideDeathPanel()
+    {
+        deathPanel.SetActive(false);
+    }
 }

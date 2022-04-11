@@ -23,11 +23,6 @@ public class EnemySpawner : MonoBehaviour
                 SpawnEnemy();
             }                               
         }
-          
-        //if (CanSpawn())
-        //{
-        //    SpawnEnemy();
-        //}
     }
 
     bool CanSpawn()
@@ -50,15 +45,17 @@ public class EnemySpawner : MonoBehaviour
     {
         if (spawnList[currentSpawnAmount].name.Contains("Grunt"))
         {
-            var enemy = EnemyPool.Instance.GetGruntFromPool();
+            var enemy = EnemyPool.Instance.GetGruntFromPool(transform.position);
 
             enemy.GetComponent<GruntController>().SetLevel(levelList[currentSpawnAmount]);
 
             enemy.transform.position = transform.position;
+
+            //print($"Spawn Position: {transform.position} Enemy Position: {enemy.transform.position}");
         }
         else if(spawnList[currentSpawnAmount].name.Contains("SharpShooter"))
         {
-            var enemy = EnemyPool.Instance.GetShooterFromPool();
+            var enemy = EnemyPool.Instance.GetShooterFromPool(transform.position);
 
             enemy.GetComponent<SharpshooterController>().SetLevel(levelList[currentSpawnAmount]);
 

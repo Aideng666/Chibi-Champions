@@ -12,8 +12,6 @@ public class AlertManager : MonoBehaviour
 
     bool alertPlaying;
 
-    //AlertText currentAlert;
-
     public static AlertManager Instance { get; private set; }
 
     private void Awake()
@@ -25,7 +23,7 @@ public class AlertManager : MonoBehaviour
     {
         if (!alertPlaying && alertQueue.Count > 0)
         {
-            Instantiate(alertQueue.Dequeue(), transform).GetComponent<AlertText>().SetInfo(infoQueue.Dequeue());
+            Instantiate(alertQueue.Dequeue(), transform).GetComponentInChildren<AlertText>().SetInfo(infoQueue.Dequeue());
 
             //currentAlert = FindObjectOfType<AlertText>();
 

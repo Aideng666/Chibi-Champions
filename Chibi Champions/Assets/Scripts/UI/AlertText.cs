@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class AlertText : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class AlertText : MonoBehaviour
 
     private void OnEnable()
     {
-        alert = GetComponent<TextMeshProUGUI>();
+        alert = GetComponentInChildren<TextMeshProUGUI>();
 
         isActive = true;
     }
@@ -38,6 +39,12 @@ public class AlertText : MonoBehaviour
             float t = currentAlertLifetime / alertInfo.lifespan;
 
             alert.fontSize = Mathf.Lerp(alertInfo.startingSize, alertInfo.endSize, t);
+
+            //Color alertColor = GetComponentInParent<Image>().color;
+
+            //alertColor.a = Mathf.Lerp(1, 0, t);
+
+            GetComponent<Image>().transform.localScale = Vector3.Lerp(Vector3.one, Vector3.zero, t);
 
             alert.color = alertInfo.color;
 

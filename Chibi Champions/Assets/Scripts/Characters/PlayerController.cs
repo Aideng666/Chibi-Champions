@@ -276,8 +276,12 @@ public class PlayerController : MonoBehaviour
         }
         else if (currentEffect == Effects.PED)
         {
+            print(effectApplied);
+
             if (!effectApplied)
             {
+                print("Applying Effect");
+
                 savedBasicAttackDamage = lightAttackDamage;
                 savedAbilityDamage = abilityDamage;
                 savedSpeed = speed;

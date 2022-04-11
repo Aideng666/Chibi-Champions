@@ -35,7 +35,6 @@ public class Spore : MonoBehaviour
     {
         ParticleManager.Instance.SpawnParticle(ParticleTypes.Spore, transform.position);
 
-        targetPlayer.SetEffectApplied(false);
         targetPlayer.SetSporeLevel(tower.GetLevel());
         targetPlayer.SetEffect(Effects.PED);
 

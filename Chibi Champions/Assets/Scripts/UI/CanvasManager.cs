@@ -80,12 +80,8 @@ public class CanvasManager : MonoBehaviour
         optionsPanel.SetActive(false);
         Time.timeScale = 1f;
         isGamePaused = false;
-        timeToSpawn = Time.realtimeSinceStartup + (Time.realtimeSinceStartup - savedTime);
 
-        foreach(EnemySpawner spawner in FindObjectsOfType<EnemySpawner>())
-        {
-            spawner.SetTimeToNextSpawn(timeToSpawn);
-        }
+        AudioListener.pause = false;
     }
     public void MultiplayerResume()
     {
@@ -101,7 +97,7 @@ public class CanvasManager : MonoBehaviour
         pausePanel.SetActive(true);
         Time.timeScale = 0f;
         isGamePaused = true;
-        savedTime = Time.realtimeSinceStartup;
+        AudioListener.pause = true;
     }
 
     public void MultiplayerPause()

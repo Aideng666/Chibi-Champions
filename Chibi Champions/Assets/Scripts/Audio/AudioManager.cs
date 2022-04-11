@@ -87,8 +87,6 @@ public class AudioManager : MonoBehaviour
     {
         sounds[0].source.volume = musicSlider.value;
         sounds[1].source.volume = musicSlider.value;
-
-        muteToggle.isOn = false;
     }
     public float GetMusicVolume()
     {

@@ -115,6 +115,7 @@ public class Rolfe : PlayerController
                 enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
                 enemy.GetComponentInParent<Enemy>().Knockback(20, transform);
                 enemy.GetComponentInParent<Enemy>().SetLastHit(this);
+                enemy.GetComponentInParent<Enemy>().HitSound();
 
                 ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);
             }
@@ -141,6 +142,8 @@ public class Rolfe : PlayerController
                 enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
                 enemy.GetComponentInParent<Enemy>().Knockback(20, transform);
                 enemy.GetComponentInParent<Enemy>().SetLastHit(this);
+                enemy.GetComponentInParent<Enemy>().HitSound(); ;
+
                 //GetComponent<PointsManager>().AddPoints(20);
 
                 ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);

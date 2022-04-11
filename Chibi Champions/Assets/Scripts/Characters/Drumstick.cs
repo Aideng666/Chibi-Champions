@@ -145,6 +145,7 @@ public class Drumstick : PlayerController
                 enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-abilityDamage);
                 enemy.GetComponentInParent<Enemy>().Knockback(35, transform);
                 enemy.GetComponentInParent<Enemy>().SetLastHit(this);
+
             }
         }
 
@@ -214,6 +215,8 @@ public class Drumstick : PlayerController
                 enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
                 enemy.GetComponentInParent<Enemy>().Knockback(20, transform);
                 enemy.GetComponentInParent<Enemy>().SetLastHit(this);
+                enemy.GetComponentInParent<Enemy>().HitSound();
+
 
                 ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);
             }

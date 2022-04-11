@@ -22,6 +22,8 @@ public class WebShooter : Tower
             shot.mute = false;
         }
         shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        shot.maxDistance = attackRange;
+        shot.minDistance = shot.maxDistance - 2;
         UpdateView();
 
         if (targetEnemy == null)

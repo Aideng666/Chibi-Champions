@@ -201,8 +201,6 @@ public class Enemy : MonoBehaviour
     {
         Rigidbody body = new Rigidbody();
 
-        hit.Play();
-
         if (!knockbackApplied)
         {
             knockbackApplied = true;
@@ -246,6 +244,11 @@ public class Enemy : MonoBehaviour
     public void SetLastHit(PlayerController player)
     {
         lastHit = player;
+    }
+
+    public void HitSound()
+    {
+        hit.Play();
     }
 
     public virtual void SetLevel(int lvl)

@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
         }
         musicSlider.value = sounds[0].source.volume;
-        sfxSlider.value = (float)0.5;//ounds[2].source.volume;
+        sfxSlider.value = 0.5f;//ounds[2].source.volume;
         muteToggle.isOn = false;
 
         savedVolumes = new float[sounds.Length];

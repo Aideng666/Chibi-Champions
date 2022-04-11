@@ -24,6 +24,8 @@ public class SpiderHouse : Tower
             hatch.mute = false;
         }
         hatch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        hatch.maxDistance = attackRange;
+        hatch.minDistance = hatch.maxDistance - 2;
         UpdateView();
 
         if (CanAttack())

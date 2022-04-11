@@ -9,7 +9,10 @@ public class ChickenLaser : Tower
     bool slowEnemies;
 
     [SerializeField] AudioSource beam;
-
+    private void Start()
+    {
+        beam.loop=true;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -22,6 +25,9 @@ public class ChickenLaser : Tower
             beam.mute = false;
         }
         beam.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        beam.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        beam.maxDistance = attackRange;
+        beam.minDistance = beam.maxDistance - 2;
         laserbeam = GetComponentInChildren<LineRenderer>();
 
         UpdateView();

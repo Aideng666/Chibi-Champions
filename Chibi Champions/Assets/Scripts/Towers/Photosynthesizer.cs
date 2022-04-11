@@ -28,8 +28,8 @@ public class Photosynthesizer : Tower
 
         ParticleSystem.ShapeModule radius = healingParticles.shape;
         radius.radius = (attackRange / 2) + 1;
-        music.maxDistance = radius.radius + 6;
-        music.minDistance = music.maxDistance-1;
+        music.maxDistance = attackRange;
+        music.minDistance = music.maxDistance-2;
     }
 
     void Heal()

@@ -22,13 +22,16 @@ public class GatlingDrummet : Tower
             shot.mute = false;
         }
         shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
+        shot.maxDistance = attackRange;
+        shot.minDistance = shot.maxDistance - 2;
         UpdateView();
 
         if (targetEnemy == null)
         {
             AnimController.Instance.SetGatlingDrummetFiring(GetComponentInChildren<Animator>(), false);
 
-            shot.Stop();
+            //shot.Stop();
 
             return;
         }
@@ -39,7 +42,10 @@ public class GatlingDrummet : Tower
         {
             Attack(targetEnemy);
 
-            shot.Play();
+            Debug.Log(shot + " gun");
+            //shot.Play();
+
+            StartCoroutine(FireSound());
         }
     }
 
@@ -61,6 +67,13 @@ public class GatlingDrummet : Tower
         //Destroy(feather, 3);
     }
 
+    IEnumerator FireSound()
+    {
+        Debug.Log("woohoo");
+        shot.Play();
+        yield return new WaitForSeconds(0.5f);
+
+    }
     public override void Upgrade()
     {
         if (towerLevel == 1)

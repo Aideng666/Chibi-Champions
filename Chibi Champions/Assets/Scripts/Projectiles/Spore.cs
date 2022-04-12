@@ -9,6 +9,8 @@ public class Spore : MonoBehaviour
     NavMeshAgent navMeshAgent;
     PlayerController targetPlayer;
 
+    [SerializeField] AudioSource bub;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,17 @@ public class Spore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            bub.mute = true;
+        }
+        else
+        {
+            bub.mute = false;
+        }
+
+        bub.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
         navMeshAgent.destination = targetPlayer.transform.position;
 
         if (Vector3.Distance(transform.position, targetPlayer.transform.position) < 2)

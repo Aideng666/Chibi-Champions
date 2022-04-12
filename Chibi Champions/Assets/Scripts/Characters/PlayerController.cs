@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected CharacterDatabase characterDB;
     Character character;
 
+    float respawnTime = 0;
+
     protected CharacterController controller;
     protected CinemachineVirtualCamera thirdPersonCam;
     protected Transform rayCastSelection;
@@ -89,6 +91,8 @@ public class PlayerController : MonoBehaviour
         character = characterDB.GetCharacter(PlayerPrefs.GetInt("CharacterIndex"));
         abilityImage.sprite = character.abilitySprites[1];
         abilityImageMain.sprite = character.abilitySprites[1];
+
+        respawnTime = deathTimer;
     }
 
     // Update is called once per frame
@@ -123,8 +127,16 @@ public class PlayerController : MonoBehaviour
                 Die();
             }
 
+            if (!isAlive)
+            {
+                respawnTime -= 1 * Time.deltaTime;
+                CanvasManager.Instance.ShowDeathPanel(respawnTime);
+            }
+
             if (isAlive)
             {
+                CanvasManager.Instance.HideDeathPanel();
+
                 ApplyEffect();
 
                 Move();
@@ -405,6 +417,8 @@ public class PlayerController : MonoBehaviour
         deathCount++;
 
         print($"You've Died {deathCount} Times, you will respawn in {deathTimer} Seconds");
+
+        respawnTime = deathTimer;
 
         StartCoroutine(DeathTimer());
 

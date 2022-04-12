@@ -16,10 +16,15 @@ public class Cure : MonoBehaviour
 
     [SerializeField] TMP_Text cureUIHPText;
 
+    float pastHP;
+    bool isHurt;
+
     private void Start()
     {
         healthText = GetComponentInChildren<TextMeshProUGUI>();
         cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString() + " / 100";
+        pastHP = GetComponent<Health>().GetCurrentHealth();
+        FindObjectOfType<AudioManager>().Loop("Alarm");
     }
     // Update is called once per frame
     void Update()
@@ -58,12 +63,25 @@ public class Cure : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("Cure Damage");
         }
 
-
         if (GetComponent<Health>().GetCurrentHealth() <= 0 && !loseStarted)
         {
             StartCoroutine(DelayBeforeLoss());
 
             loseStarted = true;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (GetComponent<Health>().GetCurrentHealth() < pastHP)
+        {
+            pastHP = GetComponent<Health>().GetCurrentHealth();
+            if (!FindObjectOfType<AudioManager>().IsPlaying("Alarm"))
+                FindObjectOfType<AudioManager>().Play("Alarm");
+        }
+        else
+        {
+            FindObjectOfType<AudioManager>().StopLoop("Alarm");
         }
     }
 

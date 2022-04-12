@@ -52,6 +52,13 @@ public class WaveManager : MonoBehaviour
         totalWavesText.text = numberOfWaves.ToString();
 
         currentPhaseText.text = "Build Phase";
+
+        FindObjectOfType<AudioManager>().Play("Level");
+        FindObjectOfType<AudioManager>().Pause("Level");
+        FindObjectOfType<AudioManager>().Loop("Level");
+        FindObjectOfType<AudioManager>().Play("BuildPhase");
+        FindObjectOfType<AudioManager>().Loop("BuildPhase");
+        FindObjectOfType<AudioManager>().SetMusicVolume();
     }
 
     // Update is called once per frame
@@ -157,6 +164,9 @@ public class WaveManager : MonoBehaviour
 
     public void BeginWave()
     {
+        FindObjectOfType<AudioManager>().UnPause("Level");
+        FindObjectOfType<AudioManager>().Pause("BuildPhase");
+
         currentPhaseText.text = "Combat Phase";
        
         waveCompleteAlertFired = false;
@@ -174,6 +184,7 @@ public class WaveManager : MonoBehaviour
                     if (currentWave == 0 && i != 2 && i != 3)
                     {
                         AnimController.Instance.PlayOpenDoorAnim(enemySpawners[i].gameObject.transform.parent.GetComponentInChildren<Animator>());
+                        enemySpawners[i].gameObject.transform.parent.GetComponent<AudioSource>().Play();
                     }
 
                     enemySpawners[i].SetSpawnList(enemiesLists[currentWave]);
@@ -189,6 +200,7 @@ public class WaveManager : MonoBehaviour
                     if (currentWave == 0 && i != 2 && i != 3)
                     {
                         AnimController.Instance.PlayOpenDoorAnim(enemySpawners[i].gameObject.transform.parent.GetComponentInChildren<Animator>());
+                        enemySpawners[i].gameObject.transform.parent.GetComponent<AudioSource>().Play();
                     }
 
                     enemySpawners[i].SetSpawnList(enemiesLists[currentWave]);
@@ -204,6 +216,7 @@ public class WaveManager : MonoBehaviour
                     if (currentWave == 0 && i != 2 && i != 3)
                     {
                         AnimController.Instance.PlayOpenDoorAnim(enemySpawners[i].gameObject.transform.parent.GetComponentInChildren<Animator>());
+                        enemySpawners[i].gameObject.transform.parent.GetComponent<AudioSource>().Play();
                     }
 
                     enemySpawners[i].SetSpawnList(enemiesLists[currentWave]);
@@ -249,6 +262,8 @@ public class WaveManager : MonoBehaviour
                     {
                         AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete!", 10));
                         waveCompleteAlertFired = true;
+                        FindObjectOfType<AudioManager>().Pause("Level");
+                        FindObjectOfType<AudioManager>().UnPause("BuildPhase");
                     }
 
                     return true;

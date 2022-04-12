@@ -35,6 +35,19 @@ public class SharpshooterController : Enemy
     {
         base.Update();
 
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            shot.mute = true;
+        }
+        else
+        {
+            shot.mute = false;
+        }
+
+        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        shot.maxDistance = attackRange;
+        shot.minDistance = shot.maxDistance - 2;
+
         if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0)
         {
             foreach (PlayerController player in FindObjectsOfType<PlayerController>())
@@ -112,6 +125,7 @@ public class SharpshooterController : Enemy
                 if (selection.tag == "Player")
                 {
                     playerTransform.gameObject.GetComponentInParent<Health>().ModifyHealth(-attackDamage);
+                    playerTransform.gameObject.GetComponentInParent<PlayerController>().hitSound();
                 }
             }
             else

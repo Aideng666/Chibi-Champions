@@ -13,16 +13,16 @@ public class GatlingDrummet : Tower
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
-        {
-            shot.mute = true;
-        }
-        else
-        {
-            shot.mute = false;
-        }
+        //if (FindObjectOfType<AudioManager>().isMute() == true)
+        //{
+        //    shot.mute = true;
+        //}
+        //else
+        //{
+        //    shot.mute = false;
+        //}
 
-        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        //shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
 
         UpdateView();
 

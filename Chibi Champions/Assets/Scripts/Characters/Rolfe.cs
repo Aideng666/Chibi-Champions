@@ -77,8 +77,6 @@ public class Rolfe : PlayerController
                 scratch.Play();
 
                 StartCoroutine(WaitForSecondSwipe());
-
-                //AnimController.Instance.PlayPlayerAttackAnim();
             }
             if (Input.GetMouseButtonDown(1) && CanHeavyAttack() && currentBeacons < maxBeacons)
             {

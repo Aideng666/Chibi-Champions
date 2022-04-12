@@ -35,18 +35,18 @@ public class SharpshooterController : Enemy
     {
         base.Update();
 
-        if (FindObjectOfType<AudioManager>().isMute() == true)
-        {
-            shot.mute = true;
-        }
-        else
-        {
-            shot.mute = false;
-        }
+        //if (FindObjectOfType<AudioManager>().isMute() == true)
+        //{
+        //    shot.mute = true;
+        //}
+        //else
+        //{
+        //    shot.mute = false;
+        //}
 
-        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        shot.maxDistance = attackRange;
-        shot.minDistance = shot.maxDistance - 2;
+        //shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        //shot.maxDistance = attackRange;
+        //shot.minDistance = shot.maxDistance - 2;
 
         if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0)
         {
@@ -99,7 +99,7 @@ public class SharpshooterController : Enemy
 
         delayBeforeAttackReached = false;
         navMeshAgent.isStopped = false;
-        AnimController.Instance.SetEnemyIsWalking(GetComponent<Animator>(), true);
+        AnimController.Instance.SetEnemyIsWalking(GetComponentInChildren<Animator>(), true);
     }
 
     protected override void AttackPlayer()
@@ -139,7 +139,7 @@ public class SharpshooterController : Enemy
 
         delayBeforeAttackReached = false;
         navMeshAgent.isStopped = false;
-        AnimController.Instance.SetEnemyIsWalking(GetComponent<Animator>(), true);
+        AnimController.Instance.SetEnemyIsWalking(GetComponentInChildren<Animator>(), true);
     }
 
     protected override IEnumerator DelayBeforeAttack()
@@ -150,7 +150,8 @@ public class SharpshooterController : Enemy
             {
                 navMeshAgent.isStopped = true;
 
-                AnimController.Instance.SetEnemyIsWalking(GetComponent<Animator>(), false);
+                AnimController.Instance.SetEnemyIsWalking(GetComponentInChildren<Animator>(), false);
+                AnimController.Instance.PlayEnemyAttackAnim(GetComponentInChildren<Animator>());
             }
 
             yield return new WaitForSeconds(0.4f);
@@ -163,7 +164,8 @@ public class SharpshooterController : Enemy
             {
                 navMeshAgent.isStopped = true;
 
-                AnimController.Instance.SetEnemyIsWalking(GetComponent<Animator>(), false);
+                AnimController.Instance.SetEnemyIsWalking(GetComponentInChildren<Animator>(), false);
+                AnimController.Instance.PlayEnemyAttackAnim(GetComponentInChildren<Animator>());
             }
 
             yield return new WaitForSeconds(0.4f);

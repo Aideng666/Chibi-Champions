@@ -984,13 +984,13 @@ MonoBehaviour:
   characterNameEnum: 1
   cam: {fileID: 0}
   attackPoint: {fileID: 6888943266550092648}
-  speed: 15
+  speed: 18
   lightAttackRange: 2
   heavyAttackRange: 10
   lightAttackDamage: 8
   abilityDamage: 15
   gravity: 1.5
-  jumpPower: 1.5
+  jumpPower: 2
   interactDistance: 5
   lightAttackDelay: 0.75
   heavyAttackDelay: 0.75

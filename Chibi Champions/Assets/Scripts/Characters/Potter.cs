@@ -57,6 +57,8 @@ public class Potter : PlayerController
                     UDPClient.Instance.SendPlayerUpdates(ActionTypes.Attack, GetCharacterNameEnum());
                 }
 
+                AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>());
+
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 RaycastHit hit;
@@ -86,6 +88,8 @@ public class Potter : PlayerController
                 {
                     UDPClient.Instance.SendPlayerUpdates(ActionTypes.Ability, GetCharacterNameEnum());
                 }
+
+                AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>());
 
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -121,6 +125,8 @@ public class Potter : PlayerController
 
     public override void ReceiveAttackTrigger()
     {
+        AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>());
+
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
@@ -144,6 +150,8 @@ public class Potter : PlayerController
 
     public override void ReceiveAbilityTrigger()
     {
+        AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>());
+
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;

@@ -32,19 +32,19 @@ public class Spider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
-        {
-            walk.mute = true;
-            atk.mute = true;
-        }
-        else
-        {
-            walk.mute = false;
-            atk.mute = false;
-        }
+        //if (FindObjectOfType<AudioManager>().isMute() == true)
+        //{
+        //    walk.mute = true;
+        //    atk.mute = true;
+        //}
+        //else
+        //{
+        //    walk.mute = false;
+        //    atk.mute = false;
+        //}
 
-        walk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        atk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        //walk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        //atk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
 
         Collider[] EnemiesInView = Physics.OverlapSphere(transform.position, tower.GetRange(), tower.GetEnemyLayer());
 
@@ -110,6 +110,9 @@ public class Spider : MonoBehaviour
     void ChaseEnemy(GameObject enemy)
     {
         walk.Play();
+
+        transform.LookAt(enemy.transform);
+
         moveDirection = (enemy.transform.position - transform.position).normalized;
 
         moveDirection.y = 0;
@@ -139,6 +142,8 @@ public class Spider : MonoBehaviour
 
         if (isMoving)
         {
+            transform.LookAt(transform.position + (moveDirection * moveSpeed * Time.deltaTime));
+
             transform.position += moveDirection * moveSpeed * Time.deltaTime;
         }
     }
@@ -166,6 +171,8 @@ public class Spider : MonoBehaviour
 
     public void SetTower(Tower t)
     {
+        print($"Tower Set: {t.gameObject.name}");
+
         tower = t;
     }
 

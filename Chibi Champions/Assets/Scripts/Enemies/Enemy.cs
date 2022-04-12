@@ -52,19 +52,18 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
-        {
-            hit.mute = true;
-        }
-        else
-        {
-            hit.mute = false;
-        }
-        hit.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        //if (FindObjectOfType<AudioManager>().isMute() == true)
+        //{
+        //    hit.mute = true;
+        //}
+        //else
+        //{
+        //    hit.mute = false;
+        //}
 
-        //print($"Position: {transform.position}");
+        //hit.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
 
-        TennisBall[] tennisBalls = FindObjectsOfType<TennisBall>();
+        TennisBall[] tennisBalls = ObjectManager.Instance.GetTennisBalls();
 
         if (!knockbackApplied)
         {

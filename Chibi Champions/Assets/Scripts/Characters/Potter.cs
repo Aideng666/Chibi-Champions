@@ -10,6 +10,9 @@ public class Potter : PlayerController
     [SerializeField] float shotSpeed;
     [SerializeField] float healAmount;
 
+    [SerializeField] AudioSource shot;
+    [SerializeField] AudioSource blast;
+
     bool InkBlastActivated = false;
 
     // Start is called before the first frame update
@@ -21,6 +24,20 @@ public class Potter : PlayerController
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            shot.mute = true;
+            blast.mute = true;
+        }
+        else
+        {
+            shot.mute = false;
+            blast.mute = false;
+        }
+
+        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        blast.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
         if (isPlayerCharacter)
         {
             base.Update();
@@ -55,6 +72,7 @@ public class Potter : PlayerController
                         direction = (endPoint - attackPoint.position).normalized;
                     }
                 }
+                shot.Play();
 
                 //var paintball = Instantiate(paintballPrefab, attackPoint.position, Quaternion.identity);
                 var paintball = ProjectilePool.Instance.GetPaintballFromPool(attackPoint.position);
@@ -86,6 +104,7 @@ public class Potter : PlayerController
                         direction = (endPoint - attackPoint.position).normalized;
                     }
                 }
+                blast.Play();
 
                 var inkBlast = Instantiate(inkBlastPrefab, attackPoint.position, Quaternion.identity);
 

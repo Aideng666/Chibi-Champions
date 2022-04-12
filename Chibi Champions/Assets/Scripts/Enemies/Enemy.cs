@@ -52,6 +52,16 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            hit.mute = true;
+        }
+        else
+        {
+            hit.mute = false;
+        }
+        hit.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
         //print($"Position: {transform.position}");
 
         TennisBall[] tennisBalls = FindObjectsOfType<TennisBall>();
@@ -238,6 +248,11 @@ public class Enemy : MonoBehaviour
     public void SetLastHit(PlayerController player)
     {
         lastHit = player;
+    }
+
+    public void HitSound()
+    {
+        hit.Play();
     }
 
     public virtual void SetLevel(int lvl)

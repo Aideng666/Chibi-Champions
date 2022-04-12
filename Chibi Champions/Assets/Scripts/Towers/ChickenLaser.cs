@@ -23,6 +23,7 @@ public class ChickenLaser : Tower
         }
 
         beam.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        beam.loop = true;
 
         laserbeam = GetComponentInChildren<LineRenderer>();
 

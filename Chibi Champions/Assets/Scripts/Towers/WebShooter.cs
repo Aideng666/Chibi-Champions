@@ -9,10 +9,22 @@ public class WebShooter : Tower
     [SerializeField] float slowDuration;
     [SerializeField] GameObject webPrefab;
     [SerializeField] GameObject partToRotate;
+    [SerializeField] AudioSource shot;
 
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            shot.mute = true;
+        }
+        else
+        {
+            shot.mute = false;
+        }
+
+        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
         UpdateView();
 
         if (targetEnemy == null)
@@ -41,6 +53,7 @@ public class WebShooter : Tower
         web.transform.LookAt(enemy.transform);
         web.GetComponentInChildren<Rigidbody>().velocity = direction * webSpeed;
         web.GetComponentInChildren<Web>().SetTower(this);
+        shot.Play();
 
         Destroy(web, 3);
     }

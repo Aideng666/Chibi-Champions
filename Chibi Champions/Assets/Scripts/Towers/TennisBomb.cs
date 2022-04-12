@@ -7,10 +7,22 @@ public class TennisBomb : Tower
     [SerializeField] GameObject tennisBallPrefab;
     [SerializeField] float launchForce;
     [SerializeField] float fuseDuration;
+    [SerializeField] AudioSource shot;
 
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            shot.mute = true;
+        }
+        else
+        {
+            shot.mute = false;
+        }
+
+        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
         UpdateView();
 
         if (targetEnemy == null)
@@ -41,6 +53,7 @@ public class TennisBomb : Tower
         tennisBall.GetComponent<Rigidbody>().AddForce(direction * launchForce, ForceMode.Impulse);
         tennisBall.GetComponent<TennisBall>().SetTower(this);
         tennisBall.GetComponent<TennisBall>().SetFuseDuration(fuseDuration);
+        shot.Play();
     }
 
     public override void Upgrade()

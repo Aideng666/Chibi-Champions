@@ -33,12 +33,16 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] AudioSource jump;
     [SerializeField] AudioSource dead;
+    [SerializeField] AudioSource hit;
+    [SerializeField] AudioSource refresh;
 
     [SerializeField] protected Image abilityImage;
     [SerializeField] protected Image abilityImageMain;
     protected bool isCooldown = false;
     [SerializeField] protected CharacterDatabase characterDB;
     Character character;
+
+    float respawnTime = 0;
 
     protected CharacterController controller;
     protected CinemachineVirtualCamera thirdPersonCam;
@@ -89,11 +93,33 @@ public class PlayerController : MonoBehaviour
         character = characterDB.GetCharacter(PlayerPrefs.GetInt("CharacterIndex"));
         abilityImage.sprite = character.abilitySprites[1];
         abilityImageMain.sprite = character.abilitySprites[1];
+
+        respawnTime = deathTimer;
     }
 
     // Update is called once per frame
     protected void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            jump.mute = true;
+            dead.mute = true;
+            hit.mute = true;
+            refresh.mute = true;
+        }
+        else
+        {
+            jump.mute = false;
+            dead.mute = false;
+            hit.mute = false;
+            refresh.mute = false;
+        }
+
+        jump.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        dead.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        hit.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        refresh.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
         if (isPlayerCharacter)
         {
             thirdPersonCam.LookAt = cameraLookAt.transform;
@@ -123,8 +149,16 @@ public class PlayerController : MonoBehaviour
                 Die();
             }
 
+            if (!isAlive)
+            {
+                respawnTime -= 1 * Time.deltaTime;
+                CanvasManager.Instance.ShowDeathPanel(respawnTime);
+            }
+
             if (isAlive)
             {
+                CanvasManager.Instance.HideDeathPanel();
+
                 ApplyEffect();
 
                 Move();
@@ -406,6 +440,8 @@ public class PlayerController : MonoBehaviour
 
         print($"You've Died {deathCount} Times, you will respawn in {deathTimer} Seconds");
 
+        respawnTime = deathTimer;
+
         StartCoroutine(DeathTimer());
 
         AnimController.Instance.PlayPlayerDeathAnim(GetComponentInChildren<Animator>());
@@ -497,6 +533,7 @@ public class PlayerController : MonoBehaviour
             if (abilityImage.fillAmount <= 0)
             {
                 isCooldown = false;
+                refresh.Play();
             }
         }
     }
@@ -600,5 +637,10 @@ public class PlayerController : MonoBehaviour
 
         Gizmos.DrawWireSphere(attackPoint.position, lightAttackRange);
         Gizmos.DrawWireSphere(attackPoint.position, heavyAttackRange);
+    }
+
+    public void hitSound()
+    {
+        hit.Play();
     }
 }

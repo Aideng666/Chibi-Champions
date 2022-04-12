@@ -8,15 +8,30 @@ public class Photosynthesizer : Tower
     [SerializeField] float healingAmount;
     [SerializeField] ParticleSystem healingParticles;
 
+    [SerializeField] AudioSource music;
+
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            music.mute = true;
+        }
+        else
+        {
+            music.mute = false;
+        }
+
+        music.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
         UpdateView();
 
         Heal();
 
         ParticleSystem.ShapeModule radius = healingParticles.shape;
         radius.radius = (attackRange / 2) + 1;
+        music.maxDistance = attackRange;
+        music.minDistance = music.maxDistance - 2;
     }
 
     void Heal()

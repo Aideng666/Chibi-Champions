@@ -13,6 +13,17 @@ public class GatlingDrummet : Tower
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            shot.mute = true;
+        }
+        else
+        {
+            shot.mute = false;
+        }
+
+        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
         UpdateView();
 
         if (targetEnemy == null)
@@ -28,14 +39,14 @@ public class GatlingDrummet : Tower
 
         if (CanAttack())
         {
-            Attack(targetEnemy);
-
-            shot.Play();
+            Attack(targetEnemy);          
         }
     }
 
     protected override void Attack(GameObject enemy = null)
     {
+        StartCoroutine(FireSound());
+
         AnimController.Instance.SetGatlingDrummetFiring(GetComponentInChildren<Animator>(), true);
 
         Vector3 direction = (enemy.transform.position - firePoint.position).normalized;
@@ -50,6 +61,12 @@ public class GatlingDrummet : Tower
         feather.GetComponentInChildren<Feather>().SetTower(this);
 
         //Destroy(feather, 3);
+    }
+
+    IEnumerator FireSound()
+    {
+        shot.Play();
+        yield return new WaitForSeconds(0.5f);
     }
 
     public override void Upgrade()

@@ -8,22 +8,36 @@ public class Rolfe : PlayerController
     [SerializeField] GameObject beaconPrefab;
     [SerializeField] int maxBeacons = 2;
 
+    [SerializeField] AudioSource scratch;
+    [SerializeField] AudioSource set;
+
     int currentBeacons = 0;
 
-    //public GameObject beaconAmount;
     bool beaconActivated = false;
 
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
-
-        //beaconAmount.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            scratch.mute = true;
+            set.mute = true;
+        }
+        else
+        {
+            scratch.mute = false;
+            set.mute = false;
+        }
+
+        scratch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        set.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
         if (isPlayerCharacter)
         {
             base.Update();
@@ -55,10 +69,12 @@ public class Rolfe : PlayerController
                         enemy.GetComponentInParent<Enemy>().Knockback(20, transform);
                         enemy.GetComponentInParent<Enemy>().SetLastHit(this);
                         //GetComponent<PointsManager>().AddPoints(20);
+                        enemy.GetComponentInParent<Enemy>().HitSound();
 
                         ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);
                     }
                 }
+                scratch.Play();
 
                 StartCoroutine(WaitForSecondSwipe());
 
@@ -77,6 +93,7 @@ public class Rolfe : PlayerController
                 currentBeacons++;
 
                 beaconActivated = true;
+                set.Play();
             }
             else
             {
@@ -125,6 +142,7 @@ public class Rolfe : PlayerController
                 enemy.GetComponentInParent<Enemy>().Knockback(20, transform);
                 enemy.GetComponentInParent<Enemy>().SetLastHit(this);
                 //GetComponent<PointsManager>().AddPoints(20);
+                enemy.GetComponentInParent<Enemy>().HitSound(); ;
 
                 ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);
             }

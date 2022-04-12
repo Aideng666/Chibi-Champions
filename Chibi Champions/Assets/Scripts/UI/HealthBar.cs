@@ -61,13 +61,6 @@ public class HealthBar : MonoBehaviour
                     healthText.text = "0 / " + player.gameObject.GetComponent<Health>().GetMaxHealth();
                 }
             }
-
-            //healthText.text = (pct * 100) + " / 100"; 
-                      
-            //if (pct < 0)
-            //{
-            //    healthText.text = "0 / 100";
-            //}
         }
     }
 

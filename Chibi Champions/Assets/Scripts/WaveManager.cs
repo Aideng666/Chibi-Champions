@@ -260,7 +260,14 @@ public class WaveManager : MonoBehaviour
                 {
                     if (!waveCompleteAlertFired)
                     {
-                        AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete!", 10));
+                        if (PlayerClient.Instance.GetClientNum() <= 0)
+                        {
+                            AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete! When Ready, Press Q", 1000));
+                        }
+                        else
+                        {
+                            AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete! Waiting for Player 1", 1000));
+                        }
                         waveCompleteAlertFired = true;
                         FindObjectOfType<AudioManager>().Pause("Level");
                         FindObjectOfType<AudioManager>().UnPause("BuildPhase");
@@ -277,8 +284,18 @@ public class WaveManager : MonoBehaviour
                 {
                     if (!waveCompleteAlertFired)
                     {
-                        AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete!"));
+                        if (PlayerClient.Instance.GetClientNum() <= 0)
+                        {
+                            AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete! When Ready, Press Q", 1000));
+                        }
+                        else
+                        {
+                            AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete! Waiting for Player 1", 1000));
+                        }
                         waveCompleteAlertFired = true;
+
+                        FindObjectOfType<AudioManager>().Pause("Level");
+                        FindObjectOfType<AudioManager>().UnPause("BuildPhase");
                     }
 
                     return true;
@@ -292,8 +309,19 @@ public class WaveManager : MonoBehaviour
                 {
                     if (!waveCompleteAlertFired)
                     {
-                        AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete!"));
+                        if (PlayerClient.Instance.GetClientNum() <= 0)
+                        {
+                            AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete! When Ready, Press Q", 1000));
+                        }
+                        else
+                        {
+                            AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete! Waiting for Player 1", 1000));
+                        }
+
                         waveCompleteAlertFired = true;
+
+                        FindObjectOfType<AudioManager>().Pause("Level");
+                        FindObjectOfType<AudioManager>().UnPause("BuildPhase");
                     }
 
                     return true;

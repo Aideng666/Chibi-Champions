@@ -271,6 +271,7 @@ MonoBehaviour:
   healthImage: {fileID: 95333650690594862}
   updateSpeedSeconds: 0.2
   isPlayer: 0
+  healthText: {fileID: 0}
 --- !u!1 &95333651235355323
 GameObject:
   m_ObjectHideFlags: 0
@@ -2147,8 +2148,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 0
-  MinDistance: 1
-  MaxDistance: 5
+  MinDistance: 5
+  MaxDistance: 7
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0

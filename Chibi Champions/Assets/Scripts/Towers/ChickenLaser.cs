@@ -26,8 +26,8 @@ public class ChickenLaser : Tower
         }
         beam.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
         beam.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        beam.maxDistance = attackRange;
-        beam.minDistance = beam.maxDistance - 2;
+        //beam.maxDistance = attackRange;
+        //beam.minDistance = beam.maxDistance - 2;
         laserbeam = GetComponentInChildren<LineRenderer>();
 
         UpdateView();

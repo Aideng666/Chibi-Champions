@@ -7,6 +7,7 @@ public class HealthPack : MonoBehaviour
 {
     [SerializeField] float cooldown;
     [SerializeField] GameObject healthpackMesh;
+    [SerializeField] AudioSource heal;
 
     [SerializeField] TMP_Text cooldownText;
     float currentTime = 0;
@@ -22,6 +23,17 @@ public class HealthPack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            heal.mute = true;
+        }
+        else
+        {
+            heal.mute = false;
+        }
+
+        heal.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
         transform.Rotate(new Vector3(0, 1, 0), 20 * Time.deltaTime);
 
         if (startCooldown)
@@ -49,6 +61,7 @@ public class HealthPack : MonoBehaviour
                 GetComponent<BoxCollider>().enabled = false;
                 startCooldown = true;
                 currentTime = cooldown;
+                heal.Play();
 
                 StartCoroutine(HealthpackCooldown());
             }

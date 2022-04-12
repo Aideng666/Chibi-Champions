@@ -8,12 +8,24 @@ public class SpiderHouse : Tower
     [SerializeField] float spiderSpawnAmount;
     [SerializeField] float effectTickDelay;
     [SerializeField] int maximumSpiders = 6;
+    [SerializeField] AudioSource hatch;
 
     int currentSpiders = 0;
 
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<AudioManager>().isMute() == true)
+        {
+            hatch.mute = true;
+        }
+        else
+        {
+            hatch.mute = false;
+        }
+
+        hatch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
         UpdateView();
 
         if (CanAttack())
@@ -33,6 +45,7 @@ public class SpiderHouse : Tower
                 currentSpiders++;
                 spider.GetComponent<Spider>().SetTower(this);
                 spider.GetComponent<Spider>().SetTickDelay(effectTickDelay);
+                hatch.Play();
             }
         }
     }

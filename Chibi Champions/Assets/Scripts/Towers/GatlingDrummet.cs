@@ -42,15 +42,15 @@ public class GatlingDrummet : Tower
         {
             Attack(targetEnemy);
 
-            Debug.Log(shot + " gun");
-            //shot.Play();
+           
 
-            StartCoroutine(FireSound());
         }
     }
 
     protected override void Attack(GameObject enemy = null)
     {
+        StartCoroutine(FireSound());
+
         AnimController.Instance.SetGatlingDrummetFiring(GetComponentInChildren<Animator>(), true);
 
         Vector3 direction = (enemy.transform.position - firePoint.position).normalized;

@@ -42,6 +42,9 @@ public class SharpshooterController : Enemy
             shot.mute = false;
         }
         shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        shot.maxDistance = attackRange;
+        shot.minDistance = shot.maxDistance - 2;
+
         base.Update();
 
         if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0)

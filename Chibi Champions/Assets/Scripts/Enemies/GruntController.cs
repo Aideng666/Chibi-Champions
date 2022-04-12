@@ -76,7 +76,7 @@ public class GruntController : Enemy
 
     protected override IEnumerator DelayBeforeAttack()
     {
-        AnimController.Instance.PlayEnemyAttackAnim(GetComponent<Animator>());
+        AnimController.Instance.PlayEnemyAttackAnim(GetComponentInChildren<Animator>());
 
         yield return new WaitForSeconds(0.2f);
 

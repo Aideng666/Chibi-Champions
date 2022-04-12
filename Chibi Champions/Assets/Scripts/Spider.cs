@@ -32,19 +32,19 @@ public class Spider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
-        {
-            walk.mute = true;
-            atk.mute = true;
-        }
-        else
-        {
-            walk.mute = false;
-            atk.mute = false;
-        }
+        //if (FindObjectOfType<AudioManager>().isMute() == true)
+        //{
+        //    walk.mute = true;
+        //    atk.mute = true;
+        //}
+        //else
+        //{
+        //    walk.mute = false;
+        //    atk.mute = false;
+        //}
 
-        walk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        atk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        //walk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        //atk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
 
         Collider[] EnemiesInView = Physics.OverlapSphere(transform.position, tower.GetRange(), tower.GetEnemyLayer());
 

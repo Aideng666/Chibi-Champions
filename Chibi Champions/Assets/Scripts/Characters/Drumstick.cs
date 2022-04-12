@@ -154,13 +154,13 @@ public class Drumstick : PlayerController
 
     protected IEnumerator GroundPoundJump()
     {
-        moveDir.y = jumpPower * 3;
+        moveDir.y = jumpPower * 5;
 
         isJumping = true;
 
         float elasped = 0f;
         float totalJumpTime = 0.6f;
-        float totalUpTime = 0.2f;
+        float totalUpTime = 0.3f;
         float totalStallTime = 0.4f;
 
         while (elasped < totalUpTime)

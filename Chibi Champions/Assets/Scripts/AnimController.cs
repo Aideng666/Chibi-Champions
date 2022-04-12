@@ -93,6 +93,8 @@ public class AnimController : MonoBehaviour
         }
         if (anim == potterAnimator)
         {
+            print("Walking Potter Animator");
+
             if (forward)
             {
                 potterAnimator.SetBool("WalkForward", isWalking);
@@ -147,6 +149,8 @@ public class AnimController : MonoBehaviour
 
     public void PlayPlayerJumpAnim(Animator anim)
     {
+
+
         anim.SetTrigger("Jump");
     }
 

@@ -43,8 +43,8 @@ public class SpiderHouse : Tower
                 var spider = Instantiate(spiderPrefab, new Vector3(firePoint.position.x, 0, firePoint.position.z), Quaternion.identity);
 
                 currentSpiders++;
-                spider.GetComponent<Spider>().SetTower(this);
-                spider.GetComponent<Spider>().SetTickDelay(effectTickDelay);
+                spider.GetComponentInChildren<Spider>().SetTower(this);
+                spider.GetComponentInChildren<Spider>().SetTickDelay(effectTickDelay);
                 hatch.Play();
             }
         }

@@ -23,18 +23,18 @@ public class HealthPack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
-        {
-            heal.mute = true;
-        }
-        else
-        {
-            heal.mute = false;
-        }
+        //if (FindObjectOfType<AudioManager>().isMute() == true)
+        //{
+        //    heal.mute = true;
+        //}
+        //else
+        //{
+        //    heal.mute = false;
+        //}
 
-        heal.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        //heal.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
 
-        transform.Rotate(new Vector3(0, 1, 0), 20 * Time.deltaTime);
+        //transform.Rotate(new Vector3(0, 1, 0), 20 * Time.deltaTime);
 
         if (startCooldown)
         {

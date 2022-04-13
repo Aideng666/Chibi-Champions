@@ -19,24 +19,32 @@ public class Potter : PlayerController
     void Start()
     {
         base.Start();
+        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        blast.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (FindObjectOfType<AudioManager>().dirtyPot)
         {
-            shot.mute = true;
-            blast.mute = true;
-        }
-        else
-        {
-            shot.mute = false;
-            blast.mute = false;
+            if (FindObjectOfType<AudioManager>().isMute() == true)
+            {
+                shot.mute = true;
+                blast.mute = true;
+            }
+            else
+            {
+                shot.mute = false;
+                blast.mute = false;
+            }
+
+            shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            blast.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            FindObjectOfType<AudioManager>().dirtyPot = false;
+
         }
 
-        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        blast.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
 
         if (isPlayerCharacter)
         {

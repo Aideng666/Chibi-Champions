@@ -10,6 +10,12 @@ public class Particle : MonoBehaviour
     void Start()
     {
         particle = GetComponent<ParticleSystem>();
+        if (GetComponent<AudioSource>() != null)
+        {
+            GetComponent<AudioSource>().volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
+        }
+
     }
 
     // Update is called once per frame
@@ -20,17 +26,24 @@ public class Particle : MonoBehaviour
             Destroy(gameObject);
         }
 
+      
         if (GetComponent<AudioSource>() != null)
-        {
-            if (FindObjectOfType<AudioManager>().isMute() == true)
+        {  
+            if (FindObjectOfType<AudioManager>().dirtyPar)
             {
-                GetComponent<AudioSource>().mute = true;
+                if (FindObjectOfType<AudioManager>().isMute() == true)
+                {
+                    GetComponent<AudioSource>().mute = true;
+                }
+                else
+                {
+                    GetComponent<AudioSource>().mute = false;
+                }
+                GetComponent<AudioSource>().volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+                FindObjectOfType<AudioManager>().dirtyPar = false;
+
             }
-            else
-            {
-                GetComponent<AudioSource>().mute = false;
-            }
-            GetComponent<AudioSource>().volume = FindObjectOfType<AudioManager>().GetSFXVolume();
         }
+        
     }
 }

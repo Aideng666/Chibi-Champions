@@ -27,25 +27,35 @@ public class Spider : MonoBehaviour
         enemySighted,
         noEnemySighted
     }
-
+    private void Start()
+    {
+        walk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        atk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+    }
 
     // Update is called once per frame
     void Update()
-    {
-        //if (FindObjectOfType<AudioManager>().isMute() == true)
-        //{
-        //    walk.mute = true;
-        //    atk.mute = true;
-        //}
-        //else
-        //{
-        //    walk.mute = false;
-        //    atk.mute = false;
-        //}
+    {
+        if (FindObjectOfType<AudioManager>().dirtySpi)
+        {
+            if (FindObjectOfType<AudioManager>().isMute() == true)
+            {
+                walk.mute = true;
+                atk.mute = true;
+            }
+            else
+            {
+                walk.mute = false;
+                atk.mute = false;
+            }
 
-        //walk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        //atk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-
+            walk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            atk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            FindObjectOfType<AudioManager>().dirtySpi = false;
+
+        }
+
+
         Collider[] EnemiesInView = Physics.OverlapSphere(transform.position, tower.GetRange(), tower.GetEnemyLayer());
 
         if (EnemiesInView == null || EnemiesInView.Length < 1)
@@ -109,7 +119,7 @@ public class Spider : MonoBehaviour
 
     void ChaseEnemy(GameObject enemy)
     {
-        walk.Play();
+        //walk.Play();
 
         transform.LookAt(enemy.transform);
 
@@ -144,7 +154,10 @@ public class Spider : MonoBehaviour
         {
             transform.LookAt(transform.position + (moveDirection * moveSpeed * Time.deltaTime));
 
-            transform.position += moveDirection * moveSpeed * Time.deltaTime;
+            transform.position += moveDirection * moveSpeed * Time.deltaTime;
+
+            walk.Play();
+
         }
     }
 

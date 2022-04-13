@@ -12,19 +12,30 @@ public class InkBomber : Tower
 
     [SerializeField] AudioSource shot;
 
+    private void Start()
+    {
+        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
+    }
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (FindObjectOfType<AudioManager>().dirtyNKB)
         {
-            shot.mute = true;
-        }
-        else
-        {
-            shot.mute = false;
+            if (FindObjectOfType<AudioManager>().isMute() == true)
+            {
+                shot.mute = true;
+            }
+            else
+            {
+                shot.mute = false;
+            }
+
+            shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            FindObjectOfType<AudioManager>().dirtyNKB = false;
+
         }
 
-        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
 
         UpdateView();
 

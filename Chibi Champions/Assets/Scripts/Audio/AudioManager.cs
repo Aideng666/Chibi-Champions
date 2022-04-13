@@ -11,6 +11,27 @@ public class AudioManager : MonoBehaviour
     [SerializeField] Slider sfxSlider;
     [SerializeField] Toggle muteToggle;
 
+    public bool dirtyChar; 
+    public bool dirtyDrum;
+    public bool dirtyRol;
+    public bool dirtyPot;
+    public bool dirtyPar;//particle
+    public bool dirtyGat;//gattling
+    public bool dirtyBla;//feather blaster
+    public bool dirtyLaz;//chicken laser
+    public bool dirtyPho;//photosynth
+    public bool dirtySAP;//sap ped
+    public bool dirtyNKB;//ink bomber
+    public bool dirtyHat;// spider hatch
+    public bool dirtyWeb;//webshoot
+    public bool dirtySpi;//spider
+    public bool dirtyNME;//enemy
+    public bool dirtyShoot;//sharpshoot
+    public bool dirtyHP;//health pack
+    public bool dirtyBal;//tennis ball
+    public bool dirtyTen;//tennis bomber
+    public bool dirtySPR;//spore
+
     float[] savedVolumes;
 
     public static AudioManager Instance { get; set; }
@@ -100,6 +121,27 @@ public class AudioManager : MonoBehaviour
         {
             sounds[i].source.volume = sfxSlider.value;
         }
+        dirtyChar = true;
+        dirtyDrum  = true;
+        dirtyRol   = true;
+        dirtyPot   = true;
+        dirtyPar   = true;
+        dirtyGat   = true;
+        dirtyBla   = true;
+        dirtyLaz   = true;
+        dirtyPho   = true;
+        dirtySAP   = true;
+        dirtyNKB   = true;
+        dirtyHat   = true;
+        dirtyWeb   = true;
+        dirtySpi   = true;
+        dirtyNME   = true;
+        dirtyShoot   = true;
+        dirtyHP    = true;
+        dirtyBal   = true;
+        dirtySPR   = true;
+        dirtyTen   = true;
+
     }
 
     public float GetSFXVolume()
@@ -109,6 +151,26 @@ public class AudioManager : MonoBehaviour
 
     public void ToggleMute()
     {
+        dirtyChar = true;
+        dirtyDrum = true;
+        dirtyRol = true;
+        dirtyPot = true;
+        dirtyPar = true;
+        dirtyGat = true;
+        dirtyBla = true;
+        dirtyLaz = true;
+        dirtyPho = true;
+        dirtySAP = true;
+        dirtyNKB = true;
+        dirtyHat = true;
+        dirtyWeb = true;
+        dirtySpi = true;
+        dirtyNME = true;
+        dirtyShoot = true;
+        dirtyHP = true;
+        dirtyBal = true;
+        dirtyTen = true;
+
         if (muteToggle.isOn)
         {
             for (int i = 0; i < sounds.Length; i++)
@@ -130,4 +192,14 @@ public class AudioManager : MonoBehaviour
     {
         return muteToggle.isOn;
     }
+
+    //public bool GetDirty()
+    //{
+    //    return dirty;
+    //}
+
+    //public void SetDirty(bool d)
+    //{
+    //    dirty = d;
+    //}
 }

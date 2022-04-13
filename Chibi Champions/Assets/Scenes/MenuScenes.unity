@@ -4169,6 +4169,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &278752491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5652445391844231804, guid: 2f4d72b59ba413f43a1d9b0f14e97be2, type: 3}
+  m_PrefabInstance: {fileID: 1538158363}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &286891289 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5652445391844231776, guid: 2f4d72b59ba413f43a1d9b0f14e97be2, type: 3}
@@ -17231,6 +17236,15 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5652445391844231807, guid: 2f4d72b59ba413f43a1d9b0f14e97be2, type: 3}
   m_PrefabInstance: {fileID: 1538158363}
   m_PrefabAsset: {fileID: 0}
+--- !u!45 &1341064139
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278752491}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 0}
 --- !u!1 &1345394735
 GameObject:
   m_ObjectHideFlags: 0

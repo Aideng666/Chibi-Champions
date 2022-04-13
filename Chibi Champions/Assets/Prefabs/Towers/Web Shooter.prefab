@@ -117,7 +117,7 @@ MonoBehaviour:
   slowDuration: 5
   webPrefab: {fileID: 8083058699883285259, guid: e10304dcc8c093d4d831c12fe25d5dce, type: 3}
   partToRotate: {fileID: 8462961035799784666}
-  shot: {fileID: 0}
+  shot: {fileID: 6781656396433179124}
 --- !u!82 &6781656396433179124
 AudioSource:
   m_ObjectHideFlags: 0
@@ -138,7 +138,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 0
-  MinDistance: 5
+  MinDistance: 7
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0

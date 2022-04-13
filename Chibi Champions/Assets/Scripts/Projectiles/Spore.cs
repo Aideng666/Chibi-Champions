@@ -14,22 +14,30 @@ public class Spore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = GetComponent<NavMeshAgent>();   
+        bub.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (FindObjectOfType<AudioManager>().dirtySPR)
         {
-            bub.mute = true;
-        }
-        else
-        {
-            bub.mute = false;
+            if (FindObjectOfType<AudioManager>().isMute() == true)
+            {
+                bub.mute = true;
+            }
+            else
+            {
+                bub.mute = false;
+            }
+
+            bub.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            FindObjectOfType<AudioManager>().dirtySPR = false;
+
         }
 
-        bub.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
 
         navMeshAgent.destination = targetPlayer.transform.position;
 

@@ -54,8 +54,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 0
-  MinDistance: 3
-  MaxDistance: 7
+  MinDistance: 5
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -505,6 +505,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &1634135809476378369
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126878481984533517}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5048873, y: 1, z: 1.7856624}
+  m_Center: {x: 0.016137978, y: 0, z: 0.39283085}
 --- !u!95 &4514093009966384302
 Animator:
   serializedVersion: 4
@@ -541,16 +554,3 @@ MonoBehaviour:
   applyEffectDistance: 1.8
   walk: {fileID: 8761865723469343961}
   atk: {fileID: 5014508181151351633}
---- !u!65 &1634135809476378369
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2126878481984533517}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.5048873, y: 1, z: 1.7856624}
-  m_Center: {x: 0.016137978, y: 0, z: 0.39283085}

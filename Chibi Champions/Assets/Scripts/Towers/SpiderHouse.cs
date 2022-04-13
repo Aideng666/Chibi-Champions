@@ -12,19 +12,30 @@ public class SpiderHouse : Tower
 
     int currentSpiders = 0;
 
+    private void Start()
+    {
+        hatch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+    }
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (FindObjectOfType<AudioManager>().dirtyHat)
         {
-            hatch.mute = true;
-        }
-        else
-        {
-            hatch.mute = false;
+            if (FindObjectOfType<AudioManager>().isMute() == true)
+            {
+                hatch.mute = true;
+            }
+            else
+            {
+                hatch.mute = false;
+            }
+
+            hatch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            FindObjectOfType<AudioManager>().dirtyHat = false;
+
         }
 
-        hatch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
 
         UpdateView();
 

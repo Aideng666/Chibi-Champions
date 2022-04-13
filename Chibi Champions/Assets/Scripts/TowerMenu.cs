@@ -131,7 +131,7 @@ public class TowerMenu : MonoBehaviour
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[0].GetComponent<Tower>().GetCost());
 
-            FindObjectOfType<AudioManager>().Play("Build");
+            AudioManager.Instance.Play("Build");
         }
     }
 
@@ -144,7 +144,7 @@ public class TowerMenu : MonoBehaviour
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[1].GetComponent<Tower>().GetCost());
 
-            FindObjectOfType<AudioManager>().Play("Build");
+            AudioManager.Instance.Play("Build");
         }
     }
 
@@ -157,7 +157,7 @@ public class TowerMenu : MonoBehaviour
             CanvasManager.Instance.CloseTowerMenu();
             player.GetComponent<PointsManager>().SpendPoints(towers[2].GetComponent<Tower>().GetCost());
 
-            FindObjectOfType<AudioManager>().Play("Build");
+            AudioManager.Instance.Play("Build");
         }
     }
 
@@ -180,7 +180,7 @@ public class TowerMenu : MonoBehaviour
             currentTower.GetComponent<Tower>().Upgrade();
             //CanvasManager.Instance.CloseTowerMenu();
 
-            FindObjectOfType<AudioManager>().Play("Improve");
+            AudioManager.Instance.Play("Improve");
         }
     }
 
@@ -199,7 +199,7 @@ public class TowerMenu : MonoBehaviour
 
         player.GetComponent<PointsManager>().AddPoints((int)(currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7));
         Destroy(currentTower.gameObject);
-        FindObjectOfType<AudioManager>().Play("Sell");
+        AudioManager.Instance.Play("Sell");
         CanvasManager.Instance.CloseTowerMenu();
     }
 

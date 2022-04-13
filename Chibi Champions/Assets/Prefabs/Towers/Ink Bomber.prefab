@@ -4358,11 +4358,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   defaultAttackPriority: 0
-  attackRange: 8
+  attackRange: 12
   towerCost: 500
   towerDamage: 10
   attackDelay: 3
-  upgradeCosts: b00400000807000034080000
+  upgradeCosts: 90010000e8030000dc050000
   firePoint: {fileID: 3509385339138943341}
   towerRadius: {fileID: 2753410864271098760}
   upgradeNames:

@@ -7,31 +7,31 @@ public class MenuAudio : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!FindObjectOfType<AudioManager>().IsPlaying("Menu") && !FindObjectOfType<AudioManager>().IsPlaying("Menu"))
+        if (!AudioManager.Instance.IsPlaying("Menu") && !AudioManager.Instance.IsPlaying("Menu"))
         {
-            FindObjectOfType<AudioManager>().Play("Menu");
-            FindObjectOfType<AudioManager>().Loop("Menu");
+            AudioManager.Instance.Play("Menu");
+            AudioManager.Instance.Loop("Menu");
         }
     }
 
     public void HoverSound()
     {
-        FindObjectOfType<AudioManager>().Play("Select");
+        AudioManager.Instance.Play("Select");
     }
 
     public void ClickSound()
     {
-        FindObjectOfType<AudioManager>().Play("Click");
+        AudioManager.Instance.Play("Click");
 
     }
     public void BackSound()
     {
-        FindObjectOfType<AudioManager>().Play("Cancel");
+        AudioManager.Instance.Play("Cancel");
 
     }
     public void StartSound()
     {
-        FindObjectOfType<AudioManager>().Play("Start");
-        FindObjectOfType<AudioManager>().Stop("Menu");
+        AudioManager.Instance.Play("Start");
+        AudioManager.Instance.Stop("Menu");
     }
 }

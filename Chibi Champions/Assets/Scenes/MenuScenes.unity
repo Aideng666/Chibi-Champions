@@ -19608,6 +19608,26 @@ MonoBehaviour:
   musicSlider: {fileID: 1994402647}
   sfxSlider: {fileID: 1994009595}
   muteToggle: {fileID: 114428102}
+  dirtyChar: 0
+  dirtyDrum: 0
+  dirtyRol: 0
+  dirtyPot: 0
+  dirtyPar: 0
+  dirtyGat: 0
+  dirtyBla: 0
+  dirtyLaz: 0
+  dirtyPho: 0
+  dirtySAP: 0
+  dirtyNKB: 0
+  dirtyHat: 0
+  dirtyWeb: 0
+  dirtySpi: 0
+  dirtyNME: 0
+  dirtyShoot: 0
+  dirtyHP: 0
+  dirtyBal: 0
+  dirtyTen: 0
+  dirtySPR: 0
 --- !u!4 &1646281358
 Transform:
   m_ObjectHideFlags: 0
@@ -27436,6 +27456,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7457660658660927536, guid: 4f4799660b3367a46bebf2fd0cc06987, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0cfa0973dfae36a4f917b4b3c1c63ab3, type: 2}
     - target: {fileID: 7753304815382532000, guid: 4f4799660b3367a46bebf2fd0cc06987, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -27503,7 +27527,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8402584440585179733, guid: 9d9bd6859a4b77249af0de6d576d53c4, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8402584440585179733, guid: 9d9bd6859a4b77249af0de6d576d53c4, type: 3}
       propertyPath: m_LocalPosition.x

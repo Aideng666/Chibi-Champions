@@ -12,14 +12,16 @@ public class Photosynthesizer : Tower
 
     private void Start()
     {
-        music.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        base.StartTower();
+
+        music.volume = AudioManager.Instance.GetSFXVolume();
     }
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().dirtyPho)
+        if (AudioManager.Instance.dirtyPho)
         {
-            if (FindObjectOfType<AudioManager>().isMute() == true)
+            if (AudioManager.Instance.isMute() == true)
             {
                 music.mute = true;
             }
@@ -28,8 +30,8 @@ public class Photosynthesizer : Tower
                 music.mute = false;
             }
 
-            music.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            FindObjectOfType<AudioManager>().dirtyPho = false;
+            music.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyPho = false;
 
         }
 

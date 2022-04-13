@@ -212,7 +212,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: dbf09114ffc191b449bab54b906600a1, type: 3}
   tennisBallPrefab: {fileID: 7085326149237912130, guid: d3c636d0d193c8b4d94c9f4c06528e3e, type: 3}
   launchForce: 8
-  fuseDuration: 5
+  fuseDuration: 3
   shot: {fileID: 7528698182150564515}
 --- !u!82 &7528698182150564515
 AudioSource:

@@ -12,15 +12,17 @@ public class ChickenLaser : Tower
 
     private void Start()
     {
-        beam.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        base.StartTower();
+
+        beam.volume = AudioManager.Instance.GetSFXVolume();
         beam.loop = true;
     }
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().dirtyLaz)
+        if (AudioManager.Instance.dirtyLaz)
         {
-            if (FindObjectOfType<AudioManager>().isMute() == true)
+            if (AudioManager.Instance.isMute() == true)
             {
                 beam.mute = true;
             }
@@ -29,8 +31,8 @@ public class ChickenLaser : Tower
                 beam.mute = false;
             }
 
-            beam.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            FindObjectOfType<AudioManager>().dirtyLaz = false;
+            beam.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyLaz = false;
 
         }
 

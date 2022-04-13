@@ -50,8 +50,6 @@ public class EnemySpawner : MonoBehaviour
             enemy.GetComponent<GruntController>().SetLevel(levelList[currentSpawnAmount]);
 
             enemy.transform.position = transform.position;
-
-            //print($"Spawn Position: {transform.position} Enemy Position: {enemy.transform.position}");
         }
         else if(spawnList[currentSpawnAmount].name.Contains("SharpShooter"))
         {

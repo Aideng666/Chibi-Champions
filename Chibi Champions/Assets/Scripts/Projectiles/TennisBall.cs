@@ -17,16 +17,16 @@ public class TennisBall : MonoBehaviour
     void Start()
     {
         StartCoroutine(Fuse());        
-        fuze.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        fuze.volume = AudioManager.Instance.GetSFXVolume();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().dirtyBal)
+        if (AudioManager.Instance.dirtyBal)
         {
-            if (FindObjectOfType<AudioManager>().isMute() == true)
+            if (AudioManager.Instance.isMute() == true)
             {
                 fuze.mute = true;
             }
@@ -35,8 +35,8 @@ public class TennisBall : MonoBehaviour
                 fuze.mute = false;
             }
 
-            fuze.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            FindObjectOfType<AudioManager>().dirtyBal= false;
+            fuze.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyBal= false;
 
         }
 

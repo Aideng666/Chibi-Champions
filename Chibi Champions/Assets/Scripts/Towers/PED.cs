@@ -12,15 +12,16 @@ public class PED : Tower
 
     private void Start()
     {
-        bloop.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        shake.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        base.StartTower();
 
+        bloop.volume = AudioManager.Instance.GetSFXVolume();
+        shake.volume = AudioManager.Instance.GetSFXVolume();
     }
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().dirtySAP)
+        if (AudioManager.Instance.dirtySAP)
         {
-            if (FindObjectOfType<AudioManager>().isMute() == true)
+            if (AudioManager.Instance.isMute() == true)
             {
                 bloop.mute = true;
                 shake.mute = true;
@@ -30,9 +31,9 @@ public class PED : Tower
                 bloop.mute = false;
                 shake.mute = false;
             }
-            bloop.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            shake.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            FindObjectOfType<AudioManager>().dirtySAP = false;
+            bloop.volume = AudioManager.Instance.GetSFXVolume();
+            shake.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtySAP = false;
 
         }
 

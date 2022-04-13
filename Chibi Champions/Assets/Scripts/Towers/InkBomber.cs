@@ -14,15 +14,16 @@ public class InkBomber : Tower
 
     private void Start()
     {
-        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        base.StartTower();
 
+        shot.volume = AudioManager.Instance.GetSFXVolume();
     }
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().dirtyNKB)
+        if (AudioManager.Instance.dirtyNKB)
         {
-            if (FindObjectOfType<AudioManager>().isMute() == true)
+            if (AudioManager.Instance.isMute() == true)
             {
                 shot.mute = true;
             }
@@ -31,11 +32,10 @@ public class InkBomber : Tower
                 shot.mute = false;
             }
 
-            shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            FindObjectOfType<AudioManager>().dirtyNKB = false;
+            shot.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyNKB = false;
 
         }
-
 
         UpdateView();
 
@@ -79,7 +79,10 @@ public class InkBomber : Tower
 
         yield return new WaitForSeconds(stunDuration);
 
-        enemy.GetComponentInParent<NavMeshAgent>().speed = enemy.GetComponentInParent<Enemy>().GetDefaultSpeed();
+        if (enemy.activeSelf)
+        {
+            enemy.GetComponentInParent<NavMeshAgent>().speed = enemy.GetComponentInParent<Enemy>().GetDefaultSpeed();
+        }
     }
 
     public override void Upgrade()

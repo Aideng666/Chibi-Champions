@@ -14,14 +14,16 @@ public class SpiderHouse : Tower
 
     private void Start()
     {
-        hatch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        base.StartTower();
+
+        hatch.volume = AudioManager.Instance.GetSFXVolume();
     }
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().dirtyHat)
+        if (AudioManager.Instance.dirtyHat)
         {
-            if (FindObjectOfType<AudioManager>().isMute() == true)
+            if (AudioManager.Instance.isMute() == true)
             {
                 hatch.mute = true;
             }
@@ -30,8 +32,8 @@ public class SpiderHouse : Tower
                 hatch.mute = false;
             }
 
-            hatch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            FindObjectOfType<AudioManager>().dirtyHat = false;
+            hatch.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyHat = false;
 
         }
 

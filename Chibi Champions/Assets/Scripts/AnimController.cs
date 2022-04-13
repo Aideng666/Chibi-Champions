@@ -93,8 +93,6 @@ public class AnimController : MonoBehaviour
         }
         if (anim == potterAnimator)
         {
-            print("Walking Potter Animator");
-
             if (forward)
             {
                 potterAnimator.SetBool("WalkForward", isWalking);

@@ -37,7 +37,7 @@ public class Tower : MonoBehaviour
 
     protected int totalPointsSpent;
 
-    private void Start()
+    protected void StartTower()
     {
         currentAttackPriority = defaultAttackPriority;
 

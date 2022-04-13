@@ -52,9 +52,18 @@ public class AudioManager : MonoBehaviour
             s.source.outputAudioMixerGroup = s.group;
         }
 
-        musicSlider.value = sounds[0].source.volume;
-        sfxSlider.value = 0.5f;
-        muteToggle.isOn = false;
+        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+        //sfxSlider.value = 0.5f;
+
+        if (PlayerPrefs.GetInt("Mute") == 0)
+        {
+            muteToggle.isOn = false;
+        }
+        else
+        {
+            muteToggle.isOn = true;
+        }
 
         savedVolumes = new float[sounds.Length];
         musicSlider.onValueChanged.AddListener(delegate { SetMusicVolume(); });
@@ -108,6 +117,8 @@ public class AudioManager : MonoBehaviour
     {
         sounds[0].source.volume = musicSlider.value;
         sounds[1].source.volume = musicSlider.value;
+
+        PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
     }
 
     public float GetMusicVolume()
@@ -121,6 +132,9 @@ public class AudioManager : MonoBehaviour
         {
             sounds[i].source.volume = sfxSlider.value;
         }
+
+        PlayerPrefs.SetFloat("SFXVolume", musicSlider.value);
+
         dirtyChar = true;
         dirtyDrum  = true;
         dirtyRol   = true;
@@ -178,6 +192,8 @@ public class AudioManager : MonoBehaviour
                 savedVolumes[i] = sounds[i].source.volume;
                 sounds[i].source.mute = true;
             }
+
+            PlayerPrefs.SetInt("Mute", 1);
         }
         else
         {
@@ -185,6 +201,8 @@ public class AudioManager : MonoBehaviour
             {
                 sounds[i].source.mute = false; //savedVolumes[i];
             }
+
+            PlayerPrefs.SetInt("Mute", 0);
         }
     }
 

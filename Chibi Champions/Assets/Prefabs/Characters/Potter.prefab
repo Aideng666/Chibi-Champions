@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a121279ad207934d8cd44e3ff3ee842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingPoints: 50000
+  startingPoints: 1000
   pointsText: {fileID: 0}
 --- !u!114 &6309032079135903695
 MonoBehaviour:
@@ -879,6 +879,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Potter(v1.8)
       objectReference: {fileID: 0}
+    - target: {fileID: 2165365876221727147, guid: 167f575517234ee45a17187622907eb6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0cfa0973dfae36a4f917b4b3c1c63ab3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 167f575517234ee45a17187622907eb6, type: 3}
 --- !u!4 &2733069992715830795 stripped

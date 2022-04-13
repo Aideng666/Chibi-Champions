@@ -21,7 +21,7 @@ public class MenuController : MonoBehaviour
     {
         if (Input.anyKeyDown && frames[0].activeInHierarchy)
         {
-            FindObjectOfType<AudioManager>().Play("Click");
+            AudioManager.Instance.Play("Click");
             StartCoroutine(LoadFadeTransitions(frames[0], frames[1]));
         }
 

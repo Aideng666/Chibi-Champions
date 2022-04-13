@@ -18,16 +18,16 @@ public class HealthPack : MonoBehaviour
     {
         currentTime = cooldown;
         cooldownText.text = string.Empty;
-        heal.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        heal.volume = AudioManager.Instance.GetSFXVolume();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().dirtyHP)
+        if (AudioManager.Instance.dirtyHP)
         {
-            if (FindObjectOfType<AudioManager>().isMute() == true)
+            if (AudioManager.Instance.isMute() == true)
             {
                 heal.mute = true;
             }
@@ -36,8 +36,8 @@ public class HealthPack : MonoBehaviour
                 heal.mute = false;
             }
 
-            heal.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            FindObjectOfType<AudioManager>().dirtyHP = false;
+            heal.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyHP = false;
 
         }
 

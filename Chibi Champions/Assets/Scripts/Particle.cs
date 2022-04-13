@@ -12,7 +12,7 @@ public class Particle : MonoBehaviour
         particle = GetComponent<ParticleSystem>();
         if (GetComponent<AudioSource>() != null)
         {
-            GetComponent<AudioSource>().volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            GetComponent<AudioSource>().volume = AudioManager.Instance.GetSFXVolume();
 
         }
 
@@ -29,9 +29,9 @@ public class Particle : MonoBehaviour
       
         if (GetComponent<AudioSource>() != null)
         {  
-            if (FindObjectOfType<AudioManager>().dirtyPar)
+            if (AudioManager.Instance.dirtyPar)
             {
-                if (FindObjectOfType<AudioManager>().isMute() == true)
+                if (AudioManager.Instance.isMute() == true)
                 {
                     GetComponent<AudioSource>().mute = true;
                 }
@@ -39,8 +39,8 @@ public class Particle : MonoBehaviour
                 {
                     GetComponent<AudioSource>().mute = false;
                 }
-                GetComponent<AudioSource>().volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-                FindObjectOfType<AudioManager>().dirtyPar = false;
+                GetComponent<AudioSource>().volume = AudioManager.Instance.GetSFXVolume();
+                AudioManager.Instance.dirtyPar = false;
 
             }
         }

@@ -11,15 +11,16 @@ public class TennisBomb : Tower
 
     private void Start()
     {
-        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        base.StartTower();
 
+        shot.volume = AudioManager.Instance.GetSFXVolume();
     }
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().dirtyTen)
+        if (AudioManager.Instance.dirtyTen)
         {
-            if (FindObjectOfType<AudioManager>().isMute() == true)
+            if (AudioManager.Instance.isMute() == true)
             {
                 shot.mute = true;
             }
@@ -28,8 +29,8 @@ public class TennisBomb : Tower
                 shot.mute = false;
             }
 
-            shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            FindObjectOfType<AudioManager>().dirtyTen = false;
+            shot.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyTen = false;
 
         }
 

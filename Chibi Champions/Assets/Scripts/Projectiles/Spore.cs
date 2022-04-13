@@ -15,16 +15,16 @@ public class Spore : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();   
-        bub.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        bub.volume = AudioManager.Instance.GetSFXVolume();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().dirtySPR)
+        if (AudioManager.Instance.dirtySPR)
         {
-            if (FindObjectOfType<AudioManager>().isMute() == true)
+            if (AudioManager.Instance.isMute() == true)
             {
                 bub.mute = true;
             }
@@ -33,8 +33,8 @@ public class Spore : MonoBehaviour
                 bub.mute = false;
             }
 
-            bub.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            FindObjectOfType<AudioManager>().dirtySPR = false;
+            bub.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtySPR = false;
 
         }
 
@@ -48,7 +48,7 @@ public class Spore : MonoBehaviour
 
         if (tower.GetLevel() == 4)
         {
-            navMeshAgent.speed = 6;
+            navMeshAgent.speed = 10;
         }
     }
 

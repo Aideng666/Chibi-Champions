@@ -19,16 +19,16 @@ public class Rolfe : PlayerController
     void Start()
     {
         base.Start();
-        scratch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        set.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        scratch.volume = AudioManager.Instance.GetSFXVolume();
+        set.volume = AudioManager.Instance.GetSFXVolume();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().dirtyRol)
+        if (AudioManager.Instance.dirtyRol)
         {
-            if (FindObjectOfType<AudioManager>().isMute() == true)
+            if (AudioManager.Instance.isMute() == true)
             {
                 scratch.mute = true;
                 set.mute = true;
@@ -39,9 +39,9 @@ public class Rolfe : PlayerController
                 set.mute = false;
             }
 
-            scratch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            set.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            FindObjectOfType<AudioManager>().dirtyRol = false;
+            scratch.volume = AudioManager.Instance.GetSFXVolume();
+            set.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyRol = false;
 
         }
 
@@ -76,7 +76,6 @@ public class Rolfe : PlayerController
                         enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
                         enemy.GetComponentInParent<Enemy>().Knockback(20, transform);
                         enemy.GetComponentInParent<Enemy>().SetLastHit(this);
-                        //GetComponent<PointsManager>().AddPoints(20);
                         enemy.GetComponentInParent<Enemy>().HitSound();
 
                         ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);

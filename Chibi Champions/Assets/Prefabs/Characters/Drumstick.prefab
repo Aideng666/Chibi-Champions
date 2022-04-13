@@ -332,7 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a121279ad207934d8cd44e3ff3ee842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingPoints: 0
+  startingPoints: 1000
   pointsText: {fileID: 0}
 --- !u!82 &8155652094558493256
 AudioSource:

@@ -24,7 +24,7 @@ public class Cure : MonoBehaviour
         healthText = GetComponentInChildren<TextMeshProUGUI>();
         cureUIHPText.text = GetComponent<Health>().GetCurrentHealth().ToString() + " / 100";
         pastHP = GetComponent<Health>().GetCurrentHealth();
-        FindObjectOfType<AudioManager>().Loop("Alarm");
+        AudioManager.Instance.Loop("Alarm");
     }
     // Update is called once per frame
     void Update()
@@ -46,21 +46,21 @@ public class Cure : MonoBehaviour
             AlertManager.Instance.DisplayAlert(new Alert(Color.white, "The Cure Is At 50 HP!", 1));
             alertFired = true;
 
-            FindObjectOfType<AudioManager>().Play("Cure Damage");
+            AudioManager.Instance.Play("Cure Damage");
         }
         if (GetComponent<Health>().GetCurrentHealth() <= 25 && !alert2Fired)
         {
             AlertManager.Instance.DisplayAlert(new Alert(Color.white, "The Cure Is At 25 HP!", 2));
             alert2Fired = true;
 
-            FindObjectOfType<AudioManager>().Play("Cure Damage");
+            AudioManager.Instance.Play("Cure Damage");
         }
         if (GetComponent<Health>().GetCurrentHealth() <= 10 && !alert3Fired)
         {
             AlertManager.Instance.DisplayAlert(new Alert(Color.white, "The Cure Only Has 10 HP Left!", 2));
             alert3Fired = true;
 
-            FindObjectOfType<AudioManager>().Play("Cure Damage");
+            AudioManager.Instance.Play("Cure Damage");
         }
 
         if (GetComponent<Health>().GetCurrentHealth() <= 0 && !loseStarted)
@@ -76,12 +76,12 @@ public class Cure : MonoBehaviour
         if (GetComponent<Health>().GetCurrentHealth() < pastHP)
         {
             pastHP = GetComponent<Health>().GetCurrentHealth();
-            if (!FindObjectOfType<AudioManager>().IsPlaying("Alarm"))
-                FindObjectOfType<AudioManager>().Play("Alarm");
+            if (!AudioManager.Instance.IsPlaying("Alarm"))
+                AudioManager.Instance.Play("Alarm");
         }
         else
         {
-            FindObjectOfType<AudioManager>().StopLoop("Alarm");
+            AudioManager.Instance.StopLoop("Alarm");
         }
     }
 

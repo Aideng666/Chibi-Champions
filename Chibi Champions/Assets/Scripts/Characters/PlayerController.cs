@@ -95,18 +95,18 @@ public class PlayerController : MonoBehaviour
         abilityImageMain.sprite = character.abilitySprites[1];
 
         respawnTime = deathTimer;
-        jump.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        dead.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        hit.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        refresh.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        jump.volume = AudioManager.Instance.GetSFXVolume();
+        dead.volume = AudioManager.Instance.GetSFXVolume();
+        hit.volume = AudioManager.Instance.GetSFXVolume();
+        refresh.volume = AudioManager.Instance.GetSFXVolume();
     }
 
     // Update is called once per frame
     protected void Update()
     {
-        if (FindObjectOfType<AudioManager>().dirtyChar)
+        if (AudioManager.Instance.dirtyChar)
         {
-            if (FindObjectOfType<AudioManager>().isMute() == true)
+            if (AudioManager.Instance.isMute() == true)
             {
                 jump.mute = true;
                 dead.mute = true;
@@ -121,11 +121,11 @@ public class PlayerController : MonoBehaviour
                 refresh.mute = false;
             }
 
-            jump.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            dead.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            hit.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            refresh.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            FindObjectOfType<AudioManager>().dirtyChar = false;
+            jump.volume = AudioManager.Instance.GetSFXVolume();
+            dead.volume = AudioManager.Instance.GetSFXVolume();
+            hit.volume = AudioManager.Instance.GetSFXVolume();
+            refresh.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyChar = false;
         }
 
 

@@ -4559,7 +4559,7 @@ MonoBehaviour:
   towerCost: 500
   towerDamage: 10
   attackDelay: 1
-  upgradeCosts: 58020000a4060000d80e0000
+  upgradeCosts: 2c010000dc050000ac0d0000
   firePoint: {fileID: 3258824005039446072}
   towerRadius: {fileID: 5528698758805209792}
   upgradeNames:

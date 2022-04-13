@@ -89,7 +89,7 @@ MonoBehaviour:
   defaultAttackPriority: 0
   attackRange: 15
   towerCost: 500
-  towerDamage: 10
+  towerDamage: 15
   attackDelay: 3
   upgradeCosts: 58020000e803000060090000
   firePoint: {fileID: 180069340930044984}

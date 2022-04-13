@@ -18799,7 +18799,7 @@ PrefabInstance:
       objectReference: {fileID: 889274041}
     - target: {fileID: 6888943266945402818, guid: 82f913cf228c23f4ca0232e9553341f5, type: 3}
       propertyPath: startingPoints
-      value: 1000
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 6888943266945402819, guid: 82f913cf228c23f4ca0232e9553341f5, type: 3}
       propertyPath: m_Name
@@ -19816,7 +19816,7 @@ PrefabInstance:
       objectReference: {fileID: 889274041}
     - target: {fileID: 6529732846633032355, guid: 6270dcff9a3f83b4c973a848e3f9862a, type: 3}
       propertyPath: startingPoints
-      value: 1000
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 7119225767286984801, guid: 6270dcff9a3f83b4c973a848e3f9862a, type: 3}
       propertyPath: m_PlayOnAwake
@@ -25906,7 +25906,7 @@ PrefabInstance:
       objectReference: {fileID: 889274041}
     - target: {fileID: 6309032079135903694, guid: baf24658fe245814e8a1909358d3837b, type: 3}
       propertyPath: startingPoints
-      value: 1000
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 6309032079135903695, guid: baf24658fe245814e8a1909358d3837b, type: 3}
       propertyPath: cam
@@ -25934,7 +25934,7 @@ PrefabInstance:
       objectReference: {fileID: 876281505}
     - target: {fileID: 6309032079135903695, guid: baf24658fe245814e8a1909358d3837b, type: 3}
       propertyPath: lightAttackDamage
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6309032079135903695, guid: baf24658fe245814e8a1909358d3837b, type: 3}
       propertyPath: towers.Array.data[0]

@@ -47,22 +47,28 @@ public class Enemy : MonoBehaviour
         playerControllers = FindObjectsOfType<PlayerController>();
 
         navMeshAgent.speed = defaultSpeed;
+        hit.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
     }
 
     // Update is called once per frame
     protected void Update()
     {
-        //if (FindObjectOfType<AudioManager>().isMute() == true)
-        //{
-        //    hit.mute = true;
-        //}
-        //else
-        //{
-        //    hit.mute = false;
-        //}
+        if (FindObjectOfType<AudioManager>().dirtyNME)
+        {
+            if (FindObjectOfType<AudioManager>().isMute() == true)
+            {
+                hit.mute = true;
+            }
+            else
+            {
+                hit.mute = false;
+            }
 
-        //hit.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            hit.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            FindObjectOfType<AudioManager>().dirtyNME = false;
 
+        }
         TennisBall[] tennisBalls = ObjectManager.Instance.GetTennisBalls();
 
         if (!knockbackApplied)
@@ -217,7 +223,10 @@ public class Enemy : MonoBehaviour
             body = GetComponent<Rigidbody>();
         }
 
-        body.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        if (GetComponent<Rigidbody>() != null)
+        {
+            body.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        }
 
         Vector3 direction = (transform.position - origin.position).normalized;
         direction.y = 1;

@@ -19,24 +19,32 @@ public class Rolfe : PlayerController
     void Start()
     {
         base.Start();
+        scratch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        set.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (FindObjectOfType<AudioManager>().dirtyRol)
         {
-            scratch.mute = true;
-            set.mute = true;
-        }
-        else
-        {
-            scratch.mute = false;
-            set.mute = false;
+            if (FindObjectOfType<AudioManager>().isMute() == true)
+            {
+                scratch.mute = true;
+                set.mute = true;
+            }
+            else
+            {
+                scratch.mute = false;
+                set.mute = false;
+            }
+
+            scratch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            set.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            FindObjectOfType<AudioManager>().dirtyRol = false;
+
         }
 
-        scratch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        set.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
 
         if (isPlayerCharacter)
         {

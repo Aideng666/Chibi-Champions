@@ -11,19 +11,28 @@ public class GatlingDrummet : Tower
     [SerializeField] AudioSource shot;
 
     // Update is called once per frame
+    private void Start()
+    {
+        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+    }
     void Update()
     {
-        //if (FindObjectOfType<AudioManager>().isMute() == true)
-        //{
-        //    shot.mute = true;
-        //}
-        //else
-        //{
-        //    shot.mute = false;
-        //}
+        if (FindObjectOfType<AudioManager>().dirtyGat)
+        {
 
-        //shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            if (FindObjectOfType<AudioManager>().isMute() == true)
+            {
+                shot.mute = true;
+            }
+            else
+            {
+                shot.mute = false;
+            }
 
+            shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            FindObjectOfType<AudioManager>().dirtyGat = false;
+
+        }
         UpdateView();
 
         if (targetEnemy == null)

@@ -28,6 +28,9 @@ public class SharpshooterController : Enemy
         bulletTrail = GetComponentInChildren<LineRenderer>();
 
         bulletTrail.enabled = false;
+
+        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
     }
 
     // Update is called once per frame
@@ -35,18 +38,24 @@ public class SharpshooterController : Enemy
     {
         base.Update();
 
-        //if (FindObjectOfType<AudioManager>().isMute() == true)
-        //{
-        //    shot.mute = true;
-        //}
-        //else
-        //{
-        //    shot.mute = false;
-        //}
+        if (FindObjectOfType<AudioManager>().dirtyShoot)
+        {
+            if (FindObjectOfType<AudioManager>().isMute() == true)
+            {
+                shot.mute = true;
+            }
+            else
+            {
+                shot.mute = false;
+            }
 
-        //shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        //shot.maxDistance = attackRange;
-        //shot.minDistance = shot.maxDistance - 2;
+            shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            FindObjectOfType<AudioManager>().dirtyShoot = false;
+
+        }
+
+
+
 
         if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0)
         {

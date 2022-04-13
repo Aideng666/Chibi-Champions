@@ -11,19 +11,29 @@ public class WebShooter : Tower
     [SerializeField] GameObject partToRotate;
     [SerializeField] AudioSource shot;
 
+    private void Start()
+    {
+        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+    }
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
-        {
-            shot.mute = true;
-        }
-        else
-        {
-            shot.mute = false;
+        if (FindObjectOfType<AudioManager>().dirtyWeb) { 
+            if (FindObjectOfType<AudioManager>().isMute() == true)
+            {
+                shot.mute = true;
+            }
+            else
+            {
+                shot.mute = false;
+            }
+
+            shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            FindObjectOfType<AudioManager>().dirtyWeb = false;
+
         }
 
-        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
 
         UpdateView();
 

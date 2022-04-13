@@ -16,22 +16,31 @@ public class TennisBall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(Fuse());
+        StartCoroutine(Fuse());        
+        fuze.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (FindObjectOfType<AudioManager>().dirtyBal)
         {
-            fuze.mute = true;
-        }
-        else
-        {
-            fuze.mute = false;
+            if (FindObjectOfType<AudioManager>().isMute() == true)
+            {
+                fuze.mute = true;
+            }
+            else
+            {
+                fuze.mute = false;
+            }
+
+            fuze.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            FindObjectOfType<AudioManager>().dirtyBal= false;
+
         }
 
-        fuze.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
 
         if (fuseEnded)
         {

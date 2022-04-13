@@ -29,7 +29,7 @@ public class SharpshooterController : Enemy
 
         bulletTrail.enabled = false;
 
-        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        shot.volume = AudioManager.Instance.GetSFXVolume();
 
     }
 
@@ -38,9 +38,9 @@ public class SharpshooterController : Enemy
     {
         base.Update();
 
-        if (FindObjectOfType<AudioManager>().dirtyShoot)
+        if (AudioManager.Instance.dirtyShoot)
         {
-            if (FindObjectOfType<AudioManager>().isMute() == true)
+            if (AudioManager.Instance.isMute() == true)
             {
                 shot.mute = true;
             }
@@ -49,29 +49,47 @@ public class SharpshooterController : Enemy
                 shot.mute = false;
             }
 
-            shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            FindObjectOfType<AudioManager>().dirtyShoot = false;
-
+            shot.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyShoot = false;
         }
-
-
-
 
         if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0)
         {
-            foreach (PlayerController player in FindObjectsOfType<PlayerController>())
+            bulletTrail.enabled = false;
+
+            PlayerController[] players = FindObjectsOfType<PlayerController>();
+
+            if (players.Length == 1)
             {
                 if (level == 1)
                 {
-                    player.GetComponent<PointsManager>().AddPoints(25);
+                    players[0].GetComponent<PointsManager>().AddPoints(70);
                 }
                 else if (level == 2)
                 {
-                    player.GetComponent<PointsManager>().AddPoints(50);
+                    players[0].GetComponent<PointsManager>().AddPoints(120);
                 }
                 else if (level == 3)
                 {
-                    player.GetComponent<PointsManager>().AddPoints(100);
+                    players[0].GetComponent<PointsManager>().AddPoints(190);
+                }
+            }
+            else
+            {
+                foreach (PlayerController player in players)
+                {
+                    if (level == 1)
+                    {
+                        player.GetComponent<PointsManager>().AddPoints(45);
+                    }
+                    else if (level == 2)
+                    {
+                        player.GetComponent<PointsManager>().AddPoints(80);
+                    }
+                    else if (level == 3)
+                    {
+                        player.GetComponent<PointsManager>().AddPoints(130);
+                    }
                 }
             }
 

@@ -22,23 +22,32 @@ public class Spider : MonoBehaviour
 
     int effectedEnemies = 0;
 
+    float timeAlive = 0;
+    float lifespanIfNoEnemyFound = 30;
+
     private enum SpiderStates
     {
         enemySighted,
         noEnemySighted
     }
-    private void Start()
-    {
-        walk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        atk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
+    private void Start()
+    {
+        walk.volume = AudioManager.Instance.GetSFXVolume();
+        atk.volume = AudioManager.Instance.GetSFXVolume();
     }
 
     // Update is called once per frame
     void Update()
-    {
-        if (FindObjectOfType<AudioManager>().dirtySpi)
-        {
-            if (FindObjectOfType<AudioManager>().isMute() == true)
+    {
+        if (timeAlive >= lifespanIfNoEnemyFound)
+        {
+            Destroy(gameObject);
+        }
+
+        if (AudioManager.Instance.dirtySpi)
+        {
+            if (AudioManager.Instance.isMute() == true)
             {
                 walk.mute = true;
                 atk.mute = true;
@@ -49,13 +58,10 @@ public class Spider : MonoBehaviour
                 atk.mute = false;
             }
 
-            walk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            atk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-            FindObjectOfType<AudioManager>().dirtySpi = false;
-
+            walk.volume = AudioManager.Instance.GetSFXVolume();
+            atk.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtySpi = false;
         }
-
-
         Collider[] EnemiesInView = Physics.OverlapSphere(transform.position, tower.GetRange(), tower.GetEnemyLayer());
 
         if (EnemiesInView == null || EnemiesInView.Length < 1)
@@ -115,6 +121,8 @@ public class Spider : MonoBehaviour
         {
             SearchForEnemy();
         }
+
+        timeAlive += Time.deltaTime;
     }
 
     void ChaseEnemy(GameObject enemy)

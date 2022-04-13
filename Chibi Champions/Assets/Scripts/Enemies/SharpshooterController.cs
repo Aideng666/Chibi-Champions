@@ -28,6 +28,9 @@ public class SharpshooterController : Enemy
         bulletTrail = GetComponentInChildren<LineRenderer>();
 
         bulletTrail.enabled = false;
+
+        shot.volume = AudioManager.Instance.GetSFXVolume();
+
     }
 
     // Update is called once per frame
@@ -35,34 +38,58 @@ public class SharpshooterController : Enemy
     {
         base.Update();
 
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (AudioManager.Instance.dirtyShoot)
         {
-            shot.mute = true;
-        }
-        else
-        {
-            shot.mute = false;
-        }
+            if (AudioManager.Instance.isMute() == true)
+            {
+                shot.mute = true;
+            }
+            else
+            {
+                shot.mute = false;
+            }
 
-        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        shot.maxDistance = attackRange;
-        shot.minDistance = shot.maxDistance - 2;
+            shot.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyShoot = false;
+        }
 
         if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0)
         {
-            foreach (PlayerController player in FindObjectsOfType<PlayerController>())
+            bulletTrail.enabled = false;
+
+            PlayerController[] players = FindObjectsOfType<PlayerController>();
+
+            if (players.Length == 1)
             {
                 if (level == 1)
                 {
-                    player.GetComponent<PointsManager>().AddPoints(25);
+                    players[0].GetComponent<PointsManager>().AddPoints(70);
                 }
                 else if (level == 2)
                 {
-                    player.GetComponent<PointsManager>().AddPoints(50);
+                    players[0].GetComponent<PointsManager>().AddPoints(120);
                 }
                 else if (level == 3)
                 {
-                    player.GetComponent<PointsManager>().AddPoints(100);
+                    players[0].GetComponent<PointsManager>().AddPoints(190);
+                }
+            }
+            else
+            {
+                foreach (PlayerController player in players)
+                {
+                    if (level == 1)
+                    {
+                        player.GetComponent<PointsManager>().AddPoints(45);
+                    }
+                    else if (level == 2)
+                    {
+                        player.GetComponent<PointsManager>().AddPoints(80);
+                    }
+                    else if (level == 3)
+                    {
+                        player.GetComponent<PointsManager>().AddPoints(130);
+                    }
                 }
             }
 
@@ -99,7 +126,7 @@ public class SharpshooterController : Enemy
 
         delayBeforeAttackReached = false;
         navMeshAgent.isStopped = false;
-        AnimController.Instance.SetEnemyIsWalking(GetComponent<Animator>(), true);
+        AnimController.Instance.SetEnemyIsWalking(GetComponentInChildren<Animator>(), true);
     }
 
     protected override void AttackPlayer()
@@ -139,7 +166,7 @@ public class SharpshooterController : Enemy
 
         delayBeforeAttackReached = false;
         navMeshAgent.isStopped = false;
-        AnimController.Instance.SetEnemyIsWalking(GetComponent<Animator>(), true);
+        AnimController.Instance.SetEnemyIsWalking(GetComponentInChildren<Animator>(), true);
     }
 
     protected override IEnumerator DelayBeforeAttack()
@@ -150,7 +177,8 @@ public class SharpshooterController : Enemy
             {
                 navMeshAgent.isStopped = true;
 
-                AnimController.Instance.SetEnemyIsWalking(GetComponent<Animator>(), false);
+                AnimController.Instance.SetEnemyIsWalking(GetComponentInChildren<Animator>(), false);
+                AnimController.Instance.PlayEnemyAttackAnim(GetComponentInChildren<Animator>());
             }
 
             yield return new WaitForSeconds(0.4f);
@@ -163,7 +191,8 @@ public class SharpshooterController : Enemy
             {
                 navMeshAgent.isStopped = true;
 
-                AnimController.Instance.SetEnemyIsWalking(GetComponent<Animator>(), false);
+                AnimController.Instance.SetEnemyIsWalking(GetComponentInChildren<Animator>(), false);
+                AnimController.Instance.PlayEnemyAttackAnim(GetComponentInChildren<Animator>());
             }
 
             yield return new WaitForSeconds(0.4f);

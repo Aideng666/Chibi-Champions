@@ -50,14 +50,14 @@ public class EnemyPool : MonoBehaviour
 
     private void CreatePools()
     {
-        for (int i = 0; i < 20; ++i)
+        for (int i = 0; i < 50; ++i)
         {
             var instanceToAdd = Instantiate(gruntPrefab);
             instanceToAdd.transform.SetParent(transform);
             AddToGruntPool(instanceToAdd);
         }
 
-        for (int i = 0; i < 20; ++i)
+        for (int i = 0; i < 50; ++i)
         {
             var instanceToAdd = Instantiate(sharpshooterPrefab);
             instanceToAdd.transform.SetParent(transform);

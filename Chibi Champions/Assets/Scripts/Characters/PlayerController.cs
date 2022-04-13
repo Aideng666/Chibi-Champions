@@ -95,30 +95,40 @@ public class PlayerController : MonoBehaviour
         abilityImageMain.sprite = character.abilitySprites[1];
 
         respawnTime = deathTimer;
+        jump.volume = AudioManager.Instance.GetSFXVolume();
+        dead.volume = AudioManager.Instance.GetSFXVolume();
+        hit.volume = AudioManager.Instance.GetSFXVolume();
+        refresh.volume = AudioManager.Instance.GetSFXVolume();
     }
 
     // Update is called once per frame
     protected void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (AudioManager.Instance.dirtyChar)
         {
-            jump.mute = true;
-            dead.mute = true;
-            hit.mute = true;
-            refresh.mute = true;
-        }
-        else
-        {
-            jump.mute = false;
-            dead.mute = false;
-            hit.mute = false;
-            refresh.mute = false;
+            if (AudioManager.Instance.isMute() == true)
+            {
+                jump.mute = true;
+                dead.mute = true;
+                hit.mute = true;
+                refresh.mute = true;
+            }
+            else
+            {
+                jump.mute = false;
+                dead.mute = false;
+                hit.mute = false;
+                refresh.mute = false;
+            }
+
+            jump.volume = AudioManager.Instance.GetSFXVolume();
+            dead.volume = AudioManager.Instance.GetSFXVolume();
+            hit.volume = AudioManager.Instance.GetSFXVolume();
+            refresh.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyChar = false;
         }
 
-        jump.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        dead.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        hit.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        refresh.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
 
         if (isPlayerCharacter)
         {
@@ -268,6 +278,7 @@ public class PlayerController : MonoBehaviour
         {
             if (verticalInput > 0)
             {
+                //print("Walking Forward");
                 AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), true, true);
                 AnimController.Instance.SetPlayerWalking(GetComponentInChildren<Animator>(), false, false);
             }

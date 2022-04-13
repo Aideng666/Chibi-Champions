@@ -12,19 +12,32 @@ public class FeatherBlaster : Tower
 
     bool shootTwoShots;
 
+    private void Start()
+    {
+        base.StartTower();
+
+        shot.volume = AudioManager.Instance.GetSFXVolume();
+    }
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (AudioManager.Instance.dirtyBla)
         {
-            shot.mute = true;
-        }
-        else
-        {
-            shot.mute = false;
+
+            if (AudioManager.Instance.isMute() == true)
+            {
+                shot.mute = true;
+            }
+            else
+            {
+                shot.mute = false;
+            }
+
+            shot.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyBla = false;
+
         }
 
-        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
 
         UpdateView();
 

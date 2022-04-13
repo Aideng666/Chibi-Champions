@@ -10,20 +10,34 @@ public class PED : Tower
     [SerializeField] AudioSource bloop;
     [SerializeField] AudioSource shake;
 
+    private void Start()
+    {
+        base.StartTower();
+
+        bloop.volume = AudioManager.Instance.GetSFXVolume();
+        shake.volume = AudioManager.Instance.GetSFXVolume();
+    }
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (AudioManager.Instance.dirtySAP)
         {
-            bloop.mute = true;
-            shake.mute = true;
+            if (AudioManager.Instance.isMute() == true)
+            {
+                bloop.mute = true;
+                shake.mute = true;
+            }
+            else
+            {
+                bloop.mute = false;
+                shake.mute = false;
+            }
+            bloop.volume = AudioManager.Instance.GetSFXVolume();
+            shake.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtySAP = false;
+
         }
-        else
-        {
-            bloop.mute = false;
-            shake.mute = false;
-        }
-        bloop.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        shake.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
+
 
         if (CanAttack())
         {

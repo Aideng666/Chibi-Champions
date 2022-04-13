@@ -22,30 +22,46 @@ public class Spider : MonoBehaviour
 
     int effectedEnemies = 0;
 
+    float timeAlive = 0;
+    float lifespanIfNoEnemyFound = 30;
+
     private enum SpiderStates
     {
         enemySighted,
         noEnemySighted
     }
 
+    private void Start()
+    {
+        walk.volume = AudioManager.Instance.GetSFXVolume();
+        atk.volume = AudioManager.Instance.GetSFXVolume();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (timeAlive >= lifespanIfNoEnemyFound)
         {
-            walk.mute = true;
-            atk.mute = true;
-        }
-        else
-        {
-            walk.mute = false;
-            atk.mute = false;
+            Destroy(gameObject);
         }
 
-        walk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        atk.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+        if (AudioManager.Instance.dirtySpi)
+        {
+            if (AudioManager.Instance.isMute() == true)
+            {
+                walk.mute = true;
+                atk.mute = true;
+            }
+            else
+            {
+                walk.mute = false;
+                atk.mute = false;
+            }
 
+            walk.volume = AudioManager.Instance.GetSFXVolume();
+            atk.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtySpi = false;
+        }
         Collider[] EnemiesInView = Physics.OverlapSphere(transform.position, tower.GetRange(), tower.GetEnemyLayer());
 
         if (EnemiesInView == null || EnemiesInView.Length < 1)
@@ -105,11 +121,16 @@ public class Spider : MonoBehaviour
         {
             SearchForEnemy();
         }
+
+        timeAlive += Time.deltaTime;
     }
 
     void ChaseEnemy(GameObject enemy)
     {
-        walk.Play();
+        //walk.Play();
+
+        transform.LookAt(enemy.transform);
+
         moveDirection = (enemy.transform.position - transform.position).normalized;
 
         moveDirection.y = 0;
@@ -139,7 +160,12 @@ public class Spider : MonoBehaviour
 
         if (isMoving)
         {
-            transform.position += moveDirection * moveSpeed * Time.deltaTime;
+            transform.LookAt(transform.position + (moveDirection * moveSpeed * Time.deltaTime));
+
+            transform.position += moveDirection * moveSpeed * Time.deltaTime;
+
+            walk.Play();
+
         }
     }
 
@@ -166,6 +192,8 @@ public class Spider : MonoBehaviour
 
     public void SetTower(Tower t)
     {
+        print($"Tower Set: {t.gameObject.name}");
+
         tower = t;
     }
 

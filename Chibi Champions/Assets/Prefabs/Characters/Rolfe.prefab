@@ -984,13 +984,13 @@ MonoBehaviour:
   characterNameEnum: 1
   cam: {fileID: 0}
   attackPoint: {fileID: 6888943266550092648}
-  speed: 15
+  speed: 18
   lightAttackRange: 2
   heavyAttackRange: 10
   lightAttackDamage: 8
   abilityDamage: 15
   gravity: 1.5
-  jumpPower: 1.5
+  jumpPower: 2
   interactDistance: 5
   lightAttackDelay: 0.75
   heavyAttackDelay: 0.75
@@ -1026,7 +1026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a121279ad207934d8cd44e3ff3ee842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingPoints: 0
+  startingPoints: 1000
   pointsText: {fileID: 0}
 --- !u!95 &6888943266945402877
 Animator:
@@ -1079,7 +1079,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 2
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1175,7 +1175,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 2
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

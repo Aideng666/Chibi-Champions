@@ -10,19 +10,32 @@ public class Photosynthesizer : Tower
 
     [SerializeField] AudioSource music;
 
+    private void Start()
+    {
+        base.StartTower();
+
+        music.volume = AudioManager.Instance.GetSFXVolume();
+    }
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (AudioManager.Instance.dirtyPho)
         {
-            music.mute = true;
-        }
-        else
-        {
-            music.mute = false;
+            if (AudioManager.Instance.isMute() == true)
+            {
+                music.mute = true;
+            }
+            else
+            {
+                music.mute = false;
+            }
+
+            music.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyPho = false;
+
         }
 
-        music.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
 
         UpdateView();
 

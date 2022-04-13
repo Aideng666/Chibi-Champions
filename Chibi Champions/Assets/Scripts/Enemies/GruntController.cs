@@ -28,19 +28,39 @@ public class GruntController : Enemy
 
         if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0)
         {
-            foreach (PlayerController player in FindObjectsOfType<PlayerController>())
+            PlayerController[] players = FindObjectsOfType<PlayerController>();
+
+            if (players.Length == 1)
             {
                 if (level == 1)
                 {
-                    player.GetComponent<PointsManager>().AddPoints(30);
+                    players[0].GetComponent<PointsManager>().AddPoints(75);
                 }
                 else if (level == 2)
                 {
-                    player.GetComponent<PointsManager>().AddPoints(60);
+                    players[0].GetComponent<PointsManager>().AddPoints(130);
                 }
                 else if (level == 3)
                 {
-                    player.GetComponent<PointsManager>().AddPoints(120);
+                    players[0].GetComponent<PointsManager>().AddPoints(220);
+                }
+            }
+            else
+            {
+                foreach (PlayerController player in players)
+                {
+                    if (level == 1)
+                    {
+                        player.GetComponent<PointsManager>().AddPoints(50);
+                    }
+                    else if (level == 2)
+                    {
+                        player.GetComponent<PointsManager>().AddPoints(90);
+                    }
+                    else if (level == 3)
+                    {
+                        player.GetComponent<PointsManager>().AddPoints(150);
+                    }
                 }
             }
 
@@ -76,7 +96,7 @@ public class GruntController : Enemy
 
     protected override IEnumerator DelayBeforeAttack()
     {
-        AnimController.Instance.PlayEnemyAttackAnim(GetComponent<Animator>());
+        AnimController.Instance.PlayEnemyAttackAnim(GetComponentInChildren<Animator>());
 
         yield return new WaitForSeconds(0.2f);
 

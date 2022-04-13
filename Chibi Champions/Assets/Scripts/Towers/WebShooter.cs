@@ -11,19 +11,31 @@ public class WebShooter : Tower
     [SerializeField] GameObject partToRotate;
     [SerializeField] AudioSource shot;
 
+    private void Start()
+    {
+        base.StartTower();
+
+        shot.volume = AudioManager.Instance.GetSFXVolume();
+    }
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
-        {
-            shot.mute = true;
-        }
-        else
-        {
-            shot.mute = false;
+        if (AudioManager.Instance.dirtyWeb) { 
+            if (AudioManager.Instance.isMute() == true)
+            {
+                shot.mute = true;
+            }
+            else
+            {
+                shot.mute = false;
+            }
+
+            shot.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyWeb = false;
+
         }
 
-        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
 
         UpdateView();
 
@@ -69,7 +81,10 @@ public class WebShooter : Tower
 
         yield return new WaitForSeconds(slowDuration);
 
-        enemy.GetComponentInParent<NavMeshAgent>().speed = enemy.GetComponentInParent<Enemy>().GetDefaultSpeed();
+        if (enemy.activeSelf)
+        { 
+            enemy.GetComponentInParent<NavMeshAgent>().speed = enemy.GetComponentInParent<Enemy>().GetDefaultSpeed();
+        }
     }
 
     public override void Upgrade()

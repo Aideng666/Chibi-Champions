@@ -19,24 +19,32 @@ public class Potter : PlayerController
     void Start()
     {
         base.Start();
+        shot.volume = AudioManager.Instance.GetSFXVolume();
+        blast.volume = AudioManager.Instance.GetSFXVolume();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (AudioManager.Instance.dirtyPot)
         {
-            shot.mute = true;
-            blast.mute = true;
-        }
-        else
-        {
-            shot.mute = false;
-            blast.mute = false;
+            if (AudioManager.Instance.isMute() == true)
+            {
+                shot.mute = true;
+                blast.mute = true;
+            }
+            else
+            {
+                shot.mute = false;
+                blast.mute = false;
+            }
+
+            shot.volume = AudioManager.Instance.GetSFXVolume();
+            blast.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyPot = false;
+
         }
 
-        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        blast.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
 
         if (isPlayerCharacter)
         {
@@ -56,6 +64,8 @@ public class Potter : PlayerController
                 {
                     UDPClient.Instance.SendPlayerUpdates(ActionTypes.Attack, GetCharacterNameEnum());
                 }
+
+                AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>());
 
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -86,6 +96,8 @@ public class Potter : PlayerController
                 {
                     UDPClient.Instance.SendPlayerUpdates(ActionTypes.Ability, GetCharacterNameEnum());
                 }
+
+                AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>());
 
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -121,6 +133,8 @@ public class Potter : PlayerController
 
     public override void ReceiveAttackTrigger()
     {
+        AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>());
+
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
@@ -144,6 +158,8 @@ public class Potter : PlayerController
 
     public override void ReceiveAbilityTrigger()
     {
+        AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>());
+
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;

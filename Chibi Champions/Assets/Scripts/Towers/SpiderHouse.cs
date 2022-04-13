@@ -12,19 +12,32 @@ public class SpiderHouse : Tower
 
     int currentSpiders = 0;
 
+    private void Start()
+    {
+        base.StartTower();
+
+        hatch.volume = AudioManager.Instance.GetSFXVolume();
+    }
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (AudioManager.Instance.dirtyHat)
         {
-            hatch.mute = true;
-        }
-        else
-        {
-            hatch.mute = false;
+            if (AudioManager.Instance.isMute() == true)
+            {
+                hatch.mute = true;
+            }
+            else
+            {
+                hatch.mute = false;
+            }
+
+            hatch.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyHat = false;
+
         }
 
-        hatch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+
 
         UpdateView();
 
@@ -43,8 +56,8 @@ public class SpiderHouse : Tower
                 var spider = Instantiate(spiderPrefab, new Vector3(firePoint.position.x, 0, firePoint.position.z), Quaternion.identity);
 
                 currentSpiders++;
-                spider.GetComponent<Spider>().SetTower(this);
-                spider.GetComponent<Spider>().SetTickDelay(effectTickDelay);
+                spider.GetComponentInChildren<Spider>().SetTower(this);
+                spider.GetComponentInChildren<Spider>().SetTickDelay(effectTickDelay);
                 hatch.Play();
             }
         }

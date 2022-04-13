@@ -9,19 +9,31 @@ public class TennisBomb : Tower
     [SerializeField] float fuseDuration;
     [SerializeField] AudioSource shot;
 
+    private void Start()
+    {
+        base.StartTower();
+
+        shot.volume = AudioManager.Instance.GetSFXVolume();
+    }
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (AudioManager.Instance.dirtyTen)
         {
-            shot.mute = true;
-        }
-        else
-        {
-            shot.mute = false;
+            if (AudioManager.Instance.isMute() == true)
+            {
+                shot.mute = true;
+            }
+            else
+            {
+                shot.mute = false;
+            }
+
+            shot.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyTen = false;
+
         }
 
-        shot.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
 
         UpdateView();
 

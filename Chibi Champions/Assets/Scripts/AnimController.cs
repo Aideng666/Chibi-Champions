@@ -147,6 +147,8 @@ public class AnimController : MonoBehaviour
 
     public void PlayPlayerJumpAnim(Animator anim)
     {
+
+
         anim.SetTrigger("Jump");
     }
 

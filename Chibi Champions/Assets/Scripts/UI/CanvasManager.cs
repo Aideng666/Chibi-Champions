@@ -35,10 +35,10 @@ public class CanvasManager : MonoBehaviour
     {
         interactMenu.gameObject.SetActive(false);
 
-        if (!FindObjectOfType<AudioManager>().IsPlaying("Level") && !FindObjectOfType<AudioManager>().IsPlaying("Level"))
+        if (!AudioManager.Instance.IsPlaying("Level") && !AudioManager.Instance.IsPlaying("Level"))
         {
-            FindObjectOfType<AudioManager>().Play("Level");
-            FindObjectOfType<AudioManager>().Loop("Level");
+            AudioManager.Instance.Play("Level");
+            AudioManager.Instance.Loop("Level");
         }    
     }
 

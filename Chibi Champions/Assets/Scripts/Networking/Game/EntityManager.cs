@@ -287,7 +287,7 @@ public class EntityManager : MonoBehaviour
                             }
                         }
 
-                        FindObjectOfType<AudioManager>().Play("Build");
+                        AudioManager.Instance.Play("Build");
 
                         break;
 
@@ -303,7 +303,7 @@ public class EntityManager : MonoBehaviour
                             }
                         }
 
-                        FindObjectOfType<AudioManager>().Play("Build");
+                        AudioManager.Instance.Play("Build");
 
                         break;
 
@@ -427,7 +427,7 @@ public class EntityManager : MonoBehaviour
             {
                 tower.Upgrade();
 
-                FindObjectOfType<AudioManager>().Play("Improve");
+                AudioManager.Instance.Play("Improve");
             }
         }
     }

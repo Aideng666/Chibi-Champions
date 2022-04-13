@@ -19,24 +19,32 @@ public class Rolfe : PlayerController
     void Start()
     {
         base.Start();
+        scratch.volume = AudioManager.Instance.GetSFXVolume();
+        set.volume = AudioManager.Instance.GetSFXVolume();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (AudioManager.Instance.dirtyRol)
         {
-            scratch.mute = true;
-            set.mute = true;
-        }
-        else
-        {
-            scratch.mute = false;
-            set.mute = false;
+            if (AudioManager.Instance.isMute() == true)
+            {
+                scratch.mute = true;
+                set.mute = true;
+            }
+            else
+            {
+                scratch.mute = false;
+                set.mute = false;
+            }
+
+            scratch.volume = AudioManager.Instance.GetSFXVolume();
+            set.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyRol = false;
+
         }
 
-        scratch.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        set.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
 
         if (isPlayerCharacter)
         {
@@ -68,7 +76,6 @@ public class Rolfe : PlayerController
                         enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-lightAttackDamage);
                         enemy.GetComponentInParent<Enemy>().Knockback(20, transform);
                         enemy.GetComponentInParent<Enemy>().SetLastHit(this);
-                        //GetComponent<PointsManager>().AddPoints(20);
                         enemy.GetComponentInParent<Enemy>().HitSound();
 
                         ParticleManager.Instance.SpawnParticle(ParticleTypes.Hurt, enemy.transform.position);
@@ -77,8 +84,6 @@ public class Rolfe : PlayerController
                 scratch.Play();
 
                 StartCoroutine(WaitForSecondSwipe());
-
-                //AnimController.Instance.PlayPlayerAttackAnim();
             }
             if (Input.GetMouseButtonDown(1) && CanHeavyAttack() && currentBeacons < maxBeacons)
             {

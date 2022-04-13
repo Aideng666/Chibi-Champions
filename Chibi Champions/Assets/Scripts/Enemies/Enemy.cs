@@ -47,24 +47,29 @@ public class Enemy : MonoBehaviour
         playerControllers = FindObjectsOfType<PlayerController>();
 
         navMeshAgent.speed = defaultSpeed;
+        hit.volume = AudioManager.Instance.GetSFXVolume();
+
     }
 
     // Update is called once per frame
     protected void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (AudioManager.Instance.dirtyNME)
         {
-            hit.mute = true;
-        }
-        else
-        {
-            hit.mute = false;
-        }
-        hit.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
+            if (AudioManager.Instance.isMute() == true)
+            {
+                hit.mute = true;
+            }
+            else
+            {
+                hit.mute = false;
+            }
 
-        //print($"Position: {transform.position}");
+            hit.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyNME = false;
 
-        TennisBall[] tennisBalls = FindObjectsOfType<TennisBall>();
+        }
+        TennisBall[] tennisBalls = ObjectManager.Instance.GetTennisBalls();
 
         if (!knockbackApplied)
         {
@@ -218,16 +223,19 @@ public class Enemy : MonoBehaviour
             body = GetComponent<Rigidbody>();
         }
 
-        body.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        if (GetComponent<Rigidbody>() != null)
+        {
+            body.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
-        Vector3 direction = (transform.position - origin.position).normalized;
-        direction.y = 1;
+            Vector3 direction = (transform.position - origin.position).normalized;
+            direction.y = 1;
 
-        direction = direction.normalized;
+            direction = direction.normalized;
 
-        body.mass = 10;
+            body.mass = 10;
 
-        body.AddForce(direction * knockbackForce, ForceMode.Impulse);
+            body.AddForce(direction * knockbackForce, ForceMode.Impulse);
+        }
     }
 
     protected virtual IEnumerator DelayBeforeAttack()

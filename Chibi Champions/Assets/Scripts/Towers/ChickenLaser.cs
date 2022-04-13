@@ -10,19 +10,32 @@ public class ChickenLaser : Tower
 
     [SerializeField] AudioSource beam;
 
+    private void Start()
+    {
+        base.StartTower();
+
+        beam.volume = AudioManager.Instance.GetSFXVolume();
+        beam.loop = true;
+    }
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (AudioManager.Instance.dirtyLaz)
         {
-            beam.mute = true;
-        }
-        else
-        {
-            beam.mute = false;
+            if (AudioManager.Instance.isMute() == true)
+            {
+                beam.mute = true;
+            }
+            else
+            {
+                beam.mute = false;
+            }
+
+            beam.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyLaz = false;
+
         }
 
-        beam.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
 
         laserbeam = GetComponentInChildren<LineRenderer>();
 

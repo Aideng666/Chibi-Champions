@@ -20,27 +20,34 @@ public class Drumstick : PlayerController
         base.Start();
 
         swordTrail.emitting = false;
+        fall.volume = AudioManager.Instance.GetSFXVolume();
+        land.volume = AudioManager.Instance.GetSFXVolume();
+        wack.volume = AudioManager.Instance.GetSFXVolume();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<AudioManager>().isMute() == true)
+        if (AudioManager.Instance.dirtyDrum)
         {
-            fall.mute = true;
-            land.mute = true;
-            wack.mute = true;
-        }
-        else
-        {
-            fall.mute = false;
-            land.mute = false;
-            wack.mute = false;
-        }
-        fall.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        land.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
-        wack.volume = FindObjectOfType<AudioManager>().GetSFXVolume();
 
+            if (AudioManager.Instance.isMute() == true)
+            {
+                fall.mute = true;
+                land.mute = true;
+                wack.mute = true;
+            }
+            else
+            {
+                fall.mute = false;
+                land.mute = false;
+                wack.mute = false;
+            }
+            fall.volume = AudioManager.Instance.GetSFXVolume();
+            land.volume = AudioManager.Instance.GetSFXVolume();
+            wack.volume = AudioManager.Instance.GetSFXVolume();
+            AudioManager.Instance.dirtyDrum = false;
+        }
         if (groundPoundActivated && controller.isGrounded)
         {
             GroundPoundAttack();
@@ -154,13 +161,13 @@ public class Drumstick : PlayerController
 
     protected IEnumerator GroundPoundJump()
     {
-        moveDir.y = jumpPower * 3;
+        moveDir.y = jumpPower * 5;
 
         isJumping = true;
 
         float elasped = 0f;
         float totalJumpTime = 0.6f;
-        float totalUpTime = 0.2f;
+        float totalUpTime = 0.3f;
         float totalStallTime = 0.4f;
 
         while (elasped < totalUpTime)

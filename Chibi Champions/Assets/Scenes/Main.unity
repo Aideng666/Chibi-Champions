@@ -19694,6 +19694,10 @@ PrefabInstance:
       propertyPath: hurtImage
       value: 
       objectReference: {fileID: 187949089}
+    - target: {fileID: 5120274358207205516, guid: 6270dcff9a3f83b4c973a848e3f9862a, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5120274358207205518, guid: 6270dcff9a3f83b4c973a848e3f9862a, type: 3}
       propertyPath: m_StepOffset
       value: 0.7

@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1839241071829877862}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -2.9, z: 0}
-  m_LocalScale: {x: 22.62, y: 1.3333334, z: 19}
+  m_LocalScale: {x: 28.6, y: 1.3333334, z: 19}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7540970447587639793}
@@ -4389,7 +4389,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   defaultAttackPriority: 0
-  attackRange: 12
+  attackRange: 15
   towerCost: 800
   towerDamage: 0.1
   attackDelay: 0

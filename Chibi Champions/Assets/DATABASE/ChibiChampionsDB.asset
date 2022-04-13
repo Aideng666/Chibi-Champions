@@ -62,7 +62,7 @@ MonoBehaviour:
     abilityDescriptions:
     - Rolfe swipes with his sharp claws one after another dealing damage per swipe
     - Rolfe places a beacon that knocks enemies away in the direction from the cure
-    towerBaseCosts: f401000008070000b0040000
+    towerBaseCosts: f4010000e803000084030000
   - characterName: Potter
     classType: Support
     characterPortrait: {fileID: 21300000, guid: 4d022b733f9837a4a8cbd52b1d79d170, type: 3}
@@ -87,4 +87,4 @@ MonoBehaviour:
     abilityDescriptions:
     - Potter shoots blobs of ink in a target direction
     - Potter blasts a ball of ink that explodes damaging enemies in the radius
-    towerBaseCosts: f4010000d007000008070000
+    towerBaseCosts: f4010000bc02000084030000

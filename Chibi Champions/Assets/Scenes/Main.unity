@@ -19820,7 +19820,7 @@ PrefabInstance:
       objectReference: {fileID: 889274041}
     - target: {fileID: 6529732846633032355, guid: 6270dcff9a3f83b4c973a848e3f9862a, type: 3}
       propertyPath: startingPoints
-      value: 50000
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 7119225767286984801, guid: 6270dcff9a3f83b4c973a848e3f9862a, type: 3}
       propertyPath: m_PlayOnAwake

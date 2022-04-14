@@ -42,6 +42,8 @@ public class Spider : MonoBehaviour
     {
         if (timeAlive >= lifespanIfNoEnemyFound)
         {
+            tower.GetComponent<SpiderHouse>().RemoveSpider();
+
             Destroy(gameObject);
         }
 

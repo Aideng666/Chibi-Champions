@@ -37,8 +37,6 @@ public class SpiderHouse : Tower
 
         }
 
-
-
         UpdateView();
 
         if (CanAttack())

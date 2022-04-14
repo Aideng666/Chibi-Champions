@@ -37,6 +37,12 @@ public class Enemy : MonoBehaviour
 
     protected int level = 1;
 
+
+    private void OnEnable()
+    {
+        GetComponentInParent<NavMeshAgent>().speed = defaultSpeed;
+    }
+
     // Start is called before the first frame update
     protected void Start()
     {

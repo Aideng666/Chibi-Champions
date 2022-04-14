@@ -308,7 +308,7 @@ public class WaveManager : MonoBehaviour
         {
             case 1:
 
-                if (enemiesKilled == enemyListPerSpawner.Count * 4)
+                if (enemiesKilled >= enemyListPerSpawner.Count * 4)
                 {
                     if (!waveCompleteAlertFired)
                     {
@@ -332,7 +332,7 @@ public class WaveManager : MonoBehaviour
 
             case 2:
 
-                if (enemiesKilled == enemyListPerSpawner.Count * 6)
+                if (enemiesKilled >= enemyListPerSpawner.Count * 6)
                 {
                     if (!waveCompleteAlertFired)
                     {
@@ -357,7 +357,7 @@ public class WaveManager : MonoBehaviour
 
             case 3:
 
-                if (enemiesKilled == enemyListPerSpawner.Count * 8)
+                if (enemiesKilled >= enemyListPerSpawner.Count * 8)
                 {
                     if (!waveCompleteAlertFired)
                     {

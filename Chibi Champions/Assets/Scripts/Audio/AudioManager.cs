@@ -54,7 +54,16 @@ public class AudioManager : MonoBehaviour
 
         musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
         sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
-        //sfxSlider.value = 0.5f;
+
+        if (PlayerPrefs.GetFloat("MusicVolume") == 0)
+        {
+            musicSlider.value = 0.3f;
+        }
+
+        if (PlayerPrefs.GetFloat("SFXVolume") == 0)
+        {
+            sfxSlider.value = 0.5f;
+        }
 
         if (PlayerPrefs.GetInt("Mute") == 0)
         {

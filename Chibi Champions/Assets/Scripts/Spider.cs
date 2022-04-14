@@ -44,7 +44,7 @@ public class Spider : MonoBehaviour
         {
             tower.GetComponent<SpiderHouse>().RemoveSpider();
 
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
 
         if (AudioManager.Instance.dirtySpi)
@@ -189,7 +189,7 @@ public class Spider : MonoBehaviour
 
         tower.GetComponent<SpiderHouse>().RemoveSpider();
 
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 
     public void SetTower(Tower t)

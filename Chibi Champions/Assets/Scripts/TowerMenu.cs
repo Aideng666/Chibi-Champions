@@ -198,6 +198,15 @@ public class TowerMenu : MonoBehaviour
         }
 
         player.GetComponent<PointsManager>().AddPoints((int)(currentTower.GetComponent<Tower>().GetTotalPointsSpent() * 0.7));
+
+        if (currentTower.GetComponent<Tower>().GetTowerName() == "Spider House")
+        {
+            foreach(Spider spider in FindObjectsOfType<Spider>())
+            {
+                Destroy(spider.transform.parent.gameObject);
+            }
+        }
+
         Destroy(currentTower.gameObject);
         AudioManager.Instance.Play("Sell");
         CanvasManager.Instance.CloseTowerMenu();

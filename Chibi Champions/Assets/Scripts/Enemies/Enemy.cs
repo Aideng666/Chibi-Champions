@@ -210,7 +210,7 @@ public class Enemy : MonoBehaviour
 
         hit.Play();
 
-        if (!knockbackApplied)
+        if (!knockbackApplied && GetComponent<Rigidbody>() == null)
         {
             knockbackApplied = true;
 

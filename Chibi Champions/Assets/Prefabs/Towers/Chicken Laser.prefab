@@ -4399,7 +4399,7 @@ MonoBehaviour:
   upgradeNames:
   - Global Ordinance
   - Particle Chip
-  - Mega Detah Ray
+  - Mega Death Ray
   upgradeImages:
   - {fileID: 21300000, guid: dcc0552d6bcb1c74b9c1c66f4e417c57, type: 3}
   - {fileID: 21300000, guid: 7b71c5c36e928f94fb6d4f32bcb98712, type: 3}

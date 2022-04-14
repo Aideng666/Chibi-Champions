@@ -10,6 +10,8 @@ public class ChickenLaser : Tower
 
     [SerializeField] AudioSource beam;
 
+    float timeToNextDamage = 0;
+
     private void Start()
     {
         base.StartTower();
@@ -68,7 +70,10 @@ public class ChickenLaser : Tower
         laserbeam.SetPosition(0, firePoint.position);
         laserbeam.SetPosition(1, enemy.transform.position);
 
-        enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-towerDamage);
+        if (CanDamageEnemy())
+        { 
+            enemy.gameObject.GetComponentInParent<Health>().ModifyHealth(-towerDamage);
+        }
 
         if (slowEnemies)
         {
@@ -78,6 +83,17 @@ public class ChickenLaser : Tower
         {
             enemy.gameObject.GetComponentInParent<NavMeshAgent>().speed = enemy.GetComponentInParent<Enemy>().GetDefaultSpeed();
         }
+    }
+
+    bool CanDamageEnemy()
+    {
+        if (timeToNextDamage < Time.realtimeSinceStartup)
+        {
+            timeToNextDamage = Time.realtimeSinceStartup + Time.deltaTime;
+            return true;
+        }
+
+        return false;
     }
 
     public override void Upgrade()

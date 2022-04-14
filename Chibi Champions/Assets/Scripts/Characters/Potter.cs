@@ -85,9 +85,11 @@ public class Potter : PlayerController
                 }
                 shot.Play();
 
-                direction = (aimObject.transform.position - attackPoint.position).normalized;
+                //direction = (aimObject.transform.position - attackPoint.position).normalized;
 
                 var paintball = ProjectilePool.Instance.GetPaintballFromPool(attackPoint.position);
+
+                paintball.transform.LookAt(direction);
 
                 paintball.GetComponentInChildren<Rigidbody>().velocity = direction * shotSpeed;
 
@@ -120,9 +122,11 @@ public class Potter : PlayerController
                 }
                 blast.Play();
 
-                direction = (aimObject.transform.position - attackPoint.position).normalized;
+                //direction = (aimObject.transform.position - attackPoint.position).normalized;
 
                 var inkBlast = Instantiate(inkBlastPrefab, attackPoint.position, Quaternion.identity);
+
+                inkBlast.transform.LookAt(direction);
 
                 inkBlast.GetComponentInChildren<Rigidbody>().velocity = direction * shotSpeed;
 

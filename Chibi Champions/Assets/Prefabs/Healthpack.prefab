@@ -2612,7 +2612,8 @@ GameObject:
   - component: {fileID: 4049268950507926994}
   - component: {fileID: 6798702903524120862}
   - component: {fileID: 4493299599820488593}
-  m_Layer: 0
+  - component: {fileID: 6486921924544168347}
+  m_Layer: 15
   m_Name: HealthPack Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3407,6 +3408,20 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7035525443033890817}
+  m_Mesh: {fileID: 0}
+--- !u!64 &6486921924544168347
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7035525443033890817}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1001 &5952503198529629082
 PrefabInstance:

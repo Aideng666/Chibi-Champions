@@ -26032,6 +26032,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 963194228}
     - target: {fileID: 6309032079135903695, guid: baf24658fe245814e8a1909358d3837b, type: 3}
+      propertyPath: aimObject
+      value: 
+      objectReference: {fileID: 36510455}
+    - target: {fileID: 6309032079135903695, guid: baf24658fe245814e8a1909358d3837b, type: 3}
       propertyPath: characterDB
       value: 
       objectReference: {fileID: 11400000, guid: b1fa66e76eee41d49a59f48f4cf0f58c, type: 2}

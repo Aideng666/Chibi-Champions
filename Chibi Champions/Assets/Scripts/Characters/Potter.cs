@@ -7,6 +7,7 @@ public class Potter : PlayerController
     [SerializeField] LayerMask interactableLayer;
     [SerializeField] GameObject paintballPrefab;
     [SerializeField] GameObject inkBlastPrefab;
+    [SerializeField] GameObject aimObject;
     [SerializeField] float shotSpeed;
     [SerializeField] float healAmount;
 
@@ -84,7 +85,8 @@ public class Potter : PlayerController
                 }
                 shot.Play();
 
-                //var paintball = Instantiate(paintballPrefab, attackPoint.position, Quaternion.identity);
+                direction = (aimObject.transform.position - attackPoint.position).normalized;
+
                 var paintball = ProjectilePool.Instance.GetPaintballFromPool(attackPoint.position);
 
                 paintball.GetComponentInChildren<Rigidbody>().velocity = direction * shotSpeed;
@@ -117,6 +119,8 @@ public class Potter : PlayerController
                     }
                 }
                 blast.Play();
+
+                direction = (aimObject.transform.position - attackPoint.position).normalized;
 
                 var inkBlast = Instantiate(inkBlastPrefab, attackPoint.position, Quaternion.identity);
 

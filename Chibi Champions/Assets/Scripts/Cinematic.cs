@@ -10,11 +10,14 @@ public class Cinematic : MonoBehaviour
 
     private void Update()
     {
+        // Ways to skip the cinematic
+        // Any key toggle
         if (Input.anyKeyDown)
         {
             SceneManager.LoadScene("MenuScenes");
         }
 
+        // When the video clip ends
         if ((video.frame) > 0 && (video.isPlaying == false))
         {
             SceneManager.LoadScene("MenuScenes");

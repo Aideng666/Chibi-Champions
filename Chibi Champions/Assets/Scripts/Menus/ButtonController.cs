@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonController : MonoBehaviour
 {
@@ -20,5 +21,10 @@ public class ButtonController : MonoBehaviour
     {
         transform.localScale = new Vector3(1, 1, 1);
         oldPanel.SetActive(false);
+    }
+
+    public void GoToCinematicScene()
+    {
+        SceneManager.LoadScene("Cinematic");
     }
 }

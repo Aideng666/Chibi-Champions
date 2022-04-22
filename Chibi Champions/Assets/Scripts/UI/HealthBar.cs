@@ -54,11 +54,14 @@ public class HealthBar : MonoBehaviour
         {
             foreach(PlayerController player in FindObjectsOfType<PlayerController>())
             {
-                healthText.text = (int)player.gameObject.GetComponent<Health>().GetCurrentHealth() + " / " + player.gameObject.GetComponent<Health>().GetMaxHealth();
-
-                if (pct < 0)
+                if (player.GetIsPlayerCharacter())
                 {
-                    healthText.text = "0 / " + player.gameObject.GetComponent<Health>().GetMaxHealth();
+                    healthText.text = (int)player.gameObject.GetComponent<Health>().GetCurrentHealth() + " / " + player.gameObject.GetComponent<Health>().GetMaxHealth();
+
+                    if (pct < 0)
+                    {
+                        healthText.text = "0 / " + player.gameObject.GetComponent<Health>().GetMaxHealth();
+                    }
                 }
             }
         }

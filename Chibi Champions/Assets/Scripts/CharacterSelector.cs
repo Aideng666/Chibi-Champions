@@ -63,10 +63,14 @@ public class CharacterSelector : MonoBehaviour
             }
         }
 
-
-
-
-        character = characterDB.GetCharacter(PlayerPrefs.GetInt("CharacterIndex"));
-        characterPortrait.sprite = character.characterPortrait;
+        for (int i = 0; i < characterList.Length; i++)
+        {
+            if (characterList[i].GetIsPlayerCharacter())
+            {
+                print("Setting Character Icon");
+                character = characterDB.GetCharacter(PlayerPrefs.GetInt("CharacterIndex"));
+                characterPortrait.sprite = character.characterPortrait;
+            }
+        }
     }
 }

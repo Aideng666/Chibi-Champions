@@ -797,7 +797,7 @@ public class PlayerClient : MonoBehaviour
 
     public void ConfirmSelectedCharacter()
     {
-        if (!isConfirmed)
+        if (!isConfirmed && selectedCharacter != "Agumon")
         {
             for (int i = 0; i < takenCharacters.Count; i++)
             {

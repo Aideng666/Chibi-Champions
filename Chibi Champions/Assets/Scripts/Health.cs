@@ -40,10 +40,11 @@ public class Health : MonoBehaviour
         float currentHealthPercent = currentHealth / maxHealth;
         OnHealthChange(currentHealthPercent);
 
-        if (gameObject.tag == "Player" && amount < 0)
+        if (gameObject.tag == "Player" && amount < 0 && GetComponent<PlayerController>().GetIsPlayerCharacter())
         {
-            //FLASH SCREEN RED HERE
-            TakeDamage();
+            //TakeDamage();
+
+            UpdateHealth();
         }
     }
 
@@ -65,19 +66,19 @@ public class Health : MonoBehaviour
         }
     }
 
-    void TakeDamage()
-    {
-        // If I'm not dead, I can take damage
-        if (currentHealth >= 0)
-        {
-            UpdateHealth();
-        }
-    }
+    //void TakeDamage()
+    //{
+    //    // If I'm not dead, I can take damage
+    //    if (currentHealth >= 0)
+    //    {
+    //        UpdateHealth();
+    //    }
+    //}
 
-    private void Update()
-    {
-        UpdateHealth();      
-    }
+    //private void Update()
+    //{
+    //    UpdateHealth();      
+    //}
 
     public float GetCurrentHealth()
     {

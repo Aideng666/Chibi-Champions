@@ -88,11 +88,15 @@ public class PlayerController : MonoBehaviour
 
         thirdPersonCam = FindObjectOfType<CinemachineVirtualCamera>();
 
-        abilityImage.fillAmount = 0;
 
-        character = characterDB.GetCharacter(PlayerPrefs.GetInt("CharacterIndex"));
-        abilityImage.sprite = character.abilitySprites[1];
-        abilityImageMain.sprite = character.abilitySprites[1];
+        //if (isPlayerCharacter)
+        //{
+        //    character = characterDB.GetCharacter(PlayerPrefs.GetInt("CharacterIndex"));
+
+        //    abilityImage.fillAmount = 0;
+        //    abilityImage.sprite = character.abilitySprites[1];
+        //    abilityImageMain.sprite = character.abilitySprites[1];
+        //}
 
         respawnTime = deathTimer;
         jump.volume = AudioManager.Instance.GetSFXVolume();
@@ -628,6 +632,12 @@ public class PlayerController : MonoBehaviour
         if (isPlayer)
         {
             gameObject.AddComponent<AudioListener>();
+
+            character = characterDB.GetCharacter(PlayerPrefs.GetInt("CharacterIndex"));
+
+            abilityImage.fillAmount = 0;
+            abilityImage.sprite = character.abilitySprites[1];
+            abilityImageMain.sprite = character.abilitySprites[1];
         }
     }
 

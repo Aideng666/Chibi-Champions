@@ -42,8 +42,6 @@ public class Health : MonoBehaviour
 
         if (gameObject.tag == "Player" && amount < 0 && GetComponent<PlayerController>().GetIsPlayerCharacter())
         {
-            //TakeDamage();
-
             UpdateHealth();
         }
     }
@@ -66,19 +64,10 @@ public class Health : MonoBehaviour
         }
     }
 
-    //void TakeDamage()
-    //{
-    //    // If I'm not dead, I can take damage
-    //    if (currentHealth >= 0)
-    //    {
-    //        UpdateHealth();
-    //    }
-    //}
-
-    //private void Update()
-    //{
-    //    UpdateHealth();      
-    //}
+    private void Update()
+    {
+        UpdateHealth();
+    }
 
     public float GetCurrentHealth()
     {

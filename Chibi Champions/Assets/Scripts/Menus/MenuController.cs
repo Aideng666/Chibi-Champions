@@ -13,8 +13,8 @@ public class MenuController : MonoBehaviour
     private bool isPlayButtonClicked = false;
     private bool isTutorialButtonClicked = false;
     private bool isOptionsButtonClicked = false;
-    private bool isSingleplayerButtonClicked = false;
-    private bool isMultiplayerButtonClicked = false;
+    //private bool isSingleplayerButtonClicked = false;
+    //private bool isMultiplayerButtonClicked = false;
 
     // Update is called once per frame
     void Update()
@@ -27,29 +27,29 @@ public class MenuController : MonoBehaviour
 
         if (isPlayButtonClicked)
         {
-            StartCoroutine(LoadFadeTransitions(frames[1], frames[2]));
+            StartCoroutine(LoadFadeTransitions(frames[1], frames[4]));
             isPlayButtonClicked = false;
         }
         else if (isTutorialButtonClicked)
         {
-            StartCoroutine(LoadFadeTransitions(frames[1], frames[3]));
+            StartCoroutine(LoadFadeTransitions(frames[1], frames[2]));
             isTutorialButtonClicked = false;
         }
         else if (isOptionsButtonClicked)
         {
-            StartCoroutine(LoadFadeTransitions(frames[1], frames[4]));
+            StartCoroutine(LoadFadeTransitions(frames[1], frames[3]));
             isOptionsButtonClicked = false;
         }
-        else if (isSingleplayerButtonClicked)
-        {
-            StartCoroutine(LoadFadeTransitions(frames[2], frames[6]));
-            isSingleplayerButtonClicked = false;
-        }
-        else if (isMultiplayerButtonClicked)
-        {
-            StartCoroutine(LoadFadeTransitions(frames[2], frames[5]));
-            isMultiplayerButtonClicked = false;
-        }
+        //else if (isSingleplayerButtonClicked)
+        //{
+        //    StartCoroutine(LoadFadeTransitions(frames[2], frames[6]));
+        //    isSingleplayerButtonClicked = false;
+        //}
+        //else if (isMultiplayerButtonClicked)
+        //{
+        //    StartCoroutine(LoadFadeTransitions(frames[2], frames[5]));
+        //    isMultiplayerButtonClicked = false;
+        //}
 
         if (ChangeScene.hasReturnedToMenu)
         {
@@ -81,15 +81,15 @@ public class MenuController : MonoBehaviour
         isOptionsButtonClicked = true;
     }
 
-    public void SingleButtonFade()
-    {
-        isSingleplayerButtonClicked = true;
-    }
+    //public void SingleButtonFade()
+    //{
+    //    isSingleplayerButtonClicked = true;
+    //}
 
-    public void MultiplayerButtonFade()
-    {
-        isMultiplayerButtonClicked = true;
-    }
+    //public void MultiplayerButtonFade()
+    //{
+    //    isMultiplayerButtonClicked = true;
+    //}
 
     IEnumerator LoadFadeTransitions(GameObject currentFrame, GameObject targetFrame)
     {

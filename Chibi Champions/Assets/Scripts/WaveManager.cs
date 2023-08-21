@@ -171,21 +171,21 @@ public class WaveManager : MonoBehaviour
             
             if (!beginWaveAlertFired)
             {
-                if (FindObjectOfType<UDPClient>() != null)
-                {
-                    if (PlayerClient.Instance.GetClientNum() == 0)
-                    {
-                        AlertManager.Instance.DisplayAlert(new Alert(Color.white, $"Prepare Your Defences! When Ready, Press Q", 1000));
-                    }
-                    else
-                    {
-                        AlertManager.Instance.DisplayAlert(new Alert(Color.white, $"Prepare Your Defences! Waiting For Player 1 To Start Wave", 1000));
-                    }
-                }
-                else
-                {
-                    AlertManager.Instance.DisplayAlert(new Alert(Color.white, $"Prepare Your Defences! When Ready, Press Q", 1000));
-                }
+                //if (FindObjectOfType<UDPClient>() != null)
+                //{
+                //    if (PlayerClient.Instance.GetClientNum() == 0)
+                //    {
+                //        AlertManager.Instance.DisplayAlert(new Alert(Color.white, $"Prepare Your Defences! When Ready, Press Q", 1000));
+                //    }
+                //    else
+                //    {
+                //        AlertManager.Instance.DisplayAlert(new Alert(Color.white, $"Prepare Your Defences! Waiting For Player 1 To Start Wave", 1000));
+                //    }
+                //}
+                //else
+                //{
+                AlertManager.Instance.DisplayAlert(new Alert(Color.white, $"Prepare Your Defences! When Ready, Press Q", 1000));
+                //}
 
                 beginWaveAlertFired = true;
             }
@@ -196,10 +196,15 @@ public class WaveManager : MonoBehaviour
 
             //    BeginWave();
             //}
-            //else if(FindObjectOfType<UDPClient>() == null && Input.GetKeyDown(KeyCode.Q))
+            //else if (FindObjectOfType<UDPClient>() == null && Input.GetKeyDown(KeyCode.Q))
             //{
             //    BeginWave();
             //}
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                BeginWave();
+            }
         }
     }
 
@@ -312,14 +317,14 @@ public class WaveManager : MonoBehaviour
                 {
                     if (!waveCompleteAlertFired)
                     {
-                        if (PlayerClient.Instance.GetClientNum() <= 0)
-                        {
-                            AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete! When Ready, Press Q", 1000));
-                        }
-                        else
-                        {
-                            AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete! Waiting for Player 1", 1000));
-                        }
+                        //if (PlayerClient.Instance.GetClientNum() <= 0)
+                        //{
+                        AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete! When Ready, Press Q", 1000));
+                        //}
+                        //else
+                        //{
+                        //    AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete! Waiting for Player 1", 1000));
+                        //}
                         waveCompleteAlertFired = true;
                         AudioManager.Instance.Pause("Level");
                         AudioManager.Instance.UnPause("BuildPhase");
@@ -336,14 +341,14 @@ public class WaveManager : MonoBehaviour
                 {
                     if (!waveCompleteAlertFired)
                     {
-                        if (PlayerClient.Instance.GetClientNum() <= 0)
-                        {
+                        //if (PlayerClient.Instance.GetClientNum() <= 0)
+                        //{
                             AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete! When Ready, Press Q", 1000));
-                        }
-                        else
-                        {
-                            AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete! Waiting for Player 1", 1000));
-                        }
+                        //}
+                        //else
+                        //{
+                        //    AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete! Waiting for Player 1", 1000));
+                        //}
                         waveCompleteAlertFired = true;
 
                         AudioManager.Instance.Pause("Level");
@@ -361,14 +366,14 @@ public class WaveManager : MonoBehaviour
                 {
                     if (!waveCompleteAlertFired)
                     {
-                        if (PlayerClient.Instance.GetClientNum() <= 0)
-                        {
+                        //if (PlayerClient.Instance.GetClientNum() <= 0)
+                        //{
                             AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete! When Ready, Press Q", 1000));
-                        }
-                        else
-                        {
-                            AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete! Waiting for Player 1", 1000));
-                        }
+                        //}
+                        //else
+                        //{
+                        //    AlertManager.Instance.DisplayAlert(new Alert(Color.white, "Wave Complete! Waiting for Player 1", 1000));
+                        //}
 
                         waveCompleteAlertFired = true;
 
@@ -490,10 +495,10 @@ public class WaveManager : MonoBehaviour
 
     IEnumerator WinGame()
     {
-        if (FindObjectOfType<UDPClient>() != null)
-        {
-            UDPClient.Instance.SendLeaderboardStats();
-        }
+        //if (FindObjectOfType<UDPClient>() != null)
+        //{
+        //    UDPClient.Instance.SendLeaderboardStats();
+        //}
 
         AlertManager.Instance.DisplayAlert(new Alert(Color.green, "YOU WIN!!", 2));
 

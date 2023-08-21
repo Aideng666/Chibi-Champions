@@ -163,16 +163,16 @@ public class TowerMenu : MonoBehaviour
 
     public void UpgradeTower()
     {
-        if (FindObjectOfType<UDPClient>() != null)
-        {
-            foreach (Tower tower in EntityManager.Instance.GetLocalTowers())
-            {
-                if (Vector3.Distance(currentTower.position, tower.transform.position) < 2 && currentTower.GetComponent<Tower>().GetTowerName() == tower.GetTowerName())
-                {
-                    UDPClient.Instance.SendTowerUpgrade(currentTower.position, tower.GetTowerType());
-                }
-            }
-        }
+        //if (FindObjectOfType<UDPClient>() != null)
+        //{
+        //    foreach (Tower tower in EntityManager.Instance.GetLocalTowers())
+        //    {
+        //        if (Vector3.Distance(currentTower.position, tower.transform.position) < 2 && currentTower.GetComponent<Tower>().GetTowerName() == tower.GetTowerName())
+        //        {
+        //            UDPClient.Instance.SendTowerUpgrade(currentTower.position, tower.GetTowerType());
+        //        }
+        //    }
+        //}
 
         if (currentTower.GetComponent<Tower>().GetUpgradeCost(currentTower.GetComponent<Tower>().GetLevel()) <= player.GetComponent<PointsManager>().GetCurrentPoints())
         {

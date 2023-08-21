@@ -155,10 +155,10 @@ public class PlayerController : MonoBehaviour
 
             if (gameObject.GetComponent<Health>().GetCurrentHealth() <= 0 && isAlive)
             {
-                if (FindObjectOfType<UDPClient>() != null)
-                {
-                    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Death, GetCharacterNameEnum());
-                }
+                //if (FindObjectOfType<UDPClient>() != null)
+                //{
+                //    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Death, GetCharacterNameEnum());
+                //}
 
                 Die();
             }
@@ -223,10 +223,10 @@ public class PlayerController : MonoBehaviour
         {
             AnimController.Instance.PlayPlayerJumpAnim(GetComponentInChildren<Animator>());
 
-            if (FindObjectOfType<UDPClient>() != null)
-            {
-                UDPClient.Instance.SendPlayerUpdates(ActionTypes.Jump, GetCharacterNameEnum());
-            }
+            //if (FindObjectOfType<UDPClient>() != null)
+            //{
+            //    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Jump, GetCharacterNameEnum());
+            //}
 
             StartCoroutine(Jump());
 

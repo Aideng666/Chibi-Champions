@@ -87,10 +87,10 @@ public class Cure : MonoBehaviour
 
     IEnumerator DelayBeforeLoss()
     {
-        if (FindObjectOfType<UDPClient>() != null)
-        {
-            UDPClient.Instance.SendLeaderboardStats();
-        }
+        //if (FindObjectOfType<UDPClient>() != null)
+        //{
+        //    UDPClient.Instance.SendLeaderboardStats();
+        //}
 
         AlertManager.Instance.DisplayAlert(new Alert(Color.white, "You Lose!", 2));       
 

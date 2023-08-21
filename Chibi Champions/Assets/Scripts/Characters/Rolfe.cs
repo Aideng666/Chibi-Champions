@@ -60,10 +60,10 @@ public class Rolfe : PlayerController
         {
             if (Input.GetMouseButton(0) && CanLightAttack())
             {
-                if (FindObjectOfType<UDPClient>() != null)
-                {
-                    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Attack, GetCharacterNameEnum());
-                }
+                //if (FindObjectOfType<UDPClient>() != null)
+                //{
+                //    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Attack, GetCharacterNameEnum());
+                //}
 
                 AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>());
 
@@ -87,10 +87,10 @@ public class Rolfe : PlayerController
             }
             if (Input.GetMouseButtonDown(1) && CanHeavyAttack() && currentBeacons < maxBeacons)
             {
-                if (FindObjectOfType<UDPClient>() != null)
-                {
-                    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Ability, GetCharacterNameEnum());
-                }
+                //if (FindObjectOfType<UDPClient>() != null)
+                //{
+                //    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Ability, GetCharacterNameEnum());
+                //}
 
                 AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>());
 

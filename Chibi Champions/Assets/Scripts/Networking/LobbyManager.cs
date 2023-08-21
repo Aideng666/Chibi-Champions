@@ -1,237 +1,237 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
+//using System.Collections;
+//using System.Collections.Generic;
+//using TMPro;
+//using UnityEngine;
+//using UnityEngine.UI;
 
-public class LobbyManager : MonoBehaviour
-{
-    [SerializeField] GameObject message;
-    [SerializeField] GameObject clientStatusPrefab;
-    [SerializeField] GameObject textContent;
-    [SerializeField] GameObject userListContent;
-    [SerializeField] GameObject requestPanel;
-    [SerializeField] GameObject mainPanel;
-    [SerializeField] GameObject userListPanel;
-    [SerializeField] GameObject namePanel;
-    [SerializeField] GameObject messagePanel;
-    bool isServer;
-    bool isClient;
+//public class LobbyManager : MonoBehaviour
+//{
+//    [SerializeField] GameObject message;
+//    [SerializeField] GameObject clientStatusPrefab;
+//    [SerializeField] GameObject textContent;
+//    [SerializeField] GameObject userListContent;
+//    [SerializeField] GameObject requestPanel;
+//    [SerializeField] GameObject mainPanel;
+//    [SerializeField] GameObject userListPanel;
+//    [SerializeField] GameObject namePanel;
+//    [SerializeField] GameObject messagePanel;
+//    bool isServer;
+//    bool isClient;
 
-    LobbyPanels activePanel = LobbyPanels.Main;
+//    LobbyPanels activePanel = LobbyPanels.Main;
 
-    public static LobbyManager Instance { get; set; }
+//    public static LobbyManager Instance { get; set; }
 
-    private void Awake()
-    {
-        Instance = this;
-    }
+//    private void Awake()
+//    {
+//        Instance = this;
+//    }
 
-    private void Update()
-    {
-        switch (activePanel)
-        {
-            case LobbyPanels.Main:
+//    private void Update()
+//    {
+//        switch (activePanel)
+//        {
+//            case LobbyPanels.Main:
 
-                requestPanel.SetActive(false);
-                mainPanel.SetActive(true);
-                userListPanel.SetActive(false);
-                namePanel.SetActive(false);
-                messagePanel.SetActive(false);
+//                requestPanel.SetActive(false);
+//                mainPanel.SetActive(true);
+//                userListPanel.SetActive(false);
+//                namePanel.SetActive(false);
+//                messagePanel.SetActive(false);
 
-                break;
+//                break;
 
-            case LobbyPanels.Name:
+//            case LobbyPanels.Name:
 
-                requestPanel.SetActive(false);
-                mainPanel.SetActive(false);
-                userListPanel.SetActive(false);
-                namePanel.SetActive(true);
-                messagePanel.SetActive(false);
+//                requestPanel.SetActive(false);
+//                mainPanel.SetActive(false);
+//                userListPanel.SetActive(false);
+//                namePanel.SetActive(true);
+//                messagePanel.SetActive(false);
 
-                break;
+//                break;
 
-            case LobbyPanels.Request:
+//            case LobbyPanels.Request:
 
-                requestPanel.SetActive(true);
-                mainPanel.SetActive(false);
-                userListPanel.SetActive(false);
-                namePanel.SetActive(false);
-                messagePanel.SetActive(false);
+//                requestPanel.SetActive(true);
+//                mainPanel.SetActive(false);
+//                userListPanel.SetActive(false);
+//                namePanel.SetActive(false);
+//                messagePanel.SetActive(false);
 
-                break;
+//                break;
 
-            case LobbyPanels.UserList:
+//            case LobbyPanels.UserList:
 
-                requestPanel.SetActive(false);
-                mainPanel.SetActive(false);
-                userListPanel.SetActive(true);
-                namePanel.SetActive(false);
-                messagePanel.SetActive(false);
+//                requestPanel.SetActive(false);
+//                mainPanel.SetActive(false);
+//                userListPanel.SetActive(true);
+//                namePanel.SetActive(false);
+//                messagePanel.SetActive(false);
 
-                break;
+//                break;
 
-            case LobbyPanels.Message:
+//            case LobbyPanels.Message:
 
-                requestPanel.SetActive(false);
-                mainPanel.SetActive(false);
-                userListPanel.SetActive(false);
-                namePanel.SetActive(false);
-                messagePanel.SetActive(true);
+//                requestPanel.SetActive(false);
+//                mainPanel.SetActive(false);
+//                userListPanel.SetActive(false);
+//                namePanel.SetActive(false);
+//                messagePanel.SetActive(true);
 
-                break;
-        }
-    }
+//                break;
+//        }
+//    }
 
-    public void MakeClient()
-    {
-        isClient = true;
-        isServer = false;
+//    public void MakeClient()
+//    {
+//        isClient = true;
+//        isServer = false;
 
-        gameObject.AddComponent<Client>();
-    }
+//        gameObject.AddComponent<Client>();
+//    }
 
-    public void MakeServer()
-    {
-        isClient = false;
-        isServer = true;
+//    public void MakeServer()
+//    {
+//        isClient = false;
+//        isServer = true;
 
-        gameObject.AddComponent<Server>();
-    }
+//        gameObject.AddComponent<Server>();
+//    }
 
-    public bool GetIsClient()
-    {
-        return isClient;
-    }
+//    public bool GetIsClient()
+//    {
+//        return isClient;
+//    }
 
-    public bool GetIsServer()
-    {
-        return isServer;
-    }
+//    public bool GetIsServer()
+//    {
+//        return isServer;
+//    }
 
-    public void SetMessage(string msg, bool sentMessage = false)
-    {
-        message.GetComponentInChildren<TextMeshProUGUI>().text = msg;
+//    public void SetMessage(string msg, bool sentMessage = false)
+//    {
+//        message.GetComponentInChildren<TextMeshProUGUI>().text = msg;
 
-        if (sentMessage)
-        {
-            message.GetComponent<Image>().color = Color.magenta;
-        }
-        else
-        {
-            message.GetComponent<Image>().color = Color.cyan;
-        }
+//        if (sentMessage)
+//        {
+//            message.GetComponent<Image>().color = Color.magenta;
+//        }
+//        else
+//        {
+//            message.GetComponent<Image>().color = Color.cyan;
+//        }
 
-        Instantiate(message, textContent.transform);
+//        Instantiate(message, textContent.transform);
 
-        RectTransform contentRect = textContent.GetComponent<RectTransform>();
+//        RectTransform contentRect = textContent.GetComponent<RectTransform>();
 
-        contentRect.sizeDelta = new Vector2(contentRect.sizeDelta.x, contentRect.sizeDelta.y + 50);
+//        contentRect.sizeDelta = new Vector2(contentRect.sizeDelta.x, contentRect.sizeDelta.y + 50);
 
-        if (FindObjectOfType<Scrollbar>() != null)
-        {
-            FindObjectOfType<Scrollbar>().value = 0;
-        }
-    }
+//        if (FindObjectOfType<Scrollbar>() != null)
+//        {
+//            FindObjectOfType<Scrollbar>().value = 0;
+//        }
+//    }
 
-    public void SetUserList(List<string> listOfNames)
-    {
-        Image[] listToClear = userListContent.GetComponentsInChildren<Image>();
+//    public void SetUserList(List<string> listOfNames)
+//    {
+//        Image[] listToClear = userListContent.GetComponentsInChildren<Image>();
 
-        foreach(Image user in listToClear)
-        {
-            Destroy(user.gameObject);
-        }
+//        foreach(Image user in listToClear)
+//        {
+//            Destroy(user.gameObject);
+//        }
 
-        foreach(string name in listOfNames)
-        {
-            clientStatusPrefab.GetComponentInChildren<TextMeshProUGUI>().text = $"{name}";
+//        foreach(string name in listOfNames)
+//        {
+//            clientStatusPrefab.GetComponentInChildren<TextMeshProUGUI>().text = $"{name}";
 
-            Instantiate(clientStatusPrefab, userListContent.transform);
-        }
+//            Instantiate(clientStatusPrefab, userListContent.transform);
+//        }
 
-        RectTransform contentRect = userListContent.GetComponent<RectTransform>();
+//        RectTransform contentRect = userListContent.GetComponent<RectTransform>();
 
-        contentRect.sizeDelta = new Vector2(contentRect.sizeDelta.x, 50 * listOfNames.Count);
+//        contentRect.sizeDelta = new Vector2(contentRect.sizeDelta.x, 50 * listOfNames.Count);
 
-        if (FindObjectOfType<Scrollbar>() != null)
-        {
-            FindObjectOfType<Scrollbar>().value = 0;
-        }
-    }
+//        if (FindObjectOfType<Scrollbar>() != null)
+//        {
+//            FindObjectOfType<Scrollbar>().value = 0;
+//        }
+//    }
 
-    public void SendMessage()
-    {
-        if (isClient)
-        {
-            GetComponent<Client>().ActivateSendMessage();
-        }
+//    public void SendMessage()
+//    {
+//        if (isClient)
+//        {
+//            GetComponent<Client>().ActivateSendMessage();
+//        }
 
-        if (isServer)
-        {
-            GetComponent<Server>().ActivateSendMessage();
-        }
-    }
+//        if (isServer)
+//        {
+//            GetComponent<Server>().ActivateSendMessage();
+//        }
+//    }
 
-    public void SendRequestMessage()
-    {
-        GetComponent<Client>().ActivateSendMessageRequest();
-    }
+//    public void SendRequestMessage()
+//    {
+//        GetComponent<Client>().ActivateSendMessageRequest();
+//    }
 
-    public void SendRequestName(string nameOfRequested)
-    {
-        GetComponent<Client>().SetNameToRequest(nameOfRequested);
-    }
+//    public void SendRequestName(string nameOfRequested)
+//    {
+//        GetComponent<Client>().SetNameToRequest(nameOfRequested);
+//    }
 
-    public void SetMainPanelActive()
-    {
-        activePanel = LobbyPanels.Main;
-    }
+//    public void SetMainPanelActive()
+//    {
+//        activePanel = LobbyPanels.Main;
+//    }
 
-    public void SetNamePanelActive()
-    {
-        activePanel = LobbyPanels.Name;
-    }
+//    public void SetNamePanelActive()
+//    {
+//        activePanel = LobbyPanels.Name;
+//    }
 
-    public void SetMessagePanelActive()
-    {
-        activePanel = LobbyPanels.Message;
-    }
+//    public void SetMessagePanelActive()
+//    {
+//        activePanel = LobbyPanels.Message;
+//    }
 
-    public void SetUserListPanelActive()
-    {
-        activePanel = LobbyPanels.UserList;
-    }
+//    public void SetUserListPanelActive()
+//    {
+//        activePanel = LobbyPanels.UserList;
+//    }
 
-    public void SetRequestPanelActive()
-    {
-        activePanel = LobbyPanels.Request;
-    }
+//    public void SetRequestPanelActive()
+//    {
+//        activePanel = LobbyPanels.Request;
+//    }
 
-    public LobbyPanels GetActivePanel()
-    {
-        return activePanel;
-    }
+//    public LobbyPanels GetActivePanel()
+//    {
+//        return activePanel;
+//    }
 
-    public void ActivateRequestPanel()
-    {
-        if (!requestPanel.activeInHierarchy)
-        {
-            print("Received Request!");
+//    public void ActivateRequestPanel()
+//    {
+//        if (!requestPanel.activeInHierarchy)
+//        {
+//            print("Received Request!");
 
-            requestPanel.SetActive(true);
-        }
-    }
+//            requestPanel.SetActive(true);
+//        }
+//    }
 
-    public void AcceptMessageRequest()
-    {
-        FindObjectOfType<Client>().AcceptMessageRequest();
-    }
+//    public void AcceptMessageRequest()
+//    {
+//        FindObjectOfType<Client>().AcceptMessageRequest();
+//    }
 
-    public void DeclineMessageRequest()
-    {
-        SetUserListPanelActive();
+//    public void DeclineMessageRequest()
+//    {
+//        SetUserListPanelActive();
 
-        FindObjectOfType<Client>().DeclineMessageRequest();
-    }
-}
+//        FindObjectOfType<Client>().DeclineMessageRequest();
+//    }
+//}

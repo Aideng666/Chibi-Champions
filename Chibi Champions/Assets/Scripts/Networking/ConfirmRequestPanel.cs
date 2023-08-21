@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
 
-public class ConfirmRequestPanel : MonoBehaviour
-{
-    public void AcceptRequest()
-    {
-        //FindObjectOfType<ClientStatus>().ConfirmRequest();
+//public class ConfirmRequestPanel : MonoBehaviour
+//{
+//    public void AcceptRequest()
+//    {
+//        //FindObjectOfType<ClientStatus>().ConfirmRequest();
 
-        LobbyManager.Instance.SendRequestMessage();
-    }
+//        LobbyManager.Instance.SendRequestMessage();
+//    }
 
-    public void ChangeToChatting()
-    {
-        LobbyManager.Instance.SetMessagePanelActive();
-    }
-}
+//    public void ChangeToChatting()
+//    {
+//        LobbyManager.Instance.SetMessagePanelActive();
+//    }
+//}

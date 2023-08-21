@@ -1,25 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
+//using System.Collections;
+//using System.Collections.Generic;
+//using TMPro;
+//using UnityEngine;
 
-public class ClientStatus : MonoBehaviour
-{
-    [SerializeField] GameObject confirmRequestPanel;
+//public class ClientStatus : MonoBehaviour
+//{
+//    [SerializeField] GameObject confirmRequestPanel;
 
-    public void SendRequest()
-    {
-        LobbyManager.Instance.SendRequestName(GetComponentInChildren<TextMeshProUGUI>().text);
+//    public void SendRequest()
+//    {
+//        LobbyManager.Instance.SendRequestName(GetComponentInChildren<TextMeshProUGUI>().text);
 
-        print("Name Sent");
+//        print("Name Sent");
 
-        Instantiate(confirmRequestPanel, transform.parent);
+//        Instantiate(confirmRequestPanel, transform.parent);
 
-        print("Spawned Confirm");
-    }
+//        print("Spawned Confirm");
+//    }
 
-    public void ConfirmRequest()
-    {
-        LobbyManager.Instance.SendRequestMessage();
-    }
-}
+//    public void ConfirmRequest()
+//    {
+//        LobbyManager.Instance.SendRequestMessage();
+//    }
+//}

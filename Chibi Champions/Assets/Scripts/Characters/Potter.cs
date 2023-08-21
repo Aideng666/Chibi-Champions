@@ -61,10 +61,10 @@ public class Potter : PlayerController
         {
             if (Input.GetMouseButton(0) && CanLightAttack())
             {
-                if (FindObjectOfType<UDPClient>() != null)
-                {
-                    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Attack, GetCharacterNameEnum());
-                }
+                //if (FindObjectOfType<UDPClient>() != null)
+                //{
+                //    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Attack, GetCharacterNameEnum());
+                //}
 
                 AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>());
 
@@ -96,10 +96,10 @@ public class Potter : PlayerController
             }
             if (Input.GetMouseButton(1) && CanHeavyAttack())
             {
-                if (FindObjectOfType<UDPClient>() != null)
-                {
-                    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Ability, GetCharacterNameEnum());
-                }
+                //if (FindObjectOfType<UDPClient>() != null)
+                //{
+                //    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Ability, GetCharacterNameEnum());
+                //}
 
                 AnimController.Instance.PlayPlayerAbilityAnim(GetComponentInChildren<Animator>());
 

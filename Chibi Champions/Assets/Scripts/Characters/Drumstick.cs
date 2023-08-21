@@ -85,10 +85,10 @@ public class Drumstick : PlayerController
         {
             if (Input.GetMouseButton(0) && CanLightAttack())
             {
-                if (FindObjectOfType<UDPClient>() != null)
-                {
-                    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Attack, GetCharacterNameEnum());
-                }
+                //if (FindObjectOfType<UDPClient>() != null)
+                //{
+                //    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Attack, GetCharacterNameEnum());
+                //}
 
                 AnimController.Instance.PlayPlayerAttackAnim(GetComponentInChildren<Animator>());
 
@@ -98,10 +98,10 @@ public class Drumstick : PlayerController
             }
             if (Input.GetMouseButtonDown(1) && CanHeavyAttack()/* && controller.isGrounded*/)
             {
-                if (FindObjectOfType<UDPClient>() != null)
-                {
-                    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Ability, GetCharacterNameEnum());
-                }
+                //if (FindObjectOfType<UDPClient>() != null)
+                //{
+                //    UDPClient.Instance.SendPlayerUpdates(ActionTypes.Ability, GetCharacterNameEnum());
+                //}
 
                 StartCoroutine(GroundPoundJump());
 

@@ -1,64 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Net;
-using System.Net.Sockets;
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
+//using System.Net;
+//using System.Net.Sockets;
 
-public class ClientInformation
-{
-    private static Socket handler;
+//public class ClientInformation
+//{
+//    private static Socket handler;
 
-    private string username;
+//    private string username;
 
-    bool nameSelected;
-    bool runConnection;
+//    bool nameSelected;
+//    bool runConnection;
 
-    public ClientInformation(Socket socket)
-    {
-        handler = socket;
-        username = "noName";
+//    public ClientInformation(Socket socket)
+//    {
+//        handler = socket;
+//        username = "noName";
 
-        runConnection = true;
+//        runConnection = true;
 
-        nameSelected = false;
+//        nameSelected = false;
 
-        handler.Blocking = false;
-    }
+//        handler.Blocking = false;
+//    }
 
-    public void SetName(string name)
-    {
-        username = name;
+//    public void SetName(string name)
+//    {
+//        username = name;
 
-        SetNameSelected(true);
-    }
+//        SetNameSelected(true);
+//    }
 
-    public string GetName()
-    {
-        return username;
-    }
+//    public string GetName()
+//    {
+//        return username;
+//    }
 
-    public void SetNameSelected(bool selected)
-    {
-        nameSelected = selected;
-    }
+//    public void SetNameSelected(bool selected)
+//    {
+//        nameSelected = selected;
+//    }
 
-    public bool GetNameSelected()
-    {
-        return nameSelected;
-    }
+//    public bool GetNameSelected()
+//    {
+//        return nameSelected;
+//    }
 
-    public void SetRunConnection(bool run)
-    {
-        runConnection = run;
-    }
+//    public void SetRunConnection(bool run)
+//    {
+//        runConnection = run;
+//    }
 
-    public bool GetRunConnection()
-    {
-        return runConnection;
-    }
+//    public bool GetRunConnection()
+//    {
+//        return runConnection;
+//    }
 
-    public Socket GetHandler()
-    {
-        return handler;
-    }
-}
+//    public Socket GetHandler()
+//    {
+//        return handler;
+//    }
+//}

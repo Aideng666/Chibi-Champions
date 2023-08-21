@@ -43,7 +43,7 @@ public class EntityManager : MonoBehaviour
 
         GetLocalPlayer();
 
-        previousPosition = localPlayer.transform.position;
+        //previousPosition = localPlayer.transform.position;
 
         previousReceivedPositions = new Vector3[] { Vector3.zero, Vector3.zero, Vector3.zero };
     }

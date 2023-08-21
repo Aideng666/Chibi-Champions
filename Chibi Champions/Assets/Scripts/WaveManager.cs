@@ -190,16 +190,16 @@ public class WaveManager : MonoBehaviour
                 beginWaveAlertFired = true;
             }
 
-            if (PlayerClient.Instance.GetClientNum() == 0 && Input.GetKeyDown(KeyCode.Q))
-            {
-                UDPClient.Instance.SendStartWave();
+            //if (PlayerClient.Instance.GetClientNum() == 0 && Input.GetKeyDown(KeyCode.Q))
+            //{
+            //    UDPClient.Instance.SendStartWave();
 
-                BeginWave();
-            }
-            else if(FindObjectOfType<UDPClient>() == null && Input.GetKeyDown(KeyCode.Q))
-            {
-                BeginWave();
-            }
+            //    BeginWave();
+            //}
+            //else if(FindObjectOfType<UDPClient>() == null && Input.GetKeyDown(KeyCode.Q))
+            //{
+            //    BeginWave();
+            //}
         }
     }
 

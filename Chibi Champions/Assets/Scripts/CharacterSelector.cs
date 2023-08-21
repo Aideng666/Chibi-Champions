@@ -20,39 +20,39 @@ public class CharacterSelector : MonoBehaviour
     {
         activeCharacter = characterList[PlayerPrefs.GetInt("CharacterIndex")];
 
-        if (PlayerClient.Instance.GetClientStarted())
-        {
-            playersCharacters = PlayerClient.Instance.GetPlayersCharacters();
+        //if (PlayerClient.Instance.GetClientStarted())
+        //{
+        //    playersCharacters = PlayerClient.Instance.GetPlayersCharacters();
 
-            for (int i = 0; i < playersCharacters.Length; i++)
-            {
-                if (playersCharacters[i] != null)
-                {
-                    if (playersCharacters[i] == "Drumstick")
-                    {
-                        characterList[0].gameObject.SetActive(true);
-                    }
-                    if (playersCharacters[i] == "Rolfe")
-                    {
-                        characterList[1].gameObject.SetActive(true);
-                    }
-                    if (playersCharacters[i] == "Potter")
-                    {
-                        characterList[2].gameObject.SetActive(true);
-                    }
-                }
-            }
+        //    for (int i = 0; i < playersCharacters.Length; i++)
+        //    {
+        //        if (playersCharacters[i] != null)
+        //        {
+        //            if (playersCharacters[i] == "Drumstick")
+        //            {
+        //                characterList[0].gameObject.SetActive(true);
+        //            }
+        //            if (playersCharacters[i] == "Rolfe")
+        //            {
+        //                characterList[1].gameObject.SetActive(true);
+        //            }
+        //            if (playersCharacters[i] == "Potter")
+        //            {
+        //                characterList[2].gameObject.SetActive(true);
+        //            }
+        //        }
+        //    }
 
-            for (int i = 0; i < characterList.Length; i++)
-            {
-                if (PlayerClient.Instance.GetSelectedCharacterIndex() == i)
-                {
-                    characterList[i].SetIsPlayerCharacter(true);
-                }
-            }
-        }
-        else
-        {
+        //    for (int i = 0; i < characterList.Length; i++)
+        //    {
+        //        if (PlayerClient.Instance.GetSelectedCharacterIndex() == i)
+        //        {
+        //            characterList[i].SetIsPlayerCharacter(true);
+        //        }
+        //    }
+        //}
+        //else
+        //{
             for (int i = 0; i < characterList.Length; i++)
             {
                 if (PlayerPrefs.GetInt("CharacterIndex") == i)
@@ -61,7 +61,7 @@ public class CharacterSelector : MonoBehaviour
                     characterList[i].SetIsPlayerCharacter(true);
                 }
             }
-        }
+        //}
 
         for (int i = 0; i < characterList.Length; i++)
         {

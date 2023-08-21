@@ -81,13 +81,13 @@ public class CharacterSelect : MonoBehaviour
     {
         PlayerPrefs.SetInt("CharacterIndex", characterIndex);
 
-        if (PlayerClient.Instance.GetClientStarted())
-        { 
-            PlayerClient.Instance.SetSelectedCharacterIndex(characterIndex);
-        }
+        //if (PlayerClient.Instance.GetClientStarted())
+        //{ 
+        //    PlayerClient.Instance.SetSelectedCharacterIndex(characterIndex);
+        //}
 
         CanvasManager.isGamePaused = false;
-        CanvasManager.isMultiplayerPaused = false;
+       // CanvasManager.isMultiplayerPaused = false;
     }
 
     public int GetCharacterIndex()
